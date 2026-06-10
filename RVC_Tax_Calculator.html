@@ -1,0 +1,1770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RVC Tax & Outcomes Calculator — Rockville Centre, NY</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root {
+  --navy: #1a2744;
+  --navy-light: #2a3f6a;
+  --gold: #c5a44e;
+  --gold-light: #e8d49a;
+  --blue-accent: #3b6cb5;
+  --bg: #f4f6fa;
+  --card-bg: #ffffff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --border: #e2e8f0;
+  --green: #16a34a;
+  --red: #dc2626;
+  --orange: #ea580c;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+.header {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+  color: white;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.header::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+}
+.header h1 { font-size: 2rem; font-weight: 700; margin-bottom: 0.25rem; letter-spacing: -0.5px; }
+.header .subtitle { font-size: 1rem; opacity: 0.85; font-weight: 400; }
+.container { max-width: 1100px; margin: 0 auto; padding: 1.5rem; }
+.card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.04);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--border);
+}
+.card-title {
+  font-size: 1.15rem; font-weight: 700; color: var(--navy);
+  margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;
+}
+.card-title .icon { font-size: 1.3rem; }
+.input-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+@media (max-width: 700px) { .input-grid { grid-template-columns: 1fr; } }
+.input-group { display: flex; flex-direction: column; gap: 0.3rem; }
+.input-group label {
+  font-size: 0.82rem; font-weight: 600; color: var(--text-muted);
+  text-transform: uppercase; letter-spacing: 0.5px;
+}
+.input-group input, .input-group select {
+  padding: 0.6rem 0.8rem; border: 1.5px solid var(--border);
+  border-radius: 8px; font-size: 1rem; transition: border-color 0.2s; background: white;
+}
+.input-group input:focus, .input-group select:focus {
+  outline: none; border-color: var(--blue-accent);
+  box-shadow: 0 0 0 3px rgba(59,108,181,0.12);
+}
+.slider-row { display: flex; align-items: center; gap: 0.75rem; }
+.slider-row input[type=range] { flex: 1; accent-color: var(--navy); height: 6px; }
+.slider-val { font-weight: 700; color: var(--navy); min-width: 100px; text-align: right; font-size: 1.05rem; }
+.star-row { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+.star-btn {
+  padding: 0.45rem 1rem; border: 1.5px solid var(--border); border-radius: 8px;
+  background: white; cursor: pointer; font-size: 0.9rem; transition: all 0.2s;
+}
+.star-btn.active { background: var(--navy); color: white; border-color: var(--navy); }
+.star-btn:hover:not(.active) { border-color: var(--blue-accent); }
+.summary-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 1.5rem; }
+@media (max-width: 900px) { .summary-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 500px) { .summary-grid { grid-template-columns: 1fr; } }
+.summary-card {
+  background: var(--card-bg); border-radius: 12px; padding: 1.25rem;
+  border: 1px solid var(--border); box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  text-align: center; position: relative; overflow: hidden;
+}
+.summary-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; }
+.summary-card.property::before { background: var(--blue-accent); }
+.summary-card.federal::before { background: var(--navy); }
+.summary-card.state::before { background: var(--gold); }
+.summary-card.total::before { background: var(--green); }
+.summary-card .label { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); font-weight: 600; margin-bottom: 0.3rem; }
+.summary-card .amount { font-size: 1.7rem; font-weight: 800; color: var(--navy); line-height: 1.1; }
+.summary-card .sub { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem; }
+.breakdown-bar { display: flex; height: 40px; border-radius: 8px; overflow: hidden; margin: 1rem 0; }
+.breakdown-bar .seg {
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-size: 0.7rem; font-weight: 700; cursor: pointer; transition: opacity 0.2s;
+}
+.breakdown-bar .seg:hover { opacity: 0.85; }
+.breakdown-table { width: 100%; border-collapse: collapse; margin-top: 0.75rem; }
+.breakdown-table th {
+  text-align: left; font-size: 0.75rem; text-transform: uppercase;
+  letter-spacing: 0.5px; color: var(--text-muted); padding: 0.5rem; border-bottom: 2px solid var(--border);
+}
+.breakdown-table td { padding: 0.6rem 0.5rem; border-bottom: 1px solid var(--border); font-size: 0.92rem; }
+.breakdown-table tr:last-child td { border-bottom: none; font-weight: 700; }
+.breakdown-table .color-dot { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 0.5rem; vertical-align: middle; }
+.breakdown-table .amt { font-weight: 600; text-align: right; }
+.breakdown-table .pct { text-align: right; color: var(--text-muted); }
+.outcome-card {
+  background: var(--card-bg); border-radius: 12px; border: 1px solid var(--border);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06); margin-bottom: 1rem; overflow: hidden; transition: box-shadow 0.2s;
+}
+.outcome-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+.outcome-header {
+  padding: 1rem 1.25rem; display: flex; align-items: center;
+  justify-content: space-between; cursor: pointer; user-select: none;
+}
+.outcome-header:hover { background: rgba(59,108,181,0.03); }
+.outcome-header .left { display: flex; align-items: center; gap: 0.75rem; }
+.outcome-header .entity-icon {
+  width: 42px; height: 42px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center; font-size: 1.3rem;
+}
+.outcome-header .entity-name { font-weight: 700; font-size: 1.05rem; color: var(--navy); }
+.outcome-header .entity-amt { font-size: 0.88rem; color: var(--text-muted); }
+.outcome-header .right-cost { text-align: right; }
+.outcome-header .your-cost { font-weight: 800; font-size: 1.2rem; color: var(--navy); }
+.outcome-header .per-mo { font-size: 0.78rem; color: var(--text-muted); font-weight: 500; }
+.outcome-header .chevron {
+  font-size: 1.2rem; color: var(--text-muted); transition: transform 0.3s; margin-left: 0.5rem;
+}
+.outcome-card.open .chevron { transform: rotate(180deg); }
+.outcome-body { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+.outcome-card.open .outcome-body { max-height: 4000px; }
+.outcome-content { padding: 0 1.25rem 1.25rem; border-top: 1px solid var(--border); }
+.metric-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 0.75rem; margin: 1rem 0; }
+.metric { background: var(--bg); border-radius: 8px; padding: 0.75rem; text-align: center; }
+.metric .metric-val { font-size: 1.4rem; font-weight: 800; color: var(--navy); }
+.metric .metric-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.3px; margin-top: 0.15rem; }
+.metric .metric-compare { font-size: 0.75rem; margin-top: 0.2rem; }
+.metric .metric-compare.good { color: var(--green); }
+.metric .metric-compare.neutral { color: var(--orange); }
+.chart-container { position: relative; height: 250px; margin: 1rem 0; }
+.chart-container.small { height: 200px; }
+.source-link {
+  font-size: 0.78rem; color: var(--blue-accent); text-decoration: none;
+  display: inline-flex; align-items: center; gap: 0.25rem; margin-top: 0.5rem;
+}
+.source-link:hover { text-decoration: underline; }
+.insight-box {
+  background: linear-gradient(135deg, rgba(59,108,181,0.06), rgba(197,164,78,0.06));
+  border-left: 3px solid var(--gold); border-radius: 0 8px 8px 0;
+  padding: 0.75rem 1rem; margin: 0.75rem 0; font-size: 0.9rem;
+}
+.insight-box strong { color: var(--navy); }
+.bracket-bar { display: flex; height: 28px; border-radius: 6px; overflow: hidden; margin: 0.5rem 0; }
+.bracket-bar .bracket-seg {
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-size: 0.65rem; font-weight: 700; min-width: 20px;
+}
+.bracket-legend { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.5rem 0; font-size: 0.78rem; }
+.bracket-legend span { display: inline-flex; align-items: center; gap: 0.25rem; }
+.bracket-legend .dot { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+@media (max-width: 700px) { .two-col { grid-template-columns: 1fr; } }
+.section-header {
+  font-size: 1.3rem; font-weight: 800; color: var(--navy);
+  margin: 2rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--gold);
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.footer {
+  background: var(--navy); color: rgba(255,255,255,0.7);
+  padding: 2rem 1.5rem; margin-top: 2rem; font-size: 0.82rem; line-height: 1.8;
+}
+.footer a { color: var(--gold-light); text-decoration: none; }
+.footer a:hover { text-decoration: underline; }
+.footer .disclaimer {
+  background: rgba(255,255,255,0.08); border-radius: 8px; padding: 1rem;
+  margin-bottom: 1.5rem; border: 1px solid rgba(255,255,255,0.1);
+}
+.footer h3 { color: white; margin-bottom: 0.5rem; font-size: 1rem; }
+.sources-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 0.5rem 2rem; }
+@media print {
+  .header { padding: 1rem; }
+  .outcome-body { max-height: none !important; }
+  .card, .outcome-card { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>RVC Tax &amp; Outcomes Calculator</h1>
+  <div class="subtitle">Rockville Centre, Nassau County, NY — Where Every Tax Dollar Goes</div>
+</div>
+
+<div class="container">
+
+<!-- INPUT SECTION -->
+<div class="card">
+  <div class="card-title"><span class="icon">&#9881;</span> Your Information</div>
+  <div class="input-grid">
+    <div class="input-group">
+      <label>Property Address</label>
+      <input type="text" id="address" value="Rockville Centre, NY 11570" placeholder="Enter your RVC address" />
+    </div>
+    <div class="input-group">
+      <label>Filing Status</label>
+      <select id="filingStatus">
+        <option value="mfj">Married Filing Jointly</option>
+        <option value="single">Single</option>
+        <option value="hoh">Head of Household</option>
+        <option value="mfs">Married Filing Separately</option>
+      </select>
+    </div>
+    <div class="input-group">
+      <label>Age Range (for demographic comparisons)</label>
+      <select id="ageRange">
+        <option value="25-34">25–34</option>
+        <option value="35-44" selected>35–44</option>
+        <option value="45-54">45–54</option>
+        <option value="55-64">55–64</option>
+        <option value="65+">65+</option>
+      </select>
+    </div>
+    <div class="input-group" style="grid-column: 1 / -1;">
+      <label>Estimated Market Value</label>
+      <div class="slider-row">
+        <input type="range" id="marketValue" min="300000" max="3000000" step="5000" value="735000" />
+        <span class="slider-val" id="marketValueDisplay">$735,000</span>
+      </div>
+    </div>
+    <div class="input-group">
+      <label>Household Income</label>
+      <input type="number" id="income" value="175000" step="1000" />
+    </div>
+    <div class="input-group">
+      <label>STAR Exemption</label>
+      <div class="star-row">
+        <button class="star-btn active" data-star="none">None</button>
+        <button class="star-btn" data-star="basic">Basic STAR</button>
+        <button class="star-btn" data-star="enhanced">Enhanced STAR</button>
+      </div>
+    </div>
+    <div class="input-group">
+      <label>Annual Mortgage Interest</label>
+      <input type="number" id="mortgageInterest" value="18000" step="500" placeholder="0 if no mortgage" />
+    </div>
+    <div class="input-group">
+      <label>Other Itemized Deductions (Charity, etc.)</label>
+      <input type="number" id="otherDeductions" value="500" step="500" placeholder="Charitable donations, etc." />
+    </div>
+  </div>
+</div>
+
+<!-- SUMMARY CARDS -->
+<div class="summary-grid">
+  <div class="summary-card property">
+    <div class="label">Property Tax</div>
+    <div class="amount" id="summaryProperty">—</div>
+    <div class="sub" id="summaryPropertySub">—</div>
+  </div>
+  <div class="summary-card federal">
+    <div class="label">Federal Income Tax</div>
+    <div class="amount" id="summaryFederal">—</div>
+    <div class="sub" id="summaryFederalSub">—</div>
+  </div>
+  <div class="summary-card state">
+    <div class="label">NYS Income Tax</div>
+    <div class="amount" id="summaryState">—</div>
+    <div class="sub" id="summaryStateSub">—</div>
+  </div>
+  <div class="summary-card total">
+    <div class="label">Total Tax Burden</div>
+    <div class="amount" id="summaryTotal">—</div>
+    <div class="sub" id="summaryTotalSub">—</div>
+  </div>
+</div>
+
+<!-- BURDEN CHART -->
+<div class="card">
+  <div class="card-title"><span class="icon">&#128202;</span> Total Tax Burden Breakdown</div>
+  <div class="two-col">
+    <div class="chart-container"><canvas id="burdenChart"></canvas></div>
+    <div style="display:flex; flex-direction:column; justify-content:center;">
+      <div id="burdenDetails" style="font-size:0.95rem; line-height:2;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- PROPERTY TAX DEEP DIVE -->
+<div class="section-header">&#127968; Property Tax Deep Dive</div>
+<div class="card">
+  <div class="card-title">Where Every Property Tax Dollar Goes</div>
+  <div class="breakdown-bar" id="breakdownBar"></div>
+  <table class="breakdown-table">
+    <thead><tr><th>Taxing Entity</th><th class="amt">Annual Amount</th><th class="pct">Share</th></tr></thead>
+    <tbody id="breakdownBody"></tbody>
+  </table>
+</div>
+
+<!-- PROPERTY TAX OUTCOMES -->
+<div style="font-size:1.1rem; font-weight:700; color:var(--navy); margin:1.5rem 0 0.75rem; display:flex; align-items:center; gap:0.5rem;">&#127919; Property Tax Outcomes Dashboard</div>
+
+<!-- School District -->
+<div class="outcome-card" id="schoolCard">
+  <div class="outcome-header" onclick="toggleCard('schoolCard')">
+    <div class="left">
+      <div class="entity-icon" style="background:#3b6cb5; color:white;">&#127891;</div>
+      <div>
+        <div class="entity-name">Rockville Centre UFSD</div>
+        <div class="entity-amt">School District Tax — largest share of your property tax</div>
+      </div>
+    </div>
+    <div class="right-cost">
+      <div class="your-cost" id="schoolCost">—</div>
+      <div class="per-mo" id="schoolCostMo">—</div>
+    </div>
+    <div class="chevron">&#9660;</div>
+  </div>
+  <div class="outcome-body"><div class="outcome-content">
+    <div class="metric-grid">
+      <div class="metric"><div class="metric-val">$42,050</div><div class="metric-label">Per-Pupil Spending</div><div class="metric-compare neutral">$139.89M &divide; 3,326 students</div></div>
+      <div class="metric"><div class="metric-val">3,326</div><div class="metric-label">Students Enrolled</div><div class="metric-compare neutral">Down from 3,548 in 2016 (&minus;8%)</div></div>
+      <div class="metric"><div class="metric-val">10:1</div><div class="metric-label">Student-Teacher Ratio</div><div class="metric-compare good">vs 13:1 national avg</div></div>
+      <div class="metric"><div class="metric-val">98-99%</div><div class="metric-label">Graduation Rate</div><div class="metric-compare good">vs 87% NY State avg</div></div>
+    </div>
+    <div class="insight-box">
+      <strong>South Side High School</strong> is ranked <strong>#611 nationally</strong> (U.S. News) and <strong>#122 of 1,242</strong> NY high schools (SchoolDigger). Regents proficiency: ELA 96.5%, Algebra II 91.1%, U.S. History 94.1%.
+    </div>
+    <div class="two-col">
+      <div><h4 style="margin-bottom:0.5rem; color:var(--navy);">Test Scores vs. NY State Average</h4><div class="chart-container small"><canvas id="schoolScoresChart"></canvas></div></div>
+      <div><h4 style="margin-bottom:0.5rem; color:var(--navy);">Per-Pupil Spending Comparison</h4><div class="chart-container small"><canvas id="schoolSpendChart"></canvas></div></div>
+    </div>
+    <div class="insight-box">
+      <strong>ROI Assessment:</strong> At $42,050 per student, RVC is among the highest-spending districts on Long Island — comparable to Jericho ($40.9K) and well above Garden City ($32.7K) and Manhasset ($35.1K). The district delivers math proficiency 55% above state average and reading 41% above — a strong return, but the spending level is significant. The 2025-26 budget is $139.89M with a 2.6% tax levy increase. The district faces a projected <strong>$3.78M deficit for 2026-27</strong>, driven by 10% health insurance increases (~$2M), rising out-of-district special ed costs, and only 1% growth in state aid. Unrestricted reserves are ~$8M (vs. $27M at similarly-sized Garden City), limiting the district's financial cushion.
+    </div>
+    <div class="insight-box" style="background:linear-gradient(135deg,rgba(220,38,38,0.06),rgba(234,88,12,0.06)); border-color:#ea580c;">
+      <strong>2026-27 Budget Outlook:</strong> Projected enrollment: 3,260 (down 66 from 2025-26). The tax levy cap is projected at ~2.1%. Total revenues may grow only ~1% ($1.4M), while health insurance alone adds ~$2M. The appropriated fund balance is declining from $2.8M to ~$1.6M. The district's unappropriated/unreserved fund balance sits at $4.8M (3.5% of budget) — just below the 4% statutory max — with an additional ~$4.2M in retirement system reserves (ERS + TRS).
+    </div>
+    <div style="margin-top:0.5rem;">
+      <a class="source-link" href="https://www.usnews.com/education/k12/new-york/districts/rockville-centre-union-free-school-district-104515" target="_blank">&#128279; U.S. News District Profile</a>
+      <a class="source-link" href="https://www.niche.com/k12/d/rockville-centre-union-free-school-district-ny/rankings/" target="_blank" style="margin-left:1rem;">&#128279; Niche Rankings</a>
+      <a class="source-link" href="https://data.nysed.gov/profile.php?instid=800000049384" target="_blank" style="margin-left:1rem;">&#128279; NYSED Data</a>
+      <a class="source-link" href="https://marybethjoyce1.substack.com/p/understanding-the-20262027-budget" target="_blank" style="margin-left:1rem;">&#128279; MaryBeth Joyce — Budget Analysis</a>
+      <a class="source-link" href="https://www.liherald.com/baldwin/stories/rockville-centre-school-district-projects-3-78m-budget-deficit-for-2026-27,220209" target="_blank" style="margin-left:1rem;">&#128279; Herald — $3.78M Deficit</a>
+    </div>
+  </div></div>
+</div>
+
+<!-- Village Services -->
+<div class="outcome-card" id="villageCard">
+  <div class="outcome-header" onclick="toggleCard('villageCard')">
+    <div class="left">
+      <div class="entity-icon" style="background:#16a34a; color:white;">&#127961;</div>
+      <div>
+        <div class="entity-name">Village of Rockville Centre</div>
+        <div class="entity-amt">Village Tax — Police, Fire, DPW, Electric, Recreation</div>
+      </div>
+    </div>
+    <div class="right-cost">
+      <div class="your-cost" id="villageCost">—</div>
+      <div class="per-mo" id="villageCostMo">—</div>
+    </div>
+    <div class="chevron">&#9660;</div>
+  </div>
+  <div class="outcome-body"><div class="outcome-content">
+    <div class="metric-grid">
+      <div class="metric"><div class="metric-val">$60.9M</div><div class="metric-label">Total Village Budget</div><div class="metric-compare neutral">FY 2025-26 Adopted</div></div>
+      <div class="metric"><div class="metric-val">$41.7M</div><div class="metric-label">Raised by Tax Levy</div><div class="metric-compare neutral">68.5% of budget</div></div>
+      <div class="metric"><div class="metric-val">5 / 1,000</div><div class="metric-label">Crime Rate</div><div class="metric-compare good">One of lowest in U.S.</div></div>
+      <div class="metric"><div class="metric-val">-37%</div><div class="metric-label">Crime Decline (2024)</div><div class="metric-compare good">Year-over-year drop</div></div>
+    </div>
+    <div class="two-col">
+      <div><h4 style="margin-bottom:0.5rem; color:var(--navy);">Village Budget Allocation (Est.)</h4><div class="chart-container small"><canvas id="villageBudgetChart"></canvas></div></div>
+      <div><h4 style="margin-bottom:0.5rem; color:var(--navy);">Monthly Electric: RVC vs. PSEG LI</h4><div class="chart-container small"><canvas id="electricChart"></canvas></div></div>
+    </div>
+    <div class="insight-box">
+      <strong>Municipal Electric Advantage:</strong> RVC's Electric Dept. provides power at $0.108–$0.114/kWh vs. PSEG Long Island's ~$0.130/kWh — saving the average household <strong>~$200–$350/year</strong>. About 75% of RVC's power comes from NYPA Niagara Falls hydroelectric, making it cleaner and cheaper.
+    </div>
+    <div class="insight-box">
+      <strong>Volunteer Fire Department:</strong> RVC's fire protection is provided by volunteers, saving taxpayers an estimated <strong>$8–12M annually</strong> compared to a professional paid department of equivalent size. This is one of the village's most significant cost efficiencies.
+    </div>
+    <a class="source-link" href="https://www.rvcny.gov/comptroller/links/2026-adopted-budget" target="_blank">&#128279; Village Adopted Budget</a>
+    <a class="source-link" href="https://www.rvcny.gov/electric-department" target="_blank" style="margin-left:1rem;">&#128279; Electric Department</a>
+    <a class="source-link" href="https://www.rockvillecentrepolice.us/" target="_blank" style="margin-left:1rem;">&#128279; Police Department</a>
+  </div></div>
+</div>
+
+<!-- Nassau County -->
+<div class="outcome-card" id="countyCard">
+  <div class="outcome-header" onclick="toggleCard('countyCard')">
+    <div class="left">
+      <div class="entity-icon" style="background:#7c3aed; color:white;">&#127963;</div>
+      <div>
+        <div class="entity-name">Nassau County</div>
+        <div class="entity-amt">County General + Police District Tax</div>
+      </div>
+    </div>
+    <div class="right-cost">
+      <div class="your-cost" id="countyCost">—</div>
+      <div class="per-mo" id="countyCostMo">—</div>
+    </div>
+    <div class="chevron">&#9660;</div>
+  </div>
+  <div class="outcome-body"><div class="outcome-content">
+    <div class="metric-grid">
+      <div class="metric"><div class="metric-val">~$3.7B</div><div class="metric-label">County Budget</div><div class="metric-compare neutral">FY 2025</div></div>
+      <div class="metric"><div class="metric-val">1.36M</div><div class="metric-label">County Population</div><div class="metric-compare neutral">Most populous suburb in NY</div></div>
+      <div class="metric"><div class="metric-val">NCPD</div><div class="metric-label">County Police</div><div class="metric-compare neutral">One of highest-paid in U.S.</div></div>
+      <div class="metric"><div class="metric-val">$146K</div><div class="metric-label">Median HH Income</div><div class="metric-compare good">#1 in NY State</div></div>
+    </div>
+    <div class="insight-box">
+      <strong>What County Taxes Fund:</strong> Nassau County Police Department (NCPD), county parks &amp; recreation (Eisenhower Park, Jones Beach oversight), social services, public health, roads/infrastructure, family court system, correctional facility, and the assessment/tax administration system.
+    </div>
+    <div class="insight-box">
+      <strong>Dual Policing Cost:</strong> RVC residents pay for both the village police department AND the Nassau County Police District tax. NCPD provides countywide specialized units (homicide, narcotics, highway patrol) that village departments don't maintain, but this overlap is a common cost concern in Nassau villages with their own force.
+    </div>
+    <a class="source-link" href="https://www.nassaucountyny.gov/3364/Property-Taxes" target="_blank">&#128279; Nassau County Property Taxes</a>
+    <a class="source-link" href="https://www.nassaucountyny.gov/" target="_blank" style="margin-left:1rem;">&#128279; Nassau County Government</a>
+  </div></div>
+</div>
+
+<!-- Town of Hempstead -->
+<div class="outcome-card" id="townCard">
+  <div class="outcome-header" onclick="toggleCard('townCard')">
+    <div class="left">
+      <div class="entity-icon" style="background:#ea580c; color:white;">&#128739;</div>
+      <div>
+        <div class="entity-name">Town of Hempstead</div>
+        <div class="entity-amt">Town General + Highway Tax</div>
+      </div>
+    </div>
+    <div class="right-cost">
+      <div class="your-cost" id="townCost">—</div>
+      <div class="per-mo" id="townCostMo">—</div>
+    </div>
+    <div class="chevron">&#9660;</div>
+  </div>
+  <div class="outcome-body"><div class="outcome-content">
+    <div class="metric-grid">
+      <div class="metric"><div class="metric-val">~800K</div><div class="metric-label">Town Population</div><div class="metric-compare neutral">Largest town in NY</div></div>
+      <div class="metric"><div class="metric-val">-18%</div><div class="metric-label">2026 Tax Cut</div><div class="metric-compare good">Announced for 2026</div></div>
+    </div>
+    <div class="insight-box">
+      <strong>What Town Taxes Fund:</strong> Highway maintenance, building permits/inspections, sanitation oversight, animal control, and town parks. The Town Receiver of Taxes also administers the collection of school and general tax bills. The announced 18% tax cut for 2026 will reduce this component.
+    </div>
+    <a class="source-link" href="https://hempsteadny.gov/428/Tax-Information" target="_blank">&#128279; Town of Hempstead Tax Info</a>
+    <a class="source-link" href="https://www.liherald.com/stories/hempstead-town-18-percent-tax-cut-2026,217835" target="_blank" style="margin-left:1rem;">&#128279; Herald: 18% Tax Cut</a>
+  </div></div>
+</div>
+
+<!-- Library -->
+<div class="outcome-card" id="libraryCard">
+  <div class="outcome-header" onclick="toggleCard('libraryCard')">
+    <div class="left">
+      <div class="entity-icon" style="background:#c5a44e; color:white;">&#128218;</div>
+      <div>
+        <div class="entity-name">Rockville Centre Public Library</div>
+        <div class="entity-amt">Library Tax</div>
+      </div>
+    </div>
+    <div class="right-cost">
+      <div class="your-cost" id="libraryCost">—</div>
+      <div class="per-mo" id="libraryCostMo">—</div>
+    </div>
+    <div class="chevron">&#9660;</div>
+  </div>
+  <div class="outcome-body"><div class="outcome-content">
+    <div class="metric-grid">
+      <div class="metric"><div class="metric-val">$4.2M</div><div class="metric-label">Total Library Budget</div><div class="metric-compare neutral">2025-26 Approved</div></div>
+      <div class="metric"><div class="metric-val">$3.3M</div><div class="metric-label">Salaries &amp; Benefits</div><div class="metric-compare neutral">78.6% of budget</div></div>
+      <div class="metric"><div class="metric-val">$288K</div><div class="metric-label">Operations &amp; Maint.</div><div class="metric-compare good">Down from $321K</div></div>
+      <div class="metric"><div class="metric-val">$101K</div><div class="metric-label">Materials Budget</div><div class="metric-compare neutral">Books, eBooks, media</div></div>
+    </div>
+    <div><h4 style="margin-bottom:0.5rem; color:var(--navy);">Library Budget Allocation</h4><div class="chart-container small"><canvas id="libraryChart"></canvas></div></div>
+    <div class="insight-box">
+      The $4.2M library budget was passed with 2,101 votes. The tax levy increase stays under the 2.6% NYS cap, costing the average homeowner about <strong>$12/year</strong> ($1/month) more. The library is increasing investment in eBooks and audiobooks.
+    </div>
+    <a class="source-link" href="https://rvclibrary.org/" target="_blank">&#128279; RVC Public Library</a>
+    <a class="source-link" href="https://www.liherald.com/stories/rockville-centre-library-budget-trustee-election-2025,214993" target="_blank" style="margin-left:1rem;">&#128279; Library Budget Details</a>
+  </div></div>
+</div>
+
+<!-- Special Districts -->
+<div class="outcome-card" id="specialCard">
+  <div class="outcome-header" onclick="toggleCard('specialCard')">
+    <div class="left">
+      <div class="entity-icon" style="background:#64748b; color:white;">&#9881;</div>
+      <div>
+        <div class="entity-name">Special Districts</div>
+        <div class="entity-amt">Sewer, Water, Sanitation, Fire Protection</div>
+      </div>
+    </div>
+    <div class="right-cost">
+      <div class="your-cost" id="specialCost">—</div>
+      <div class="per-mo" id="specialCostMo">—</div>
+    </div>
+    <div class="chevron">&#9660;</div>
+  </div>
+  <div class="outcome-body"><div class="outcome-content">
+    <div class="insight-box">
+      <strong>What Special Districts Cover:</strong> Sewer collection and treatment (RVC is one of 6 municipal sewer districts in Nassau County), water supply, sanitation/refuse collection, and fire protection districts. These are billed as part of the general tax bill collected by the Town of Hempstead Receiver of Taxes.
+    </div>
+    <a class="source-link" href="https://www.nassaucountyny.gov/1882/Wastewater-Management-Program" target="_blank">&#128279; Nassau County Wastewater Management</a>
+  </div></div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 2: NYS INCOME TAX DEEP DIVE                         -->
+<!-- ============================================================ -->
+<div class="section-header">&#127963; NYS Income Tax Deep Dive</div>
+<div style="background:linear-gradient(135deg,rgba(197,164,78,0.10),rgba(59,108,181,0.06)); border:1px solid var(--gold); border-radius:8px; padding:0.6rem 1rem; margin-bottom:1rem; font-size:0.85rem; display:flex; align-items:center; gap:0.5rem;">
+  <strong style="color:var(--gold); font-size:1.1rem;">&#9888;</strong>
+  <span><strong>Estimates Only</strong> — NYS income tax is calculated using simplified bracket math. Your actual liability may differ due to NYC surcharges, estimated payments, prior-year credits, AMT, and other adjustments. Consult a tax professional or your filed return for exact amounts.</span>
+</div>
+<div class="card">
+  <div class="card-title"><span class="icon">&#127963;</span> New York State Income Tax Estimate</div>
+  <div class="bracket-bar" id="stateBracketBar"></div>
+  <div class="bracket-legend" id="stateBracketLegend"></div>
+  <div id="stateCalcDetail" style="margin-top:0.75rem; font-size:0.9rem;"></div>
+  <div class="insight-box" style="margin-top:0.75rem;">
+    <strong>2026 Relief:</strong> NYS is reducing rates for income under ~$323K (MFJ) from 4%–6.85% to 3.9%–5.9%, providing modest relief for most RVC households.
+  </div>
+</div>
+
+<div class="card" style="margin-bottom:1rem;">
+  <div class="card-title">Where Every NYS Tax Dollar Goes</div>
+  <div class="two-col">
+    <div class="chart-container"><canvas id="nysOutcomeChart"></canvas></div>
+    <div>
+      <table class="breakdown-table">
+        <thead><tr><th>Category</th><th class="amt">Your Share</th><th class="pct">%</th></tr></thead>
+        <tbody id="nysOutcomeBody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div style="font-size:1.1rem; font-weight:700; color:var(--navy); margin:1.5rem 0 0.75rem; display:flex; align-items:center; gap:0.5rem;">&#127919; NYS Tax Outcomes Dashboard</div>
+
+<div class="outcome-card" id="nysMedicaidCard">
+  <div class="outcome-header" onclick="toggleCard('nysMedicaidCard')">
+    <div class="left">
+      <div class="entity-icon" style="background:#dc2626; color:white;">&#9764;</div>
+      <div>
+        <div class="entity-name">Medicaid &amp; Health</div>
+        <div class="entity-amt">33% of state spending — Medicaid, public health, mental health</div>
+      </div>
+    </div>
+    <div class="right-cost">
+      <div class="your-cost" id="nysMedicaidCost">—</div>
+      <div class="per-mo" id="nysMedicaidCostMo">—</div>
+    </div>
+    <div class="chevron">&#9660;</div>
+  </div>
+  <div class="outcome-body"><div class="outcome-content">
+    <div class="metric-grid">
+      <div class="metric"><div class="metric-val">$34.2B</div><div class="metric-label">State Medicaid Investment</div><div class="metric-compare neutral">$109.6B total with federal match</div></div>
+      <div class="metric"><div class="metric-val">6.8M</div><div class="metric-label">Medicaid Enrollment</div><div class="metric-compare neutral">Down from 7.7M peak</div></div>
+      <div class="metric"><div class="metric-val">$4.7B</div><div class="metric-label">Mental Health Budget</div><div class="metric-compare neutral">OMH — community & facilities</div></div>
+      <div class="metric"><div class="metric-val">$1.2B</div><div class="metric-label">Public Health (DOH)</div><div class="metric-compare neutral">Surveillance, prevention, labs</div></div>
+    </div>
+    <div class="insight-box">
+      <strong>NYS Medicaid</strong> covers approximately one-third of all New Yorkers. The program accounts for the largest single expense in the state budget when including the federal matching funds. NYS has one of the most generous Medicaid programs in the nation, covering dental, vision, long-term care, and behavioral health — benefits many other states do not offer. The state share is funded by income tax and a dedicated health care surcharge.
+    </div>
+    <div class="insight-box">
+      <strong>Nassau County Impact:</strong> Nassau County has approximately 180,000 Medicaid recipients (~13% of population). The county previously contributed to Medicaid costs directly, but the state assumed the local share growth under a 2015 agreement, saving Nassau taxpayers approximately $80M/year compared to pre-reform levels.
+    </div>
+    <a class="source-link" href="https://www.health.ny.gov/health_care/medicaid/" target="_blank">&#128279; NYS DOH — Medicaid</a>
+    <a class="source-link" href="https://www.budget.ny.gov/pubs/archive/fy2526eb/index.html" target="_blank" style="margin-left:1rem;">&#128279; NYS Budget — Health &amp; Medicaid</a>
+  </div></div>
+</div>
+
+<div class="outcome-card" id="nysSchoolCard">
+  <div class="outcome-header" onclick="toggleCard('nysSchoolCard')">
+    <div class="left">
+      <div class="entity-icon" style="background:#3b6cb5; color:white;">&#127891;</div>
+      <div>
+        <div class="entity-name">Education &amp; School Aid</div>
+        <div class="entity-amt">27% of state spending — Foundation Aid, STAR, pre-K, higher ed</div>
+      </div>
+    </div>
+    <div class="right-cost">
+      <div class="your-cost" id="nysSchoolCost">—</div>
+      <div class="per-mo" id="nysSchoolCostMo">—</div>
+    </div>
+    <div class="chevron">&#9660;</div>
+  </div>
+  <div class="outcome-body"><div class="outcome-content">
+    <div class="metric-grid">
+      <div class="metric"><div class="metric-val">$37.6B</div><div class="metric-label">Total School Aid FY2026</div><div class="metric-compare neutral">Largest state expenditure</div></div>
+      <div class="metric"><div class="metric-val">$26.4B</div><div class="metric-label">Foundation Aid</div><div class="metric-compare neutral">Primary formula aid to districts</div></div>
+      <div class="metric"><div class="metric-val">$36,293</div><div class="metric-label">Per-Pupil Spending (NYS)</div><div class="metric-compare good">91% above national avg — #1 in U.S.</div></div>
+      <div class="metric"><div class="metric-val">$2.7B</div><div class="metric-label">STAR Tax Relief</div><div class="metric-compare neutral">Property tax rebates</div></div>
+    </div>
+    <div class="two-col">
+      <div><h4 style="margin-bottom:0.5rem; color:var(--navy);">NYS NAEP Scores vs. National Avg</h4><div class="chart-container small"><canvas id="nysNaepChart"></canvas></div></div>
+      <div><h4 style="margin-bottom:0.5rem; color:var(--navy);">Per-Pupil Spending: NYS vs. Nation</h4><div class="chart-container small"><canvas id="nysPupilChart"></canvas></div></div>
+    </div>
+    <div class="insight-box">
+      <strong>Performance Paradox:</strong> New York spends the most per student in the nation ($36,293 vs. $15,633 national avg — a 132% premium), yet scores inconsistently on NAEP assessments: 4th-grade reading ranks 32nd, 4th-grade math ranks 46th, while 8th-grade reading ranks 9th nationally. The gap between spending leadership and mixed test outcomes is one of the most debated issues in NYS education policy.
+    </div>
+    <div class="insight-box">
+      <strong>What RVC Gets:</strong> RVC UFSD receives modest Foundation Aid (the formula favors higher-need districts), but benefits from STAR exemptions (~$1,220/household basic, $2,680 enhanced) and participates in BOCES shared-services agreements that reduce per-pupil administrative costs.
+    </div>
+    <a class="source-link" href="https://www.budget.ny.gov/pubs/archive/fy2526eb/index.html" target="_blank">&#128279; NYS Executive Budget FY2025-26</a>
+    <a class="source-link" href="https://www.oms.nysed.gov/faru/Profiles/profiles_cover.html" target="_blank" style="margin-left:1rem;">&#128279; NYSED — Fiscal Profiles</a>
+    <a class="source-link" href="https://nces.ed.gov/nationsreportcard/profiles/stateprofile?ctx=xreq&loc=NY" target="_blank" style="margin-left:1rem;">&#128279; NAEP — NY State Profile</a>
+  </div></div>
+</div>
+
+<div class="outcome-card" id="nysOtherCard">
+  <div class="outcome-header" onclick="toggleCard('nysOtherCard')">
+    <div class="left">
+      <div class="entity-icon" style="background:#c5a44e; color:white;">&#127963;</div>
+      <div>
+        <div class="entity-name">Higher Ed, Local Aid &amp; Other</div>
+        <div class="entity-amt">22% of state spending — SUNY/CUNY, revenue sharing, environment, parks</div>
+      </div>
+    </div>
+    <div class="right-cost">
+      <div class="your-cost" id="nysOtherCost">—</div>
+      <div class="per-mo" id="nysOtherCostMo">—</div>
+    </div>
+    <div class="chevron">&#9660;</div>
+  </div>
+  <div class="outcome-body"><div class="outcome-content">
+    <div class="metric-grid">
+      <div class="metric"><div class="metric-val">$13.1B</div><div class="metric-label">SUNY + CUNY</div><div class="metric-compare neutral">64 campuses, 635K students</div></div>
+      <div class="metric"><div class="metric-val">$7.6B</div><div class="metric-label">Local Gov't Aid (AIM)</div><div class="metric-compare neutral">Revenue sharing to municipalities</div></div>
+      <div class="metric"><div class="metric-val">$5.5B</div><div class="metric-label">Environment &amp; Parks</div><div class="metric-compare neutral">DEC, Clean Water, OPRHP</div></div>
+      <div class="metric"><div class="metric-val">$4.8B</div><div class="metric-label">Social Services &amp; Housing</div><div class="metric-compare neutral">OTDA, HHAP, shelters</div></div>
+    </div>
+    <div class="insight-box">
+      <strong>SUNY/CUNY:</strong> New York operates the largest comprehensive public university system in the nation. SUNY's 64 campuses serve 380,000+ students; CUNY's 25 campuses serve 255,000+. The combined state appropriation of $13.1B includes tuition assistance (TAP) and capital investments.
+    </div>
+    <div class="insight-box">
+      <strong>Local Impact:</strong> Nassau County receives Aid and Incentives for Municipalities (AIM) payments and other state revenue sharing. NYS also funds Jones Beach State Park operations via OPRHP, environmental cleanup programs on Long Island, and the Long Island Sound conservation program.
+    </div>
+    <a class="source-link" href="https://www.suny.edu/" target="_blank">&#128279; SUNY System</a>
+    <a class="source-link" href="https://www.osc.ny.gov/local-government/data" target="_blank" style="margin-left:1rem;">&#128279; NYS Comptroller — Local Data</a>
+    <a class="source-link" href="https://parks.ny.gov/" target="_blank" style="margin-left:1rem;">&#128279; NYS Parks</a>
+  </div></div>
+</div>
+
+<div class="outcome-card" id="nysTransCard">
+  <div class="outcome-header" onclick="toggleCard('nysTransCard')">
+    <div class="left">
+      <div class="entity-icon" style="background:#16a34a; color:white;">&#128646;</div>
+      <div>
+        <div class="entity-name">Transportation &amp; MTA</div>
+        <div class="entity-amt">12% of state spending — MTA/LIRR, highways, bridges, DOT</div>
+      </div>
+    </div>
+    <div class="right-cost">
+      <div class="your-cost" id="nysTransCost">—</div>
+      <div class="per-mo" id="nysTransCostMo">—</div>
+    </div>
+    <div class="chevron">&#9660;</div>
+  </div>
+  <div class="outcome-body"><div class="outcome-content">
+    <div class="metric-grid">
+      <div class="metric"><div class="metric-val">$8.0B</div><div class="metric-label">State DOT Budget</div><div class="metric-compare neutral">Highways, bridges, aviation</div></div>
+      <div class="metric"><div class="metric-val">$3.8B</div><div class="metric-label">State Aid to MTA</div><div class="metric-compare neutral">Subsidies + dedicated taxes</div></div>
+      <div class="metric"><div class="metric-val">$20.5B</div><div class="metric-label">MTA Total Budget</div><div class="metric-compare neutral">LIRR, Subway, MNRR, buses</div></div>
+      <div class="metric"><div class="metric-val">89.3M</div><div class="metric-label">LIRR Ridership (2024)</div><div class="metric-compare good">Highest since pre-pandemic</div></div>
+    </div>
+    <div class="insight-box">
+      <strong>RVC &amp; the LIRR:</strong> Rockville Centre station on the Babylon Branch is a key commuter hub. The one-way peak fare to Penn Station is ~$13.75 (monthly $349). State income tax revenue funds a significant share of MTA operations through dedicated surcharges, including the Metropolitan Commuter Transportation Mobility Tax (MCTMT) paid by employers in the MTA region.
+    </div>
+    <a class="source-link" href="https://new.mta.info/transparency/financial-information/financial-and-budget-statements" target="_blank">&#128279; MTA — Financials</a>
+    <a class="source-link" href="https://www.dot.ny.gov/" target="_blank" style="margin-left:1rem;">&#128279; NYS DOT</a>
+  </div></div>
+</div>
+
+<div class="outcome-card" id="nysSafetyCard">
+  <div class="outcome-header" onclick="toggleCard('nysSafetyCard')">
+    <div class="left">
+      <div class="entity-icon" style="background:#1a2744; color:white;">&#128110;</div>
+      <div>
+        <div class="entity-name">Public Safety &amp; Corrections</div>
+        <div class="entity-amt">6% of state spending — prisons, state police, courts, DOCCS</div>
+      </div>
+    </div>
+    <div class="right-cost">
+      <div class="your-cost" id="nysSafetyCost">—</div>
+      <div class="per-mo" id="nysSafetyCostMo">—</div>
+    </div>
+    <div class="chevron">&#9660;</div>
+  </div>
+  <div class="outcome-body"><div class="outcome-content">
+    <div class="metric-grid">
+      <div class="metric"><div class="metric-val">$4.3B</div><div class="metric-label">DOCCS (Corrections)</div><div class="metric-compare neutral">~31,000 incarcerated</div></div>
+      <div class="metric"><div class="metric-val">$1.1B</div><div class="metric-label">State Police</div><div class="metric-compare neutral">~5,000 sworn members</div></div>
+      <div class="metric"><div class="metric-val">$3.4B</div><div class="metric-label">Unified Court System</div><div class="metric-compare neutral">State-funded courts</div></div>
+      <div class="metric"><div class="metric-val">$139K</div><div class="metric-label">Cost per Inmate/Year</div><div class="metric-compare neutral">Among highest in U.S.</div></div>
+    </div>
+    <div class="insight-box">
+      <strong>NYS incarcerates at one of the highest per-person costs</strong> in the nation ($139K/year vs. ~$45K national avg), driven by NYC-area facility costs, staffing, and healthcare mandates. The incarcerated population has declined ~60% since 1999, but spending has not declined proportionally due to fixed facility costs and staffing requirements.
+    </div>
+    <a class="source-link" href="https://doccs.ny.gov/" target="_blank">&#128279; NYS DOCCS</a>
+    <a class="source-link" href="https://www.osc.ny.gov/reports" target="_blank" style="margin-left:1rem;">&#128279; NYS Comptroller — Reports</a>
+  </div></div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 3: FEDERAL INCOME TAX DEEP DIVE                      -->
+<!-- ============================================================ -->
+<div class="section-header">&#127482;&#127480; Federal Income Tax Deep Dive</div>
+<div style="background:linear-gradient(135deg,rgba(26,39,68,0.10),rgba(59,108,181,0.06)); border:1px solid var(--navy-light); border-radius:8px; padding:0.6rem 1rem; margin-bottom:1rem; font-size:0.85rem; display:flex; align-items:center; gap:0.5rem;">
+  <strong style="color:var(--navy); font-size:1.1rem;">&#9888;</strong>
+  <span><strong>Estimates Only</strong> — Federal income tax is calculated using simplified 2025 bracket math with OBBBA SALT provisions. Your actual liability may differ due to AMT, NIIT, Additional Medicare Tax, capital gains rates, credits, and other adjustments. Consult a tax professional or your filed return for exact amounts.</span>
+</div>
+<div class="card">
+  <div class="card-title"><span class="icon">&#127482;&#127480;</span> Federal Income Tax Estimate</div>
+  <div class="bracket-bar" id="fedBracketBar"></div>
+  <div class="bracket-legend" id="fedBracketLegend"></div>
+  <div id="federalCalcDetail" style="margin-top:0.75rem; font-size:0.9rem;"></div>
+  <div id="saltInsightBox" class="insight-box" style="margin-top:0.75rem;"></div>
+</div>
+
+<div class="card" style="margin-bottom:1rem;">
+  <div class="card-title">Where Every Federal Tax Dollar Goes</div>
+  <div class="two-col">
+    <div class="chart-container"><canvas id="fedOutcomeChart"></canvas></div>
+    <div>
+      <table class="breakdown-table">
+        <thead><tr><th>Category</th><th class="amt">Your Share</th><th class="pct">%</th></tr></thead>
+        <tbody id="fedOutcomeBody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div style="font-size:1.1rem; font-weight:700; color:var(--navy); margin:1.5rem 0 0.75rem; display:flex; align-items:center; gap:0.5rem;">&#127919; Federal Tax Outcomes Dashboard</div>
+
+<div class="outcome-card" id="fedHealthCard">
+  <div class="outcome-header" onclick="toggleCard('fedHealthCard')">
+    <div class="left">
+      <div class="entity-icon" style="background:#dc2626; color:white;">&#9764;</div>
+      <div>
+        <div class="entity-name">Medicare &amp; Health Programs</div>
+        <div class="entity-amt">30% of federal spending — healthcare for seniors, low-income, veterans</div>
+      </div>
+    </div>
+    <div class="right-cost">
+      <div class="your-cost" id="fedHealthCost">—</div>
+      <div class="per-mo" id="fedHealthCostMo">—</div>
+    </div>
+    <div class="chevron">&#9660;</div>
+  </div>
+  <div class="outcome-body"><div class="outcome-content">
+    <div class="metric-grid">
+      <div class="metric"><div class="metric-val">$912B</div><div class="metric-label">Medicare Spending</div><div class="metric-compare neutral">67M Americans covered</div></div>
+      <div class="metric"><div class="metric-val">$616B</div><div class="metric-label">Medicaid (Federal Share)</div><div class="metric-compare neutral">~85M enrolled nationwide</div></div>
+      <div class="metric"><div class="metric-val">$85B</div><div class="metric-label">ACA Marketplace</div><div class="metric-compare neutral">Premium subsidies & exchanges</div></div>
+      <div class="metric"><div class="metric-val">$350B</div><div class="metric-label">Other Health (VA, CHIP, NIH)</div><div class="metric-compare neutral">Veterans, children, research</div></div>
+    </div>
+    <div class="insight-box">
+      <strong>Medicare Part A</strong> (hospital insurance) covers inpatient stays, skilled nursing, and hospice for those 65+. <strong>Part B</strong> covers doctor visits and outpatient services. <strong>Part D</strong> covers prescription drugs. The Medicare Advantage (Part C) program now covers ~51% of all Medicare beneficiaries, up from 13% in 2005.
+    </div>
+    <div class="insight-box">
+      <strong>Note for Higher-Income Filers:</strong> Households with modified AGI above $206K (MFJ) are subject to IRMAA surcharges (Income-Related Monthly Adjustment Amount) for Medicare Parts B &amp; D, meaning higher premiums than the standard rate. Additionally, the 0.9% Additional Medicare Tax applies to wages above $250K (MFJ) / $200K (single).
+    </div>
+    <a class="source-link" href="https://www.cms.gov/data-research/statistics-trends-and-reports/national-health-expenditure-data" target="_blank">&#128279; CMS — National Health Expenditures</a>
+    <a class="source-link" href="https://www.medicare.gov/basics/get-started-with-medicare/medicare-basics/parts-of-medicare" target="_blank" style="margin-left:1rem;">&#128279; Medicare.gov — Parts of Medicare</a>
+  </div></div>
+</div>
+
+<div class="outcome-card" id="fedSSCard">
+  <div class="outcome-header" onclick="toggleCard('fedSSCard')">
+    <div class="left">
+      <div class="entity-icon" style="background:#1a2744; color:white;">&#128116;</div>
+      <div>
+        <div class="entity-name">Social Security</div>
+        <div class="entity-amt">21% of federal spending — retirement, disability & survivors</div>
+      </div>
+    </div>
+    <div class="right-cost">
+      <div class="your-cost" id="fedSSCost">—</div>
+      <div class="per-mo" id="fedSSCostMo">—</div>
+    </div>
+    <div class="chevron">&#9660;</div>
+  </div>
+  <div class="outcome-body"><div class="outcome-content">
+    <div class="metric-grid">
+      <div class="metric"><div class="metric-val">$1.5T</div><div class="metric-label">Total FY2025 Outlays</div><div class="metric-compare neutral">21% of federal budget</div></div>
+      <div class="metric"><div class="metric-val">51.5M</div><div class="metric-label">Retired Workers</div><div class="metric-compare neutral">Receiving monthly benefits</div></div>
+      <div class="metric"><div class="metric-val">$1,922</div><div class="metric-label">Avg. Monthly Benefit</div><div class="metric-compare neutral">$23,064/year per retiree</div></div>
+      <div class="metric"><div class="metric-val">67.9M</div><div class="metric-label">Total Beneficiaries</div><div class="metric-compare neutral">Including disability & survivors</div></div>
+    </div>
+    <div class="insight-box">
+      <strong>Trust Fund Status:</strong> The Old-Age and Survivors Insurance (OASI) trust fund is projected to be depleted around 2033, after which payroll taxes would cover ~79% of scheduled benefits. Social Security lifts ~22 million Americans out of poverty and provides the majority of income for over half of retirees.
+    </div>
+    <div class="insight-box">
+      <strong>Your ROI:</strong> As a current contributor, your Social Security taxes fund today's retirees. Based on average earners' benefits, married couples who both worked can expect ~$45K–$65K/year in combined benefits at full retirement age, depending on earnings history and claiming age.
+    </div>
+    <a class="source-link" href="https://www.ssa.gov/OACT/STATS/table4a4.html" target="_blank">&#128279; SSA — Monthly Statistics</a>
+    <a class="source-link" href="https://www.ssa.gov/OACT/TR/" target="_blank" style="margin-left:1rem;">&#128279; SSA — Trustees Report</a>
+    <a class="source-link" href="https://www.cbpp.org/research/social-security" target="_blank" style="margin-left:1rem;">&#128279; CBPP — Social Security</a>
+  </div></div>
+</div>
+
+<div class="outcome-card" id="fedInterestCard">
+  <div class="outcome-header" onclick="toggleCard('fedInterestCard')">
+    <div class="left">
+      <div class="entity-icon" style="background:#ea580c; color:white;">&#128200;</div>
+      <div>
+        <div class="entity-name">Interest on National Debt</div>
+        <div class="entity-amt">14% of federal spending — surpassed $1 trillion in FY2025</div>
+      </div>
+    </div>
+    <div class="right-cost">
+      <div class="your-cost" id="fedInterestCost">—</div>
+      <div class="per-mo" id="fedInterestCostMo">—</div>
+    </div>
+    <div class="chevron">&#9660;</div>
+  </div>
+  <div class="outcome-body"><div class="outcome-content">
+    <div class="metric-grid">
+      <div class="metric"><div class="metric-val">$962B</div><div class="metric-label">Net Interest FY2025</div><div class="metric-compare neutral">14% of total spending</div></div>
+      <div class="metric"><div class="metric-val">$36.2T</div><div class="metric-label">Total National Debt</div><div class="metric-compare neutral">~120% of GDP</div></div>
+      <div class="metric"><div class="metric-val">$2,640</div><div class="metric-label">Per Person / Year</div><div class="metric-compare neutral">In interest alone</div></div>
+      <div class="metric"><div class="metric-val">#1</div><div class="metric-label">Fastest-Growing Category</div><div class="metric-compare neutral">Surpassed defense spending</div></div>
+    </div>
+    <div class="insight-box">
+      <strong>Context:</strong> Net interest now exceeds total defense spending for the first time in U.S. history. At current trajectories, interest costs are projected to reach $1.8T by 2035 — consuming nearly 25% of all federal revenue. This money produces no services, programs, or infrastructure — it is entirely the cost of past borrowing.
+    </div>
+    <a class="source-link" href="https://fiscaldata.treasury.gov/americas-finance-guide/national-debt/" target="_blank">&#128279; Treasury — Fiscal Data</a>
+    <a class="source-link" href="https://www.pgpf.org/national-debt/interest" target="_blank" style="margin-left:1rem;">&#128279; PGPF — Interest on the Debt</a>
+  </div></div>
+</div>
+
+<div class="outcome-card" id="fedDefenseCard">
+  <div class="outcome-header" onclick="toggleCard('fedDefenseCard')">
+    <div class="left">
+      <div class="entity-icon" style="background:#3b6cb5; color:white;">&#128737;</div>
+      <div>
+        <div class="entity-name">National Defense</div>
+        <div class="entity-amt">13% of federal spending — military, veterans, homeland security</div>
+      </div>
+    </div>
+    <div class="right-cost">
+      <div class="your-cost" id="fedDefenseCost">—</div>
+      <div class="per-mo" id="fedDefenseCostMo">—</div>
+    </div>
+    <div class="chevron">&#9660;</div>
+  </div>
+  <div class="outcome-body"><div class="outcome-content">
+    <div class="metric-grid">
+      <div class="metric"><div class="metric-val">$872B</div><div class="metric-label">DoD Budget FY2025</div><div class="metric-compare neutral">13% of total spending</div></div>
+      <div class="metric"><div class="metric-val">1.3M</div><div class="metric-label">Active-Duty Personnel</div><div class="metric-compare neutral">+ 750K reserves</div></div>
+      <div class="metric"><div class="metric-val">$61B</div><div class="metric-label">DHS Budget</div><div class="metric-compare neutral">Homeland Security</div></div>
+      <div class="metric"><div class="metric-val">3.4%</div><div class="metric-label">% of GDP</div><div class="metric-compare neutral">vs 1.8% NATO avg</div></div>
+    </div>
+    <div class="insight-box">
+      <strong>What This Funds:</strong> Personnel costs (~25%), operations &amp; maintenance (~30%), procurement of weapons systems (~20%), research &amp; development (~15%), and military construction (~10%). The U.S. spends more on defense than the next 10 countries combined.
+    </div>
+    <a class="source-link" href="https://comptroller.defense.gov/Budget-Materials/" target="_blank">&#128279; DoD Comptroller — Budget</a>
+    <a class="source-link" href="https://www.pgpf.org/budget-basics/budget-explainer-national-defense" target="_blank" style="margin-left:1rem;">&#128279; PGPF — Defense Spending</a>
+  </div></div>
+</div>
+
+<div class="outcome-card" id="fedOtherCard">
+  <div class="outcome-header" onclick="toggleCard('fedOtherCard')">
+    <div class="left">
+      <div class="entity-icon" style="background:#c5a44e; color:white;">&#127891;</div>
+      <div>
+        <div class="entity-name">Education, Science &amp; Other</div>
+        <div class="entity-amt">12% of federal spending — education, R&D, justice, international affairs</div>
+      </div>
+    </div>
+    <div class="right-cost">
+      <div class="your-cost" id="fedOtherCost">—</div>
+      <div class="per-mo" id="fedOtherCostMo">—</div>
+    </div>
+    <div class="chevron">&#9660;</div>
+  </div>
+  <div class="outcome-body"><div class="outcome-content">
+    <div class="metric-grid">
+      <div class="metric"><div class="metric-val">$250B</div><div class="metric-label">Education (incl. Pell)</div><div class="metric-compare neutral">Student loans, K-12, Head Start</div></div>
+      <div class="metric"><div class="metric-val">$47B</div><div class="metric-label">NIH Research</div><div class="metric-compare neutral">Biomedical & public health</div></div>
+      <div class="metric"><div class="metric-val">$25B</div><div class="metric-label">NASA</div><div class="metric-compare neutral">Space exploration & aeronautics</div></div>
+      <div class="metric"><div class="metric-val">$80B</div><div class="metric-label">Justice & International</div><div class="metric-compare neutral">FBI, courts, foreign aid, State Dept.</div></div>
+    </div>
+    <div class="insight-box">
+      <strong>This includes:</strong> Department of Education (Pell Grants, Title I school funding, special education IDEA grants), NIH and NSF research grants, NASA, EPA, the federal court system, the FBI, the State Department, and foreign aid. Federal Title I funding provides approximately $3,700 per disadvantaged student to RVC UFSD.
+    </div>
+    <a class="source-link" href="https://www.usaspending.gov/" target="_blank">&#128279; USASpending.gov — Federal Expenditures</a>
+    <a class="source-link" href="https://www.pgpf.org/budget-basics/budget-explainer-spending" target="_blank" style="margin-left:1rem;">&#128279; PGPF — Federal Spending</a>
+  </div></div>
+</div>
+
+<div class="outcome-card" id="fedSafetyCard">
+  <div class="outcome-header" onclick="toggleCard('fedSafetyCard')">
+    <div class="left">
+      <div class="entity-icon" style="background:#7c3aed; color:white;">&#128101;</div>
+      <div>
+        <div class="entity-name">Income Security &amp; Safety Net</div>
+        <div class="entity-amt">8% of federal spending — SNAP, housing, unemployment, EITC</div>
+      </div>
+    </div>
+    <div class="right-cost">
+      <div class="your-cost" id="fedSafetyCost">—</div>
+      <div class="per-mo" id="fedSafetyCostMo">—</div>
+    </div>
+    <div class="chevron">&#9660;</div>
+  </div>
+  <div class="outcome-body"><div class="outcome-content">
+    <div class="metric-grid">
+      <div class="metric"><div class="metric-val">$656B</div><div class="metric-label">Total Income Security</div><div class="metric-compare neutral">7.7% of federal budget</div></div>
+      <div class="metric"><div class="metric-val">42M</div><div class="metric-label">SNAP Recipients</div><div class="metric-compare neutral">~$6.30/person/day avg</div></div>
+      <div class="metric"><div class="metric-val">$114B</div><div class="metric-label">SNAP (Food Stamps)</div><div class="metric-compare neutral">Largest safety net program</div></div>
+      <div class="metric"><div class="metric-val">$73B</div><div class="metric-label">EITC (Earned Income)</div><div class="metric-compare neutral">Refundable tax credits</div></div>
+    </div>
+    <div class="insight-box">
+      <strong>What This Funds:</strong> SNAP (food assistance), federal housing programs (Section 8, public housing), Supplemental Security Income (SSI) for aged/disabled, unemployment insurance, child tax credits, EITC, school lunch programs, and TANF (temporary assistance). These programs serve as automatic economic stabilizers — spending rises during recessions.
+    </div>
+    <a class="source-link" href="https://www.cbpp.org/research/federal-budget/where-do-our-federal-tax-dollars-go" target="_blank">&#128279; CBPP — Federal Tax Dollars</a>
+    <a class="source-link" href="https://www.fns.usda.gov/snap/supplemental-nutrition-assistance-program" target="_blank" style="margin-left:1rem;">&#128279; USDA — SNAP Data</a>
+  </div></div>
+</div>
+
+<div class="outcome-card" id="fedTransCard">
+  <div class="outcome-header" onclick="toggleCard('fedTransCard')">
+    <div class="left">
+      <div class="entity-icon" style="background:#16a34a; color:white;">&#128652;</div>
+      <div>
+        <div class="entity-name">Transportation &amp; Infrastructure</div>
+        <div class="entity-amt">2% of federal spending — highways, transit, aviation, rail</div>
+      </div>
+    </div>
+    <div class="right-cost">
+      <div class="your-cost" id="fedTransCost">—</div>
+      <div class="per-mo" id="fedTransCostMo">—</div>
+    </div>
+    <div class="chevron">&#9660;</div>
+  </div>
+  <div class="outcome-body"><div class="outcome-content">
+    <div class="metric-grid">
+      <div class="metric"><div class="metric-val">$134B</div><div class="metric-label">Transportation Outlays</div><div class="metric-compare neutral">1.6% of budget</div></div>
+      <div class="metric"><div class="metric-val">$47B</div><div class="metric-label">Highway & Bridge</div><div class="metric-compare neutral">Federal highway programs</div></div>
+      <div class="metric"><div class="metric-val">$19B</div><div class="metric-label">Mass Transit</div><div class="metric-compare neutral">Including LIRR via MTA</div></div>
+      <div class="metric"><div class="metric-val">$18B</div><div class="metric-label">Aviation (FAA)</div><div class="metric-compare neutral">Air traffic control & safety</div></div>
+    </div>
+    <div class="insight-box">
+      <strong>Local Impact:</strong> Federal transit funds flow to the MTA, which operates the LIRR — a critical link for RVC commuters to Penn Station (~35 min). FY2025 federal grants to MTA total approximately $1.5B. Federal highway funding also maintains the Southern State Parkway and other Long Island arterials.
+    </div>
+    <a class="source-link" href="https://www.transportation.gov/budget" target="_blank">&#128279; DOT — Budget & Programs</a>
+    <a class="source-link" href="https://new.mta.info/transparency/financial-information/financial-and-budget-statements" target="_blank" style="margin-left:1rem;">&#128279; MTA — Financials</a>
+  </div></div>
+</div>
+
+<!-- ============================================================ -->
+<!-- HOW YOU AND RVC COMPARE                                      -->
+<!-- ============================================================ -->
+<div class="section-header">&#128200; How You and RVC Compare</div>
+
+<!-- Personalized Qualitative Summary -->
+<div class="card">
+  <div class="card-title"><span class="icon">&#128100;</span> Your Personalized Snapshot</div>
+  <div id="personalizedSummary" style="font-size:0.92rem; line-height:1.7;"></div>
+</div>
+
+<!-- Income Comparison -->
+<div class="card">
+  <div class="card-title">Household Income: You vs. Benchmarks</div>
+  <div class="two-col">
+    <div class="chart-container"><canvas id="incomeCompareChart"></canvas></div>
+    <div>
+      <div id="incomeCompareDetail" style="font-size:0.9rem; line-height:1.8;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Property Tax Rate -->
+<div class="card">
+  <div class="card-title">Effective Property Tax Rate: RVC vs. Neighbors</div>
+  <div class="chart-container"><canvas id="benchmarkChart"></canvas></div>
+  <div class="insight-box">
+    RVC's ~2.07% effective property tax rate is competitive among Nassau County villages. Higher-spending districts like Garden City deliver similar school outcomes at higher cost, while lower-rate communities generally have lower-performing schools. RVC occupies a strong value-for-outcome position.
+  </div>
+</div>
+
+<!-- Total Tax Burden Comparison -->
+<div class="card">
+  <div class="card-title">Total Effective Tax Rate: You vs. Averages</div>
+  <div class="chart-container"><canvas id="taxRateCompareChart"></canvas></div>
+  <div id="taxRateCompareDetail" style="font-size:0.9rem; margin-top:0.75rem;"></div>
+</div>
+
+<!-- Municipal Electric -->
+<div class="card">
+  <div class="card-title">Municipal Electric: A Rare Advantage</div>
+  <div class="two-col">
+    <div>
+      <div class="metric-grid" style="grid-template-columns:1fr 1fr;">
+        <div class="metric"><div class="metric-val" style="color:var(--green);">$0.108</div><div class="metric-label">RVC Electric (/kWh)</div></div>
+        <div class="metric"><div class="metric-val" style="color:var(--red);">$0.130</div><div class="metric-label">PSEG LI (/kWh)</div></div>
+      </div>
+      <div class="insight-box">
+        RVC is one of only <strong>50 municipal/co-op electric utilities</strong> in New York State. The village's long-term NYPA (Niagara Falls hydro) contract provides ~75% of residential energy at rates <strong>15–20% below PSEG Long Island</strong>, translating to <strong>$200–$350 in annual savings</strong> per household.
+      </div>
+    </div>
+    <div><div class="chart-container small"><canvas id="electricCompareChart"></canvas></div></div>
+  </div>
+  <a class="source-link" href="https://www.rvcny.gov/electric-department/pages/electric-rates" target="_blank">&#128279; RVC Electric Rates</a>
+  <a class="source-link" href="https://www.psegliny.com/aboutpseglongisland/ratesandtariffs/rateinformation" target="_blank" style="margin-left:1rem;">&#128279; PSEG LI Rates</a>
+</div>
+
+</div><!-- /container -->
+
+<div class="footer">
+<div style="max-width:1100px; margin:0 auto;">
+  <div class="disclaimer">
+    <strong>Disclaimer:</strong> This calculator provides estimates based on publicly available data from Nassau County, the Village of Rockville Centre, NYS, and federal sources. Actual tax amounts depend on your property's specific assessed value, exemptions, and current-year tax rates. Consult the <a href="https://lrv.nassaucountyny.gov" target="_blank">Nassau County Land Records Viewer</a> for your exact assessed value and the <a href="https://www.rvcny.gov/tax-office" target="_blank">RVC Tax Office</a> (516-678-9205) for precise bill amounts. Income tax calculations are simplified estimates; consult a tax professional for advice specific to your situation.
+  </div>
+  <h3>Data Sources</h3>
+  <div class="sources-grid">
+    <div>
+      <strong>Property Tax &amp; Assessment</strong><br>
+      <a href="https://lrv.nassaucountyny.gov" target="_blank">Nassau County Land Records Viewer</a><br>
+      <a href="https://www.rvcny.gov/tax-office" target="_blank">RVC Village Tax Office</a><br>
+      <a href="https://www.nassaucountyny.gov/3364/Property-Taxes" target="_blank">Nassau County Property Taxes</a><br>
+      <a href="https://hempsteadny.gov/428/Tax-Information" target="_blank">Town of Hempstead Tax Info</a><br>
+      <a href="https://www.ownwell.com/trends/new-york/nassau-county/rockville-centre" target="_blank">Ownwell — RVC Tax Trends</a>
+    </div>
+    <div>
+      <strong>Schools &amp; Education</strong><br>
+      <a href="https://www.usnews.com/education/k12/new-york/districts/rockville-centre-union-free-school-district-104515" target="_blank">U.S. News — RVC UFSD</a><br>
+      <a href="https://www.niche.com/k12/d/rockville-centre-union-free-school-district-ny/" target="_blank">Niche — RVC UFSD Rankings</a><br>
+      <a href="https://data.nysed.gov/profile.php?instid=800000049384" target="_blank">NYSED Data — South Side HS</a><br>
+      <a href="https://www.rvcschools.org" target="_blank">RVC Schools Official Site</a><br>
+      <a href="https://www.liherald.com/stories/rvc-2025-school-budget-proposal,214994" target="_blank">Herald — 2025-26 Budget</a>
+    </div>
+    <div>
+      <strong>Village &amp; Municipal</strong><br>
+      <a href="https://www.rvcny.gov/comptroller/links/2026-adopted-budget" target="_blank">RVC 2026 Adopted Budget</a><br>
+      <a href="https://www.rvcny.gov/electric-department/pages/electric-rates" target="_blank">RVC Electric Rates</a><br>
+      <a href="https://www.rockvillecentrepolice.us" target="_blank">RVC Police Department</a><br>
+      <a href="https://rvclibrary.org" target="_blank">RVC Public Library</a><br>
+      <a href="https://www.nyapp.org/village-of-rockville-centre" target="_blank">NY Assoc. of Public Power</a>
+    </div>
+    <div>
+      <strong>Income Tax &amp; Federal (OBBBA)</strong><br>
+      <a href="https://www.irs.gov/newsroom/one-big-beautiful-bill-provisions" target="_blank">IRS — OBBBA Provisions</a><br>
+      <a href="https://www.irs.gov/filing/federal-income-tax-rates-and-brackets" target="_blank">IRS — Federal Tax Brackets</a><br>
+      <a href="https://bipartisanpolicy.org/explainer/salt-deduction-changes-in-the-one-big-beautiful-bill-act/" target="_blank">BPC — OBBBA SALT Changes</a><br>
+      <a href="https://www.tax.ny.gov/pit/file/tax-tables/2025.htm" target="_blank">NYS — 2025 Tax Tables</a><br>
+      <a href="https://www.census.gov/quickfacts/fact/table/nassaucountynewyork" target="_blank">U.S. Census — Nassau County</a>
+    </div>
+    <div>
+      <strong>Federal Spending &amp; Outcomes</strong><br>
+      <a href="https://www.usaspending.gov/" target="_blank">USASpending.gov</a><br>
+      <a href="https://fiscaldata.treasury.gov/americas-finance-guide/" target="_blank">Treasury — America's Finance Guide</a><br>
+      <a href="https://www.pgpf.org/budget-basics" target="_blank">PGPF — Budget Basics</a><br>
+      <a href="https://www.cbpp.org/research/federal-budget" target="_blank">CBPP — Federal Budget</a><br>
+      <a href="https://www.ssa.gov/OACT/STATS/" target="_blank">SSA — Statistics</a>
+    </div>
+    <div>
+      <strong>NYS Spending &amp; Outcomes</strong><br>
+      <a href="https://www.budget.ny.gov/pubs/archive/fy2526eb/index.html" target="_blank">NYS Executive Budget FY2025-26</a><br>
+      <a href="https://www.osc.ny.gov/reports" target="_blank">NYS Comptroller Reports</a><br>
+      <a href="https://nces.ed.gov/nationsreportcard/profiles/stateprofile?ctx=xreq&loc=NY" target="_blank">NAEP — NY State Profile</a><br>
+      <a href="https://new.mta.info/transparency" target="_blank">MTA — Transparency</a><br>
+      <a href="https://www.health.ny.gov/health_care/medicaid/" target="_blank">NYS DOH — Medicaid</a>
+    </div>
+    <div>
+      <strong>Demographic &amp; Comparison</strong><br>
+      <a href="https://data.census.gov/table/ACSST5Y2023.S1903" target="_blank">ACS — Median Income by Age</a><br>
+      <a href="https://www.census.gov/quickfacts/fact/table/nassaucountynewyork" target="_blank">Census QuickFacts — Nassau</a><br>
+      <a href="https://www.irs.gov/statistics/soi-tax-stats-individual-income-tax-statistics" target="_blank">IRS SOI — Tax Statistics</a><br>
+      <a href="https://www.tax.ny.gov/research/stats/statistics/personal_income_tax_statistical_reports.htm" target="_blank">NYS DTF — PIT Statistics</a><br>
+      <a href="https://www.attomdata.com/solutions/tax-data/" target="_blank">ATTOM — Property Tax Data</a>
+    </div>
+  </div>
+  <div style="margin-top:1.5rem; text-align:center; opacity:0.6;">Built March 2026 &middot; Data reflects 2025-26 tax year</div>
+</div>
+</div>
+
+<script>
+// =================== DATA ===================
+// Property tax components — sorted descending by share
+const COMPONENTS = [
+  { name: 'School District (RVC UFSD)', pct: 0.62, color: '#3b6cb5', id: 'school' },
+  { name: 'Village of RVC', pct: 0.18, color: '#16a34a', id: 'village' },
+  { name: 'Nassau County (Gen. + Police)', pct: 0.12, color: '#7c3aed', id: 'county' },
+  { name: 'Town of Hempstead', pct: 0.03, color: '#ea580c', id: 'town' },
+  { name: 'RVC Public Library', pct: 0.03, color: '#c5a44e', id: 'library' },
+  { name: 'Special Districts', pct: 0.02, color: '#64748b', id: 'special' },
+];
+const EFF_RATE = 0.02073;
+const STAR = { none: 0, basic: 1220, enhanced: 2680 };
+
+// Federal 2025 brackets
+const FB = {
+  mfj: [{m:0,x:23850,r:.10},{m:23850,x:96950,r:.12},{m:96950,x:206700,r:.22},{m:206700,x:394600,r:.24},{m:394600,x:501050,r:.32},{m:501050,x:751600,r:.35},{m:751600,x:1e15,r:.37}],
+  single: [{m:0,x:11925,r:.10},{m:11925,x:48475,r:.12},{m:48475,x:103350,r:.22},{m:103350,x:197300,r:.24},{m:197300,x:250525,r:.32},{m:250525,x:626350,r:.35},{m:626350,x:1e15,r:.37}],
+  hoh: [{m:0,x:17000,r:.10},{m:17000,x:64850,r:.12},{m:64850,x:103350,r:.22},{m:103350,x:197300,r:.24},{m:197300,x:250500,r:.32},{m:250500,x:626350,r:.35},{m:626350,x:1e15,r:.37}],
+  mfs: [{m:0,x:11925,r:.10},{m:11925,x:48475,r:.12},{m:48475,x:103350,r:.22},{m:103350,x:197300,r:.24},{m:197300,x:250525,r:.32},{m:250525,x:626350,r:.35},{m:626350,x:1e15,r:.37}],
+};
+const FSD = { mfj:31500, single:15750, hoh:23625, mfs:15750 };
+
+// OBBBA SALT provisions (effective 2025-2029)
+const SALT_CAP = { mfj:40000, single:40000, hoh:40000, mfs:20000 };
+const SALT_PHASEOUT_THRESHOLD = { mfj:500000, single:500000, hoh:500000, mfs:250000 };
+const SALT_PHASEOUT_RATE = 0.30; // 30% of excess over threshold
+const SALT_FLOOR = 10000; // Minimum SALT deduction regardless of phase-out
+
+// NYS 2025 brackets
+const SB = {
+  mfj: [{m:0,x:17150,r:.04},{m:17150,x:23600,r:.045},{m:23600,x:27900,r:.0525},{m:27900,x:161550,r:.055},{m:161550,x:323200,r:.06},{m:323200,x:2155350,r:.0685},{m:2155350,x:5e6,r:.0965},{m:5e6,x:25e6,r:.103},{m:25e6,x:1e15,r:.109}],
+  single: [{m:0,x:8500,r:.04},{m:8500,x:11700,r:.045},{m:11700,x:13900,r:.0525},{m:13900,x:80650,r:.055},{m:80650,x:215400,r:.06},{m:215400,x:1077550,r:.0685},{m:1077550,x:5e6,r:.0965},{m:5e6,x:25e6,r:.103},{m:25e6,x:1e15,r:.109}],
+  hoh: [{m:0,x:12800,r:.04},{m:12800,x:17650,r:.045},{m:17650,x:20900,r:.0525},{m:20900,x:107650,r:.055},{m:107650,x:269300,r:.06},{m:269300,x:1616450,r:.0685},{m:1616450,x:5e6,r:.0965},{m:5e6,x:25e6,r:.103},{m:25e6,x:1e15,r:.109}],
+  mfs: [{m:0,x:8500,r:.04},{m:8500,x:11700,r:.045},{m:11700,x:13900,r:.0525},{m:13900,x:80650,r:.055},{m:80650,x:215400,r:.06},{m:215400,x:1077550,r:.0685},{m:1077550,x:5e6,r:.0965},{m:5e6,x:25e6,r:.103},{m:25e6,x:1e15,r:.109}],
+};
+const SSD = { mfj:16050, single:8000, hoh:11200, mfs:8000 };
+
+// Federal spending categories (% of total federal spending FY2025, ~$7.1T) — sorted descending
+const FED_SPEND = [
+  { name: 'Medicare & Health', pct: 0.30, color: '#dc2626', id: 'fedHealth' },
+  { name: 'Social Security', pct: 0.21, color: '#1a2744', id: 'fedSS' },
+  { name: 'Interest on Debt', pct: 0.14, color: '#ea580c', id: 'fedInterest' },
+  { name: 'National Defense', pct: 0.13, color: '#3b6cb5', id: 'fedDefense' },
+  { name: 'Education, Science & Other', pct: 0.12, color: '#c5a44e', id: 'fedOther' },
+  { name: 'Income Security', pct: 0.08, color: '#7c3aed', id: 'fedSafety' },
+  { name: 'Transportation', pct: 0.02, color: '#16a34a', id: 'fedTrans' },
+];
+
+// NYS spending categories (% of total NYS budget FY2025-26) — sorted descending
+const NYS_SPEND = [
+  { name: 'Medicaid & Health', pct: 0.33, color: '#dc2626', id: 'nysMedicaid' },
+  { name: 'Education & School Aid', pct: 0.27, color: '#3b6cb5', id: 'nysSchool' },
+  { name: 'Higher Ed, Local Aid & Other', pct: 0.22, color: '#c5a44e', id: 'nysOther' },
+  { name: 'Transportation & MTA', pct: 0.12, color: '#16a34a', id: 'nysTrans' },
+  { name: 'Public Safety & Corrections', pct: 0.06, color: '#1a2744', id: 'nysSafety' },
+];
+
+// Demographic comparison data (ACS 2023 / Census estimates, IRS SOI)
+// Median household income by age of householder
+const DEMO = {
+  // { rvc, nassau, nys, us } — median HH income by age bracket
+  income: {
+    '25-34': { rvc: 118000, nassau: 105000, nys: 78000, us: 71000 },
+    '35-44': { rvc: 172000, nassau: 158000, nys: 98000, us: 88000 },
+    '45-54': { rvc: 185000, nassau: 168000, nys: 105000, us: 95000 },
+    '55-64': { rvc: 148000, nassau: 135000, nys: 82000, us: 75000 },
+    '65+':   { rvc: 82000,  nassau: 78000,  nys: 52000, us: 47000 },
+  },
+  // Median home value
+  homeValue: { rvc: 735000, nassau: 660000, nys: 384000, us: 345000 },
+  // Avg effective total tax rate (property + income) by geography
+  avgTotalRate: { rvc: 0.305, nassau: 0.29, nys: 0.26, us: 0.22 },
+  // Homeownership rate
+  homeOwnership: { rvc: 0.78, nassau: 0.80, nys: 0.54, us: 0.66 },
+  // Avg property tax
+  avgPropTax: { rvc: 15230, nassau: 13680, nys: 6600, us: 3500 },
+  // Avg mortgage interest (among those itemizing)
+  avgMortInt: { rvc: 21000, nassau: 19000, nys: 12000, us: 9500 },
+  // % itemizing
+  pctItemize: { rvc: 0.68, nassau: 0.62, nys: 0.35, us: 0.13 },
+};
+
+const FC = ['#dbeafe','#93c5fd','#60a5fa','#3b82f6','#2563eb','#1d4ed8','#1e3a8a'];
+const SC = ['#fef3c7','#fde68a','#fcd34d','#fbbf24','#f59e0b','#d97706','#b45309','#92400e','#78350f'];
+
+let charts = {};
+
+function fmt(n) {
+  if (isNaN(n) || !isFinite(n)) return '$0';
+  const r = Math.round(n);
+  return r < 0 ? '-$' + Math.abs(r).toLocaleString() : '$' + r.toLocaleString();
+}
+function fmtP(n) {
+  if (isNaN(n) || !isFinite(n)) return '0%';
+  const v = n * 100;
+  // Smart rounding: show 1 decimal if < 10%, whole number otherwise
+  return v < 10 && v > 0 ? v.toFixed(1) + '%' : Math.round(v) + '%';
+}
+// Compact dollar format for chart axes — dynamically rounds to fit
+function fmtCompact(n) {
+  if (isNaN(n) || !isFinite(n)) return '$0';
+  const abs = Math.abs(n);
+  if (abs >= 1e6) return '$' + (n / 1e6).toFixed(abs >= 1e7 ? 0 : 1) + 'M';
+  if (abs >= 1e3) return '$' + (n / 1e3).toFixed(abs >= 1e4 ? 0 : 1) + 'K';
+  return '$' + Math.round(n);
+}
+// Smart % for chart tooltips — max 2 decimals, trims trailing zeros
+function fmtPct(n) {
+  if (isNaN(n) || !isFinite(n)) return '0%';
+  const v = n * 100;
+  if (v === Math.round(v)) return Math.round(v) + '%';
+  const s = v.toFixed(2).replace(/0+$/, '').replace(/\.$/, '');
+  return s + '%';
+}
+
+function calcTax(brackets, ti) {
+  let tax = 0;
+  for (const b of brackets) {
+    if (ti <= 0) break;
+    const amt = Math.min(ti, b.x - b.m);
+    tax += amt * b.r;
+    ti -= amt;
+  }
+  return tax;
+}
+
+function getStatus() { return document.getElementById('filingStatus').value; }
+function getStarSave() {
+  const a = document.querySelector('.star-btn.active');
+  return STAR[a ? a.dataset.star : 'none'];
+}
+
+function calcSaltCap(status, magi) {
+  const baseCap = SALT_CAP[status];
+  const threshold = SALT_PHASEOUT_THRESHOLD[status];
+  if (magi <= threshold) return baseCap;
+  const reduction = (magi - threshold) * SALT_PHASEOUT_RATE;
+  return Math.max(SALT_FLOOR, baseCap - reduction);
+}
+
+function safeNum(id, fallback) {
+  const el = document.getElementById(id);
+  if (!el) return fallback || 0;
+  const v = parseFloat(el.value);
+  return isNaN(v) || !isFinite(v) ? (fallback || 0) : Math.max(0, v);
+}
+
+function calculate() {
+  try {
+  const mv = safeNum('marketValue', 300000);
+  const inc = safeNum('income', 0);
+  const st = getStatus();
+  const star = getStarSave();
+  const mortInt = safeNum('mortgageInterest', 0);
+  const otherDed = safeNum('otherDeductions', 0);
+
+  // Property tax — STAR applies ONLY to school district levy
+  const grossPropTax = mv * EFF_RATE;
+  // Build per-component amounts; STAR reduces only the school component
+  const compAmounts = {};
+  let propTax = 0;
+  COMPONENTS.forEach(c => {
+    let amt = grossPropTax * c.pct;
+    if (c.id === 'school') {
+      amt = Math.max(0, amt - star); // STAR is a school-levy-only exemption
+    }
+    compAmounts[c.id] = amt;
+    propTax += amt;
+  });
+  const propR = mv > 0 ? propTax / mv : 0;
+
+  // NYS State tax (calculated first since it feeds into SALT)
+  const sti = Math.max(0, inc - SSD[st]);
+  const sTax = calcTax(SB[st], sti);
+  const sR = inc > 0 ? sTax / inc : 0;
+
+  // OBBBA SALT calculation
+  const totalSalt = propTax + sTax; // property tax + state income tax
+  const effectiveSaltCap = calcSaltCap(st, inc);
+  const saltDeduction = Math.min(totalSalt, effectiveSaltCap);
+  const saltLost = totalSalt - saltDeduction;
+
+  // Itemized deductions: SALT (capped) + mortgage interest + other
+  const itemizedTotal = saltDeduction + mortInt + otherDed;
+  const standardDed = FSD[st];
+  const useItemized = itemizedTotal > standardDed;
+  const fedDeduction = Math.max(itemizedTotal, standardDed);
+
+  // Federal tax
+  const fti = Math.max(0, inc - fedDeduction);
+  const fTax = calcTax(FB[st], fti);
+  const fR = inc > 0 ? fTax / inc : 0;
+
+  const total = propTax + fTax + sTax;
+  const tR = inc > 0 ? total / inc : 0;
+
+  // Summary cards
+  document.getElementById('summaryProperty').textContent = fmt(propTax);
+  document.getElementById('summaryPropertySub').textContent = fmt(propTax/12)+'/mo \u00b7 '+fmtP(propR)+' eff.';
+  document.getElementById('summaryFederal').textContent = fmt(fTax);
+  document.getElementById('summaryFederalSub').textContent = fmt(fTax/12)+'/mo \u00b7 '+fmtP(fR)+' eff.';
+  document.getElementById('summaryState').textContent = fmt(sTax);
+  document.getElementById('summaryStateSub').textContent = fmt(sTax/12)+'/mo \u00b7 '+fmtP(sR)+' eff.';
+  document.getElementById('summaryTotal').textContent = fmt(total);
+  document.getElementById('summaryTotalSub').textContent = fmt(total/12)+'/mo \u00b7 '+fmtP(tR)+' total';
+
+  // SALT insight box
+  const saltBox = document.getElementById('saltInsightBox');
+  saltBox.innerHTML = `<strong>OBBBA SALT Cap (2025–2029):</strong> The One Big Beautiful Bill Act raised the SALT deduction cap from $10K to <strong>${fmt(SALT_CAP[st])}</strong> for your filing status. ` +
+    (inc > SALT_PHASEOUT_THRESHOLD[st]
+      ? `Your AGI of ${fmt(inc)} exceeds the ${fmt(SALT_PHASEOUT_THRESHOLD[st])} phase-out threshold, reducing your effective cap to <strong>${fmt(effectiveSaltCap)}</strong> (30¢ reduction per $1 over threshold, ${fmt(SALT_FLOOR)} floor). `
+      : `Your AGI of ${fmt(inc)} is under the ${fmt(SALT_PHASEOUT_THRESHOLD[st])} phase-out threshold, so you get the full ${fmt(SALT_CAP[st])} cap. `) +
+    `<br><br>Your total SALT (property ${fmt(propTax)} + NYS income ${fmt(sTax)}) = <strong>${fmt(totalSalt)}</strong>. ` +
+    `Deductible: <strong>${fmt(saltDeduction)}</strong>` +
+    (saltLost > 0 ? ` — ${fmt(saltLost)} lost to the cap.` : ' — fully deductible under the OBBBA cap!') +
+    `<br><br><strong>${useItemized ? '&#10003; You should ITEMIZE' : '&#10007; Standard deduction is better'}:</strong> ` +
+    (useItemized
+      ? `Itemized (${fmt(itemizedTotal)}) beats the standard deduction (${fmt(standardDed)}) by <strong>${fmt(itemizedTotal - standardDed)}</strong>, saving you ~${fmt((itemizedTotal - standardDed) * 0.22)} in federal tax (est. at 22% marginal rate).`
+      : `Standard deduction (${fmt(standardDed)}) exceeds your itemized deductions (${fmt(itemizedTotal)}). Add mortgage interest or charitable giving above to see if itemizing makes sense.`);
+
+  // Breakdown bar + table — uses actual per-component amounts (STAR-adjusted)
+  const bar = document.getElementById('breakdownBar');
+  const body = document.getElementById('breakdownBody');
+  bar.innerHTML = ''; body.innerHTML = '';
+  COMPONENTS.forEach(c => {
+    const a = compAmounts[c.id];
+    const share = propTax > 0 ? a / propTax : c.pct;
+    const s = document.createElement('div');
+    s.className = 'seg'; s.style.flex = share; s.style.background = c.color;
+    s.textContent = share >= 0.05 ? Math.round(share*100)+'%' : '';
+    s.title = c.name+': '+fmt(a);
+    bar.appendChild(s);
+    const tr = document.createElement('tr');
+    const actualStarSavings = c.id === 'school' && star > 0 ? Math.min(star, grossPropTax * c.pct) : 0;
+    tr.innerHTML = '<td><span class="color-dot" style="background:'+c.color+'"></span>'+c.name+(actualStarSavings > 0 ? ' <span style="font-size:0.75rem;color:var(--green);">(STAR -'+fmt(actualStarSavings)+')</span>' : '')+'</td><td class="amt">'+fmt(a)+'</td><td class="pct">'+Math.round(share*100)+'%</td>';
+    body.appendChild(tr);
+  });
+  const ttr = document.createElement('tr');
+  ttr.innerHTML = '<td>Total Property Tax'+(star > 0 ? ' <span style="font-size:0.75rem;color:var(--green);">(after STAR)</span>':'')+' </td><td class="amt">'+fmt(propTax)+'</td><td class="pct">100%</td>';
+  body.appendChild(ttr);
+
+  // Outcome costs — uses actual per-component amounts
+  COMPONENTS.forEach(c => {
+    const a = compAmounts[c.id];
+    const el = document.getElementById(c.id+'Cost');
+    const mel = document.getElementById(c.id+'CostMo');
+    if(el) el.textContent = fmt(a);
+    if(mel) mel.textContent = fmt(a/12)+'/mo';
+  });
+
+  // Federal spending outcome costs
+  updateOutcomeCosts(FED_SPEND, fTax, 'fedOutcomeBody', 'fedOutcomeChart', 'Federal Tax');
+  // NYS spending outcome costs
+  updateOutcomeCosts(NYS_SPEND, sTax, 'nysOutcomeBody', 'nysOutcomeChart', 'NYS Tax');
+
+  // Burden chart
+  updateBurden(propTax, fTax, sTax, total, inc);
+  // Bracket vis — pass deduction info for federal
+  updateBrackets('fed', FB[st], fti, fTax, inc, fedDeduction, FC, useItemized, itemizedTotal, standardDed, saltDeduction, mortInt, otherDed);
+  updateBrackets('state', SB[st], sti, sTax, inc, SSD[st], SC);
+  // Personalized comparison
+  const starActive = document.querySelector('.star-btn.active');
+  const starType = starActive ? starActive.dataset.star : 'none';
+  updatePersonalComparison(inc, mv, propTax, fTax, sTax, mortInt, starType);
+  } catch(e) {
+    console.error('Calculation error:', e);
+    // Show graceful fallback in summary cards
+    ['summaryProperty','summaryFederal','summaryState','summaryTotal'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.textContent = '—';
+    });
+  }
+}
+
+function updateBurden(prop, fed, nys, total, inc) {
+  try {
+  const safeTotal = total || 1; // avoid division by zero
+  const ctx = document.getElementById('burdenChart').getContext('2d');
+  if(charts.burden) charts.burden.destroy();
+  charts.burden = new Chart(ctx, {
+    type:'doughnut',
+    data:{ labels:['Property Tax','Federal Income Tax','NYS Income Tax'],
+      datasets:[{ data:[Math.round(prop),Math.round(fed),Math.round(nys)], backgroundColor:['#3b6cb5','#1a2744','#c5a44e'], borderWidth:2, borderColor:'#fff' }]
+    },
+    options:{ responsive:true, maintainAspectRatio:false, cutout:'55%',
+      plugins:{ legend:{position:'bottom',labels:{padding:16,usePointStyle:true,font:{size:12}}},
+        tooltip:{callbacks:{label:c=>c.label+': '+fmt(c.raw)+' ('+fmtPct(c.raw/safeTotal)+')'}} }
+    }
+  });
+  const d = document.getElementById('burdenDetails');
+  d.innerHTML = `<div><strong>Property Tax:</strong> ${fmt(prop)} <span style="color:var(--text-muted)">(${fmtPct(prop/safeTotal)})</span></div>
+    <div><strong>Federal Tax:</strong> ${fmt(fed)} <span style="color:var(--text-muted)">(${fmtPct(fed/safeTotal)})</span></div>
+    <div><strong>NYS Tax:</strong> ${fmt(nys)} <span style="color:var(--text-muted)">(${fmtPct(nys/safeTotal)})</span></div>
+    <hr style="margin:0.5rem 0;border:none;border-top:1px solid var(--border);">
+    <div><strong>Total Annual:</strong> ${fmt(total)}</div>
+    <div><strong>Per Day:</strong> ${fmt(total/365)}</div>
+    ${inc>0?'<div><strong>% of Income:</strong> '+fmtP(total/inc)+'</div>':''}
+    <div style="margin-top:0.5rem;font-size:0.82rem;color:var(--text-muted);">OBBBA raised SALT cap to $40K (MFJ) — see Federal section for itemization analysis.</div>`;
+  } catch(e) { console.error('updateBurden error:', e); }
+}
+
+function updateBrackets(type, brackets, ti, tax, gross, ded, colors, useItemized, itemized, standard, salt, mortInt, otherDed) {
+  try {
+  const pre = type==='fed'?'fed':'state';
+  const bar = document.getElementById(pre+'BracketBar');
+  const leg = document.getElementById(pre+'BracketLegend');
+  const det = document.getElementById(type==='fed'?'federalCalcDetail':'stateCalcDetail');
+  if (!bar || !leg || !det) return;
+  let used=[],rem=ti;
+  for(let i=0;i<brackets.length;i++){
+    const b=brackets[i],w=Math.min(rem,b.x-b.m);
+    if(w<=0&&i>0) break;
+    used.push({...b,w:Math.max(w,0),c:colors[i%colors.length]});
+    rem-=w; if(rem<=0) break;
+  }
+  const tw=used.reduce((s,b)=>s+b.w,0)||1;
+  bar.innerHTML='';
+  used.forEach(b=>{
+    const s=document.createElement('div');
+    s.className='bracket-seg'; s.style.flex=b.w/tw; s.style.background=b.c;
+    s.style.color=b.r>0.05?'#fff':'#333'; s.textContent=fmtPct(b.r);
+    bar.appendChild(s);
+  });
+  leg.innerHTML=used.map(b=>`<span><span class="dot" style="background:${b.c}"></span>${fmtPct(b.r)}: ${fmtCompact(b.w)}</span>`).join('');
+  const er=gross>0?tax/gross:0;
+  if (type === 'fed') {
+    det.innerHTML=`<div>Gross Income: <strong>${fmt(gross)}</strong></div>
+      <div style="margin:0.4rem 0 0.2rem; font-size:0.8rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.5px;">Deduction Method: ${useItemized ? 'Itemized' : 'Standard'}</div>
+      ${useItemized
+        ? `<div style="padding-left:0.75rem; border-left:2px solid var(--gold); margin:0.25rem 0;">
+            <div>SALT (capped): ${fmt(salt)}</div>
+            <div>Mortgage Interest: ${fmt(mortInt)}</div>
+            <div>Other Deductions: ${fmt(otherDed)}</div>
+            <div><strong>Itemized Total: -${fmt(itemized)}</strong></div>
+           </div>`
+        : `<div>Standard Deduction: <strong>-${fmt(ded)}</strong></div>
+           <div style="font-size:0.8rem;color:var(--text-muted);">(Itemized would be ${fmt(itemized)} — less than standard)</div>`
+      }
+      <div>Taxable Income: <strong>${fmt(ti)}</strong></div>
+      <div>Tax Owed: <strong>${fmt(tax)}</strong></div>
+      <div>Effective Rate: <strong>${fmtP(er)}</strong></div>`;
+  } else {
+    det.innerHTML=`<div>Gross Income: <strong>${fmt(gross)}</strong></div>
+      <div>Standard Deduction: <strong>-${fmt(ded)}</strong></div>
+      <div>Taxable Income: <strong>${fmt(ti)}</strong></div>
+      <div>Tax Owed: <strong>${fmt(tax)}</strong></div>
+      <div>Effective Rate: <strong>${fmtP(er)}</strong></div>`;
+  }
+  } catch(e) { console.error('updateBrackets error:', e); }
+}
+
+function updateOutcomeCosts(categories, totalTax, tableId, chartId, chartLabel) {
+  try {
+    const safeTax = isNaN(totalTax) || !isFinite(totalTax) ? 0 : Math.max(0, totalTax);
+    // Categories already sorted descending by pct at definition
+    categories.forEach(c => {
+      const amt = safeTax * c.pct;
+      const el = document.getElementById(c.id + 'Cost');
+      const mel = document.getElementById(c.id + 'CostMo');
+      if (el) el.textContent = fmt(amt);
+      if (mel) mel.textContent = fmt(amt / 12) + '/mo';
+    });
+    // Update summary table (already in descending order)
+    const tbody = document.getElementById(tableId);
+    if (tbody) {
+      tbody.innerHTML = '';
+      categories.forEach(c => {
+        const amt = safeTax * c.pct;
+        const tr = document.createElement('tr');
+        tr.innerHTML = '<td><span class="color-dot" style="background:' + c.color + '"></span>' + c.name + '</td><td class="amt">' + fmt(amt) + '</td><td class="pct">' + Math.round(c.pct * 100) + '%</td>';
+        tbody.appendChild(tr);
+      });
+      const ttr = document.createElement('tr');
+      ttr.innerHTML = '<td>Total ' + chartLabel + '</td><td class="amt">' + fmt(safeTax) + '</td><td class="pct">100%</td>';
+      tbody.appendChild(ttr);
+    }
+    // Update doughnut chart
+    const canvas = document.getElementById(chartId);
+    if (canvas) {
+      const ctx = canvas.getContext('2d');
+      const key = chartId;
+      if (charts[key]) charts[key].destroy();
+      charts[key] = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: categories.map(c => c.name),
+          datasets: [{
+            data: categories.map(c => Math.round(safeTax * c.pct)),
+            backgroundColor: categories.map(c => c.color),
+            borderWidth: 2, borderColor: '#fff'
+          }]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false, cutout: '50%',
+          plugins: {
+            legend: { position: 'bottom', labels: { padding: 10, usePointStyle: true, font: { size: 10 } } },
+            tooltip: { callbacks: { label: c => {
+              const pct = safeTax > 0 ? fmtPct(c.raw / safeTax) : '0%';
+              return c.label + ': ' + fmt(c.raw) + ' (' + pct + ')';
+            }}}
+          }
+        }
+      });
+    }
+  } catch(e) { console.error('updateOutcomeCosts error:', e); }
+}
+
+function updatePersonalComparison(inc, mv, propTax, fTax, sTax, mortInt, starType) {
+  try {
+  const age = document.getElementById('ageRange').value;
+  const st = getStatus();
+  const demoInc = DEMO.income[age] || DEMO.income['35-44'];
+  const total = propTax + fTax + sTax;
+  const totalRate = inc > 0 ? total / inc : 0;
+
+  // Helper for above/below language
+  const pctDiff = (yours, theirs) => {
+    if (theirs === 0) return 'N/A';
+    const d = ((yours - theirs) / theirs * 100);
+    return d >= 0 ? `${Math.round(d)}% above` : `${Math.round(Math.abs(d))}% below`;
+  };
+  const aboveBelow = (yours, theirs) => yours >= theirs ? 'above' : 'below';
+
+  // Income comparison chart
+  const incCanvas = document.getElementById('incomeCompareChart');
+  if (incCanvas) {
+    const ctx = incCanvas.getContext('2d');
+    if (charts.incComp) charts.incComp.destroy();
+    charts.incComp = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['You', 'RVC Median', 'Nassau Median', 'NYS Median', 'U.S. Median'],
+        datasets: [{
+          label: 'Household Income (' + age + ')',
+          data: [inc, demoInc.rvc, demoInc.nassau, demoInc.nys, demoInc.us],
+          backgroundColor: ['#3b6cb5', '#c5a44e', '#7c3aed', '#ea580c', '#64748b'],
+          borderRadius: 4
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false, indexAxis: 'y',
+        scales: { x: { beginAtZero: true, ticks: { callback: v => '$' + (v / 1000).toFixed(0) + 'K' } } },
+        plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => fmt(c.raw) } } }
+      }
+    });
+  }
+
+  // Income comparison detail
+  const incDet = document.getElementById('incomeCompareDetail');
+  if (incDet) {
+    incDet.innerHTML =
+      `<div><strong>Your HH Income:</strong> ${fmt(inc)}</div>` +
+      `<div>vs. RVC median (${age}): <strong>${fmt(demoInc.rvc)}</strong> — ${pctDiff(inc, demoInc.rvc)}</div>` +
+      `<div>vs. Nassau median (${age}): <strong>${fmt(demoInc.nassau)}</strong> — ${pctDiff(inc, demoInc.nassau)}</div>` +
+      `<div>vs. NYS median (${age}): <strong>${fmt(demoInc.nys)}</strong> — ${pctDiff(inc, demoInc.nys)}</div>` +
+      `<div>vs. U.S. median (${age}): <strong>${fmt(demoInc.us)}</strong> — ${pctDiff(inc, demoInc.us)}</div>` +
+      `<div style="margin-top:0.5rem; font-size:0.78rem; color:var(--text-muted);">Sources: ACS 2023, Census QuickFacts, IRS SOI</div>`;
+  }
+
+  // Tax rate comparison chart
+  const taxCanvas = document.getElementById('taxRateCompareChart');
+  if (taxCanvas) {
+    const ctx = taxCanvas.getContext('2d');
+    if (charts.taxComp) charts.taxComp.destroy();
+    charts.taxComp = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['You', 'RVC Avg', 'Nassau Avg', 'NYS Avg', 'U.S. Avg'],
+        datasets: [{
+          label: 'Eff. Total Tax Rate',
+          data: [
+            Math.round(totalRate * 1000) / 10,
+            Math.round(DEMO.avgTotalRate.rvc * 1000) / 10,
+            Math.round(DEMO.avgTotalRate.nassau * 1000) / 10,
+            Math.round(DEMO.avgTotalRate.nys * 1000) / 10,
+            Math.round(DEMO.avgTotalRate.us * 1000) / 10
+          ],
+          backgroundColor: ['#3b6cb5', '#c5a44e', '#7c3aed', '#ea580c', '#64748b'],
+          borderRadius: 4
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        scales: { y: { beginAtZero: true, max: 45, ticks: { callback: v => v + '%' } }, x: { grid: { display: false } } },
+        plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => c.raw + '%' } } }
+      }
+    });
+  }
+
+  // Tax rate detail
+  const taxDet = document.getElementById('taxRateCompareDetail');
+  if (taxDet) {
+    const yourPropRate = mv > 0 ? (propTax / mv * 100).toFixed(2) : '0';
+    taxDet.innerHTML = `<div class="insight-box">` +
+      `<strong>Your effective total tax rate is ${fmtP(totalRate)}</strong> (property ${fmtP(propTax / Math.max(inc,1))} + federal ${fmtP(fTax / Math.max(inc,1))} + NYS ${fmtP(sTax / Math.max(inc,1))}), which is ` +
+      `${totalRate > DEMO.avgTotalRate.rvc ? 'above' : 'below'} the RVC average of ~${(DEMO.avgTotalRate.rvc*100).toFixed(1)}% and ` +
+      `${totalRate > DEMO.avgTotalRate.us ? 'well above' : 'near'} the national average of ~${(DEMO.avgTotalRate.us*100).toFixed(1)}%. ` +
+      `High property taxes + NYS income tax are the primary drivers. The OBBBA SALT cap relief and municipal electric savings partially offset this.` +
+      `</div>`;
+  }
+
+  // Personalized summary
+  const summ = document.getElementById('personalizedSummary');
+  if (summ) {
+    const starLabel = starType === 'none' ? 'No STAR' : (starType === 'basic' ? 'Basic STAR' : 'Enhanced STAR');
+    const incMultRvc = demoInc.rvc > 0 ? (inc / demoInc.rvc) : 0;
+    const incMultUs = demoInc.us > 0 ? (inc / demoInc.us) : 0;
+    const mvMultRvc = DEMO.homeValue.rvc > 0 ? (mv / DEMO.homeValue.rvc) : 0;
+    const propMultRvc = DEMO.avgPropTax.rvc > 0 ? (propTax / DEMO.avgPropTax.rvc) : 0;
+
+    let incBlurb = '';
+    if (incMultRvc >= 3) incBlurb = `Your household income places you well above the RVC median for your age group — roughly <strong>${incMultRvc.toFixed(1)}x</strong> the local median and <strong>${incMultUs.toFixed(1)}x</strong> the national median.`;
+    else if (incMultRvc >= 1.5) incBlurb = `Your income is comfortably above the RVC median for your age group — roughly <strong>${incMultRvc.toFixed(1)}x</strong> the local median.`;
+    else if (incMultRvc >= 0.8) incBlurb = `Your income is near the RVC median for your age group — roughly <strong>${incMultRvc.toFixed(1)}x</strong> the local median.`;
+    else incBlurb = `Your income is below the RVC median for your age group (<strong>${Math.round(incMultRvc*100)}%</strong>), which affects your relative tax burden.`;
+
+    let mvBlurb = '';
+    if (mvMultRvc >= 2) mvBlurb = `Your home's estimated market value of <strong>${fmt(mv)}</strong> is <strong>${mvMultRvc.toFixed(1)}x</strong> the RVC median home value — placing you in the upper tier of village properties.`;
+    else if (mvMultRvc >= 1.2) mvBlurb = `Your home's estimated value of <strong>${fmt(mv)}</strong> is above the RVC median — <strong>${mvMultRvc.toFixed(1)}x</strong> typical village home values.`;
+    else mvBlurb = `Your home's estimated value of <strong>${fmt(mv)}</strong> is near the RVC village median.`;
+
+    let propBlurb = '';
+    if (propMultRvc >= 1.5) propBlurb = `At <strong>${fmt(propTax)}/year</strong>, your property tax is <strong>${propMultRvc.toFixed(1)}x</strong> the RVC average and <strong>${(propTax / DEMO.avgPropTax.us).toFixed(1)}x</strong> the national average. You pay more because your home value is higher than typical — but you benefit from RVC's competitive 2.07% effective rate.`;
+    else propBlurb = `At <strong>${fmt(propTax)}/year</strong>, your property tax is near the RVC average of <strong>${fmt(DEMO.avgPropTax.rvc)}</strong>. RVC's 2.07% effective rate is mid-range among Nassau villages.`;
+
+    let mortBlurb = '';
+    if (mortInt > 0) {
+      mortBlurb = `You claim <strong>${fmt(mortInt)}</strong> in annual mortgage interest — ${mortInt > DEMO.avgMortInt.rvc ? 'above' : 'near'} the RVC average of ~${fmt(DEMO.avgMortInt.rvc)} among itemizers.`;
+    } else {
+      mortBlurb = `You have no mortgage interest deduction, which is unusual in RVC where ~${Math.round(DEMO.pctItemize.rvc*100)}% of filers itemize (vs. ${Math.round(DEMO.pctItemize.us*100)}% nationally).`;
+    }
+
+    let saltBlurb = `Under the OBBBA, roughly <strong>${Math.round(DEMO.pctItemize.rvc*100)}%</strong> of RVC filers benefit from the increased $40K SALT cap — compared to just ${Math.round(DEMO.pctItemize.us*100)}% of U.S. filers who itemize at all. This provision disproportionately benefits high-tax suburban communities like RVC.`;
+
+    summ.innerHTML =
+      `<div class="insight-box" style="margin-top:0;"><strong>Income (${age} age bracket):</strong> ${incBlurb}</div>` +
+      `<div class="insight-box"><strong>Home Value:</strong> ${mvBlurb}</div>` +
+      `<div class="insight-box"><strong>Property Tax:</strong> ${propBlurb}</div>` +
+      `<div class="insight-box"><strong>Mortgage &amp; Deductions:</strong> ${mortBlurb} STAR status: <strong>${starLabel}</strong>.</div>` +
+      `<div class="insight-box"><strong>SALT &amp; Itemization:</strong> ${saltBlurb}</div>` +
+      `<div style="margin-top:0.75rem; font-size:0.78rem; color:var(--text-muted);">Comparison data: ACS 2023 5-year estimates, IRS Statistics of Income (SOI) 2022, Census QuickFacts 2024, Nassau County Assessor, NYS Dept. of Taxation and Finance. Age-bracket medians are approximate; exact figures vary by survey year and methodology.</div>`;
+  }
+  } catch(e) { console.error('updatePersonalComparison error:', e); }
+}
+
+function toggleCard(id){ document.getElementById(id).classList.toggle('open'); }
+
+function initStatic(){
+  try {
+  // School scores
+  charts.ss = new Chart(document.getElementById('schoolScoresChart').getContext('2d'),{
+    type:'bar',
+    data:{labels:['Math Proficiency','Reading Proficiency'],
+      datasets:[{label:'RVC UFSD',data:[73,69],backgroundColor:'#3b6cb5'},{label:'NY State Avg',data:[47,49],backgroundColor:'#cbd5e1'}]
+    },
+    options:{responsive:true,maintainAspectRatio:false,
+      scales:{y:{beginAtZero:true,max:100,ticks:{callback:v=>Math.round(v)+'%'}}},
+      plugins:{legend:{position:'bottom',labels:{font:{size:11}}},tooltip:{callbacks:{label:c=>c.dataset.label+': '+c.raw+'%'}}}
+    }
+  });
+  // School spending
+  charts.sp = new Chart(document.getElementById('schoolSpendChart').getContext('2d'),{
+    type:'bar',
+    data:{labels:['RVC ($42.1K)','Jericho ($40.9K)','Port Wash. ($36.2K)','Manhasset ($35.1K)','Garden City ($32.7K)'],
+      datasets:[{label:'Per-Pupil',data:[42050,40900,36200,35100,32700],backgroundColor:['#3b6cb5','#64748b','#64748b','#64748b','#64748b']}]
+    },
+    options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',
+      scales:{x:{beginAtZero:true,ticks:{callback:v=>fmtCompact(v)}}},
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>fmt(c.raw)}}}
+    }
+  });
+  // Village budget
+  charts.vb = new Chart(document.getElementById('villageBudgetChart').getContext('2d'),{
+    type:'doughnut',
+    data:{labels:['Police','Fire (Vol.)','DPW/Sanitation','Electric Dept.','Administration','Recreation/Other'],
+      datasets:[{data:[28,4,22,25,14,7],backgroundColor:['#1a2744','#dc2626','#ea580c','#f59e0b','#64748b','#16a34a'],borderWidth:2,borderColor:'#fff'}]
+    },
+    options:{responsive:true,maintainAspectRatio:false,cutout:'45%',
+      plugins:{legend:{position:'bottom',labels:{font:{size:10},padding:8,usePointStyle:true}},
+        tooltip:{callbacks:{label:c=>c.label+': ~'+c.raw+'% of budget'}}}
+    }
+  });
+  // Electric
+  charts.el = new Chart(document.getElementById('electricChart').getContext('2d'),{
+    type:'bar',
+    data:{labels:['Monthly Bill (750 kWh)'],
+      datasets:[{label:'RVC Electric',data:[88],backgroundColor:'#16a34a'},{label:'PSEG LI',data:[104],backgroundColor:'#dc2626'}]
+    },
+    options:{responsive:true,maintainAspectRatio:false,
+      scales:{y:{beginAtZero:true,ticks:{callback:v=>fmtCompact(v)}}},
+      plugins:{legend:{position:'bottom',labels:{font:{size:11}}},tooltip:{callbacks:{label:c=>c.dataset.label+': $'+c.raw}}}
+    }
+  });
+  // Library
+  charts.lib = new Chart(document.getElementById('libraryChart').getContext('2d'),{
+    type:'doughnut',
+    data:{labels:['Salaries & Benefits','Administration','Operations & Maint.','Materials'],
+      datasets:[{data:[3300,381,288,101],backgroundColor:['#c5a44e','#3b6cb5','#64748b','#16a34a'],borderWidth:2,borderColor:'#fff'}]
+    },
+    options:{responsive:true,maintainAspectRatio:false,cutout:'45%',
+      plugins:{legend:{position:'bottom',labels:{font:{size:10},padding:8,usePointStyle:true}},
+        tooltip:{callbacks:{label:c=>c.label+': $'+c.raw+'K'}}}
+    }
+  });
+  // Benchmark
+  charts.bm = new Chart(document.getElementById('benchmarkChart').getContext('2d'),{
+    type:'bar',
+    data:{labels:['Freeport','Oceanside','Baldwin','Malverne','RVC','Lynbrook','Garden City'],
+      datasets:[{label:'Eff. Tax Rate (%)',data:[2.45,2.30,2.22,2.15,2.07,2.05,1.85],
+        backgroundColor:['#cbd5e1','#cbd5e1','#cbd5e1','#cbd5e1','#3b6cb5','#cbd5e1','#cbd5e1'],borderRadius:4}]
+    },
+    options:{responsive:true,maintainAspectRatio:false,
+      scales:{y:{beginAtZero:true,max:3,ticks:{callback:v=>v+'%'}},x:{grid:{display:false}}},
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.raw+'%'}}}
+    }
+  });
+  // Electric compare
+  charts.ec = new Chart(document.getElementById('electricCompareChart').getContext('2d'),{
+    type:'bar',
+    data:{labels:['Annual Electric Cost (avg household)'],
+      datasets:[{label:'RVC Municipal',data:[1150],backgroundColor:'#16a34a'},{label:'PSEG Long Island',data:[1430],backgroundColor:'#dc2626'}]
+    },
+    options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',
+      scales:{x:{beginAtZero:true,ticks:{callback:v=>fmtCompact(v)}}},
+      plugins:{legend:{position:'bottom',labels:{font:{size:11}}},tooltip:{callbacks:{label:c=>c.dataset.label+': $'+c.raw+'/yr'}}}
+    }
+  });
+  // NYS NAEP Scores
+  charts.naep = new Chart(document.getElementById('nysNaepChart').getContext('2d'),{
+    type:'bar',
+    data:{labels:['4th Reading','4th Math','8th Reading','8th Math'],
+      datasets:[
+        {label:'New York',data:[214,233,266,279],backgroundColor:'#3b6cb5'},
+        {label:'National Avg',data:[216,236,259,274],backgroundColor:'#cbd5e1'}
+      ]
+    },
+    options:{responsive:true,maintainAspectRatio:false,
+      scales:{y:{beginAtZero:false,min:200,max:300,title:{display:true,text:'NAEP Scale Score'}}},
+      plugins:{legend:{position:'bottom',labels:{font:{size:11}}},tooltip:{callbacks:{label:c=>c.dataset.label+': '+c.raw}}}
+    }
+  });
+  // NYS Per-Pupil Spending
+  charts.pupil = new Chart(document.getElementById('nysPupilChart').getContext('2d'),{
+    type:'bar',
+    data:{labels:['New York','New Jersey','Connecticut','Massachusetts','National Avg'],
+      datasets:[{label:'Per-Pupil',data:[36293,24551,24028,22354,15633],backgroundColor:['#3b6cb5','#64748b','#64748b','#64748b','#cbd5e1']}]
+    },
+    options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',
+      scales:{x:{beginAtZero:true,ticks:{callback:v=>fmtCompact(v)}}},
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>fmt(c.raw)}}}
+    }
+  });
+  } catch(e) { console.error('initStatic error:', e); }
+}
+
+// Event listeners
+document.getElementById('marketValue').addEventListener('input', function(){
+  document.getElementById('marketValueDisplay').textContent = fmt(parseInt(this.value));
+  calculate();
+});
+document.getElementById('income').addEventListener('input', calculate);
+document.getElementById('mortgageInterest').addEventListener('input', calculate);
+document.getElementById('otherDeductions').addEventListener('input', calculate);
+document.getElementById('filingStatus').addEventListener('change', calculate);
+document.getElementById('ageRange').addEventListener('change', calculate);
+document.querySelectorAll('.star-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.star-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    calculate();
+  });
+});
+
+// Init
+document.addEventListener('DOMContentLoaded', () => { initStatic(); calculate(); });
+</script>
+</body>
+</html>

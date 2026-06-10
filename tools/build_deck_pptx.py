@@ -176,7 +176,7 @@ kpi_cell(s, MX + Inches(4.0), Inches(1.70), Inches(3.7), "W. Suffolk BOCES", "�
 kpi_cell(s, MX + Inches(8.0), Inches(1.70), Inches(4.05), "Next door", "−16.5", "%", "Oyster Bay–East Norwich enrollment since 2015-16; Hewlett-Woodmere cut 11 teaching positions for 2025-26", "NYSED · LI Herald", kpi_size=40)
 text(s, MX, Inches(4.0), Inches(11), Inches(0.3), [eyebrow("If the benchmarks are missed, the sequence is already written")])
 seq = [("1 · OVERRIDES OR CUTS", "A 60% supermajority override on some of America's highest property taxes — or annual position cuts. Already happening: −62 (RVC), −11 (Hewlett-Woodmere)."),
-       ("2 · PROGRAM EROSION", "Larger classes, fewer electives, building consolidations. The endgame has a local address: Levittown closed two elementary schools when its first family cycle aged out (1976)."),
+       ("2 · EROSION & CLOSURES", "Larger classes, fewer electives, consolidations — then buildings. Northport closed two elementaries in 2021 (−10.6% enrollment); Long Beach parents fought one off in Jan 2025; Locust Valley's 2026-27 budget failed outright (revote June 16)."),
        ("3 · HOME-VALUE RISK", "School quality capitalizes into prices (Black 1999, QJE, and a large successor literature) — the premium that justifies RVC's taxes erodes with the schools.")]
 y = Inches(4.4)
 sw = (W - MX*2 - Inches(0.6)) / 3
@@ -185,7 +185,7 @@ for i, (t, d) in enumerate(seq):
     rect(s, x, y, sw, Pt(2), RULE)
     text(s, x, y + Inches(0.10), sw, Inches(0.25), [[mono(t, 8.5, ACCENT, True)]])
     text(s, x, y + Inches(0.40), sw, Inches(1.6), [[R(d, SANS, 10.5, BODY)]], line_spacing=1.18)
-footrule(s, "A county-wide coalition exists for the asking — slide 14")
+footrule(s, "A county-wide coalition exists for the asking — slide 15")
 
 # 05 — THE CAUSE
 s = slide(); masthead(s, "The Cause")
@@ -220,8 +220,31 @@ text(s, MX, Inches(1.7), Inches(1.2), Inches(2.0), [[R("“", SERIF, 110, ACCENT
 text(s, MX + Inches(1.3), Inches(1.9), Inches(10.5), Inches(2.4),
      [[R("Five houses under a million dollars. In the whole district.", SERIF, 38, BG, True)]], line_spacing=1.05)
 text(s, MX + Inches(1.3), Inches(4.0), Inches(10.3), Inches(1.6),
-     [[R("Locust Valley's superintendent — “this is a Long Island problem, not a Locust Valley problem” — explaining a projected −15% enrollment slide (2,034 → 1,725 by 2027-28). Young families bid on the few large homes that list; the rest never list. Rockville Centre's version: 2,076 senior-owned homes, a frozen assessment roll, and a federal tax code that charges six figures for selling.", SANS, 13, CREAM_DIM)]], line_spacing=1.3)
-text(s, MX + Inches(1.3), Inches(6.1), Inches(10), Inches(0.3), [[mono("LI Herald · April 2025 · NYSED · ACS B25007", 8, MONO_DIM)]])
+     [[R("Supt. Kristen Turnow, Locust Valley — “this is a Long Island problem, not a Locust Valley problem” — explaining a projected −15% enrollment slide (2,034 → 1,725 by 2027-28). Three weeks ago hers became the only Nassau district whose 2026-27 budget failed (850–765; revote June 16). Young families bid on the few large homes that list; the rest never list. Rockville Centre's version: 2,076 senior-owned homes, a frozen assessment roll, and a federal tax code that charges six figures for selling.", SANS, 13, CREAM_DIM)]], line_spacing=1.3)
+text(s, MX + Inches(1.3), Inches(6.25), Inches(10), Inches(0.3), [[mono("LI Herald · Apr 2025 & May 2026 · NYSED · ACS B25007", 8, MONO_DIM)]])
+
+# 07 — VOICES (the library, surfaced)
+s = slide(); masthead(s, "The Voices")
+text(s, MX, Inches(0.88), Inches(11.5), Inches(0.55), [[R("The rooms are telling you", SERIF, 27, INK, True)]])
+voices = [("CHRIS ZUBLIONIS · SUPT., NORTH SHORE CSD · APR 2025",
+           "You look at the students in senior year, and then you look at the incoming kindergarten, and it's like half. You can really see it going down."),
+          ("LESLI DENINNO · PRESIDENT, RVC TEACHERS' ASSN. · MAR 2026",
+           "The strength of this district is its teachers, staff and programs that support students. Cutting these is not the best practice. It is actively damaging to students and the community."),
+          ("JEFF GREENFIELD · RVC RESIDENT, 56TH YEAR OF BUDGET HEARINGS · APR 2026",
+           "It's probably one of the worst budget situations that I've seen in all those years. … You lost the confidence of the community as shepherds and stewards of our money.")]
+y = Inches(1.7)
+for who, q in voices:
+    rect(s, MX, y, W - MX*2, Pt(1), RULESOFT)
+    text(s, MX, y + Inches(0.14), Inches(0.4), Inches(0.6), [[R("“", SERIF, 30, ACCENT, True)]])
+    text(s, MX + Inches(0.45), y + Inches(0.12), Inches(11.3), Inches(0.75),
+         [[R(q, SERIF, 14.5, INK, False, True)]], line_spacing=1.22)
+    text(s, MX + Inches(0.45), y + Inches(1.04), Inches(11.3), Inches(0.25), [[mono(who, 8, MUTED, True)]])
+    y += Inches(1.46)
+dark_band(s, MX, y + Inches(0.08), W - MX*2, Inches(0.62))
+text(s, MX + Inches(0.25), y + Inches(0.20), Inches(11.6), Inches(0.4),
+     [[mono("The library   ", 8.5, ACCENT_LT, True),
+       R("30+ verbatim, sourced quotes — parents, teachers, superintendents, trustees — at rvc-taxes.jeffpinto.com/voices.html. Built for reuse: testimony, letters, op-eds.", SANS, 11.5, BG)]])
+footrule(s, "All quotes verbatim from linked sources — LI Herald · News 12 · Patch · Northport Journal")
 
 # 07 — FOUR LOCKS (2x2)
 s = slide(); masthead(s, "The Lock-In")
@@ -279,7 +302,7 @@ for i, (t, d) in enumerate(trio):
     text(s, x, y + Inches(0.40), sw, Inches(1.4), [[R(d, SANS, 10.5, BODY)]], line_spacing=1.18)
 text(s, MX, Inches(6.25), Inches(11.8), Inches(0.6),
      [[R("The ask is not to oppose relief — it is to pair every expansion with a fiscal note and a mobility counterpart.", SERIF, 15, BODY, False, True)]])
-footrule(s, "Every §467 expansion decision is now pending locally — the data ask (slide 14) comes first")
+footrule(s, "Every §467 expansion decision is now pending locally — the data ask (slide 15) comes first")
 
 # 10 — FOLLOW ONE HOME
 s = slide(); masthead(s, "The Math, Done Honestly")
@@ -397,7 +420,7 @@ text(s, MX, Inches(0.88), Inches(12), Inches(0.5), [[R("Assembled from things th
 rows = [("DEFERRAL · OR 1963 · MA 41A · WA · TX", "Districts made whole; seniors cash-flow-safe", "State pays; a lien — not a subsidy — does the work, repaid with 5–8% interest at sale. Voluntary. Oregon's program is self-financing."),
         ("CALIFORNIA · PROP 19 · 2020", "Senior mobility wins at the ballot box", "Base-transfer for 55+, statewide, up to 3 moves — narrowly approved by voters; LAO scored the package revenue-positive for schools. The lesson for NY is the politics, not the mechanism: NY taxes current value, so our version is benefit-continuity (S3309), not basis-porting."),
         ("MINNEAPOLIS FED · 2024", "Property taxes reduce lock-in, shift ownership younger", "Recurring taxes capitalize into lower prices and raise turnover toward young families — NY's turnover dividend is unusually large once artificial locks come off."),
-        ("LEVITTOWN · 1976", "The endgame of doing nothing has a local address", "When the first postwar suburb aged through its family cycle, it closed Pintail Lane and Cherrywood elementary schools — two generations ago. The cycle is now Rockville Centre's to manage, with better tools.")]
+        ("NORTHPORT · 2021 · THREE VILLAGE · 2025", "The endgame is current, not historical", "Northport–East Northport closed two elementaries in Aug 2021 (enrollment −10.6% + LIPA step-down; ~$7M/yr saved); Three Village consolidated grades district-wide in 2025; Long Beach is Nassau's nearest miss (East Elementary saved by 4,000 signatures, Jan 2025). The cycle is now Rockville Centre's to manage, with better tools.")]
 y = Inches(1.62)
 for ey, h3, body in rows:
     rect(s, MX, y, W - MX*2, Pt(1), RULESOFT)
@@ -408,7 +431,7 @@ for ey, h3, body in rows:
 text(s, MX, y + Inches(0.08), Inches(11.8), Inches(0.7),
      [[R("What we are not proposing: ", SANS, 11.5, INK, True),
        R("no benefit cuts, no forced sales, no “empty-nester tax.” Opt-in for the senior; revenue-positive for the State.", SANS, 11.5, BODY)]], line_spacing=1.2)
-footrule(s, "NBER w25468 evidence on exemption retention effects — slide 9")
+footrule(s, "NBER w25468 evidence on exemption retention effects — slide 10")
 
 # 16 — THE UNASKED QUESTION: DISTRICT LINES (new)
 s = slide(); masthead(s, "The Horizon Lever")
@@ -429,7 +452,7 @@ dark_band(s, MX, y + Inches(0.1), W - MX*2, Inches(0.6))
 text(s, MX + Inches(0.25), y + Inches(0.21), Inches(11.6), Inches(0.4),
      [[mono("Candor   ", 8.5, ACCENT_LT, True),
        R("This is the political hot potato of the set — which is why the ask here is only the study and the data, not the redraw.", SANS, 11.5, BG)]])
-footrule(s, "Same county data ask (slide 14) powers this conversation — utilization + exemptions by district")
+footrule(s, "Same county data ask (slide 15) powers this conversation — utilization + exemptions by district")
 
 # 17 — CLOSE (dark CTA)
 s = slide(dark=True)
@@ -525,7 +548,7 @@ table(s, MX, Inches(1.5), W - MX*2, [2.2, 2.4, 2.2, 5.3],
        ("Massachusetts (Cl. 41A)", "8% (local option lower)", "Sale / death", "65+; local income limit; deferral + interest capped at 50% of fair cash value; 16% post-death until paid"),
        ("Washington (RCW 84.38)", "5%", "Sale / death", "61+/disabled; income threshold indexed to county median; deferral capped at 80% of equity"),
        ("Texas (Tax Code §33.06)", "5%", "Sale / estate", "65+/disabled; tax collection simply defers; widely used, simple affidavit"),
-       ("Proposed: New York", "OSC-set", "At sale", "District opt-in for the school-tax share; lien accrues; the levy is made whole — the cash-flow lock (slide 7, Lock 03) disappears at zero long-run cost")],
+       ("Proposed: New York", "OSC-set", "At sale", "District opt-in for the school-tax share; lien accrues; the levy is made whole — the cash-flow lock (slide 8, Lock 03) disappears at zero long-run cost")],
       fs=9.0, row_h=0.52)
 text(s, MX, Inches(4.85), Inches(11.8), Inches(0.8),
      [[R("Design note: deferral pairs naturally with S3309/A5288 — continuity for those who move, deferral for those who stay until they're ready. Both are senior-protective; neither costs the district its levy.", SERIF, 13, BODY, False, True)]], line_spacing=1.25)
@@ -552,10 +575,10 @@ s = slide(); appendix_head(s, "The coalition map — validated district facts (N
 table(s, MX, Inches(1.5), W - MX*2, [2.7, 2.0, 7.4],
       ["District", "K-12 (NYSED)", "Validated facts"],
       [("Hewlett-Woodmere", "2,650", "11 teaching positions cut for 2025-26; elementary enrollment projected −200 vs 2022-23"),
-       ("Locust Valley", "1,754", "−15% projected by 2027-28 (2,034 → 1,725); “five homes under $1M” — Supt. Turnow"),
+       ("Locust Valley", "1,754", "−15% projected by 2027-28 (2,034 → 1,725); “five homes under $1M” — Supt. Turnow; 2026-27 budget FAILED 850–765 (revote 6/16/26)"),
        ("Oyster Bay-E. Norwich", "1,310", "−16.5% since 2015-16; Supt. Ianni credits universal pre-K for stabilization"),
        ("Long Beach", "3,265", "Fought a year-long closure debate over East Elementary; community advocacy kept it open (2025)"),
-       ("Levittown", "7,061", "−2% since 2022-23; the 1976 Pintail Lane / Cherrywood closures are the historical endgame; $274.1M budget"),
+       ("Levittown", "7,061", "−2% since 2022-23; $274.1M budget (2025-26)"),
        ("Lynbrook / Malverne / Massapequa / Great Neck", "2,725 / 1,801 / 6,460 / 6,600", "Budgets at or near their caps ($110M / $73.9M max-cap / $243M); Uniondale 65% Hispanic, 32% Black"),
        ("County-wide", "—", "61% of 56 districts declined over the decade (Nassau BOCES); LI −6.3% since 2017 (W. Suffolk BOCES)")],
       fs=8.6, row_h=0.52)
@@ -569,7 +592,7 @@ src1 = [("RVC BUDGET PROCESS", "LI Herald: “$3.78M deficit” (Feb 6, 2026) ·
         ("NYSED", "Enrollment (instid 800000049383): 3,533 → 3,276 · grad rate 98% · per-pupil expenditure $37,973 (2023-24) · district pages for all coalition districts"),
         ("CENSUS / ACS", "B25007 (2,076 senior-owner households) · B19049 (incomes by age) · B19013 ($144,516 → $151,938) · B25077 ($818,700) · B11007 (Nassau 38.9% → 39.6%) · IRS SOI TY2022 (itemization)"),
         ("HOUSING", "Zillow RVC home values (June 2026) · Redfin “Empty Nesters” (Jan 2024; 2026 refresh) · ATTOM property-tax reports (2023–2025)"),
-        ("ENROLLMENT CONTEXT", "Nassau BOCES via LI Herald (61% of 56 districts) · W. Suffolk BOCES bi-county study (LI −6.3% since 2017) · Levittown UFSD history (1976 closures)")]
+        ("ENROLLMENT CONTEXT", "Nassau BOCES via LI Herald (61% of 56 districts) · W. Suffolk BOCES bi-county study (LI −6.3% since 2017) · Northport Journal/Patch (two 2021 closures) · LI Herald (Locust Valley budget failure, May 2026) · voices library: /voices.html")]
 y = Inches(1.55)
 for k, v in src1:
     rect(s, MX, y, W - MX*2, Pt(1), RULESOFT)
@@ -594,7 +617,7 @@ dark_band(s, MX, y + Inches(0.05), W - MX*2, Inches(0.85))
 text(s, MX + Inches(0.25), y + Inches(0.16), Inches(11.6), Inches(0.6),
      [[mono("Contact & next steps   ", 8.5, ACCENT_LT, True),
        R("Jeff Pinto · rvc-taxes.jeffpinto.com — FOIL to Nassau Assessment (exemption counts by district) · district-clerk confirmation of RVC's §467 posture · coalition letters from the 61%-club.", SANS, 11, BG)]], line_spacing=1.2)
-footrule(s, "Slides 1–17 are the live deck; this appendix is the validated reference set")
+footrule(s, "Slides 1–18 are the live deck; this appendix is the validated reference set")
 
 # ---- save ----------------------------------------------------------------
 out = os.path.join(os.path.dirname(__file__), "..", "site", "RVC_Legislator_Deck.pptx")

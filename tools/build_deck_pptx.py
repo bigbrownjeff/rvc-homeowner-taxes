@@ -313,8 +313,8 @@ oc = [("01 · Every year after the sale", "NY STATE SAVES", C_STATE, T_STATE, "$
        "Enhanced STAR credit ($3,147) becomes Basic ($1,089). STAR is state-funded — the saver is Albany, forever.", "DTF 2025 final · RVC Class 1 · RPTL §1306-a"),
       ("02 · Once, at closing", "NY STATE COLLECTS", C_STATE, T_STATE, "~$3,300", "",
        "Transfer tax: 0.4% of an ~$820K sale, seller-paid (+1% buyer mansion tax at $1M+).", "Tax Law Art. 31 · ACS/Zillow"),
-      ("03 · Every year after the sale", "NEIGHBORS RELIEVED", C_TAX, T_TAX, "5–65", "%",
-       "A §467 parcel's school-tax share stops shifting onto every other taxpayer. The levy is fixed; exemptions move it around.", "OSC · Nassau brochure rev. 3-26"),
+      ("03 · Every year after the sale", "NEIGHBORS RELIEVED", C_TAX, T_TAX, "≈$4,700", "/yr",
+       "School tax un-shifted from neighbors at §467's 50% tier, on a ~$9.4K school bill (est.). It's a sliding scale by income — 65% (≤$47K) down to 5% ($58.4K) — so ≈$470–$6,100 per home. The levy is fixed; exemptions move it around.", "OSC · Nassau brochure · bill assumption labeled"),
       ("04 · As the family invests", "DISTRICT GAINS", C_DIST, T_DIST, "+1.4", "students",
        "Per home (2 children × 70% school-age — stated assumption) into seats emptied by a ~7% enrollment decline; renovations grow the tax base, lawfully raising the levy cap.", "DTF growth factor · NYSED")]
 gw2 = (W - MX*2 - Inches(0.5)) / 2

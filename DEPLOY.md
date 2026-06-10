@@ -37,11 +37,13 @@ Pages invalidates its own cache on deploy. Hard-refresh to bypass browser cache.
 
 | Path | Content |
 |------|---------|
-| `/` | 8-page legislator deck (`site/index.html`) — print-to-PDF friendly (⌘P → Save as PDF gives the 8-page handout) |
+| `/` | 8-page legislator briefing (`site/index.html`, Editorial DS) — print-to-PDF friendly (⌘P → Save as PDF gives the 8-page handout) |
+| `/fiscal-math.html` | Long-form write-up of the honest fiscal mechanics (companion to briefing p. 5) |
+| `/RVC_Legislator_Deck.pptx` | 26-slide deck (15 live + appendix) — opens in PowerPoint / Keynote / Google Slides; regenerate with `tools/build_deck_pptx.py` |
 | `/calculator.html` | RVC Tax & Outcomes Calculator (corrected fork of the original) |
 | `/validation.html` | Fact-check & methodology page backing every number in the deck |
 
 ## Notes
 
-- Keep the deck self-contained (inline CSS, no external fonts) so the PDF export and offline copies match the web version. The calculator's only external dependency is Chart.js from cdnjs.
+- Design system: Editorial DS (jeffpinto.com) with the ink-blue policy accent (`#1E3A8A`); pages load Source Serif 4 / Inter / IBM Plex Mono from Google Fonts (system fallbacks included). The PPTX maps to Georgia/Arial/Courier New so it renders identically in PowerPoint, Keynote, and Google Slides without font installs. The calculator keeps its original styling and depends only on Chart.js from cdnjs.
 - A real-browser pass (fonts, print layout, chart rendering) is part of done — `curl` is not sufficient. Open both the pages.dev URL and the custom domain after DNS cutover.

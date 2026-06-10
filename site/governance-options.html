@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cut the Bill, or Erase the Lines — Two Governance Briefs for Review</title>
+<meta name="description" content="An adversarially-tested decision memo: the levers that cut a Nassau homeowner's bill and the levers that desegregate Long Island's schools are largely different. Draft for review.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F1ECE2; --paper:#FAF6EC; --ink:#0E1116; --body:#2A2A2A; --muted:#6B6B6B;
+  --rule:#231F1A; --ruleSoft:#C9C3B4; --accent:#1E3A8A;
+  --dollar:oklch(0.52 0.09 150); --dollar-tint:oklch(0.52 0.09 150 / 0.12);
+  --equity:oklch(0.55 0.13 25); --equity-tint:oklch(0.55 0.13 25 / 0.10);
+  --serif:'Source Serif 4','Source Serif Pro',Georgia,serif;
+  --sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,'SF Mono',Consolas,monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{font-family:var(--sans);background:var(--bg);color:var(--body);line-height:1.5}
+.page{width:8.5in;min-height:11in;margin:26px auto;background:var(--bg);border:1px solid var(--ruleSoft);padding:.6in .68in .5in;position:relative;display:flex;flex-direction:column}
+.masthead{display:flex;justify-content:space-between;align-items:baseline;border-bottom:2px solid var(--rule);padding-bottom:8px;margin-bottom:16px}
+.masthead .t{font-family:var(--serif);font-weight:600;font-size:15px;color:var(--ink)}
+.masthead .m{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:8px}
+.eyebrow .sq{display:inline-block;width:7px;height:7px;background:var(--accent);margin-right:8px}
+.eyebrow.dollar{color:oklch(0.42 0.09 150)} .eyebrow.dollar .sq{background:var(--dollar)}
+.eyebrow.equity{color:oklch(0.45 0.13 25)} .eyebrow.equity .sq{background:var(--equity)}
+h1{font-family:var(--serif);color:var(--ink);font-weight:700;font-size:46px;line-height:1.0;letter-spacing:-.025em}
+h2{font-family:var(--serif);color:var(--ink);font-weight:700;font-size:27px;line-height:1.06;letter-spacing:-.02em;margin-bottom:6px}
+h3{font-family:var(--serif);color:var(--ink);font-weight:600;font-size:16px;line-height:1.2}
+.standfirst{font-family:var(--serif);font-style:italic;font-size:15px;line-height:1.5;color:var(--body);margin:10px 0 6px}
+p{font-size:12.2px;margin:.45rem 0}
+.k{font-weight:600;color:var(--ink)}
+sup{font-size:8px;color:var(--accent);font-weight:600;font-family:var(--mono)}
+a{color:var(--accent);text-decoration:none}
+.rule2{border:none;border-top:2px solid var(--rule);margin:14px 0}
+.wall{display:grid;grid-template-columns:repeat(3,1fr);border-top:2px solid var(--rule);margin:12px 0}
+.cell{border-bottom:1px solid var(--ruleSoft);border-right:1px solid var(--ruleSoft);padding:11px 14px 11px 0;margin-right:14px}
+.cell:nth-child(3n){border-right:none;margin-right:0}
+.cell .ey{font-family:var(--mono);font-size:8.4px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
+.cell .ey b{color:var(--accent)}
+.cell .kpi{font-family:var(--serif);font-size:25px;font-weight:700;color:var(--ink);line-height:1;letter-spacing:-.02em}
+.cell .kpi i{font-style:italic;color:var(--accent);font-size:.55em;font-weight:400}
+.cell .claim{font-size:10.3px;color:var(--body);margin-top:5px;line-height:1.4}
+.cell .src{font-family:var(--mono);font-size:7.6px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:5px}
+.dark{background:var(--ink);color:var(--bg);padding:14px 18px;margin:12px 0}
+.dark .ey{font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#9DB4E8;margin-bottom:7px}
+.dark p{color:var(--bg);font-size:12px}
+.dark .big{font-family:var(--serif);font-size:17px;line-height:1.3;color:var(--bg);font-weight:600}
+.paperbox{background:var(--paper);border-top:2px solid var(--rule);padding:11px 16px;margin:10px 0}
+.paperbox.dollar{border-top-color:var(--dollar)} .paperbox.equity{border-top-color:var(--equity)}
+.paperbox .ey{font-family:var(--mono);font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:5px}
+.paperbox.dollar .ey{color:oklch(0.42 0.09 150)} .paperbox.equity .ey{color:oklch(0.45 0.13 25)}
+.rows{border-top:2px solid var(--rule)}
+.row{display:grid;grid-template-columns:150px 1fr;gap:16px;padding:10px 0;border-bottom:1px solid var(--ruleSoft)}
+.row .lab{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:600;line-height:1.5;padding-top:2px}
+.row .lab .sub{color:var(--muted);font-weight:400;display:block;margin-top:3px;letter-spacing:.07em}
+.row.dollar .lab{color:oklch(0.42 0.09 150)} .row.equity .lab{color:oklch(0.45 0.13 25)}
+.row h3{margin-bottom:2px}
+.row p{font-size:11.4px;margin:.15rem 0}
+.ask{display:grid;grid-template-columns:30px 1fr;gap:11px;padding:8px 0;border-bottom:1px solid var(--ruleSoft);align-items:start}
+.ask .n{font-family:var(--serif);font-size:21px;font-weight:700;color:var(--accent);line-height:1}
+.ask.dollar .n{color:var(--dollar)} .ask.equity .n{color:var(--equity)}
+.ask p{font-size:11.6px;margin:0}
+.tag{display:inline-block;font-family:var(--mono);font-size:8px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:2px 8px;border:1px solid var(--ruleSoft);vertical-align:middle}
+.tag.dollar{background:var(--dollar-tint);color:oklch(0.36 0.09 150);border-color:var(--dollar)}
+.tag.equity{background:var(--equity-tint);color:oklch(0.42 0.13 25);border-color:var(--equity)}
+table{width:100%;border-collapse:collapse;font-size:11px;margin:8px 0}
+th{background:var(--ink);color:var(--bg);text-align:left;padding:5px 8px;font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.06em}
+td{padding:5px 8px;border-bottom:1px solid var(--ruleSoft);vertical-align:top}
+tr:nth-child(even) td{background:var(--paper)}
+.pfoot{margin-top:auto;border-top:1px solid var(--ruleSoft);padding-top:7px;display:flex;justify-content:space-between;font-family:var(--mono);font-size:8.4px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.draft{position:absolute;top:.62in;right:.68in;font-family:var(--mono);font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:#fff;background:var(--accent);padding:2px 8px}
+ul{padding-left:16px;margin:.3rem 0}
+li{font-size:11.4px;margin:.2rem 0}
+@page{size:letter;margin:0}
+@media print{
+  body{background:var(--bg)}
+  .page{margin:0;border:none;page-break-after:always;width:8.5in;height:11in;min-height:0;overflow:hidden;padding:.5in .62in .38in}
+  .page:last-child{page-break-after:auto}
+}
+@media screen and (max-width:900px){.page{width:auto;min-height:auto;padding:6%}.wall{grid-template-columns:1fr}.row,.ask{grid-template-columns:1fr;gap:5px}}
+</style>
+</head>
+<body>
+
+<!-- ===================== PAGE 1 — THE DECISION ===================== -->
+<div class="page">
+  <span class="draft">Draft · for review</span>
+  <div class="masthead"><span class="t">Nassau Governance · Homeowner Cost &amp; Equity</span><span class="m">Decision memo · June 2026</span></div>
+  <div class="eyebrow"><span class="sq"></span>Adversarial review · 1 proposal &middot; 4 challengers &middot; 1 adjudicator</div>
+  <h1>Cut the bill, or<br>erase the lines.</h1>
+  <p class="standfirst">You asked for one thing — reduce the homeowner's tax bill through redundancy and efficiency, <em>and</em> erase racism. Six agents stress-tested it. The honest verdict is a tie, because those are two different jobs.</p>
+  <p>The levers that put real, recurring dollars back on a <span class="k">Rockville Centre</span> bill are <span class="k">segregation-neutral</span> — they don't touch the school-district race lines. The levers that actually <span class="k">desegregate</span> Long Island's schools <span class="k">cost</span> the wealthy-district homeowner money — which is precisely why those lines have never moved. Collapsing the two into one "efficiency erases racism" story would be the single dishonesty all four challengers flagged. So: <span class="k">two briefs</span>, one per axis, each honest about what it can't do.</p>
+
+  <div class="dark">
+    <div class="ey"><b>The one-sentence finding</b></div>
+    <p class="big">Erasing racism will not cut this homeowner's bill, and the levers that cut the bill will not erase racism — with one modest exception: a fresher, accurate assessment roll.</p>
+  </div>
+
+  <h3 style="margin-top:6px">What the adversaries overturned in the first draft</h3>
+  <div class="rows" style="border-top-width:1px;border-top-color:var(--ruleSoft)">
+    <div class="row"><div class="lab">Wrong parcel</div><div><p>The proposal's <span class="k">#1 "homeowner savings"</span> lever — taking over Hempstead's commissioner-run sanitation districts — has <span class="k">zero incidence on an RVC homeowner.</span> The village self-provides sanitation, police, water, and municipal electric. It's a real mid-hundreds/year lever, but only for an <em>unincorporated</em> Town-of-Hempstead home. Sold as a universal win, it wasn't.</p></div></div>
+    <div class="row"><div class="lab">Wrong mechanism</div><div><p>The proposal credited <span class="k">school-district mergers</span> with desegregation. The two cases it leaned on refute it: Wake County integrated via a <em>student-assignment</em> policy (repealed 5&ndash;4 in 2010 &rarr; resegregation), not its 1976 merger; the Twin Cities went from 6 to 100 heavily-segregated schools <em>while</em> tax-base pooling ran the whole time. Pooling and merger move <span class="k">dollars, not children.</span><sup>W</sup></p></div></div>
+    <div class="row"><div class="lab">Wrong size</div><div><p>The big structural numbers don't survive a recurrence test: the headline <span class="k">$130.5M "consolidation" saving was a one-time Long Beach wastewater project</span>, and the largest direct-dollar RVC levers (STAR, §467, grievance) were missing from the proposal entirely.</p></div></div>
+  </div>
+  <p style="font-size:10px;color:var(--muted);font-family:var(--mono);letter-spacing:.04em;margin-top:8px"><sup>W</sup> WAKE: CSMonitor/EdWeek/WCPSS. TWIN CITIES: ORFIELD; MINNPOST; STAR TRIBUNE. BOTH INDEPENDENTLY WEB-VERIFIED IN REVIEW.</p>
+  <div class="pfoot"><span>Method, rejected levers &amp; open items: page 6 · sources are agent-compiled from the cited reports</span><span>1 / 6</span></div>
+</div>
+
+<!-- ===================== PAGE 2 — BRIEF 1 OPEN ===================== -->
+<div class="page">
+  <div class="masthead"><span class="t">Brief 1 of 2 · The Dollar Axis</span><span class="m">Segregation-neutral by construction</span></div>
+  <div class="eyebrow dollar"><span class="sq"></span>For the RVC homeowner · the Town-of-Hempstead homeowner · a reform village trustee</div>
+  <h2>Cut the bill you actually pay.</h2>
+  <p class="standfirst">The biggest, most certain dollars on a Rockville Centre bill are <em>personal and administrative</em>, not structural reform — and you have to read the incidence label before you claim a lever.</p>
+  <p><span class="k">Incidence, stated first.</span> Rockville Centre is an incorporated village that self-provides sanitation, police, water, parks, and electricity — so the splashy <span class="k">special-district consolidation</span> savings land on <em>unincorporated</em> Town-of-Hempstead homeowners, not on you. Your dollars come from claimed exemptions, an assessment grievance, ending duplicate village assessment, and disciplined back-office sharing. We mark every lever <span class="tag dollar">RVC + ToH</span> or <span class="tag equity" style="background:#eee;border-color:var(--ruleSoft);color:var(--muted)">ToH only</span> so no one claims a saving that never reaches their parcel.</p>
+
+  <div class="wall">
+    <div class="cell"><div class="ey"><b>01</b> · Enhanced STAR</div><div class="kpi">$2,856<i>/yr</i></div><div class="claim">RVC Class 1 exemption savings (Basic $1,068). State-funded under RPTL §1306-a — shifts nothing onto neighbors. The cleanest direct dollar there is.</div><div class="src">DTF 2025 final certification</div></div>
+    <div class="cell"><div class="ey"><b>02</b> · §467 senior</div><div class="kpi">up to 65<i>%</i></div><div class="claim">Off county+town+school tax, income ≤ $58,399 (5–65% sliding scale, Ch. 581 of 2025). Stacks on STAR. Confirm RVC's adopted tier with the district clerk.</div><div class="src">DTF · Nassau brochure rev. 3-26</div></div>
+    <div class="cell"><div class="ey"><b>03</b> · Grievance</div><div class="kpi">6th<i> frozen roll</i></div><div class="claim">Nassau's roll is frozen a sixth straight year; a successful grievance (Jan–Mar window) is a permanent assessed-value cut feeding every levy — no income test.</div><div class="src">Nassau Assessment · Jan 2 2026 tentative</div></div>
+  </div>
+  <div class="paperbox dollar"><div class="ey">The honest size of the rest</div>
+    <p>Beyond those three personal levers, the structural dollars are real but smaller and slower than the first draft implied. <span class="k">BOCES back-office sharing</span> (payroll, HR, purchasing, IT, insurance) is the only efficiency lever that touches the ~60–65% school slice — aidable at 36–90%, with the state's 2025 budget doubling the aidable-salary cap from $30K to $60K. Aggregate county potential is perhaps $80–160M, but treat it as <span class="k">1–2% of spending with independently-audited savings clauses</span> — the Comptroller found districts often couldn't verify guaranteed "savings." Strip the $130.5M wastewater number; it doesn't recur.</p>
+  </div>
+  <div class="paperbox dollar" style="border-top-color:var(--ruleSoft)"><div class="ey" style="color:var(--muted)">Town-of-Hempstead homeowners only</div>
+    <p><span class="k">Special districts are 51.8% of all town revenue</span> ($946/household, 2004 OSC); commissioner-run sanitation has billed up to <span class="k">3× the town-run cost</span>, with ~$18M/yr recoverable in Hempstead and $23.8–35.7M county-wide (Lundine 2008 / OSC 2007). A genuine mid-hundreds-per-year lever — but for the unincorporated homeowner, and only if sequenced <em>after</em> a sunlight campaign makes the audited cost gap indefensible. Discount the 3× headline for union wage-harmonization on absorption.</p>
+  </div>
+  <div class="pfoot"><span>Figures: governance.md, exemptions.md (validated). “Diffuse/county-budget” levers excluded — see p.6</span><span>2 / 6</span></div>
+</div>
+
+<!-- ===================== PAGE 3 — BRIEF 1 ASKS ===================== -->
+<div class="page">
+  <div class="masthead"><span class="t">Brief 1 of 2 · The Dollar Axis</span><span class="m">The asks, in order of dollars-per-effort</span></div>
+  <div class="eyebrow dollar"><span class="sq"></span>Do these — ranked by real, recurring, named-bill dollars</div>
+  <div class="rows">
+    <div class="ask dollar"><div class="n">1</div><div><h3 style="display:inline">File or verify STAR + §467 today.</h3> <p style="display:inline">The single largest clean lever per qualifying home. Confirm with the RVC UFSD district clerk whether the district opted into the new 65% tier and the public-school-child rule — school tax is ~60–65% of the bill, so the school-side adoption is load-bearing.</p></div></div>
+    <div class="ask dollar"><div class="n">2</div><div><h3 style="display:inline">Grieve the frozen assessment, Jan–Mar.</h3> <p style="display:inline">On a sixth consecutive frozen roll, a win is a <em>permanent</em> reduction to every levy on the parcel. The best non-senior direct-dollar move, and the only one with no income test.</p></div></div>
+    <div class="ask dollar"><div class="n">3</div><div><h3 style="display:inline">Village board adopts the county assessment roll (RPTL §1402).</h3> <p style="display:inline">Ends duplicate village assessment — one board resolution, no referendum. The single most passable structural lever in either brief; use it to earn credibility for the hard asks.</p></div></div>
+    <div class="ask dollar"><div class="n">4</div><div><h3 style="display:inline">Move district back-office into Nassau BOCES / shared-services co-ops</h3> <p style="display:inline">— payroll, HR, purchasing, IT, insurance — with <em>hard, independently-audited</em> savings-measurement clauses (the Comptroller's central caveat). Stripped of the misattributed wastewater number.</p></div></div>
+    <div class="ask dollar"><div class="n">5</div><div><h3 style="display:inline">Town-of-Hempstead only: sunlight first, then the takeover.</h3> <p style="display:inline">Independent special/fire-district audits, move December commissioner elections to November, mandatory contract posting — <em>then</em> call the sanitation-takeover referendum. Sunlight is what makes the referendum winnable.</p></div></div>
+  </div>
+  <div class="dark"><div class="ey"><b>Equity note</b> — read before pairing this with any racial-justice message</div>
+    <p>This brief is <span class="k" style="color:var(--bg)">segregation-neutral by construction.</span> Exemptions, grievance, double-assessment cleanup, BOCES back-office, and the sanitation takeover do not touch the district race lines that ERASE Racism, EdBuild's "Fault Lines," and Newsday's "Long Island Divided" document. The one quiet convergence: a fresher, accurate roll corrects <em>regressive over-assessment</em> — low-value homes assessed at ~2× the ratio of high-value ones; Black and Hispanic owners documented paying 10–13% more for identical services (Berry) — and Nassau's refund machine is commercial-skewed (~$70M of a ~$100M peak). That makes roll accuracy a <span class="k" style="color:var(--bg)">funding-equity byproduct, not a desegregation claim.</span> Do not tell this homeowner that erasing racism cuts their bill.</p>
+  </div>
+  <div class="paperbox dollar"><div class="ey">Why these, and not the structural reforms</div>
+    <p>Ranked strictly on real, recurring, named-bill dollars. Cross-line <span class="k">merger is dollar-negative for RVC</span> (the wealthy side's rate rises to absorb the poorer side; Duncombe–Yinger savings are near-zero at Nassau's ~3,700-pupil average, half-eaten by salary leveling-up). <span class="k">Commercial tax-base pooling</span> is a cost to a commercial-rich district, not a saving. <span class="k">County-guarantee / refund reform</span> is firewalled from the school slice by the 1938 hold-harmless and reaches only the ~14% county-general slice as lumpy, volatile pennies.</p>
+  </div>
+  <div class="pfoot"><span>Confidence: high (two independent fiscal critiques converge; figures verified in primary sources)</span><span>3 / 6</span></div>
+</div>
+
+<!-- ===================== PAGE 4 — BRIEF 2 OPEN ===================== -->
+<div class="page">
+  <div class="masthead"><span class="t">Brief 2 of 2 · The Equity Axis</span><span class="m">Honest about a contested remedy</span></div>
+  <div class="eyebrow equity"><span class="sq"></span>For ERASE Racism-aligned advocates · fair-housing litigators · BOCES &amp; state policymakers</div>
+  <h2>Erase the lines, honestly.</h2>
+  <p class="standfirst">Long Island's ~56-district map is an adjudicated segregation machine — but the durable desegregation lever is the student-<em>assignment</em> rule plus the <em>housing</em> root cause, not the structural container the first draft crowned.</p>
+  <p>Tax-base pooling and cross-line merger move <span class="k">dollars, not children</span> — and re-segregate the moment the assignment rule is removed. The two cases usually cited as proof are the strongest evidence against the container theory (front page). So this brief leads with what actually moves students across lines without a merger referendum: <span class="k">fair-housing enforcement</span> against the exclusionary zoning the school lines merely ratify, and <span class="k">BOCES-run regional magnets / inter-district controlled choice</span> with a binding diversity assignment rule. Pooling and assessment accuracy are the <span class="k">funding floor — necessary, insufficient.</span></p>
+
+  <div class="wall">
+    <div class="cell"><div class="ey"><b>01</b> · Segregation, rising</div><div class="kpi">2&times;</div><div class="claim">Intensely-segregated (90–100% nonwhite) LI districts more than doubled 2004–2016; LI is a top-10 most-segregated US region.</div><div class="src">ERASE Racism</div></div>
+    <div class="cell"><div class="ey"><b>02</b> · The funding gap</div><div class="kpi">~$10<i>K</i></div><div class="claim">Less revenue per student in those districts vs. predominantly-white ones; EdBuild finds a ~$4,200 cross-border gap "largely because of local property taxes."</div><div class="src">ERASE Racism · EdBuild "Fault Lines"</div></div>
+    <div class="cell"><div class="ey"><b>03</b> · It's adjudicated</div><div class="kpi">40<i>%</i></div><div class="claim">Disparate treatment of minority homebuyers (Newsday paired testing, 2019); Garden City's exclusionary zoning ruled intentional discrimination (2d Cir., 2016).</div><div class="src">Newsday "Long Island Divided" · 2d Cir.</div></div>
+  </div>
+  <div class="dark"><div class="ey"><b>The cautionary number</b> — why "merge for savings" is the wrong tool</div>
+    <p class="big">6 &rarr; 100 heavily-segregated Twin Cities schools, 1995–2015 — while regional tax-base pooling ran the entire time.</p>
+    <p style="margin-top:6px">Orfield attributes the lost integration to a reversed fair-share housing mandate and a gutted anti-concentration assignment law — not to the pooling, which never stopped. Equalizing dollars without an assignment rule is separate-but-more-equal.</p>
+  </div>
+  <p style="font-size:10.5px;color:var(--muted)">Figures are agent-compiled from the cited reports for this review; the segregation literature is contested and the desegregation-mechanism claims rest on a thinner evidence base than the dollar brief — flagged honestly on p.6.</p>
+  <div class="pfoot"><span>Sources: ERASE Racism · Newsday · EdBuild · Orfield/Institute on Metropolitan Opportunity · 2d Cir.</span><span>4 / 6</span></div>
+</div>
+
+<!-- ===================== PAGE 5 — BRIEF 2 ASKS ===================== -->
+<div class="page">
+  <div class="masthead"><span class="t">Brief 2 of 2 · The Equity Axis</span><span class="m">The asks — students &amp; housing first, dollars as the floor</span></div>
+  <div class="eyebrow equity"><span class="sq"></span>Ordered by desegregation durability, not by cost</div>
+  <div class="rows">
+    <div class="ask equity"><div class="n">1</div><div><h3 style="display:inline">Attack the housing root cause.</h3> <p style="display:inline">Fund and site fair-share affordable housing in exclusionary (largely white) districts; Newsday-grade anti-steering enforcement; continue the Nassau steering litigation. The lines follow the housing — Garden City (2d Cir., 2016) is adjudicated, not rhetorical.</p></div></div>
+    <div class="ask equity"><div class="n">2</div><div><h3 style="display:inline">Move students without a merger: BOCES regional magnets + controlled choice.</h3> <p style="display:inline">Stand up inter-district enrollment with a <em>binding diversity-controlled assignment rule</em> — the only student-moving lever that needs no boundary referendum, and the one the literature (Cambridge) shows raises interracial exposure durably.</p></div></div>
+    <div class="ask equity"><div class="n">3</div><div><h3 style="display:inline">Route freed back-office dollars to high-need districts.</h3> <p style="display:inline">Direct BOCES shared-services savings (Brief 1, ask 4) to chip the ~$10K per-student gap <em>without</em> a boundary change — the dollar and equity axes' one operational handshake.</p></div></div>
+    <div class="ask equity"><div class="n">4</div><div><h3 style="display:inline">Pursue pooling + assessment accuracy as the funding floor — labeled insufficient.</h3> <p style="display:inline">Commercial tax-base pooling and an accurate roll equalize money, not composition. Worth doing; never sold as desegregation.</p></div></div>
+    <div class="ask equity"><div class="n">5</div><div><h3 style="display:inline">Reserve inclusive cross-line merger for willing communities only.</h3> <p style="display:inline">If pursued: minority-community-led, no screened tracks, grade-banding over forced relocation ("the 5 Rs"). Never a dollar-driven merger that closes the under-enrolled minority school first.</p></div></div>
+  </div>
+  <div class="dark"><div class="ey"><b>The contested-remedy wall</b> — state it, don't blur it</div>
+    <p>Consolidation can integrate (Wake held <em>while</em> its assignment policy lived) or harm — dollar-driven mergers close under-enrolled minority schools first, paint over the murals, and dissolve hard-won Black and Latino local control (P.S. 305 is the cautionary takeover). The old 73% poll for "pooling" is itself a tell: it polls well <em>because</em> it doesn't threaten composition. And the cost of real integration lands on the wealthy white district — that is the engine of every failed Long Island merger vote. None of this is a reason for inaction; it is the reason to lead with housing and assignment, not the map.</p>
+  </div>
+  <div class="paperbox equity"><div class="ey">Why this ordering beats "just merge / just pool"</div>
+    <p>The verified Wake and Twin Cities natural experiments show the container without the assignment rule does not desegregate; pure dollar-equalization is "separate but more equal." Merger as a primary lever is generationally infeasible on Long Island (every recorded vote failed) and double-edged. Housing + assignment is harder politically but is the only path with durability evidence behind it.</p>
+  </div>
+  <div class="pfoot"><span>Confidence: medium-high (Wake/Twin Cities kill-shots web-verified; magnet superiority on thinner literature)</span><span>5 / 6</span></div>
+</div>
+
+<!-- ===================== PAGE 6 — METHOD, REJECTED, OPEN ===================== -->
+<div class="page">
+  <div class="masthead"><span class="t">Method · Rejected Levers · Open Items</span><span class="m">How these two briefs were derived</span></div>
+  <div class="eyebrow"><span class="sq"></span>The adversarial process</div>
+  <p>A lead strategist read the governance review and ranked nine cost-reduction levers. Four adversaries then attacked that ranking in parallel — a <span class="k">fiscal skeptic</span> (are the savings real and recurring?), a <span class="k">political realist</span> (what can actually pass?), an <span class="k">equity/desegregation critic</span> (does it move children or just dollars?), and a <span class="k">homeowner-bottom-line advocate</span> (does it reach <em>my</em> parcel?). An adjudicator weighed the critiques against the source documents and rebuilt both briefs — <span class="k">from the critiques, not the original memo</span>, because the critiques won on the points that matter. Full transcripts: <span style="font-family:var(--mono);font-size:10px">docs/findings/gov-lead.md</span>, <span style="font-family:var(--mono);font-size:10px">gov-critique-*.md</span>, <span style="font-family:var(--mono);font-size:10px">gov-brief-plan.md</span>.</p>
+
+  <h3 style="margin-top:8px">Rejected &amp; demoted levers</h3>
+  <table>
+    <tr><th style="width:32%">Lever</th><th>Why it didn't make either brief's front</th></tr>
+    <tr><td>Cross-line school merger (primary)</td><td>Dollar-negative for RVC; generationally infeasible (every recorded LI vote failed); double-edged on equity. Reserved Tier-3, willing-communities-only.</td></tr>
+    <tr><td>Tax-base pooling as "the" desegregation lever</td><td>Equalizes dollars, not students; its case rests on a 17-year-old poll with no bill ever filed. Demoted to funding floor.</td></tr>
+    <tr><td>County-guarantee / refund-machine reform</td><td>Firewalled from the 60–65% school slice by the 1938 hold-harmless; diffuse and lumpy. Kept only as the regressive-transfer equity note.</td></tr>
+    <tr><td>Village dissolution (Citizen Empowerment Act)</td><td>Value-destroying for RVC (loses municipal electric + bundled services). A countywide tool for thin add-a-layer villages only.</td></tr>
+    <tr><td>K-12 PPP / transport / energy-performance</td><td>Small, RVC-reachable, but evidence-thin; only with Comptroller-grade measurement. For-profit operation of district schools is unconstitutional in NY.</td></tr>
+    <tr><td>Sanitation takeover as an <em>RVC</em> lever</td><td>Zero incidence — the village self-provides. Retained as a Town-of-Hempstead-only lever.</td></tr>
+  </table>
+
+  <div class="paperbox"><div class="ey">Confidence &amp; the must-verify items</div>
+    <p><span class="k">High</span> on Brief 1 (two independent fiscal critiques converge; incidence and exemption figures verified in primary sources). <span class="k">High</span> that the tie is real (the axes verifiably diverge). <span class="k">Medium-high</span> on Brief 2's re-ordering (Wake + Twin Cities kill-shots independently web-verified; the magnet/controlled-choice superiority rests on a thinner literature the critic itself caveats). <span class="k">Before publishing:</span> confirm RVC UFSD's specific §467 65% adoption with the district clerk; treat all BOCES savings as estimated-not-realized; the segregation figures are agent-compiled from the cited reports and warrant a primary-source pass if this goes external.</p>
+  </div>
+  <div class="dark"><div class="ey"><b>Your call</b></div>
+    <p>Two separable products: <span class="k" style="color:var(--bg)">Brief 1</span> can go to homeowners and a village trustee tomorrow — it's concrete, verified, and apolitical. <span class="k" style="color:var(--bg)">Brief 2</span> is a coalition/policy document for a different audience and a longer horizon; it needs the primary-source pass and a willing partner (ERASE Racism, a fair-housing litigator). Tell me which to harden into a finished piece — or whether to merge the convergence (assessment accuracy) into a short third "where they meet" note.</p>
+  </div>
+  <div class="pfoot"><span>Companion to the Nassau governance review · separate from the school-budget brief</span><span>6 / 6</span></div>
+</div>
+
+</body>
+</html>

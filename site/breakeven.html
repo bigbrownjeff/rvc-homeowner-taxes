@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Break-Even Instrument — Rockville Centre Schools × Housing</title>
+<meta name="description" content="What combination of housing turnover, new units, aid, and cost discipline keeps Rockville Centre's school budget whole without cuts or overrides? Every assumption on a slider.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F1ECE2;--paper:#FAF6EC;--ink:#0E1116;--body:#2A2A2A;--muted:#6B6B6B;--rule:#231F1A;--ruleSoft:#C9C3B4;--accent:#1E3A8A;
+--good:#4E7A58;--bad:#B05442;
+--serif:'Source Serif 4','Source Serif Pro',Georgia,serif;--sans:'Inter',-apple-system,sans-serif;--mono:'IBM Plex Mono',ui-monospace,monospace}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--sans);background:var(--bg);color:var(--body);line-height:1.55}
+.wrap{max-width:1200px;margin:0 auto;padding:40px 56px 64px}
+.masthead{display:flex;justify-content:space-between;align-items:baseline;border-bottom:2px solid var(--rule);padding-bottom:10px}
+.masthead .t{font-family:var(--serif);font-weight:600;font-size:26px;color:var(--ink)}
+.masthead .m{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.masthead .m a{color:var(--accent);text-decoration:none}
+.head{margin:40px 0 8px;max-width:920px}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:14px}
+h1{font-family:var(--serif);font-size:58px;font-weight:700;line-height:.98;letter-spacing:-.03em;color:var(--ink)}
+.standfirst{font-family:var(--serif);font-style:italic;font-size:20px;line-height:1.45;color:var(--body);margin:16px 0 0}
+.identity{background:var(--ink);color:var(--bg);font-family:var(--mono);font-size:13px;letter-spacing:.04em;padding:14px 20px;margin:26px 0 0}
+.identity b{color:#9DB4E8}
+.layout{display:grid;grid-template-columns:430px 1fr;gap:40px;margin-top:32px}
+.panel{background:var(--paper);border-top:2px solid var(--rule);padding:20px 22px}
+.panel h4{font-family:var(--mono);font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);font-weight:600;margin:0 0 14px}
+.ctl{margin-bottom:14px}
+.ctl label{display:flex;justify-content:space-between;align-items:baseline;font-size:12.5px;font-weight:600;color:var(--ink)}
+.ctl label .v{font-family:var(--mono);font-size:12px;color:var(--accent);font-weight:600}
+.ctl input[type=range]{width:100%;accent-color:var(--accent);height:4px;margin-top:6px}
+.ctl .note{font-family:var(--mono);font-size:8.6px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:2px}
+.group{border-top:1px solid var(--ruleSoft);padding-top:12px;margin-top:14px}
+.results{display:flex;flex-direction:column;gap:18px}
+.pull{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;border-top:2px solid var(--rule);padding:16px 0 14px;border-bottom:1px solid var(--ruleSoft)}
+.pn .v{font-family:var(--serif);font-size:38px;font-weight:700;color:var(--ink);line-height:1;letter-spacing:-.02em}
+.pn .v i{font-style:italic;color:var(--accent);font-size:.5em;font-weight:400}
+.pn .l{font-family:var(--mono);font-size:9px;letter-spacing:.11em;text-transform:uppercase;color:var(--muted);margin-top:7px;line-height:1.5}
+.meter{margin:4px 0 0}
+.meter .lab{display:flex;justify-content:space-between;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
+.meter .trk{height:22px;background:var(--paper);border:1px solid var(--ruleSoft);position:relative}
+.meter .fill{height:100%;background:var(--good);display:flex;align-items:center;color:#fff;font-family:var(--mono);font-size:9.5px;font-weight:600;padding-left:8px;white-space:nowrap}
+.verdict{font-family:var(--serif);font-size:19px;line-height:1.45;color:var(--ink)}
+.verdict b{color:var(--accent)}
+.darkbox{background:var(--ink);color:var(--bg);padding:18px 20px}
+.darkbox h4{font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:#9DB4E8;font-weight:600;margin-bottom:10px}
+.darkbox p,.darkbox li{font-size:13px;color:var(--bg);line-height:1.5}
+.darkbox ul{padding-left:18px;margin-top:6px}
+.assume{font-size:12px;color:var(--muted);border-top:1px solid var(--ruleSoft);padding-top:12px;line-height:1.6}
+a{color:var(--accent)}
+.foot{border-top:2px solid var(--rule);margin-top:48px;padding-top:16px;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);display:flex;justify-content:space-between}
+@media (max-width:1024px){.wrap{padding:24px 20px}.layout{grid-template-columns:1fr}h1{font-size:38px}.pull{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="masthead"><span class="t">Rockville Centre · Housing &times; Schools</span><span class="m"><a href="index.html">Deck</a> · <a href="fiscal-math.html">Mechanics</a> · <a href="validation.html">Fact-check</a> · <a href="calculator.html">Calculator</a></span></div>
+
+  <div class="head">
+    <div class="eyebrow">The break-even instrument · illustrative until the county releases its data</div>
+    <h1>What keeps the budget whole?</h1>
+    <p class="standfirst">Hold school services constant and the problem is one line of arithmetic: revenue growth must match cost growth. This instrument lets you mix the four dials — turnover, new units, aid, and the cost line — and see what it actually takes. Every assumption is a slider; defaults are the validated Rockville Centre figures.</p>
+  </div>
+
+  <div class="identity">cost growth &nbsp;≤&nbsp; <b>levy share</b> × (cap + <b>physical base growth δ</b>) &nbsp;+&nbsp; <b>aid share</b> × aid growth &nbsp;+&nbsp; other</div>
+
+  <div class="layout">
+    <div class="panel">
+      <h4>Dials — district finances</h4>
+      <div class="ctl"><label>Cost growth (services held constant) <span class="v" id="vCost"></span></label>
+        <input type="range" id="cost" min="1.5" max="5" step="0.1" value="3.0">
+        <div class="note">Driver: health +10% on ~$20M ≈ +1.4% of budget alone</div></div>
+      <div class="ctl"><label>Levy cap (allowable growth) <span class="v" id="vCap"></span></label>
+        <input type="range" id="cap" min="0" max="3" step="0.1" value="2.0">
+        <div class="note">Lesser of 2% or CPI; 2026-27 final ≈2.1%</div></div>
+      <div class="ctl"><label>State aid growth <span class="v" id="vAid"></span></label>
+        <input type="range" id="aid" min="0" max="5" step="0.1" value="1.0">
+        <div class="note">2026-27: ~1% on ~15% of revenue</div></div>
+      <div class="ctl"><label>District taxable full value <span class="v" id="vFV"></span></label>
+        <input type="range" id="fv" min="4" max="12" step="0.5" value="7">
+        <div class="note">ASSUMPTION — pending DTF school-district full-value table</div></div>
+      <div class="group"><h4>Dials — housing</h4>
+      <div class="ctl"><label>Senior&rarr;family transitions / yr <span class="v" id="vTr"></span></label>
+        <input type="range" id="tr" min="0" max="300" step="10" value="100">
+        <div class="note">Natural senior attrition ≈3–5%/yr of 2,076 homes ≈ 60–100</div></div>
+      <div class="ctl"><label>Renovation per transition <span class="v" id="vRen"></span></label>
+        <input type="range" id="ren" min="0" max="400" step="25" value="150">
+        <div class="note">Physical improvement → DTF quantity change</div></div>
+      <div class="ctl"><label>New units built / yr (ADU · condo) <span class="v" id="vNu"></span></label>
+        <input type="range" id="nu" min="0" max="200" step="10" value="20">
+        <div class="note">Right-size supply near the LIRR</div></div>
+      <div class="ctl"><label>Avg full value per new unit <span class="v" id="vUv"></span></label>
+        <input type="range" id="uv" min="200" max="1200" step="50" value="600"></div>
+      </div>
+    </div>
+
+    <div class="results">
+      <div class="pull">
+        <div class="pn"><div class="v" id="rGap">—</div><div class="l">Structural gap / yr at your cost line (before housing dials)</div></div>
+        <div class="pn"><div class="v" id="rDelta">—</div><div class="l">Physical base growth δ required to close it inside the cap</div></div>
+        <div class="pn"><div class="v" id="rNeed">—</div><div class="l">Construction $ / yr that δ implies on your full-value base</div></div>
+      </div>
+      <div class="meter">
+        <div class="lab"><span>What your housing dials deliver</span><span id="rDelivPct">—</span></div>
+        <div class="trk"><div class="fill" id="rFill" style="width:0%">$0</div></div>
+        <div class="lab" style="margin-top:5px"><span id="rDeliv">—</span><span id="rResid">—</span></div>
+      </div>
+      <p class="verdict" id="verdict">—</p>
+      <div class="darkbox">
+        <h4>Data needed to make this real — the county ask</h4>
+        <ul>
+          <li><b>§467 / Enhanced STAR counts and exempted value by school district</b> (Nassau Dept. of Assessment) — sizes the burden-shift and the eligible-senior pool.</li>
+          <li><b>DTF school-district full value</b> for RVC UFSD — replaces the $-base assumption above.</li>
+          <li><b>A district facilities/capacity study</b> — converts "~7% enrollment decline" into actual absorbable seats and marginal cost.</li>
+        </ul>
+      </div>
+      <p class="assume"><b>Assumptions, stated:</b> revenue mix 78% levy / 15% aid / 7% other (validated 2025-26: $109.24M levy on $139.89M budget); "other" held flat; δ (the DTF tax-base growth factor) counts only physical change — construction and renovation, never price appreciation; renovations assumed to assess at cost; new units add full value at the slider price; budget base $141.3M (2026-27 adopted). Recent reality check: budgets grew +1.63% (2025-26) and +1.03% (2026-27) — the gap was closed with ~62 position cuts, which is exactly the outcome this instrument prices the alternative to. Mechanics write-up: <a href="fiscal-math.html">/fiscal-math.html</a> · worked example: <code>docs/BREAKEVEN_SAMPLE.md</code>.</p>
+    </div>
+  </div>
+
+  <div class="foot"><span>Rockville Centre housing &times; schools briefing · June 2026</span><span>rvc-taxes.jeffpinto.com</span></div>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+const BUDGET = 141.3e6, W_LEVY = 0.78, W_AID = 0.15;
+const fmtM = n => (n >= 1e6 ? '$' + (n/1e6).toFixed(n >= 1e7 ? 0 : 1) + 'M' : '$' + Math.round(n/1e3) + 'K');
+function calc(){
+  const cost = +$('cost').value, cap = +$('cap').value, aid = +$('aid').value, fv = +$('fv').value * 1e9;
+  const tr = +$('tr').value, ren = +$('ren').value * 1e3, nu = +$('nu').value, uv = +$('uv').value * 1e3;
+  $('vCost').textContent = cost.toFixed(1) + '%/yr'; $('vCap').textContent = cap.toFixed(1) + '%';
+  $('vAid').textContent = aid.toFixed(1) + '%/yr'; $('vFV').textContent = '$' + (+$('fv').value).toFixed(1) + 'B';
+  $('vTr').textContent = tr; $('vRen').textContent = '$' + Math.round(ren/1e3) + 'K';
+  $('vNu').textContent = nu; $('vUv').textContent = '$' + Math.round(uv/1e3) + 'K';
+
+  // autopilot revenue growth (δ=0) and structural gap
+  const auto = W_LEVY * cap + W_AID * aid;            // % per yr
+  const gapPct = Math.max(0, cost - auto);
+  const gap$ = gapPct / 100 * BUDGET;
+  // δ required: levy share × δ must supply gapPct
+  const deltaPct = gapPct / W_LEVY;                    // % of taxable full value, per yr
+  const need$ = deltaPct / 100 * fv;                   // construction $ per yr
+  // delivered by housing dials
+  const deliv$ = tr * ren + nu * uv;
+  const covered = need$ > 0 ? Math.min(1, deliv$ / need$) : 1;
+  const residGapPct = gapPct - (deliv$ / fv * 100) * W_LEVY;
+  const resid$ = Math.max(0, residGapPct) / 100 * BUDGET;
+
+  $('rGap').textContent = gap$ > 0 ? fmtM(gap$) : '$0';
+  $('rDelta').textContent = deltaPct.toFixed(2) + '%';
+  $('rNeed').textContent = fmtM(need$) + '/yr';
+  $('rDeliv').textContent = 'Delivered: ' + fmtM(deliv$) + '/yr of physical base growth';
+  $('rDelivPct').textContent = Math.round(covered * 100) + '% of requirement';
+  $('rResid').textContent = resid$ > 1e4 ? 'Residual gap: ' + fmtM(resid$) + '/yr' : 'Gap closed';
+  const f = $('rFill'); f.style.width = Math.max(4, covered * 100) + '%';
+  f.style.background = covered >= 1 ? 'var(--good)' : (covered >= 0.5 ? 'var(--accent)' : 'var(--bad)');
+  f.textContent = fmtM(deliv$);
+
+  let v;
+  if (gap$ <= 0) v = 'At this cost line the cap alone covers it — no housing contribution required. (History suggests the cost line is rarely this kind.)';
+  else if (covered >= 1) v = 'Your dial settings close the gap inside the cap — <b>no cuts, no override</b> — via ' + tr + ' transitions and ' + nu + ' new units a year.';
+  else v = 'Your settings cover <b>' + Math.round(covered*100) + '%</b> of the in-cap requirement. The residual ' + fmtM(resid$) + '/yr balances only by aid reform, cost discipline, an override — or the cuts the village just lived through. <b>No single dial closes it; that is the case for pulling all four.</b>';
+  $('verdict').innerHTML = v;
+}
+document.querySelectorAll('input[type=range]').forEach(el => el.addEventListener('input', calc));
+calc();
+</script>
+</body>
+</html>

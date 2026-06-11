@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unlock the Homes, Keep the Teachers — A Rockville Centre Briefing</title>
+<meta name="description" content="A senior-mobility agenda to sustain Rockville Centre's schools. Briefing for federal, state, and county legislators. Every figure independently fact-checked.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Editorial DS — policy accent (#1E3A8A). Tokens & rules per jeffpinto.com design system. */
+:root{
+  --bg:#F1ECE2; --paper:#FAF6EC; --ink:#0E1116; --body:#2A2A2A; --muted:#6B6B6B;
+  --rule:#231F1A; --ruleSoft:#C9C3B4; --accent:#1E3A8A;
+  --c-state:oklch(0.62 0.11 75); --c-state-tint:oklch(0.62 0.11 75 / 0.10);
+  --c-tax:oklch(0.52 0.09 150); --c-tax-tint:oklch(0.52 0.09 150 / 0.12);
+  --c-dist:oklch(0.55 0.13 25); --c-dist-tint:oklch(0.55 0.13 25 / 0.08);
+  --serif:'Source Serif 4','Source Serif Pro',Georgia,serif;
+  --sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,'SF Mono',Consolas,monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{font-family:var(--sans);background:var(--bg);color:var(--body);line-height:1.5}
+.page{width:8.5in;min-height:11in;margin:26px auto;background:var(--bg);border:1px solid var(--ruleSoft);padding:.6in .68in .5in;position:relative;display:flex;flex-direction:column}
+.masthead{display:flex;justify-content:space-between;align-items:baseline;border-bottom:2px solid var(--rule);padding-bottom:8px;margin-bottom:18px}
+.masthead .t{font-family:var(--serif);font-weight:600;font-size:15px;color:var(--ink)}
+.masthead .m{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:8px}
+.eyebrow .sq{display:inline-block;width:7px;height:7px;background:var(--accent);margin-right:8px;vertical-align:baseline}
+h1{font-family:var(--serif);color:var(--ink);font-weight:700;font-size:54px;line-height:.98;letter-spacing:-.025em}
+h2{font-family:var(--serif);color:var(--ink);font-weight:700;font-size:30px;line-height:1.06;letter-spacing:-.02em;margin-bottom:6px}
+h3{font-family:var(--serif);color:var(--ink);font-weight:600;font-size:16.5px;line-height:1.2}
+.standfirst{font-family:var(--serif);font-style:italic;font-size:15.5px;line-height:1.5;color:var(--body);margin:10px 0 6px}
+p{font-size:12.4px;margin:.45rem 0}
+.k{font-weight:600;color:var(--ink)}
+sup{font-size:8px;color:var(--accent);font-weight:600;font-family:var(--mono)}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.rule2{border:none;border-top:2px solid var(--rule);margin:14px 0}
+.rule1{border:none;border-top:1px solid var(--ruleSoft);margin:10px 0}
+/* evidence wall */
+.wall{display:grid;grid-template-columns:repeat(4,1fr);border-top:2px solid var(--rule);margin:12px 0}
+.wall.w3{grid-template-columns:repeat(3,1fr)}
+.cell{border-bottom:1px solid var(--ruleSoft);border-right:1px solid var(--ruleSoft);padding:12px 14px 12px 0;margin-right:14px}
+.cell:last-child{border-right:none;margin-right:0}
+.cell .ey{font-family:var(--mono);font-size:8.6px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.cell .ey b{color:var(--accent)}
+.cell .kpi{font-family:var(--serif);font-size:31px;font-weight:700;color:var(--ink);line-height:1;letter-spacing:-.02em}
+.cell .kpi i{font-style:italic;color:var(--accent);font-size:.55em;font-weight:400}
+.cell .claim{font-size:10.8px;color:var(--body);margin-top:5px;line-height:1.4}
+.cell .src{font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:6px}
+/* dark sidebox / band */
+.dark{background:var(--ink);color:var(--bg);padding:16px 20px;margin:12px 0}
+.dark .ey{font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--ruleSoft);margin-bottom:8px}
+.dark .ey b{color:#9DB4E8}
+.dark p{color:var(--bg)}
+.dark .q{font-family:var(--serif);font-style:italic;font-size:14.5px;line-height:1.45}
+.dark .q::before{content:'\201C';font-size:34px;color:#9DB4E8;font-style:normal;line-height:0;vertical-align:-10px;margin-right:4px}
+/* paper box */
+.paperbox{background:var(--paper);border-top:2px solid var(--rule);padding:12px 16px;margin:10px 0}
+.paperbox .ey{font-family:var(--mono);font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:5px}
+/* list rows */
+.rows{border-top:2px solid var(--rule)}
+.row{display:grid;grid-template-columns:118px 1fr;gap:16px;padding:11px 0;border-bottom:1px solid var(--ruleSoft)}
+.row .lab{font-family:var(--mono);font-size:9px;letter-spacing:.13em;text-transform:uppercase;color:var(--accent);font-weight:600;line-height:1.5;padding-top:3px}
+.row .lab .sub{color:var(--muted);font-weight:400;display:block;margin-top:3px;letter-spacing:.08em}
+.row h3{margin-bottom:3px}
+.row p{font-size:11.6px;margin:.2rem 0}
+/* asks (title page) */
+.ask{display:grid;grid-template-columns:44px 1fr;gap:14px;padding:13px 0;border-bottom:1px solid var(--ruleSoft);align-items:start}
+.ask .n{font-family:var(--serif);font-size:34px;font-weight:700;color:var(--accent);line-height:1}
+.ask h3{font-size:15.5px;margin-bottom:3px}
+.ask p{font-size:11.8px;margin:0}
+/* timeline */
+.tline{border-left:2px solid var(--rule);margin:12px 0 12px 4px;padding-left:18px}
+.tl{position:relative;margin-bottom:11px}
+.tl::before{content:'';position:absolute;left:-23.5px;top:5px;width:9px;height:9px;background:var(--accent)}
+.tl .d{font-family:var(--mono);font-size:9px;letter-spacing:.13em;text-transform:uppercase;color:var(--accent);font-weight:600}
+.tl p{font-size:12px;margin:.15rem 0 0}
+/* simple bars */
+.bar{display:flex;align-items:center;gap:10px;margin:5px 0;font-size:11px}
+.bar .lbl{width:118px;flex:none;font-family:var(--mono);font-size:8.8px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:right}
+.bar .trk{flex:1;background:var(--paper);border:1px solid var(--ruleSoft);height:14px}
+.bar .fill{height:100%;background:var(--accent);display:flex;align-items:center;justify-content:flex-end;color:var(--bg);font-family:var(--mono);font-size:8.6px;padding-right:6px;min-width:38px}
+.bar.alt .fill{background:var(--ink)}
+/* beneficiary tags */
+.tag{display:inline-block;font-family:var(--mono);font-size:8px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:2px 7px;border:1px solid var(--ruleSoft)}
+.tag.state{background:var(--c-state-tint);color:oklch(0.42 0.11 75);border-color:var(--c-state)}
+.tag.tax{background:var(--c-tax-tint);color:oklch(0.36 0.09 150);border-color:var(--c-tax)}
+.tag.dist{background:var(--c-dist-tint);color:oklch(0.42 0.13 25);border-color:var(--c-dist)}
+/* outcome cells (p5 infographic) */
+.flow{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:2px solid var(--rule);margin:10px 0}
+.oc{padding:13px 16px 13px 0;border-bottom:1px solid var(--ruleSoft);position:relative}
+.oc:nth-child(odd){border-right:1px solid var(--ruleSoft);padding-right:18px}
+.oc:nth-child(even){padding-left:18px}
+.oc .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px}
+.oc .ey{font-family:var(--mono);font-size:8.6px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted)}
+.oc .ey b{color:var(--accent)}
+.oc .kpi{font-family:var(--serif);font-size:34px;font-weight:700;color:var(--ink);line-height:1;letter-spacing:-.02em}
+.oc .kpi i{font-style:italic;color:var(--accent);font-size:.5em;font-weight:400}
+.oc .claim{font-size:11px;margin-top:5px;line-height:1.45}
+.oc .src{font-family:var(--mono);font-size:7.8px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin-top:6px}
+/* pull-numbers dark band */
+.pull{background:var(--ink);color:var(--bg);display:grid;grid-template-columns:repeat(4,1fr);gap:18px;padding:15px 20px;margin:12px 0}
+.pull .pn .v{font-family:var(--serif);font-size:25px;font-weight:700;color:var(--bg);line-height:1.05;letter-spacing:-.02em}
+.pull .pn .v i{color:#9DB4E8;font-size:.6em;font-weight:400}
+.pull .pn .l{font-family:var(--mono);font-size:7.8px;letter-spacing:.11em;text-transform:uppercase;color:var(--ruleSoft);margin-top:5px;line-height:1.5}
+/* kv list */
+.kv{display:grid;grid-template-columns:150px 1fr;gap:4px 14px;font-size:11.6px}
+.kv dt{font-family:var(--mono);font-size:8.8px;letter-spacing:.11em;text-transform:uppercase;color:var(--muted);padding-top:2px}
+.kv dd{color:var(--body)}
+.pfoot{margin-top:auto;border-top:1px solid var(--ruleSoft);padding-top:7px;display:flex;justify-content:space-between;font-family:var(--mono);font-size:8.6px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+ul{padding-left:16px;margin:.4rem 0}
+li{font-size:11.8px;margin:.25rem 0}
+.srcs{font-size:9.8px;line-height:1.5}
+.srcs li{margin-bottom:4.5px;font-size:9.8px}
+.srcs .k{font-family:var(--mono);font-size:8.6px;letter-spacing:.08em;text-transform:uppercase}
+.cols2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@page{size:letter;margin:0}
+@media print{
+  body{background:var(--bg)}
+  .page{margin:0;border:none;page-break-after:always;width:8.5in;height:11in;min-height:0;overflow:hidden;padding:.52in .65in .4in}
+  .page:last-child{page-break-after:auto}
+}
+@media screen and (max-width:900px){.page{width:auto;min-height:auto;padding:6%}.wall,.pull{grid-template-columns:1fr 1fr}.flow{grid-template-columns:1fr}.oc:nth-child(odd){border-right:none;padding-right:0}.oc:nth-child(even){padding-left:0}}
+</style>
+</head>
+<body>
+
+<!-- ================= PAGE 1 — TITLE & ASKS ================= -->
+<div class="page">
+  <div class="masthead"><span class="t">Rockville Centre · Housing &times; Schools</span><span class="m">Briefing · June 2026</span></div>
+  <div class="eyebrow"><span class="sq"></span>For federal, state &amp; county legislators</div>
+  <h1>Unlock the homes,<br>keep the teachers.</h1>
+  <p class="standfirst">This spring Rockville Centre balanced its school budget by cutting &asymp;22 teaching positions and 40 teaching assistants — in a village whose median household earns $151,938 and whose homes average $819,000.<sup>1,2,7,8</sup></p>
+  <p>The problem isn't wealth. It's that <span class="k">the homes stopped changing hands:</span> 27.9% of owner households are now headed by someone 65 or older,<sup>7</sup> enrollment is down ~7% in a decade (&asymp;260 students),<sup>3</sup> and the seniors who <em>want</em> to move face a wall of federal tax penalties, benefit-timing traps, and missing downsize inventory. Every lever below is carrots-only — <span class="k">no senior loses a benefit.</span></p>
+  <hr class="rule2" style="margin-top:18px">
+  <div class="eyebrow" style="margin-top:2px"><span class="sq"></span>Three asks, each with a live vehicle</div>
+  <div class="ask"><div class="n">1</div><div>
+    <h3>Federal — end the home-sale capital-gains lock-in</h3>
+    <p>Cosponsor <span class="k">H.R. 1340 / S. 3332</span> (More Homes on the Market Act): double the &sect;121 exclusion to $500K/$1M and index it — unchanged since 1997. AEI: ~1.9&nbsp;million senior-owned homes are locked above today's caps.<sup>9,11</sup></p>
+  </div></div>
+  <div class="ask"><div class="n">2</div><div>
+    <h3>State — make benefits move when seniors move; let them defer</h3>
+    <p>Pass <span class="k">S3309/A5288</span> (keeps a senior's exemption in the year of a move — out of Aging committee 7&ndash;0). Enact a <span class="k">senior property-tax deferral</span> enabling act on the Oregon/Massachusetts model: taxes accrue against the home, paid in full at sale.<sup>12,13</sup></p>
+  </div></div>
+  <div class="ask"><div class="n">3</div><div>
+    <h3>County &amp; local — data before dollars</h3>
+    <p>Publish <span class="k">parcel-level senior-exemption counts by school district</span> before any opt-in to the new 65% exemption tier (Ch. 581 of 2025) or the $75,000 income cap arriving July 2027 — and fund a Silver-to-Gold downsizing pilot.<sup>12,14</sup></p>
+  </div></div>
+  <div class="pfoot"><span>Prepared by Jeff Pinto · rvc-taxes.jeffpinto.com</span><span>1 / 8</span></div>
+</div>
+
+<!-- ================= PAGE 2 — WHAT JUST HAPPENED ================= -->
+<div class="page">
+  <div class="masthead"><span class="t">The Squeeze</span><span class="m">rvc-taxes.jeffpinto.com</span></div>
+  <h2>What just happened in Rockville Centre's schools</h2>
+  <p class="standfirst">An A-rated district — South Side High ranks #611 nationally; the graduation rate is 98&ndash;99% against New York's 87%<sup>4</sup> — chose between classrooms and solvency.</p>
+  <div class="tline">
+    <div class="tl"><div class="d">Jan 29, 2026</div><p>District projects a <span class="k">$3.78M deficit</span> for 2026-27: health insurance +10% (~$2M), out-of-district special-ed placements projected at $6.38M, total revenue growth only ~1% (~$1.4M).<sup>1</sup></p></div>
+    <div class="tl"><div class="d">Mar 2026</div><p>Final state levy cap lands at <span class="k">&asymp;2.1%</span>. Reserves are thin: unappropriated fund balance $4.8M — 3.5% of budget against a 4% statutory ceiling; appropriated fund balance falling $2.8M &rarr; $1.6M.<sup>1,5</sup></p></div>
+    <div class="tl"><div class="d">Apr 16, 2026</div><p>Board adopts a <span class="k">$141.32M budget (+1.03%)</span> that closes the gap chiefly by eliminating <span class="k">&asymp;22.2 teaching positions and 40 teaching-assistant positions</span>.<sup>2</sup></p></div>
+    <div class="tl"><div class="d">May 19, 2026</div><p>Voters approve it 1,915&ndash;1,195.<sup>2</sup></p></div>
+  </div>
+  <div class="wall">
+    <div class="cell"><div class="ey"><b>01</b> · Positions cut</div><div class="kpi">&minus;62</div><div class="claim">Teaching + TA positions eliminated to balance 2026-27</div><div class="src">LI Herald · Apr 2026</div></div>
+    <div class="cell"><div class="ey"><b>02</b> · Enrollment</div><div class="kpi">&minus;7<i>%</i></div><div class="claim">K-12 since 2015-16 (3,533 &rarr; 3,276; 3,260 projected for 2026-27)</div><div class="src">NYSED</div></div>
+    <div class="cell"><div class="ey"><b>03</b> · Revenue</div><div class="kpi">+1<i>%</i></div><div class="claim">Total revenue growth vs. +$2M for health insurance alone</div><div class="src">District · Substack</div></div>
+    <div class="cell"><div class="ey"><b>04</b> · Reserves</div><div class="kpi">3.5<i>%</i></div><div class="claim">Unappropriated fund balance (statutory max 4%)</div><div class="src">Asst. Supt. · Feb 2026</div></div>
+  </div>
+  <div class="dark"><div class="ey"><b>The burning</b> platform</div>
+    <p style="font-size:12.6px;font-family:var(--serif);font-weight:600">Nassau's school districts were built and staffed for more young families per capita than the population has aged into.</p>
+    <p style="font-size:11.6px">Under a 2% levy cap, that mismatch balances only three ways: <span class="k" style="color:var(--bg)">override votes</span> (60% supermajority on some of America's highest property taxes), <span class="k" style="color:var(--bg)">recurring cuts</span> (already happening: −62 RVC, −11 Hewlett-Woodmere), or <span class="k" style="color:var(--bg)">a bigger physical tax base</span>. Miss the turnover benchmarks and the sequence runs: overrides &rarr; program erosion &rarr; closures (Northport shut two elementaries in 2021; Long Beach parents fought one off in 2025) &rarr; the home-value premium that justifies RVC's taxes erodes with the schools — school quality capitalizes into prices (Black 1999, QJE).<sup>19</sup></p>
+  </div>
+  <h3 style="margin-top:4px">And RVC is the rule, not the exception</h3>
+  <p><span class="k">61% of Nassau's 56 school districts</span> lost enrollment over the past decade (Nassau BOCES); Long Island public-school enrollment is down 6.3% since 2017. Hewlett-Woodmere cut 11 teaching positions for 2025-26; Oyster Bay&ndash;East Norwich is down 16.5% since 2015; Locust Valley projects &minus;15% by 2027-28 (2,034 &rarr; 1,725) — and on May 19 became <span class="k">the only Nassau district whose 2026-27 budget failed</span> (850&ndash;765; revote June 16).<sup>6</sup></p>
+  <div class="pfoot"><span>Every figure fact-checked against primary sources — methodology at /validation.html</span><span>2 / 8</span></div>
+</div>
+
+<!-- ================= PAGE 3 — THE CAUSE ================= -->
+<div class="page">
+  <div class="masthead"><span class="t">The Cause</span><span class="m">rvc-taxes.jeffpinto.com</span></div>
+  <h2>The village aged in place — and the homes stopped turning over</h2>
+  <div class="wall">
+    <div class="cell"><div class="ey"><b>01</b> · Senior-owned</div><div class="kpi">27.9<i>%</i></div><div class="claim">Owner households headed by someone 65+ — 2,076 of 7,453</div><div class="src">ACS B25007</div></div>
+    <div class="cell"><div class="ey"><b>02</b> · Senior share</div><div class="kpi">20.1<i>%</i></div><div class="claim">Of all RVC residents are 65 or older</div><div class="src">ACS S0101</div></div>
+    <div class="cell"><div class="ey"><b>03</b> · Home value</div><div class="kpi">$819<i>K</i></div><div class="claim">Average RVC home, June 2026 (ACS 2020-24: $818.7K)</div><div class="src">Zillow · ACS B25077</div></div>
+    <div class="cell"><div class="ey"><b>04</b> · Senior income</div><div class="kpi">~$80<i>K</i></div><div class="claim">Median 65+ household income, vs. $151.9K village-wide</div><div class="src">ACS B19049</div></div>
+  </div>
+  <p>Two thousand of Rockville Centre's roughly 7,450 owner-occupied homes — the three- and four-bedroom houses that built the school system — are held by households past child-rearing age.<sup>7</sup> Nationally, empty-nest baby boomers own <span class="k">28% of large homes; millennials raising children own 14&ndash;16%</span> (Redfin, 2024/2026).<sup>8</sup></p>
+  <div class="eyebrow" style="margin-top:10px"><span class="sq"></span>Households with someone 65+ keep rising; households with kids don't</div>
+  <div class="bar"><span class="lbl">Nassau 2014-18</span><div class="trk"><div class="fill" style="width:72%">36.1%</div></div></div>
+  <div class="bar"><span class="lbl">Nassau 2019-23</span><div class="trk"><div class="fill" style="width:78%">38.9%</div></div></div>
+  <div class="bar alt"><span class="lbl">Nassau 2020-24</span><div class="trk"><div class="fill" style="width:79%">39.6%</div></div></div>
+  <p style="font-size:10px;color:var(--muted);font-family:var(--mono);letter-spacing:.04em">SHARE OF NASSAU HOUSEHOLDS INCLUDING SOMEONE 65+ (ACS B11007). HOUSEHOLDS WITH OWN CHILDREN UNDER 18: 35.5% &rarr; 34.7%.<sup>7</sup></p>
+  <div class="dark" style="display:grid;grid-template-columns:1fr 2.1in;gap:18px;align-items:center">
+    <div>
+      <div class="ey"><b>The pipeline</b> is inventory-starved, not demand-starved</div>
+      <p class="q" style="font-size:16.5px">Five houses under a million dollars. In the whole district.</p>
+      <p style="font-size:10.8px;color:var(--ruleSoft);margin-top:5px;line-height:1.45"><span style="color:var(--bg);font-weight:600">Supt. Kristen Turnow, Locust Valley CSD</span> — "this is a Long Island problem, not a Locust Valley problem" — on an enrollment slide projected at &minus;15% by 2027-28. Young families bid on the few large homes that list; the rest never list.<sup>6</sup></p>
+      <p style="font-family:var(--mono);font-size:8.3px;letter-spacing:.12em;text-transform:uppercase;margin-top:7px"><a href="https://www.liherald.com/stories/school-districts-across-the-north-shore-address-nassau-county-public-schools-lowering-enrollment,214116" style="color:#9DB4E8">LI Herald · Apr 2025 — read the article &rarr;</a> &nbsp;·&nbsp; <a href="voices.html" style="color:#9DB4E8">30+ more voices: /voices.html &rarr;</a></p>
+    </div>
+    <a href="https://www.liherald.com/stories/school-districts-across-the-north-shore-address-nassau-county-public-schools-lowering-enrollment,214116"><img src="liherald-northshore.png" alt="LI Herald headline: School districts across the North Shore address Nassau County public schools' lowering enrollment rates — rising housing costs contribute to drop" style="width:100%;display:block;border:1px solid var(--ruleSoft)"></a>
+  </div>
+  <div class="paperbox"><div class="ey">Why this is also the least painful fix</div>
+    <p style="font-size:12px">The alternative paths to school solvency: override the tax cap (60% supermajority, on top of some of the nation's highest property taxes), cut programs year after year, or close a building. Housing turnover is the one lever that adds students, relieves taxpayers, and asks no current resident to give anything up.</p>
+  </div>
+  <div class="pfoot"><span>ACS = American Community Survey 5-year estimates · sources p. 8</span><span>3 / 8</span></div>
+</div>
+
+<!-- ================= PAGE 4 — THE LOCK-IN ================= -->
+<div class="page">
+  <div class="masthead"><span class="t">The Lock-In</span><span class="m">rvc-taxes.jeffpinto.com</span></div>
+  <h2>Four locks on the front door</h2>
+  <p class="standfirst">What stops the seniors who want to go is concrete — and fixable.</p>
+  <div class="rows">
+    <div class="row"><div class="lab">Lock 01<span class="sub">Federal · cap gains</span></div><div>
+      <h3>The &sect;121 exclusion hasn't moved since 1997</h3>
+      <p>A couple who bought in RVC in the 1990s for ~$250K and sells at ~$900K has taxable gain above the $500K joint cap; a widowed senior filing single hits the $250K cap twice as fast. AEI: <span class="k">~1.9M senior-owned homes</span> nationally sit on gains above the exclusions — $620B in locked value.<sup>9,10</sup> <span class="k">Fix:</span> H.R. 1340 / S. 3332 — double &amp; index. 117+ House cosponsors, bipartisan.<sup>11</sup></p>
+    </div></div>
+    <div class="row"><div class="lab">Lock 02<span class="sub">State · timing trap</span></div><div>
+      <h3>Move at the wrong point in the assessment calendar, lose a year's exemption</h3>
+      <p>A real, documented penalty for moving. (The deeper fear — "I lose my STAR/&sect;467 forever if I move" — is mostly <em>misinformation</em>; see below.) <span class="k">Fix:</span> S3309/A5288 (Palumbo): apply within 30 days of closing, keep the exemption. Out of Aging 7&ndash;0, April 2026.<sup>12</sup></p>
+    </div></div>
+    <div class="row"><div class="lab">Lock 03<span class="sub">State · cash flow</span></div><div>
+      <h3>Fixed-income seniors hoard equity against carrying costs</h3>
+      <p>Four states solve this with <span class="k">deferral</span>: the state pays the tax, a lien accrues at 5&ndash;8% simple interest, the bill is settled in full at sale (OR &middot; MA &middot; WA &middot; TX).<sup>13</sup> <span class="k">Fix:</span> a NY enabling act for senior school-tax deferral — district opt-in, zero long-run cost to the levy.</p>
+    </div></div>
+    <div class="row"><div class="lab">Lock 04<span class="sub">Local · inventory</span></div><div>
+      <h3>Nothing to move into</h3>
+      <p>RVC's housing stock is overwhelmingly single-family; the condo/ADU rungs of the downsizing ladder are missing, so "selling" means "leaving the village you've lived in for 40 years." <span class="k">Fix:</span> ADU policy, right-size zoning near the LIRR, senior-priority placement in new developments.</p>
+    </div></div>
+  </div>
+  <div class="paperbox"><div class="ey">Myth-buster for senior constituents</div>
+    <p>Enhanced STAR <em>follows you</em> to any new NY primary residence (re-register, income-qualified). The &sect;467 senior exemption applies at the new home wherever the local jurisdictions adopted it — and Nassau waives its 12-month ownership wait for seniors who held the exemption before. And because NY (unlike California) taxes <em>current value, not purchase price</em>, downsizing to a smaller home automatically lowers the tax bill.<sup>14</sup></p>
+  </div>
+  <div class="dark"><div class="ey"><b>More "stay" incentives</b> are coming — with nothing for "go"</div>
+    <p style="font-size:12px">Albany just authorized a 65% senior exemption tier (Ch. 581 of 2025, eff. 2026) and — in separate 2025 legislation — a $75,000 income ceiling from July 2027. A century of evidence says such relief measurably increases seniors' tendency to stay put (NBER w25468).<sup>15</sup> Each unpaired expansion makes three things harder: <span class="k" style="color:var(--bg)">for young families</span> — even fewer of the 2,076 senior-owned homes ever list; <span class="k" style="color:var(--bg)">for current taxpayers</span> — a larger §467 pool shifts more of the fixed levy onto them; <span class="k" style="color:var(--bg)">for districts</span> — slower turnover means faster enrollment decline. The ask is not to oppose relief — it is to pair every expansion with a fiscal note and a mobility counterpart.</p>
+  </div>
+  <div class="pfoot"><span>&sect;121 = 26 U.S.C. &sect;121 · &sect;467 = NY RPTL &sect;467 (income-tested senior exemption)</span><span>4 / 8</span></div>
+</div>
+
+<!-- ================= PAGE 5 — THE MATH (infographic) ================= -->
+<div class="page">
+  <div class="masthead"><span class="t">The Math, Done Honestly</span><span class="m">rvc-taxes.jeffpinto.com</span></div>
+  <h2>Follow one home.</h2>
+  <p class="standfirst">A senior household sells; a young family buys. Four things happen — to four different balance sheets. None of them is "the district recaptures revenue."</p>
+  <div class="flow">
+    <div class="oc"><div class="top"><span class="ey"><b>01</b> · Every year after the sale</span><span class="tag state">NY State saves</span></div>
+      <div class="kpi">$2,058<i>/yr</i></div>
+      <div class="claim">The Enhanced STAR credit ($3,147) becomes a Basic credit ($1,089). STAR is state-funded — so the saver is Albany, forever.</div>
+      <div class="src">DTF 2025 final · RVC Class 1 · RPTL &sect;1306-a</div></div>
+    <div class="oc"><div class="top"><span class="ey"><b>02</b> · Once, at closing</span><span class="tag state">NY State collects</span></div>
+      <div class="kpi">~$3,300</div>
+      <div class="claim">Transfer tax: 0.4% of an ~$820K average sale, paid by the seller to the State (plus a 1% buyer mansion tax at $1M+).</div>
+      <div class="src">Tax Law Art. 31 · ACS/Zillow value</div></div>
+    <div class="oc"><div class="top"><span class="ey"><b>03</b> · Every year after the sale</span><span class="tag tax">Neighbors relieved</span></div>
+      <div class="kpi">&asymp;$4,700<i>/yr</i></div>
+      <div class="claim">School tax that stops being shifted onto every other taxpayer when a &sect;467-exempt parcel turns over — at the 50% tier, on a ~$9.4K school bill (est.). &sect;467 is an income sliding scale (65% for income &le;$47K down to 5% at $58.4K), so the per-home figure runs &asymp;$470&ndash;$6,100. The levy is fixed; exemptions move it around.</div>
+      <div class="src">OSC · Nassau brochure rev. 3-26 · school bill &asymp; 62% of est. $15.2K total (assumption)</div></div>
+    <div class="oc"><div class="top"><span class="ey"><b>04</b> · As the family invests</span><span class="tag dist">District gains</span></div>
+      <div class="kpi">+1.4<i> students</i></div>
+      <div class="claim">Per home (2 children &times; 70% school-age — stated assumption) into seats emptied by a ~260-student decline. Buyer renovations physically grow the tax base, which lawfully raises the levy cap.</div>
+      <div class="src">DTF tax-base growth factor · NYSED</div></div>
+  </div>
+  <div class="eyebrow" style="margin-top:8px"><span class="sq"></span>Scale it: per 100 transitions</div>
+  <div class="pull">
+    <div class="pn"><div class="v">$205.8K<i>/yr</i></div><div class="l">STAR savings to NY State — recurring; funds every carrot in this deck</div></div>
+    <div class="pn"><div class="v">~$330K</div><div class="l">One-time transfer-tax receipts to NY State</div></div>
+    <div class="pn"><div class="v">n = ?</div><div class="l">&sect;467 parcels relieved — the county does not publish this. That's Ask 3.</div></div>
+    <div class="pn"><div class="v">~140</div><div class="l">Students into existing seats at low marginal cost — while spare capacity lasts</div></div>
+  </div>
+  <div class="paperbox"><div class="ey">What this is not</div>
+    <p style="font-size:11.6px">It is not district revenue. NY school districts levy a fixed dollar amount; exemptions shift it, they don't shrink it — <em>"Every exemption granted on a property shifts the tax burden to the non-exempt properties"</em> (NYS Comptroller) — and STAR is reimbursed by the State (RPTL &sect;1306-a). Claims that exemptions "cost the schools millions" or that turnover "recaptures revenue" don't survive contact with the levy mechanics. The district's true gains are channels 03&ndash;04 — plus voters with children in the system (the 2026-27 budget passed 62&ndash;38).<sup>16</sup></p>
+  </div>
+  <p style="font-size:10px;font-family:var(--mono);letter-spacing:.05em;color:var(--muted)">WRITE-UP: <a href="fiscal-math.html">/FISCAL-MATH.HTML</a> · BREAK-EVEN INSTRUMENT: <a href="breakeven.html">/BREAKEVEN.HTML</a> · ASSUMPTIONS LABELED · CAPACITY CAVEAT: ENROLLMENT DECLINE &ne; MEASURED BUILDING CAPACITY</p>
+  <div class="pfoot"><span>Verified: DTF 2025 STAR tables · OSC exemption guidance · DTF growth-factor rules</span><span>5 / 8</span></div>
+</div>
+
+<!-- ================= PAGE 6 — THE ASKS ================= -->
+<div class="page">
+  <div class="masthead"><span class="t">The Asks</span><span class="m">rvc-taxes.jeffpinto.com</span></div>
+  <h2>Who we're asking, for what</h2>
+  <p class="standfirst">Officeholders, bill numbers, and statuses verified against congress.gov, nysenate.gov, and official sites — June 2026.</p>
+
+  <div class="eyebrow" style="margin-top:6px"><span class="sq"></span>Federal</div>
+  <div class="rows">
+    <div class="row"><div class="lab">H.R. 1340<span class="sub">In W&amp;M · 117+ cosponsors</span></div><div>
+      <h3>Cosponsor the More Homes on the Market Act</h3>
+      <p><span class="k">Rep. Laura Gillen</span> (D, NY-4) — lives in RVC, former Hempstead Town Supervisor, led the SALT-relief fight, <span class="k">not yet on the bill</span>. A natural extension of her affordability platform (Panetta/Kelly lead).</p>
+    </div></div>
+    <div class="row"><div class="lab">S. 3332<span class="sub">Senate Finance</span></div><div>
+      <h3>Senate companion — same ask</h3>
+      <p><span class="k">Sen. Kirsten Gillibrand</span> — Ranking Member, Approps THUD (HUD funding) and Special Committee on Aging. <span class="k">Sen. Chuck Schumer</span> — Minority Leader. Frame: senior mobility + young-family affordability in one bill (Cornyn/Bennet/Schiff lead).</p>
+    </div></div>
+  </div>
+
+  <div class="eyebrow" style="margin-top:12px"><span class="sq"></span>New York State</div>
+  <div class="rows">
+    <div class="row"><div class="lab">S3309 / A5288<span class="sub">Aging 7&ndash;0 · Apr 2026</span></div><div>
+      <h3>Keep a senior's exemption in the year of a move</h3>
+      <p><span class="k">Sen. Patricia Canzoneri-Fitzpatrick</span> (R, SD-9) — herself a Rockville Centre resident — to champion in the Senate; <span class="k">Asm. Judy Griffin</span> (D, AD-21: RVC, Lynbrook, Malverne, Baldwin) to carry the companion. Add S3574 (renewal-notice protection) so no senior loses &sect;467 to paperwork.</p>
+    </div></div>
+    <div class="row"><div class="lab">New bill<span class="sub">Model: OR · MA · WA · TX</span></div><div>
+      <h3>Senior school-tax deferral enabling act</h3>
+      <p>District opt-in; lien accrues at modest interest; taxes paid in full at sale. Drafted with OSC input — the cash-flow lock (Lock 03) disappears at zero long-run cost to the levy.</p>
+    </div></div>
+  </div>
+
+  <div class="eyebrow" style="margin-top:12px"><span class="sq"></span>County &amp; local</div>
+  <div class="rows">
+    <div class="row"><div class="lab">Data ask<span class="sub">Before 65% tier · $75K cap</span></div><div>
+      <h3>Publish &sect;467 / Enhanced STAR counts &amp; exempted value, by school district, annually</h3>
+      <p><span class="k">County Executive Bruce Blakeman</span>, Nassau Legislature, Dept. of Assessment. Require a fiscal note before any opt-in to the new 65% tier or the 2027 $75K income cap; fund a means-tested <span class="k">"Silver-to-Gold"</span> moving-grant pilot ($5&ndash;10K).</p>
+    </div></div>
+    <div class="row"><div class="lab">Village + BOE<span class="sub">RVC</span></div><div>
+      <h3>Confirm the district's own &sect;467 posture; build the downsizing ladder</h3>
+      <p><span class="k">Mayor Francis X. Murray</span>; RVC Board of Education (incl. Trustee-elect Mary Beth Joyce, seated July 2026): publish the adopting resolution and current tiers; pilot moving assistance ($25&ndash;50K/yr); pursue ADU / right-size supply near the LIRR.</p>
+    </div></div>
+  </div>
+
+  <div class="pull" style="grid-template-columns:repeat(3,1fr);margin-top:12px">
+    <div class="pn"><div class="v">Now&ndash;Sept</div><div class="l">County data publication · district &sect;467 confirmation · coalition letters from the 61%-club</div></div>
+    <div class="pn"><div class="v">Fall 2026</div><div class="l">Deferral bill drafted with OSC · H.R. 1340 cosponsor push pre-election</div></div>
+    <div class="pn"><div class="v">2027 session</div><div class="l">S3309/A5288 + deferral act pass before the July 2027 $75K-cap decision — relief paired with mobility</div></div>
+  </div>
+  <div class="pfoot"><span>Coalition-ready: Hewlett-Woodmere · Locust Valley · OBEN · Long Beach · the rest of the 61%</span><span>6 / 8</span></div>
+</div>
+
+<!-- ================= PAGE 7 — PRECEDENTS ================= -->
+<div class="page">
+  <div class="masthead"><span class="t">Precedents &amp; Evidence</span><span class="m">rvc-taxes.jeffpinto.com</span></div>
+  <h2>None of this is novel — it's assembled from things that already work</h2>
+  <div class="rows" style="margin-top:8px">
+    <div class="row"><div class="lab">Deferral<span class="sub">OR 1963 · MA 41A · WA · TX</span></div><div>
+      <h3>Property-tax deferral keeps seniors cash-flow-safe; districts are made whole</h3>
+      <p>The state pays; a lien — not a subsidy — does the work, repaid with 5&ndash;8% interest at sale. Participation voluntary. Oregon's program is state-administered and self-financing.<sup>13</sup></p>
+    </div></div>
+    <div class="row"><div class="lab">California<span class="sub">Prop 19 · 2020</span></div><div>
+      <h3>Senior mobility wins at the ballot box</h3>
+      <p>55+ homeowners carry their tax basis statewide, up to 3 moves — narrowly approved by voters in the most property-tax-anxious state in America; the LAO scored the package revenue-positive for schools. The lesson for NY is the <em>politics</em>, not the mechanism — NY taxes current value, so our version is benefit-continuity (S3309), not basis-porting.<sup>17</sup></p>
+    </div></div>
+    <div class="row"><div class="lab">Research<span class="sub">Minneapolis Fed · 2024</span></div><div>
+      <h3>Property taxes reduce lock-in and shift ownership younger</h3>
+      <p>"How higher property taxes increase home affordability": recurring taxes capitalize into lower prices, raise turnover, and tilt ownership toward young families. NY's high property taxes mean the turnover dividend is unusually large once the artificial locks come off.<sup>18</sup></p>
+    </div></div>
+    <div class="row"><div class="lab">Research<span class="sub">NBER w25468 · JUE 2021</span></div><div>
+      <h3>Senior exemptions measurably increase staying put</h3>
+      <p>A century of Georgia's age-based exemptions, quadruple-difference design: relief significantly increases older homeowners' retention in place. It's the rigorous version of what every Nassau assessor knows — and why the new 65% tier needs a mobility counterweight.<sup>15</sup></p>
+    </div></div>
+    <div class="row"><div class="lab">The Endgame<span class="sub">Northport · 2021 · LI</span></div><div>
+      <h3>The endgame is current, not historical</h3>
+      <p>Northport&ndash;East Northport closed two elementary schools in August 2021 (enrollment &minus;10.6% in six years + a stepped-down LIPA settlement; ~$7M/yr saved). Three Village consolidated grades district-wide in 2025 after a 23% slide. Long Beach is Nassau's nearest miss: East Elementary was saved by a 4,000-signature parent mobilization in January 2025 — and Locust Valley's 2026-27 budget just failed outright. The cycle is now Rockville Centre's to manage, with better tools.<sup>6</sup></p>
+    </div></div>
+    <div class="row"><div class="lab">The Map<span class="sub">Unasked · hot potato</span></div><div>
+      <h3>District lines — the lever nobody touches</h3>
+      <p>Why does one county run 56 districts whose lines match no town or village (RVC UFSD &ne; Village of RVC) and never move? They descend from 19th-century common-school districts — and Albany already pays districts to reorganize (NYSED incentive operating aid + enhanced building aid). Short of merger: cross-district tuitioning, BOCES shared programs, boundary-alteration petitions. Candidly the hot potato of the set — so the ask is only the <em>study and the data</em>, not the redraw. A county where 61% of districts are shrinking shouldn't treat the map as scripture.<sup>20</sup></p>
+    </div></div>
+  </div>
+  <div class="paperbox"><div class="ey">What we are not proposing</div>
+    <p>No reduction of any current senior's exemption or STAR benefit. No forced sales, no age-targeted assessments, no "empty-nester tax." Every mechanism is opt-in for the senior; most are revenue-positive for the State. The message to RVC's 2,000+ senior-owner households: <em>when you're ready, the move should cost you nothing extra.</em></p>
+  </div>
+  <div class="pfoot"><span>Full citations p. 8 · interactive model: /calculator.html · break-even instrument: /breakeven.html</span><span>7 / 8</span></div>
+</div>
+
+<!-- ================= PAGE 8 — SOURCES & NEXT STEPS ================= -->
+<div class="page">
+  <div class="masthead"><span class="t">Sources &amp; Next Steps</span><span class="m">rvc-taxes.jeffpinto.com</span></div>
+  <h2>Sources</h2>
+  <ol class="srcs cols2" style="margin-top:6px">
+    <div>
+    <li value="1"><span class="k">RVC 2026-27 budget process:</span> <a href="https://www.liherald.com/baldwin/stories/rockville-centre-school-district-projects-378m-budget-deficit-for-2026-27,220209">LI Herald, "$3.78M deficit" (Feb 6, 2026)</a>; <a href="https://www.liherald.com/stories/rockville-centre-board-faces-public-scrutiny-over-2026-27-budget-shortfall,220467">budget-scrutiny coverage (Feb 13)</a>; <a href="https://marybethjoyce1.substack.com/p/understanding-the-20262027-budget">M.B. Joyce, "Understanding the 2026/2027 budget" (Mar 18, 2026)</a>.</li>
+    <li value="2"><span class="k">Adoption &amp; vote:</span> <a href="https://www.liherald.com/rockvillecentre/stories/rockville-centre-school-board-adopts-1413m-budget-preserves-tax-cap,221736">LI Herald, "$141.3M budget adopted" (Apr 2026)</a>; <a href="https://www.liherald.com/stories/school-budget-passes-in-rockville-centre,222477">"School budget passes" (May 2026)</a>.</li>
+    <li value="3"><span class="k">Enrollment:</span> <a href="https://data.nysed.gov/enrollment.php?year=2025&instid=800000049383">NYSED, RVC UFSD</a> — 3,533 (2015-16) &rarr; 3,276 (2024-25); district-stated 3,548 (2016) &rarr; 3,260 projected.</li>
+    <li value="4"><span class="k">District quality:</span> <a href="https://www.usnews.com/education/best-high-schools/new-york/districts/rockville-centre-union-free-school-district/south-side-high-school-14024">U.S. News, South Side HS #611</a>; <a href="https://data.nysed.gov/gradrate.php?year=2024&instid=800000049383">NYSED grad rate 98%</a>; <a href="https://data.nysed.gov/expenditures.php?year=2024&instid=800000049383">NYSED per-pupil $37,973 (2023-24)</a>.</li>
+    <li value="5"><span class="k">Reserves &amp; cap:</span> Asst. Supt. figures via source 1; OSC 2026-27 inflation factor capped at 2%.</li>
+    <li value="6"><span class="k">County-wide decline:</span> <a href="https://www.liherald.com/stories/school-districts-across-the-north-shore-address-nassau-county-public-schools-lowering-enrollment,214116">LI Herald — Nassau BOCES 61%; Locust Valley</a>; <a href="https://www.liherald.com/eastrockaway/stories/hewlett-woodmere-to-cut-teaching-positions,213353">Hewlett-Woodmere cuts</a>; <a href="https://www.wsboces.org/wp-content/uploads/Bi-County-Nassau-and-Suffolk-Enrollment-2017-2026.pdf">W. Suffolk BOCES bi-county study</a>; <a href="https://northportjournal.com/schools/board-of-ed-denies-pause-votes-in-favor-of-closing-two-elementary-schools">Northport Journal — two elementaries closed (2021)</a>; <a href="https://www.liherald.com/oysterbay/stories/locust-valley-central-school-district-budget-fails-oyster-bay-east-norwich-central-school-district,222540">LI Herald — Locust Valley budget fails (May 2026)</a>.</li>
+    <li value="7"><span class="k">Demographics:</span> ACS 5-yr, Rockville Centre village &amp; Nassau — <a href="https://data.census.gov/table/ACSDT5Y2023.B25007?g=1600000US3663264">B25007 (2,076 senior-owner households, 27.9%)</a>; <a href="https://data.census.gov/table/ACSDT5Y2023.B19049?g=1600000US3663264">B19049</a>; <a href="https://data.census.gov/table/ACSDT5Y2023.B11007?g=0500000US36059">B11007 (38.9%&rarr;39.6%)</a>; B19013 ($144,516&rarr;$151,938).</li>
+    <li value="8"><span class="k">Home values &amp; large homes:</span> <a href="https://www.zillow.com/home-values/40613/rockville-centre-ny/">Zillow RVC (June 2026)</a>; ACS B25077 ($818,700); <a href="https://www.redfin.com/news/empty-nesters-own-large-homes/">Redfin 28.2%/14.2% (2024)</a>, <a href="https://www.redfin.com/news/empty-nest-large-homes-2026/">28%/16% (2026)</a>.</li>
+    <li value="9"><span class="k">Capital-gains lock-in:</span> <a href="https://www.aei.org/articles/capital-gain-regulations-on-home-sales-and-baby-boomer-lock-in/">AEI Housing Center (Pinto): ~1.9M homes, $620B</a>; <a href="https://www.law.cornell.edu/uscode/text/26/121">26 U.S.C. &sect;121</a>.</li>
+    </div>
+    <div>
+    <li value="10"><span class="k">Exclusion mechanics:</span> IRS Topic 701 / Pub. 523 (widow-er single-filer cliff).</li>
+    <li value="11"><span class="k">Federal bills:</span> <a href="https://www.congress.gov/bill/119th-congress/house-bill/1340">H.R. 1340 (Panetta/Kelly)</a>; <a href="https://www.congress.gov/bill/119th-congress/senate-bill/3332">S. 3332 (Cornyn/Bennet/Schiff)</a>.</li>
+    <li value="12"><span class="k">NY bills:</span> <a href="https://www.nysenate.gov/legislation/bills/2025/S3309">S3309</a> / <a href="https://www.nysenate.gov/legislation/bills/2025/A5288">A5288</a>; <a href="https://www.nysenate.gov/legislation/bills/2025/S3574">S3574</a>; <a href="https://www.nysenate.gov/legislation/bills/2025/S5175/amendment/A">S5175A &rarr; Ch. 581 of 2025</a>; <a href="https://www.tax.ny.gov/pdf/publications/orpts/legis/legsum25.pdf">DTF 2025 legislative summary ($75K cap, eff. 7/1/2027)</a>.</li>
+    <li value="13"><span class="k">Deferral programs:</span> <a href="https://www.oregon.gov/dor/programs/property/pages/senior-and-disabled-property-tax-deferral-program.aspx">Oregon DOR</a>; <a href="https://www.mass.gov/doc/guide-to-real-estate-tax-deferrals-for-qualifying-persons/download">Massachusetts Cl. 41A</a>; <a href="https://app.leg.wa.gov/rcw/default.aspx?cite=84.38">Washington RCW 84.38</a>; Texas Tax Code &sect;33.06.</li>
+    <li value="14"><span class="k">Exemption rules:</span> <a href="https://www.nassaucountyny.gov/DocumentCenter/View/49404/">Nassau &sect;467 brochure (rev. 3-26): 65% &le;$47,000 &rarr; 5% at $57,500&ndash;58,399</a>; <a href="https://www.tax.ny.gov/pit/property/exemption/seniorexempt.htm">DTF senior-exemption rules</a>; <a href="https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm">DTF 2025 final STAR savings (RVC Class 1)</a>; <a href="https://www.tax.ny.gov/pit/property/star/eligibility.htm">Enhanced STAR limits ($107,300 / $110,750)</a>.</li>
+    <li value="15"><span class="k">Senior-relief lock-in research:</span> <a href="https://www.nber.org/papers/w25468">Banzhaf, Mickey &amp; Patrick (NBER w25468 / J. Urban Econ. 2021)</a> — GSU CSLF, "Tax Relief for the Elderly, But at What Cost?"</li>
+    <li value="16"><span class="k">Levy mechanics:</span> <a href="https://www.osc.ny.gov/files/local-government/publications/pdf/propertytax_exemptions_0.pdf">OSC, "Property Tax Exemptions in NYS"</a>; <a href="https://www.nysenate.gov/legislation/laws/RPT/1306-A">RPTL &sect;1306-a</a>; <a href="https://www.osc.ny.gov/local-government/property-tax-cap/real-property-tax-cap-information-glossary">OSC tax-cap glossary (growth factor)</a>; <a href="https://www.tax.ny.gov/bus/transfer/rptidx.htm">NYS transfer tax</a>.</li>
+    <li value="17"><span class="k">California:</span> <a href="https://www.boe.ca.gov/prop19/">CA BOE, Prop 19</a>; <a href="https://lao.ca.gov/BallotAnalysis/Proposition?number=19&year=2020">LAO fiscal analysis</a>.</li>
+    <li value="18"><span class="k">Turnover economics:</span> <a href="https://www.minneapolisfed.org/article/2024/how-higher-property-taxes-increase-home-affordability">Horwich, Minneapolis Fed (Nov 14, 2024)</a>.</li>
+    <li value="19"><span class="k">School-quality capitalization:</span> Black, S. (1999), "Do Better Schools Matter? Parental Valuation of Elementary Education," <em>QJE</em> 114(2) — and successor boundary-discontinuity literature.</li>
+    <li value="20"><span class="k">District reorganization:</span> <a href="https://www.nysed.gov/educational-management/guide-reorganization-school-districts-new-york-state">NYSED, Guide to the Reorganization of School Districts</a> (incentive operating &amp; building aid).</li>
+    </div>
+  </ol>
+  <hr class="rule2">
+  <h2 style="font-size:22px">Next steps</h2>
+  <div class="kv" style="margin-top:6px">
+    <dt>Data</dt><dd>FOIL to Nassau Dept. of Assessment — &sect;467 &amp; Enhanced STAR counts, tiers, exempted AV by school district; written confirmation of RVC UFSD's &sect;467 adopting resolution from the district clerk.</dd>
+    <dt>Meetings</dt><dd>Gillen (H.R. 1340) · Canzoneri-Fitzpatrick &amp; Griffin (S3309/A5288 + deferral act) · county legislature (data + pilot).</dd>
+    <dt>Coalition</dt><dd>Letters from the 61%-club superintendents; one shared data ask.</dd>
+  </div>
+  <div class="pfoot"><span>rvc-taxes.jeffpinto.com · /fiscal-math.html · /breakeven.html · /voices.html · /validation.html · /calculator.html</span><span>8 / 8</span></div>
+</div>
+
+</body>
+</html>

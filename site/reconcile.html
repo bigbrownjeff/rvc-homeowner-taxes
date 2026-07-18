@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bill Reconciliation — What an RVC Property-Tax Bill Is Actually Made Of</title>
+<meta name="description" content="Reconcile a real Rockville Centre property-tax bill against the actual Nassau County and village mechanics: county roll at 0.1% LOA, per-$100 rates, the village's own roll, and STAR. Includes a back-solve mode.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F1ECE2;--paper:#FAF6EC;--ink:#0E1116;--body:#2A2A2A;--muted:#6B6B6B;--rule:#231F1A;--ruleSoft:#C9C3B4;--accent:#1E3A8A;
+--good:#4E7A58;--bad:#B05442;
+--serif:'Source Serif 4','Source Serif Pro',Georgia,serif;--sans:'Inter',-apple-system,sans-serif;--mono:'IBM Plex Mono',ui-monospace,monospace}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--sans);background:var(--bg);color:var(--body);line-height:1.55}
+.wrap{max-width:960px;margin:0 auto;padding:40px 56px 64px}
+.masthead{display:flex;justify-content:space-between;align-items:baseline;border-bottom:2px solid var(--rule);padding-bottom:10px}
+.masthead .t{font-family:var(--serif);font-weight:600;font-size:26px;color:var(--ink)}
+.masthead .m{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.masthead .m a{color:var(--accent);text-decoration:none}
+.head{margin:40px 0 8px;max-width:860px}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:14px}
+h1{font-family:var(--serif);font-size:42px;font-weight:700;line-height:1.05;letter-spacing:-.03em;color:var(--ink)}
+.standfirst{font-family:var(--serif);font-style:italic;font-size:18px;line-height:1.45;color:var(--body);margin:16px 0 0}
+.provenance{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;color:var(--muted);margin-top:14px;line-height:1.7}
+h2{font-family:var(--serif);font-size:24px;font-weight:700;letter-spacing:-.015em;color:var(--ink);border-top:2px solid var(--rule);padding-top:18px;margin:36px 0 12px}
+h2 .no{font-family:var(--mono);font-size:12px;letter-spacing:.12em;color:var(--accent);vertical-align:6px;margin-right:10px}
+p{font-size:14.5px;margin:0 0 12px;max-width:860px}
+a{color:var(--accent)}
+b,strong{color:var(--ink)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin:16px 0}
+.panel{background:var(--paper);border-top:2px solid var(--rule);padding:16px 18px}
+.panel h4{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:12px}
+label{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:10px 0 4px}
+input,select{width:100%;padding:8px 10px;font-family:var(--mono);font-size:13px;border:1px solid var(--ruleSoft);background:#fff;color:var(--ink);border-radius:2px}
+input:focus,select:focus{outline:2px solid var(--accent)}
+.hint{font-size:11.5px;color:var(--muted);margin-top:3px;line-height:1.45}
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13.5px}
+th{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;border-bottom:2px solid var(--rule);padding:6px 8px}
+td{padding:7px 8px;border-bottom:1px solid var(--ruleSoft)}
+td.num{font-family:var(--mono);text-align:right;white-space:nowrap}
+tr.total td{border-top:2px solid var(--rule);border-bottom:none;font-weight:600;color:var(--ink)}
+.darkbox{background:var(--ink);color:var(--bg);padding:18px 22px;margin:18px 0}
+.darkbox h4{font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:#9DB4E8;font-weight:600;margin-bottom:10px}
+.darkbox p{font-size:13.5px;color:var(--bg)}
+.darkbox b{color:#fff}
+.darkbox a{color:#9DB4E8}
+.pass{color:var(--good);font-weight:600}
+.fail{color:var(--bad);font-weight:600}
+.foot{border-top:2px solid var(--rule);margin-top:48px;padding-top:16px;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+@media (max-width:900px){.wrap{padding:24px 20px}h1{font-size:30px}.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="masthead"><span class="t">Rockville Centre · Housing &times; Schools</span><span class="m"><a href="index.html">Deck</a> · <a href="brief-2026-08.html">Brief</a> · <a href="validation.html">Fact-check</a> · <a href="calculator.html">Calculator</a></span></div>
+
+  <div class="head">
+    <div class="eyebrow">Reconciliation Tool · July 2026</div>
+    <h1>What your RVC tax bill is actually made of</h1>
+    <p class="standfirst">A Rockville Centre homeowner's total is three different taxes on <b>two different assessment rolls</b>. No single "market value &times; rate" can reproduce it — this page uses the real mechanics, with every rate traced to a primary source.</p>
+    <p class="provenance">Rates verified July 18, 2026 against Nassau County Land Records parcel tax tables, the adopted village FY26/FY27 budgets, and NYS ORPTS equalization rates · full audit: docs/MATH-AUDIT-2026-07.md · <a href="validation.html">fact-check page</a></p>
+  </div>
+
+  <h2><span class="no">01</span>The mechanics in one box</h2>
+  <div class="darkbox">
+    <h4>Three taxes, two rolls, three value concepts</h4>
+    <p><b>School + library + county/town taxes</b> are computed on the <b>Nassau County roll</b>: your <i>taxable assessed value</i> (AV) &times; rate per $100. Class-1 AV = 0.1% of the county's "effective market value" (EMV) for that roll year — and the EMV <b>lags</b> the county's own Fair Market Value estimate because class-1 AV can't rise more than 6%/yr or 20%/5yr (RPTL §1805, the Taxpayer Protection Plan phase-in). The roll has been carried forward since the 2020-21 reassessment, so bill-era EMVs sit years behind the market.</p>
+    <p><b>The village tax</b> is computed on the <b>Village of Rockville Centre's own roll</b> — its own assessed values (total $59.7M FY26 / $59.4M FY27) at its own level of assessment (NYS equalization rate: <b>0.87%</b> for 2025), times the village rate ($69.89 FY26 → $74.91 FY27 per $100 of <i>village</i> AV).</p>
+    <p><b>Your sense of market value</b> (Zillow, a recent appraisal) is a third number, usually higher than both roll values. Dividing a real bill by a flat "effective rate" and calling the result "your home's value" mixes all three bases — that's the arithmetic behind most $900K-vs-$1.1M confusions, including the one that prompted this page.</p>
+  </div>
+
+  <h2><span class="no">02</span>Forward: compute an expected bill</h2>
+  <div class="grid">
+    <div class="panel">
+      <h4>Inputs</h4>
+      <label for="av">County taxable AV (from your bill or lrv.nassaucountyny.gov)</label>
+      <input type="number" id="av" value="653" step="1">
+      <div class="hint">On your school/general bill as "Taxable Value." EMV = AV &divide; 0.001 (e.g. AV 653 = $653,000 EMV). If you only know EMV, AV = EMV &times; 0.001.</div>
+      <label for="mkt">Market value (your estimate — used only for the village line &amp; effective-rate readouts)</label>
+      <input type="number" id="mkt" value="741000" step="1000">
+      <label for="veq">Village level of assessment (NYS equalization rate, %)</label>
+      <input type="number" id="veq" value="0.87" step="0.01">
+      <div class="hint">2025: 0.87 · 2024: 0.96 · 2023: 0.99 (NYS ORPTS). If you know your actual village AV from the village bill, enter it below and it overrides.</div>
+      <label for="vav">Village AV override (optional, from your village bill)</label>
+      <input type="number" id="vav" placeholder="leave blank to estimate" step="1">
+      <label for="vrate">Village rate per $100 village AV</label>
+      <select id="vrate"><option value="69.89">FY2025-26 — $69.89</option><option value="74.91">FY2026-27 — $74.91</option></select>
+      <label for="schrate">School rate per $100 county AV (RVC UFSD, 2025-26)</label>
+      <input type="number" id="schrate" value="2247.867" step="0.001">
+      <label for="librate">Library rate per $100</label>
+      <input type="number" id="librate" value="84.459" step="0.001">
+      <label for="genrate">General (county + town) rate per $100 — in-village parcels</label>
+      <input type="number" id="genrate" value="206.397" step="0.001">
+      <div class="hint">In-village parcels pay $206.397 (no county police district, no town highway/park/refuse — the village levy funds RVC's own police/sanitation/roads). RVC-schools parcels <i>outside</i> the village pay ≈$886.816 in general lines instead, plus fire/sanitary special districts, and no village tax.</div>
+      <label for="star">STAR</label>
+      <select id="star">
+        <option value="0">None / not eligible</option>
+        <option value="credit-basic">Basic credit — check, bill unchanged ($1,089, 2025 final)</option>
+        <option value="credit-enh">Enhanced credit — check, bill unchanged ($3,147.01)</option>
+        <option value="ex-basic">Basic exemption (pre-2015 owners) — on-bill, max $1,068</option>
+        <option value="ex-enh">Enhanced exemption (pre-2015) — on-bill, max $2,856</option>
+      </select>
+    </div>
+    <div class="panel">
+      <h4>Expected bill</h4>
+      <table id="out">
+        <tr><th>Line</th><th style="text-align:right">Basis</th><th style="text-align:right">Rate/$100</th><th style="text-align:right">Amount</th></tr>
+        <tr><td>School (RVC UFSD)</td><td class="num" id="b-sch-av"></td><td class="num" id="r-sch"></td><td class="num" id="a-sch"></td></tr>
+        <tr><td>Library</td><td class="num" id="b-lib-av"></td><td class="num" id="r-lib"></td><td class="num" id="a-lib"></td></tr>
+        <tr><td>General (county + town)</td><td class="num" id="b-gen-av"></td><td class="num" id="r-gen"></td><td class="num" id="a-gen"></td></tr>
+        <tr><td>Village of RVC</td><td class="num" id="b-vil-av"></td><td class="num" id="r-vil"></td><td class="num" id="a-vil"></td></tr>
+        <tr id="starrow" style="display:none"><td>STAR exemption (on-bill)</td><td class="num"></td><td class="num"></td><td class="num" id="a-star"></td></tr>
+        <tr class="total"><td>Total billed</td><td></td><td></td><td class="num" id="a-tot"></td></tr>
+        <tr id="creditrow" style="display:none"><td>less STAR credit check</td><td></td><td></td><td class="num" id="a-credit"></td></tr>
+        <tr class="total" id="netrow" style="display:none"><td>Net cost after credit</td><td></td><td></td><td class="num" id="a-net"></td></tr>
+      </table>
+      <p class="hint" id="effline"></p>
+      <p class="hint">School + library + general verified to the penny against a real in-village parcel; the village line is an estimate unless you enter your actual village AV.</p>
+    </div>
+  </div>
+
+  <h2><span class="no">03</span>Reverse: back-solve from a known total</h2>
+  <div class="grid">
+    <div class="panel">
+      <h4>Inputs</h4>
+      <label for="bs-total">Your actual total (school + library + general + village, before any STAR credit check)</label>
+      <input type="number" id="bs-total" value="22800" step="1">
+      <label for="bs-mkt">Your market-value estimate (for the village line)</label>
+      <input type="number" id="bs-mkt" value="1050000" step="1000">
+      <label for="bs-veq">Village equalization rate (%)</label>
+      <input type="number" id="bs-veq" value="0.87" step="0.01">
+      <label for="bs-vrate">Village rate per $100</label>
+      <select id="bs-vrate"><option value="69.89">FY2025-26 — $69.89</option><option value="74.91">FY2026-27 — $74.91</option></select>
+    </div>
+    <div class="panel">
+      <h4>What that bill implies</h4>
+      <table>
+        <tr><td>Estimated village portion</td><td class="num" id="bs-vil"></td></tr>
+        <tr><td>County-roll portion (school+library+general)</td><td class="num" id="bs-cty"></td></tr>
+        <tr class="total"><td>Implied county taxable AV</td><td class="num" id="bs-av"></td></tr>
+        <tr class="total"><td>Implied county EMV (AV &divide; 0.1%)</td><td class="num" id="bs-emv"></td></tr>
+      </table>
+      <p class="hint" id="bs-note"></p>
+    </div>
+  </div>
+
+  <h2><span class="no">04</span>Built-in verification</h2>
+  <p>Two hand-computed cases run on every page load. Case A's school, library, and general lines are the actual 2025-26/2026 tax-table amounts for a real in-village parcel (55 Kennedy Ave, SBL 36/366/150, county taxable AV 653): <b>$14,678.57 / $551.52 / $1,347.77</b>.</p>
+  <table>
+    <tr><th>Case</th><th>Inputs</th><th>Expected</th><th>Result</th></tr>
+    <tr><td>A — verified parcel</td><td>AV 653 · mkt $741,000 · eq 0.87% · FY26</td><td class="num">sch 14,678.57 · lib 551.52 · gen 1,347.77 · vil 4,505.60 · tot 21,083.46</td><td id="t1"></td></tr>
+    <tr><td>B — $900K-EMV home</td><td>AV 900 · mkt $1,000,000 · eq 0.87% · FY26</td><td class="num">sch 20,230.80 · lib 760.13 · gen 1,857.57 · vil 6,080.43 · tot 28,928.94</td><td id="t2"></td></tr>
+  </table>
+
+  <div class="foot"><span>Jeff Pinto · Rockville Centre</span><span>Sources: Nassau LRV parcel tax tables · Village FY27 adopted budget · NYS ORPTS · DTF STAR tables</span></div>
+</div>
+<script>
+'use strict';
+const $ = id => document.getElementById(id);
+const pos = v => Math.max(0, +v || 0); // negative inputs clamp to 0
+const fmt = n => n.toLocaleString('en-US', {style:'currency', currency:'USD'});
+const STAR_AMT = { 'credit-basic':1089, 'credit-enh':3147.01, 'ex-basic':1068, 'ex-enh':2856 };
+
+function components(av, mkt, veqPct, vavOverride, vrate, rsch, rlib, rgen, starMode) {
+  const sch = av * rsch / 100, lib = av * rlib / 100, gen = av * rgen / 100;
+  const vav = vavOverride > 0 ? vavOverride : mkt * (veqPct / 100);
+  const vil = vav * vrate / 100;
+  let starEx = 0, starCr = 0;
+  if (starMode && starMode.startsWith('ex-')) starEx = Math.min(STAR_AMT[starMode], sch);
+  else if (starMode && starMode.startsWith('credit-')) starCr = STAR_AMT[starMode];
+  const tot = sch - starEx + lib + gen + vil;
+  return { sch, lib, gen, vil, vav, starEx, starCr, tot };
+}
+
+function calc() {
+  const av = pos($('av').value), mkt = pos($('mkt').value);
+  const veq = pos($('veq').value), vavO = pos($('vav').value);
+  const vrate = pos($('vrate').value), rsch = pos($('schrate').value);
+  const rlib = pos($('librate').value), rgen = pos($('genrate').value);
+  const star = $('star').value === '0' ? null : $('star').value;
+  const c = components(av, mkt, veq, vavO, vrate, rsch, rlib, rgen, star);
+  $('b-sch-av').textContent = av; $('b-lib-av').textContent = av; $('b-gen-av').textContent = av;
+  $('b-vil-av').textContent = Math.round(c.vav).toLocaleString() + ' (vil AV)';
+  $('r-sch').textContent = rsch; $('r-lib').textContent = rlib; $('r-gen').textContent = rgen; $('r-vil').textContent = vrate;
+  $('a-sch').textContent = fmt(c.sch); $('a-lib').textContent = fmt(c.lib); $('a-gen').textContent = fmt(c.gen); $('a-vil').textContent = fmt(c.vil);
+  $('starrow').style.display = c.starEx ? '' : 'none';
+  if (c.starEx) $('a-star').textContent = '−' + fmt(c.starEx);
+  $('a-tot').textContent = fmt(c.tot);
+  const showCr = c.starCr > 0;
+  $('creditrow').style.display = showCr ? '' : 'none';
+  $('netrow').style.display = showCr ? '' : 'none';
+  if (showCr) { $('a-credit').textContent = '−' + fmt(c.starCr); $('a-net').textContent = fmt(c.tot - c.starCr); }
+  const emv = av / 0.001;
+  $('effline').textContent = 'Effective rate: ' + (emv > 0 ? (c.tot/emv*100).toFixed(2) + '% of county EMV (' + fmt(emv) + ')' : '—')
+    + (mkt > 0 ? ' · ' + (c.tot/mkt*100).toFixed(2) + '% of your market estimate (' + fmt(mkt) + ')' : '');
+}
+
+function backsolve() {
+  const T = pos($('bs-total').value), mkt = pos($('bs-mkt').value);
+  const veq = pos($('bs-veq').value), vrate = pos($('bs-vrate').value);
+  const rsch = pos($('schrate').value), rlib = pos($('librate').value), rgen = pos($('genrate').value);
+  const vil = mkt * (veq / 100) * vrate / 100;
+  const cty = Math.max(0, T - vil);
+  const combined = (rsch + rlib + rgen) / 100; // $ per unit of AV
+  const av = combined > 0 ? cty / combined : 0;
+  const emv = av / 0.001;
+  $('bs-vil').textContent = fmt(vil);
+  $('bs-cty').textContent = fmt(cty);
+  $('bs-av').textContent = Math.round(av).toLocaleString();
+  $('bs-emv').textContent = fmt(emv);
+  $('bs-note').textContent = 'If the implied EMV is well below a value you were recently mailed, the mailed number is almost certainly a NEWER roll year (2026/27 or 2027/28 tentative) or the county’s Fair Market Value — not the value your bill was computed on. That gap is the roll lag, not an error in your bill.';
+}
+
+function runTests() {
+  const near = (a, b) => Math.abs(a - b) < 0.015;
+  const A = components(653, 741000, 0.87, 0, 69.89, 2247.867, 84.459, 206.397, null);
+  const okA = near(A.sch, 14678.57) && near(A.lib, 551.52) && near(A.gen, 1347.77) && near(A.vil, 4505.60) && near(A.tot, 21083.46);
+  const B = components(900, 1000000, 0.87, 0, 69.89, 2247.867, 84.459, 206.397, null);
+  const okB = near(B.sch, 20230.80) && near(B.lib, 760.13) && near(B.gen, 1857.57) && near(B.vil, 6080.43) && near(B.tot, 28928.94);
+  $('t1').innerHTML = okA ? '<span class="pass">PASS</span>' : '<span class="fail">FAIL — ' + [A.sch,A.lib,A.gen,A.vil,A.tot].map(x=>x.toFixed(2)).join(' / ') + '</span>';
+  $('t2').innerHTML = okB ? '<span class="pass">PASS</span>' : '<span class="fail">FAIL — ' + [B.sch,B.lib,B.gen,B.vil,B.tot].map(x=>x.toFixed(2)).join(' / ') + '</span>';
+}
+
+document.querySelectorAll('input,select').forEach(el => el.addEventListener('input', () => { calc(); backsolve(); }));
+calc(); backsolve(); runTests();
+</script>
+</body>
+</html>

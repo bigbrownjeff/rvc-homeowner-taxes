@@ -25,6 +25,16 @@ July 18, 2026 with HTTP 200).
 | Blakeman: re-elected county executive Nov 2025; announced for governor Dec 9, 2025; Stefanik exited Dec 20, 2025; Trump endorsement; **GOP nominee**, general Nov 3, 2026 | [CBS New York](https://www.cbsnews.com/newyork/news/bruce-blakeman-running-for-new-york-governor-2026/) · [Wikipedia roundup](https://en.wikipedia.org/wiki/Bruce_Blakeman) | News verification (secondary; no primary gov't source exists for a candidacy) |
 | RVC UFSD 2026-27: adopted **$141,323,369** (+1.03%); levy **+2.06%** (~$2.25M); cut 22.2 teaching + 40 TA positions, restored 13 facilitators; passed **1,915–1,195** May 19, 2026; district estimate ≈ $309/yr on typical home | [LI Herald: board adopts $141.3M budget](https://www.liherald.com/rockvillecentre/stories/rockville-centre-school-board-adopts-1413m-budget-preserves-tax-cap,221736) · [LI Herald: budget passes](https://www.liherald.com/stories/school-budget-passes-in-rockville-centre,222477) · [Patch: vote result](https://patch.com/new-york/rockvillecentre/rockville-centre-budget-vote-results-are-see-how-voters-weighed) · [District budget page](https://www.rvcschools.org/43656_3) | June receipts (exact) + July search re-confirmation of all figures |
 
+## Math-audit receipts (fetched 2026-07-18, same-day as the refresh)
+
+| Claim | Source (primary) | How verified |
+|---|---|---|
+| RVC UFSD 2025-26 school tax rate **$2,247.867/$100 county AV**; library **$84.459**; in-village general (county+town) **$206.397**; out-of-village general $886.816 | Nassau LRV parcel tax tables: [36366++00150 (55 Kennedy Ave, in-village)](https://lrv.nassaucountyny.gov/info/36366++00150/) · [36503++00090 (413 Rose Ln, out-of-village)](https://lrv.nassaucountyny.gov/info/36503++00090/) | Rendered via headless browser (search is reCaptcha-gated; direct parcel URLs load); line items × AV reproduce every printed dollar amount to the penny |
+| $15,230.09 = combined 2025-26 **school+library** bill on a typical in-village parcel (AV 653) — NOT a total bill | Same LRV tax table (55 Kennedy Ave) | Printed "Combined School Taxes $15,230.09"; resolves the March-model/June-validation label dispute |
+| County Class-1 FMV frozen across displayed roll years; EMV (=AV÷0.1%) lags FMV under the 6%/yr / 20%/5yr caps; 2027/28 tentative values jump toward FMV (+21% on the sample parcel) | Same LRV parcel pages ("Values" tab + Taxpayer Protection Plan notices) | Values table quoted; §1805 cap language printed on page |
+| Village of RVC assesses its **own roll**: FY26 AV $59,732,924 / rate $69.89; FY27 AV $59,388,849 / rate $74.91 per $100 village AV | [Village FY27 adopted budget PDF](https://www.rvcny.gov/sites/g/files/vyhlif4946/f/uploads/village_of_rockville_centre_fy27_adopted_budget.pdf) | pypdf extraction; levy ÷ AV × 100 = 74.91 exactly |
+| Village level of assessment (equalization rate): **0.87 (2025)**, 0.96 (2024), 0.99 (2023) → village full value ≈ $6.9B | [NYS ORPTS via data.ny.gov (e6pv-77bh, SWIS 282029)](https://data.ny.gov/resource/e6pv-77bh.json?%24q=ROCKVILLE) | Socrata API query returned the village rows |
+
 ## Reused June-2026 receipts (fetch-verified 2026-06-09, liveness 200 on 2026-07-18)
 
 | Claim | Source |

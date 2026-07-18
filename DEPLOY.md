@@ -43,6 +43,7 @@ Pages invalidates its own cache on deploy. Hard-refresh to bypass browser cache.
 | `/calculator.html` | RVC Tax & Outcomes Calculator (corrected fork of the original) |
 | `/validation.html` | Fact-check & methodology page backing every number in the deck |
 | `/brief-2026-08.html` | August 2026 refresh brief (2-page print handout; source `docs/BRIEF_2026-08.md`, receipts `docs/_SOURCES.md`) |
+| `/reconcile.html` | Bill reconciliation calculator — real county/village roll mechanics, forward + back-solve modes (July 2026 math audit, `docs/MATH-AUDIT-2026-07.md`) |
 
 ## Notes
 

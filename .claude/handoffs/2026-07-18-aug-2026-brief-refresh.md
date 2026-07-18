@@ -18,7 +18,7 @@ All other June corrections passed re-derivation spot-checks.
 
 ## Key refresh findings (all in _SOURCES.md)
 - STAR 2026: auto-upgrade at 65, resident-only income, Enhanced limit $110,750 — strengthens the "lock-in is mostly myth" leg.
-- S3309/A5288 died in Senate Finance at 2026 session close (Aging 7-0 in April) → ask flips to reintroduction.
+- S3309 stalled in Senate Finance at 2026 adjournment (Aging 7-0 in April); A5288 never left Assembly Real Property Taxation → ask flips to advancing both.
 - H.R. 1340 now 146 cosponsors; **Gillen still not one** (Suozzi and Malliotakis are) — the federal ask is sharper.
 - NEW: Village FY27 budget — rate +7.2% ($69.89→$74.91/$100), levy +6.6% to $44.49M — broadens the story beyond schools.
 - Blakeman is the GOP nominee for governor (general Nov 3, 2026) — county asks aimed at the legislature, not the executive.
@@ -27,11 +27,11 @@ All other June corrections passed re-derivation spot-checks.
 ## What worked / dead ends
 - nysenate.gov statute pages: WebFetch summaries were right but curl-fetching the raw HTML and grepping was the decisive receipt — do that for any statutory claim.
 - congress.gov and govtrack 403 all automated fetches; BillTrack50 + GovInfo + sponsor press releases are the workable verification path.
-- DTF/OSC PDFs extract fine with stdlib zlib + paren-string regex then whitespace-collapse; the RVC village budget PDF does not (figures corroborated via search-engine extraction + LI Herald — eyeball page 1 before print, noted in _SOURCES caveat 2).
+- DTF/OSC PDFs extract fine with stdlib zlib + paren-string regex then whitespace-collapse; the RVC village budget PDF resisted my stdlib approach but pypdf extracts it (adversarial review verified $63,641,946 / $44,488,056 / $74.91, +7.18%; _SOURCES caveat 2 closed).
 
 ## Open threads
 1. **Deploy**: `npx wrangler pages deploy site --project-name rvc-taxes` after merge (direct-upload project — merge ≠ deploy), then real-browser check of `/brief-2026-08.html` on the live domain.
 2. **Merge**: PR from `feature/aug-2026-refresh`; main-push/merge needs Jeff's per-session approval.
-3. **Before handing to politicians**: eyeball village FY27 PDF page 1 ($63,641,946 / $44,488,056 / $74.91); check whether DTF has published 2026 final STAR credit amounts (would replace the 2025-labeled $1,089/$3,147.01).
+3. **Before handing to politicians**: check whether DTF has published 2026 final STAR credit amounts (would replace the 2025-labeled $1,089/$3,147.01). Village FY27 PDF figures are machine-verified (+7.18%).
 4. **Still-blocked data** (unchanged): FOIL parcel counts by tier; RVC UFSD §467 resolution; independent $15,230 bill source.
 5. The .docx/.xlsx root artifacts remain superseded, not regenerated.

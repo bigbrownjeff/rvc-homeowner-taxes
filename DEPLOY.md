@@ -42,6 +42,7 @@ Pages invalidates its own cache on deploy. Hard-refresh to bypass browser cache.
 | `/RVC_Legislator_Deck.pptx` | 26-slide deck (15 live + appendix) — opens in PowerPoint / Keynote / Google Slides; regenerate with `tools/build_deck_pptx.py` |
 | `/calculator.html` | RVC Tax & Outcomes Calculator (corrected fork of the original) |
 | `/validation.html` | Fact-check & methodology page backing every number in the deck |
+| `/brief-2026-08.html` | August 2026 refresh brief (2-page print handout; source `docs/BRIEF_2026-08.md`, receipts `docs/_SOURCES.md`) |
 
 ## Notes
 

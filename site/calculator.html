@@ -987,10 +987,10 @@ body {
 
 <!-- Property Tax Rate -->
 <div class="card">
-  <div class="card-title">Effective Property Tax Rate: RVC vs. Neighbors (Illustrative Estimates)</div>
+  <div class="card-title">RVC Effective Property Tax Rate: Same Verified Bill, Three Value Bases</div>
   <div class="chart-container"><canvas id="benchmarkChart"></canvas></div>
   <div class="insight-box">
-    These rates are estimates derived from levy data and home values — no parcel-level public source exists, and individual bills vary. RVC's ~2.6% estimated effective rate (total bill vs. current market value; corrected July 2026 — the earlier 2.07% figure treated a school-only bill as the total) is mid-range among Nassau County communities. Higher-spending districts like Garden City deliver similar school outcomes at higher cost, while lower-rate communities generally have lower-performing schools. RVC occupies a strong value-for-outcome position.
+    One verified in-village bill (~$21.1K total incl. the village line; Nassau LRV parcel tax tables + village rate, July 2026) divided by three different value bases gives three different "effective rates": <strong>3.23%</strong> of the bill-era taxable EMV ($653K), <strong>2.85%</strong> of the county's frozen Fair Market Value ($741K), and <strong>~2.6%</strong> of a current-market estimate ($819K median). There is no single "RVC effective rate" — quote the basis with the number, and treat the calculator's 2.57% as a planning mid-point of a ~2.0&ndash;3.2% range depending on basis and parcel. (An earlier version of this card compared RVC to six neighboring communities at a flat 2.07%; both the peer figures and the 2.07% were unusable — the 2.07% treated a school-only bill as the total — so the comparison was removed rather than dressed up. See <a href="reconcile.html">reconcile.html</a>.)
   </div>
 </div>
 
@@ -1106,7 +1106,9 @@ const COMPONENTS = [
 ];
 // July 2026 audit: the old 2.073% rate was circular ($15,230/$735K) AND $15,230 is a school+library-only
 // bill (verified: 55 Kennedy Ave, AV 653, combined school taxes $15,230.09). Real total on a median ($819K)
-// home ~ $21,083 -> 2.57% of current market value. Planning estimate only; real mechanics: reconcile.html.
+// home ~ $21,083 -> 2.57% of current market value. Planning MID-POINT of a ~2.0-3.2% range (basis- and
+// parcel-dependent: 3.23% of bill-era EMV, 2.85% of frozen county FMV). Never quote 2.57% without the
+// basis. Real mechanics: reconcile.html.
 const EFF_RATE = 0.0257;
 // DTF 2025 final STAR savings, Rockville Centre Class 1 — CREDIT amounts (all post-2015 owners get the credit).
 // Pre-2015 exemption holders: Basic $1,068 / Enhanced $2,856.
@@ -1621,8 +1623,8 @@ function updatePersonalComparison(inc, mv, propTax, fTax, sTax, mortInt, starTyp
     else mvBlurb = `Your home's estimated value of <strong>${fmt(mv)}</strong> is near the RVC village median.`;
 
     let propBlurb = '';
-    if (propMultRvc >= 1.5) propBlurb = `At <strong>${fmt(propTax)}/year</strong>, your property tax is <strong>${propMultRvc.toFixed(1)}x</strong> the RVC average and <strong>${(propTax / DEMO.avgPropTax.us).toFixed(1)}x</strong> the national average. You pay more because your home value is higher than typical — reflecting RVC's ~2.6% effective rate on current market value.`;
-    else propBlurb = `At <strong>${fmt(propTax)}/year</strong>, your property tax is near the RVC average of <strong>${fmt(DEMO.avgPropTax.rvc)}</strong>. RVC's ~2.6% effective rate (on current market value) is mid-range among Nassau communities.`;
+    if (propMultRvc >= 1.5) propBlurb = `At <strong>${fmt(propTax)}/year</strong>, your property tax is <strong>${propMultRvc.toFixed(1)}x</strong> the RVC average and <strong>${(propTax / DEMO.avgPropTax.us).toFixed(1)}x</strong> the national average. You pay more because your home value is higher than typical — reflecting RVC's effective rate of ~2.6% of current market value (a planning mid-point of a ~2.0&ndash;3.2% range depending on value basis and parcel).`;
+    else propBlurb = `At <strong>${fmt(propTax)}/year</strong>, your property tax is near the RVC average of <strong>${fmt(DEMO.avgPropTax.rvc)}</strong>. That reflects ~2.6% of current market value — a planning mid-point of a ~2.0&ndash;3.2% range depending on value basis and parcel (see the three-bases chart on this page and reconcile.html).`;
 
     let mortBlurb = '';
     if (mortInt > 0) {
@@ -1706,12 +1708,12 @@ function initStatic(){
   // Benchmark
   charts.bm = new Chart(document.getElementById('benchmarkChart').getContext('2d'),{
     type:'bar',
-    data:{labels:['Freeport','Oceanside','Baldwin','Malverne','RVC','Lynbrook','Garden City'],
-      datasets:[{label:'Eff. Tax Rate (%)',data:[2.45,2.30,2.22,2.15,2.57,2.05,1.85],
-        backgroundColor:['#cbd5e1','#cbd5e1','#cbd5e1','#cbd5e1','#3b6cb5','#cbd5e1','#cbd5e1'],borderRadius:4}]
+    data:{labels:['Bill-era taxable EMV ($653K)','County frozen FMV ($741K)','Current market est. ($819K)'],
+      datasets:[{label:'Same verified bill / value basis (%)',data:[3.23,2.85,2.57],
+        backgroundColor:['#3b6cb5','#3b6cb5','#3b6cb5'],borderRadius:4}]
     },
     options:{responsive:true,maintainAspectRatio:false,
-      scales:{y:{beginAtZero:true,max:3,ticks:{callback:v=>v+'%'}},x:{grid:{display:false}}},
+      scales:{y:{beginAtZero:true,max:3.5,ticks:{callback:v=>v+'%'}},x:{grid:{display:false}}},
       plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.raw+'%'}}}
     }
   });

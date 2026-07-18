@@ -121,5 +121,11 @@ haven't modeled — visible on the same LRV tax tab.
 re-checked line by line; breakeven (assumption already ⚠-flagged, now bounded); governance,
 redraw-evidence, voices pages (no valuation math).
 
-*Prepared 2026-07-18 · branch `fix/math-audit-2026-07` · all rates fetched same-day; LRV pages are
-session-gated (reCaptcha on search) — parcel URLs above load directly.*
+**Reproducibility scope note.** The Nassau LRV parcel tax tables are reCaptcha-gated (address/SBL
+search) and render via JavaScript; the primary rates cited here ($2,247.867 / $84.459 / $206.397
+in-village / $886.816 out-of-village per $100 AV) were verified in-session via a real browser on
+2026-07-18 but could not be independently re-fetched by the PR reviewer through plain HTTP. The
+direct parcel URLs above load in any normal browser. **Jeff pasting his own bill components (§4)
+remains the to-the-penny confirmation.**
+
+*Prepared 2026-07-18 · branch `fix/math-audit-2026-07` · all rates fetched same-day.*

@@ -43,7 +43,7 @@ STAR max exemption savings for RVC Class 1 are unchanged for 2026-27 ($1,068/$2,
 
 - FOIL: parcel counts of §467 and Enhanced STAR in RVC by tier (Nassau Dept. of Assessment).
 - RVC UFSD's §467 adopting resolution, current ceiling, and 65%-tier posture (district clerk).
-- Independent sourcing for the $15,230 average total bill and the bill-component split.
+- ~~Independent sourcing for the $15,230 average total bill and the bill-component split.~~ **Closed 2026-07-18 (math audit):** $15,230.09 is a verified school+library-only bill, not a total (Nassau LRV parcel tax table); verified component split and a typical in-village total of ≈$21.1K now in `docs/MATH-AUDIT-2026-07.md` / `site/reconcile.html`.
 
 ## Artifacts of this refresh
 

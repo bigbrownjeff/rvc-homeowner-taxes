@@ -158,6 +158,7 @@ tr.total td{border-top:2px solid var(--rule);border-bottom:none;font-weight:600;
 <script>
 'use strict';
 const $ = id => document.getElementById(id);
+const pos = v => Math.max(0, +v || 0); // negative inputs clamp to 0
 const fmt = n => n.toLocaleString('en-US', {style:'currency', currency:'USD'});
 const STAR_AMT = { 'credit-basic':1089, 'credit-enh':3147.01, 'ex-basic':1068, 'ex-enh':2856 };
 
@@ -173,10 +174,10 @@ function components(av, mkt, veqPct, vavOverride, vrate, rsch, rlib, rgen, starM
 }
 
 function calc() {
-  const av = +$('av').value || 0, mkt = +$('mkt').value || 0;
-  const veq = +$('veq').value || 0, vavO = +$('vav').value || 0;
-  const vrate = +$('vrate').value, rsch = +$('schrate').value || 0;
-  const rlib = +$('librate').value || 0, rgen = +$('genrate').value || 0;
+  const av = pos($('av').value), mkt = pos($('mkt').value);
+  const veq = pos($('veq').value), vavO = pos($('vav').value);
+  const vrate = pos($('vrate').value), rsch = pos($('schrate').value);
+  const rlib = pos($('librate').value), rgen = pos($('genrate').value);
   const star = $('star').value === '0' ? null : $('star').value;
   const c = components(av, mkt, veq, vavO, vrate, rsch, rlib, rgen, star);
   $('b-sch-av').textContent = av; $('b-lib-av').textContent = av; $('b-gen-av').textContent = av;
@@ -196,9 +197,9 @@ function calc() {
 }
 
 function backsolve() {
-  const T = +$('bs-total').value || 0, mkt = +$('bs-mkt').value || 0;
-  const veq = +$('bs-veq').value || 0, vrate = +$('bs-vrate').value;
-  const rsch = +$('schrate').value || 0, rlib = +$('librate').value || 0, rgen = +$('genrate').value || 0;
+  const T = pos($('bs-total').value), mkt = pos($('bs-mkt').value);
+  const veq = pos($('bs-veq').value), vrate = pos($('bs-vrate').value);
+  const rsch = pos($('schrate').value), rlib = pos($('librate').value), rgen = pos($('genrate').value);
   const vil = mkt * (veq / 100) * vrate / 100;
   const cty = Math.max(0, T - vil);
   const combined = (rsch + rlib + rgen) / 100; // $ per unit of AV

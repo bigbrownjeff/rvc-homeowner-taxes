@@ -268,6 +268,12 @@
   var copied={};
   var BTN="See my details";
 
+  // Count-only engagement pings (aggregate integers server-side; no address, no PII
+  // ever sent). Fire-and-forget: a failed ping (offline, static preview) is ignored.
+  function pingCount(event){
+    try{ fetch("/api/count",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({event:event}),keepalive:true}).catch(function(){}); }catch(e){}
+  }
+
   function mailto(email,letter){
     var subject=letter.split("\n")[0].replace("Subject: ","");
     var body=letter.split("\n\n").slice(1).join("\n\n");
@@ -289,7 +295,7 @@
     function done(ok){
       copied[key]=!!ok;
       btn.textContent=ok?"Copied":"Copy letter";
-      if(ok) setTimeout(function(){copied[key]=false;btn.textContent="Copy letter";},2000);
+      if(ok){ pingCount("letter"); setTimeout(function(){copied[key]=false;btn.textContent="Copy letter";},2000); }
     }
     function fallback(){
       var ta=document.createElement("textarea");
@@ -481,7 +487,7 @@
         inVillage:!!(place&&/village|city/i.test(place.NAME||place.BASENAME||"")),
         matched:match.matchedAddress||addr
       };
-      if(fromUser){ signup(c.matched); refreshMoney(c); }
+      if(fromUser){ signup(c.matched); refreshMoney(c); pingCount("lookup"); }
       render(c);
     }).catch(function(){
       btn.textContent=BTN;

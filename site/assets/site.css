@@ -1,0 +1,32 @@
+/* RVC Housing × Schools — shared design tokens & chrome ("Modernist", RVC colors)
+   Source of truth: design_handoff_rvc_site_redesign/README.md */
+:root{
+  --bg:#f3f2f2; --ink:#201e1d; --green:#1e6b3d; --green-hover:#14522c; --gold:#c5a44e; --error:#8a2f1d;
+  --muted-60:rgba(32,30,29,.6); --muted-65:rgba(32,30,29,.65); --muted-70:rgba(32,30,29,.7); --muted-75:rgba(32,30,29,.75);
+  --rule-strong:rgba(32,30,29,.4); --rule-hair:rgba(32,30,29,.25); --rule-row:rgba(32,30,29,.2);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Archivo',system-ui,sans-serif;font-size:15px;line-height:1.55}
+a{color:var(--green);text-underline-offset:3px}
+a:hover{color:var(--green-hover)}
+/* Shared nav (injected by assets/nav.js) */
+.site-nav{border-bottom:2px solid var(--rule-strong);background:var(--bg);font-family:'Archivo',system-ui,sans-serif}
+.site-nav .bar{display:flex;justify-content:space-between;align-items:center;padding:14px 24px;gap:12px}
+.site-nav .brand{font-weight:800;font-size:15px;color:var(--ink);text-decoration:none;letter-spacing:-.01em}
+.site-nav .links{display:flex;gap:22px;font-size:13px;font-weight:600;align-items:center}
+.site-nav .links a{text-decoration:none;color:var(--ink)}
+.site-nav .links a.current{text-decoration:underline;text-underline-offset:4px;text-decoration-color:var(--green);color:var(--green);font-weight:800}
+.site-nav .act{background:var(--green);color:var(--bg) !important;font-weight:800;font-size:13px;padding:9px 26px 9px 12px;text-decoration:none}
+.site-nav .menu-btn{display:none;font-family:'Archivo',sans-serif;cursor:pointer;background:transparent;border:1px solid var(--ink);color:var(--ink);font-weight:800;font-size:13px;padding:8px 14px}
+.site-nav .mobile{display:none;flex-direction:column;border-top:1px solid var(--rule-hair);padding:6px 24px 14px}
+.site-nav .mobile a{padding:11px 0;border-bottom:1px solid rgba(32,30,29,.15);font-size:15px;text-decoration:none;color:var(--ink);font-weight:600}
+.site-nav .mobile a.current{color:var(--green);font-weight:800}
+.site-nav .mobile .act{display:inline-flex;align-self:flex-start;border-bottom:none;font-size:14px;padding:11px 36px 11px 14px;margin-top:10px}
+@media(max-width:760px){
+  .site-nav .links{display:none}
+  .site-nav .menu-btn{display:block}
+  .site-nav.open .mobile{display:flex}
+}
+/* Shared footer */
+.site-foot{display:flex;justify-content:space-between;padding:16px 48px;font-size:12px;font-weight:600;color:var(--muted-60);flex-wrap:wrap;gap:8px}
+@media(max-width:760px){.site-foot{padding:16px 24px}}

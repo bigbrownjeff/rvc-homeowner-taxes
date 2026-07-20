@@ -1,17 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Voices: What Long Island Says About Its Shrinking Schools</title>
-<meta name="description" content="Verbatim, sourced quotes from the parents, teachers, superintendents, and trustees living Long Island's school enrollment decline.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css">
+<script src="./support.js"></script>
 </head>
 <body>
-<div>
-  <div id="site-nav" data-current="voices"></div>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#f3f2f2;color:#201e1d;font-family:'Archivo',system-ui,sans-serif}
+a{color:#1e6b3d;text-underline-offset:3px}
+a:hover{color:#14522c}
+</style>
+</helmet>
+<div style="min-height:100vh;background:#f3f2f2;color:#201e1d;font-family:'Archivo',system-ui,sans-serif;font-size:15px;line-height:1.55">
+  <dc-import name="Nav" current="voices" hint-size="100%,60px"></dc-import>
 
   <div style="padding:56px 48px 36px;max-width:1100px">
     <div style="font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#1e6b3d;margin-bottom:16px">The voices library &middot; verbatim &middot; sourced &middot; 2023-2026</div>
@@ -129,21 +135,21 @@
         <div style="font-size:13px"><b>Kristen Turnow</b> &middot; Superintendent, Locust Valley; after Nassau's only 2026-27 budget defeat (850-765)<br><a href="https://www.liherald.com/oysterbay/stories/locust-valley-central-school-district-budget-fails-oyster-bay-east-norwich-central-school-district,222540" style="font-size:12px">LI Herald &middot; May 22, 2026</a></div>
       </div>
     </div>
-    <p style="margin:18px 0 0;font-size:13px;color:rgba(32,30,29,.7);max-width:760px"><b>Use and provenance:</b> every quote is verbatim from the linked source. The full library with theme tags and overflow quotes lives in the repo. Newsday's enrollment series is paywalled; its data points appear only where republished. More quotes: <a href="voices-library.html">the full voices library</a>.</p>
+    <p style="margin:18px 0 0;font-size:13px;color:rgba(32,30,29,.7);max-width:760px"><b>Use and provenance:</b> every quote is verbatim from the linked source. The full library with theme tags and overflow quotes lives in the repo. Newsday's enrollment series is paywalled; its data points appear only where republished. More quotes: <a href="https://rvc-taxes.jeffpinto.com/voices.html">the full voices page</a>.</p>
   </div>
 
   <div style="margin-top:8px;background:#1e6b3d;color:#f3f2f2;padding:40px 48px">
     <div style="font-weight:800;font-size:30px;line-height:1.1;letter-spacing:-.02em;max-width:860px">These rooms will keep filling until the homes start changing hands. Add your voice to the record.</div>
     <div style="display:flex;gap:12px;margin-top:24px;flex-wrap:wrap">
-      <a href="index.html#asks" style="display:inline-flex;background:#c5a44e;color:#201e1d;font-weight:800;font-size:14px;padding:13px 44px 13px 18px;text-decoration:none">Write to your representatives</a>
+      <a href="RVC Brief.dc.html#asks" style="display:inline-flex;background:#c5a44e;color:#201e1d;font-weight:800;font-size:14px;padding:13px 44px 13px 18px;text-decoration:none">Write to your representatives</a>
       <a href="mailto:jeff@bluecamelconsulting.com?subject=%5Brvc-taxes%5D%20voices" style="display:inline-flex;border:1px solid #f3f2f2;color:#f3f2f2;font-weight:800;font-size:14px;padding:13px 44px 13px 18px;text-decoration:none">Submit a quote</a>
     </div>
   </div>
-  <div class="site-foot">
+  <div style="display:flex;justify-content:space-between;padding:16px 48px;font-size:12px;font-weight:600;color:rgba(32,30,29,.6);flex-wrap:wrap;gap:8px">
     <span>Jeff Pinto &middot; Rockville Centre &middot; <a href="mailto:jeff@bluecamelconsulting.com?subject=%5Brvc-taxes%5D%20">Contact</a></span>
     <span>Compiled June 10, 2026 &middot; nothing paraphrased</span>
   </div>
 </div>
-<script src="assets/nav.js"></script>
+</x-dc>
 </body>
 </html>

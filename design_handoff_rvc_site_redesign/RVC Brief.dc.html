@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#f3f2f2;color:#201e1d;font-family:'Archivo',system-ui,sans-serif}
+a{color:#1e6b3d;text-underline-offset:3px}
+a:hover{color:#14522c}
+</style>
+</helmet>
+<div style="min-height:100vh;background:#f3f2f2;color:#201e1d;font-family:'Archivo',system-ui,sans-serif;font-size:15px;line-height:1.55">
+
+  <dc-import name="Nav" current="brief" hint-size="100%,60px"></dc-import>
+  <div style="display:flex;gap:20px;padding:10px 48px;border-bottom:1px solid rgba(32,30,29,.2);font-size:12.5px;font-weight:600;flex-wrap:wrap">
+    <span style="color:rgba(32,30,29,.55);font-weight:800;text-transform:uppercase;font-size:10.5px;letter-spacing:.08em;padding-top:1px">On this page</span>
+    <a href="#gist" style="text-decoration:none;color:#201e1d">The gist</a>
+    <a href="#nassau" style="text-decoration:none;color:#201e1d">Across Nassau</a>
+    <a href="#money" style="text-decoration:none;color:#201e1d">The money</a>
+    <a href="#asks" style="text-decoration:none;color:#201e1d">Act now</a>
+    <a href="#legislators" style="text-decoration:none;color:#1e6b3d">For legislators</a>
+  </div>
+
+  <!-- hero -->
+  <div style="padding:64px 48px 44px;max-width:1100px">
+    <div style="font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#1e6b3d;margin-bottom:18px">Briefing · August 2026 · Rockville Centre, NY</div>
+    <h1 style="margin:0 0 22px;font-weight:800;font-size:62px;line-height:1.02;letter-spacing:-.025em;max-width:940px">Our schools cut 62 positions this spring. A quarter of our homes hold the fix.</h1>
+    <p style="margin:0;font-size:19px;line-height:1.5;max-width:760px">Rockville Centre balanced its 2026-27 school budget by cutting 22 teaching positions and 40 teaching assistants. This happened in a village where the median household earns $151,938. The problem is not wealth. The homes stopped changing hands: 27.9% of RVC's owner households (2,076 of 7,453) are headed by someone 65 or older.</p>
+    <div style="display:flex;gap:12px;margin-top:30px;flex-wrap:wrap">
+      <a href="#gist" style="display:inline-flex;background:#1e6b3d;color:#f3f2f2;font-weight:800;font-size:14px;padding:13px 44px 13px 18px;text-decoration:none">Read the 60-second version</a>
+      <a href="#asks" style="display:inline-flex;border:1px solid #201e1d;color:#201e1d;font-weight:800;font-size:14px;padding:13px 44px 13px 18px;text-decoration:none">Contact your representatives →</a>
+    </div>
+  </div>
+
+  <!-- gist -->
+  <div id="gist" style="margin:0 48px;border-top:2px solid rgba(32,30,29,.4);padding:30px 0">
+    <div style="display:grid;grid-template-columns:200px 1fr;gap:32px;max-width:1000px">
+      <div style="font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#1e6b3d">The gist<br><span style="color:rgba(32,30,29,.55);font-weight:600;letter-spacing:.06em">60 seconds</span></div>
+      <div style="font-size:17px;line-height:1.55;max-width:720px">
+        <p style="margin:0 0 10px">RVC has 257 fewer students than in 2015. Seniors head 27.9% of the village's owner households, and many of them <b>want</b> to downsize (<a href="#evidence" style="font-weight:600">the evidence</a>). Federal capital gains rules, benefit timing traps, and a shortage of smaller homes keep the door locked.</p>
+        <p style="margin:0">Every fix on this page removes a penalty on moving. <b>No senior loses a benefit.</b> Most fixes make money for New York State. 4 asks, each to our officials, a live bill number, and a link to contact them if you agree and want to support this. And this reaches past RVC: most of Nassau's school districts are shrinking the same way.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- five numbers -->
+  <div style="margin:0 48px;border-top:2px solid rgba(32,30,29,.4)">
+    <div style="display:grid;grid-template-columns:repeat(5,1fr)">
+      <div style="padding:22px 16px 22px 0;border-right:1px solid rgba(32,30,29,.25)">
+        <div style="font-weight:800;font-size:40px;letter-spacing:-.02em;line-height:1">−257</div>
+        <div style="font-size:11.5px;margin-top:10px;line-height:1.45;color:rgba(32,30,29,.75)">K-12 students since 2015-16 · <a href="https://data.nysed.gov/enrollment.php?year=2025&amp;instid=800000049383" style="font-weight:600">NYSED</a></div>
+      </div>
+      <div style="padding:22px 16px;border-right:1px solid rgba(32,30,29,.25)">
+        <div style="font-weight:800;font-size:40px;letter-spacing:-.02em;line-height:1">62</div>
+        <div style="font-size:11.5px;margin-top:10px;line-height:1.45;color:rgba(32,30,29,.75)">Positions cut to balance 2026-27 · <a href="https://www.liherald.com/rockvillecentre/stories/rockville-centre-school-board-adopts-1413m-budget-preserves-tax-cap,221736" style="font-weight:600">LI Herald</a></div>
+      </div>
+      <div style="padding:22px 16px;border-right:1px solid rgba(32,30,29,.25)">
+        <div style="font-weight:800;font-size:40px;letter-spacing:-.02em;line-height:1">2%</div>
+        <div style="font-size:11.5px;margin-top:10px;line-height:1.45;color:rgba(32,30,29,.75)">School levy cap, 5th straight year · <a href="https://www.osc.ny.gov/press/releases/2026/01/dinapoli-school-district-tax-cap-levy-remains-at-2-percent" style="font-weight:600">OSC</a></div>
+      </div>
+      <div style="padding:22px 16px;border-right:1px solid rgba(32,30,29,.25)">
+        <div style="font-weight:800;font-size:40px;letter-spacing:-.02em;line-height:1">+7.2%</div>
+        <div style="font-size:11.5px;margin-top:10px;line-height:1.45;color:rgba(32,30,29,.75)">Village tax rate increase, FY27 · <a href="https://www.rvcny.gov/sites/g/files/vyhlif4946/f/uploads/village_of_rockville_centre_fy27_adopted_budget.pdf" style="font-weight:600">Adopted budget</a></div>
+      </div>
+      <div style="padding:22px 0 22px 16px">
+        <div style="font-weight:800;font-size:40px;letter-spacing:-.02em;line-height:1">27.9%</div>
+        <div style="font-size:11.5px;margin-top:10px;line-height:1.45;color:rgba(32,30,29,.75)">Owner homes headed by someone 65 or older · <a href="https://data.census.gov/table/ACSDT5Y2023.B25007?g=1600000US3663264" style="font-weight:600">ACS B25007</a></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- across nassau -->
+  <div id="nassau" style="margin:0 48px;border-top:2px solid rgba(32,30,29,.4);padding:34px 0">
+    <div style="display:grid;grid-template-columns:200px 1fr;gap:32px;max-width:1000px">
+      <div style="font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#1e6b3d">01 · This is<br>Nassau's problem,<br>not just ours</div>
+      <div style="max-width:760px">
+        <p style="margin:0 0 14px;font-size:17px"><b>61% of Nassau's 56 school districts</b> lost enrollment over the past decade. The same squeeze that cut 62 positions here is running everywhere: Hewlett-Woodmere cut 11 teaching positions for 2025-26. Locust Valley projects a 15% enrollment drop by 2027-28 and saw its 2026-27 budget fail outright. Long Beach parents needed a 4,000-signature campaign to keep East Elementary open. Northport closed two elementary schools in 2021.</p>
+        <p style="margin:0 0 18px;font-size:17px">That is why the asks below cross jurisdictions. A fix that only works for RVC is not worth a legislator's time. One that works for Long Beach, Levittown, Locust Valley, and the rest of the shrinking 61% is.</p>
+        <div style="display:flex;gap:20px;flex-wrap:wrap;font-size:13px;font-weight:600">
+          <a href="https://www.liherald.com/stories/school-districts-across-the-north-shore-address-nassau-county-public-schools-lowering-enrollment,214116">Nassau BOCES coverage →</a>
+          <a href="https://www.wsboces.org/wp-content/uploads/Bi-County-Nassau-and-Suffolk-Enrollment-2017-2026.pdf">Bi-county enrollment study →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- the money -->
+  <div id="money" style="margin:0 48px;border-top:2px solid rgba(32,30,29,.4);padding:34px 0">
+    <div style="display:grid;grid-template-columns:200px 1fr;gap:32px;max-width:1000px">
+      <div style="font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#1e6b3d">02 · Follow<br>one home sale</div>
+      <div style="max-width:760px">
+        <p style="margin:0 0 16px;font-size:17px">A senior sells. A young family buys. Four things happen, to four different balance sheets.</p>
+        <div style="border-top:1px solid rgba(32,30,29,.25)">
+          <div style="display:grid;grid-template-columns:150px 1fr;gap:16px;padding:13px 0;border-bottom:1px solid rgba(32,30,29,.25)">
+            <div style="font-weight:800;font-size:22px">$2,058<span style="font-size:13px;font-weight:600;color:rgba(32,30,29,.6)">/yr</span></div>
+            <div style="font-size: 14px; text-decoration-line: none"><b>New York State saves enough, every year after the sale, to fund every incentive on this page.</b>&nbsp;The Enhanced STAR credit becomes a Basic credit. STAR is state money, so Albany keeps the difference. &nbsp;<a href="https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm" style="font-size: 12.5px; font-weight: 600;">DTF 2025 tables</a></div>
+          </div>
+          <div style="display:grid;grid-template-columns:150px 1fr;gap:16px;padding:13px 0;border-bottom:1px solid rgba(32,30,29,.25)">
+            <div style="font-weight:800;font-size:22px">~$3,300</div>
+            <div style="font-size:14px"><b>New York State collects</b>, once at closing: 0.4% transfer tax on a typical $820K RVC sale. <a href="https://www.tax.ny.gov/bus/transfer/rptidx.htm" style="font-size:12.5px;font-weight:600">Tax Law Art. 31</a></div>
+          </div>
+          <div style="display:grid;grid-template-columns:150px 1fr;gap:16px;padding:13px 0;border-bottom:1px solid rgba(32,30,29,.25)">
+            <div style="font-weight:800;font-size:22px">~$7,300<span style="font-size:13px;font-weight:600;color:rgba(32,30,29,.6)">/yr</span></div>
+            <div style="font-size:14px"><b>Neighbors get relief.</b> School tax that a §467 exempt parcel was shifting onto every other taxpayer stops shifting when the home turns over. <a href="https://www.osc.ny.gov/files/local-government/publications/pdf/propertytax_exemptions_0.pdf" style="font-size: 12.5px; font-weight: 600;">Comptroller guidance</a></div>
+          </div>
+          <div style="display:grid;grid-template-columns:150px 1fr;gap:16px;padding:13px 0">
+            <div style="font-weight:800;font-size:22px">+1.4<span style="font-size:13px;font-weight:600;color:rgba(32,30,29,.6)"> students</span></div>
+            <div style="font-size:14px"><b>The district gains</b>: students into seats emptied by a 257-student decline, renovations that lawfully grow the levy cap, a reason to maintain infrastructure designed when Nassau had more kids, and parents who vote for school budgets. <a href="https://www.osc.ny.gov/local-government/property-tax-cap/real-property-tax-cap-information-glossary" style="font-size: 12.5px; font-weight: 600;">Growth factor rules</a></div>
+          </div>
+        </div>
+        <p style="margin:14px 0 0;font-size:13px;color:rgba(32,30,29,.7)">Full mechanics write-up for aides: <a href="https://rvc-taxes.jeffpinto.com/fiscal-math.html" style="font-weight:600">fiscal-math</a> · every number checked at <a href="https://rvc-taxes.jeffpinto.com/validation.html" style="font-weight:600">validation</a> · run your own scenario in the <a href="https://rvc-taxes.jeffpinto.com/calculator.html" style="font-weight:600">calculator</a></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- asks / act now -->
+  <div id="asks" style="margin:0 48px;border-top:2px solid rgba(32,30,29,.4);padding:34px 0 10px">
+    <div style="font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#1e6b3d;margin-bottom:6px">03 · Four asks. One click each.</div>
+    <p style="margin:0 0 20px;font-size:17px;max-width:740px">Your representatives change with your street address, so start there. We look up your congressional, state senate, assembly, and school districts, then draft a letter for each office with your name and address filled in. A short note that names the bill and says you live in their district is the single most effective thing a resident can do.</p>
+    <div style="display:grid;grid-template-columns:2fr 1fr 1fr auto;gap:12px;align-items:end;max-width:980px;margin-bottom:8px">
+        <div style="display:flex;flex-direction:column;gap:4px">
+          <label for="kitAddr" style="font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:rgba(32,30,29,.6)">Street address, village, NY</label>
+          <input id="kitAddr" value="{{ kitAddr }}" onInput="{{ onAddr }}" placeholder="12 Maple Ave, Rockville Centre, NY" style="font-family:'Archivo',sans-serif;font-size:14px;padding:10px 12px;border:1px solid #201e1d;background:#f3f2f2;color:#201e1d">
+        </div>
+        <div style="display:flex;flex-direction:column;gap:4px">
+          <label for="kitName" style="font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:rgba(32,30,29,.6)">Name (optional)</label>
+          <input id="kitName" value="{{ kitName }}" onInput="{{ onName }}" placeholder="Jane Smith" style="font-family:'Archivo',sans-serif;font-size:14px;padding:10px 12px;border:1px solid #201e1d;background:#f3f2f2;color:#201e1d">
+        </div>
+        <div style="display:flex;flex-direction:column;gap:4px">
+          <label for="kitEmail" style="font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:rgba(32,30,29,.6)">Email (optional)</label>
+          <input id="kitEmail" value="{{ kitEmail }}" onInput="{{ onEmail }}" placeholder="jane@example.com" style="font-family:'Archivo',sans-serif;font-size:14px;padding:10px 12px;border:1px solid #201e1d;background:#f3f2f2;color:#201e1d">
+        </div>
+        <button onClick="{{ onBuild }}" style="font-family:'Archivo',sans-serif;cursor:pointer;background:#1e6b3d;color:#f3f2f2;font-weight:800;font-size:14px;padding:11px 36px 11px 16px;border:none;text-align:left">{{ buildLabel }}</button>
+      </div>
+    <div style="font-size:12px;color:rgba(32,30,29,.65);margin-bottom:4px">Prefilled with Village Hall; change it to your address. The lookup runs in your browser against the U.S. Census Bureau geocoder. Email is optional and joins the project's update list.</div>
+    <sc-if value="{{ kitError }}" hint-placeholder-val="{{ false }}">
+      <div style="font-size:13.5px;font-weight:600;color:#8a2f1d;margin-top:10px">{{ kitError }}</div>
+    </sc-if>
+    <sc-if value="{{ kitReady }}" hint-placeholder-val="{{ false }}">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 56px;max-width:1100px;margin-top:22px;border-top:2px solid rgba(32,30,29,.4)">
+        <sc-for list="{{ kitCards }}" as="card" hint-placeholder-count="4">
+          <div style="padding:20px 0 22px;border-bottom:1px solid rgba(32,30,29,.25)">
+            <div style="font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:rgba(32,30,29,.6);margin-bottom:6px">{{ card.level }}</div>
+            <a href="{{ card.nameHref }}" target="_blank" style="font-weight:800;font-size:17px;line-height:1.2;color:#201e1d;text-decoration:underline;text-decoration-color:#1e6b3d;text-underline-offset:3px">{{ card.name }}</a>
+            <div style="font-size:12.5px;color:rgba(32,30,29,.7);margin:4px 0 8px">{{ card.district }}</div>
+            <div style="font-size:13.5px;margin-bottom:12px">{{ card.askText }}</div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <a href="{{ card.primaryHref }}" target="_blank" style="display:inline-flex;background:#1e6b3d;color:#f3f2f2;font-weight:800;font-size:12.5px;padding:9px 28px 9px 12px;text-decoration:none">{{ card.primaryLabel }}</a>
+              <button onClick="{{ card.onCopy }}" style="font-family:'Archivo',sans-serif;cursor:pointer;background:transparent;border:1px solid #201e1d;color:#201e1d;font-weight:800;font-size:12.5px;padding:9px 28px 9px 12px;text-align:left">{{ card.copyLabel }}</button>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+      <div style="font-size:12px;color:rgba(32,30,29,.65);margin-top:12px">{{ kitFootnote }}</div>
+    </sc-if>
+  </div>
+
+  <!-- legislator layer -->
+  <div id="legislators" style="margin:32px 48px 0;border-top:2px solid rgba(32,30,29,.4);padding:34px 0">
+    <div style="display:grid;grid-template-columns:200px 1fr;gap:32px;max-width:1100px">
+      <div style="font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#1e6b3d">04 · For legislators<br>and their aides</div>
+      <div>
+        <p style="margin:0 0 18px;font-size:17px;max-width:720px">Everything an office needs to act this session, in one place. Every figure traces to a public primary source, and the fact check includes the errors this project found and fixed in its own earlier drafts.</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;max-width:900px">
+          <a href="https://rvc-taxes.jeffpinto.com/RVC_Legislator_Deck.pptx" style="display:block;border:1px solid rgba(32,30,29,.35);padding:16px;text-decoration:none;color:#201e1d">
+            <div style="font-weight:800;font-size:15px;margin-bottom:4px">The deck (PPTX)</div>
+            <div style="font-size:12.5px;color:rgba(32,30,29,.7)">26 slides, opens in PowerPoint or Google Slides. Built for a 15-minute meeting.</div>
+          </a>
+          <a href="https://rvc-taxes.jeffpinto.com/fiscal-math.html" style="display:block;border:1px solid rgba(32,30,29,.35);padding:16px;text-decoration:none;color:#201e1d">
+            <div style="font-weight:800;font-size:15px;margin-bottom:4px">The mechanics</div>
+            <div style="font-size:12.5px;color:rgba(32,30,29,.7)">How the levy, STAR, and §467 actually interact. Written for counsel and aides.</div>
+          </a>
+          <a href="https://rvc-taxes.jeffpinto.com/validation.html" style="display:block;border:1px solid rgba(32,30,29,.35);padding:16px;text-decoration:none;color:#201e1d">
+            <div style="font-weight:800;font-size:15px;margin-bottom:4px">The fact check</div>
+            <div style="font-size:12.5px;color:rgba(32,30,29,.7)">Every number, its primary source, and the corrections log.</div>
+          </a>
+          <a href="https://www.congress.gov/bill/119th-congress/house-bill/1340" style="display:block;border:1px solid rgba(32,30,29,.35);padding:16px;text-decoration:none;color:#201e1d">
+            <div style="font-weight:800;font-size:15px;margin-bottom:4px">Bill status: federal</div>
+            <div style="font-size:12.5px;color:rgba(32,30,29,.7)">H.R. 1340 in Ways &amp; Means, 146 cosponsors. Companion S. 3332 in Senate Finance.</div>
+          </a>
+          <a href="https://www.nysenate.gov/legislation/bills/2025/S3309" style="display:block;border:1px solid rgba(32,30,29,.35);padding:16px;text-decoration:none;color:#201e1d">
+            <div style="font-weight:800;font-size:15px;margin-bottom:4px">Bill status: state</div>
+            <div style="font-size:12.5px;color:rgba(32,30,29,.7)">S3309 cleared Aging 7-0, stalled in Finance. A5288 sits in Real Property Taxation.</div>
+          </a>
+          <a href="https://rvc-taxes.jeffpinto.com/reconcile.html" style="display:block;border:1px solid rgba(32,30,29,.35);padding:16px;text-decoration:none;color:#201e1d">
+            <div style="font-weight:800;font-size:15px;margin-bottom:4px">Run the numbers</div>
+            <div style="font-size:12.5px;color:rgba(32,30,29,.7)">Bill reconciler and calculator with real county roll mechanics. Check our math.</div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- evidence: do seniors want to move? -->
+  <div id="evidence" style="margin:0 48px;border-top:2px solid rgba(32,30,29,.4);padding:34px 0">
+    <div style="display:grid;grid-template-columns:200px 1fr;gap:32px;max-width:1100px">
+      <div style="font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#1e6b3d">05 · Do seniors<br>really want<br>to move?</div>
+      <div style="max-width:760px">
+        <p style="margin:0 0 16px;font-size:17px">The strongest claim on this page is that many seniors want to downsize and cannot. It does not rest on anecdotes.</p>
+        <div style="border-top:1px solid rgba(32,30,29,.25)">
+          <div style="padding:13px 0;border-bottom:1px solid rgba(32,30,29,.25)">
+            <div style="font-size:14px"><b>Freddie Mac, December 2024.</b> The "Silver Tsunami" survey found two thirds of boomer homeowners who plan to move say the move will be a downsize. <a href="https://www.freddiemac.com/research" style="font-size:12.5px;font-weight:600">Freddie Mac research</a></div>
+          </div>
+          <div style="padding:13px 0;border-bottom:1px solid rgba(32,30,29,.25)">
+            <div style="font-size:14px"><b>AARP, 2024.</b> The Home and Community Preferences Survey found two thirds of adults call downsizing a good option, and 44% of older adults expect a move. <a href="https://www.aarp.org/home-living/home-community-preferences-survey-2024/" style="font-size:12.5px;font-weight:600">AARP survey</a></div>
+          </div>
+          <div style="padding:13px 0;border-bottom:1px solid rgba(32,30,29,.25)">
+            <div style="font-size:14px"><b>Realtor.com, June 2026.</b> Housing analysts report older owners delaying downsizes because smaller homes cost as much as the ones they own, leaving many "aging in place" by necessity rather than choice, and reducing turnover for young buyers. <a href="https://www.housingwire.com/articles/many-older-americans-stuck-in-homes-that-no-longer-fit/" style="font-size:12.5px;font-weight:600">Coverage</a></div>
+          </div>
+          <div style="padding:13px 0;border-bottom:1px solid rgba(32,30,29,.25)">
+            <div style="font-size:14px"><b>AEI Housing Center.</b> Roughly 1.9 million senior-owned homes nationally sit on capital gains above the federal exclusion, $620 billion in locked value. The owners who want to sell face a five-figure tax bill for doing it. <a href="https://www.aei.org/articles/capital-gain-regulations-on-home-sales-and-baby-boomer-lock-in/" style="font-size:12.5px;font-weight:600">AEI analysis</a></div>
+          </div>
+          <div style="padding:13px 0">
+            <div style="font-size:14px"><b>Gov. Hochul, April 2025.</b> "We are committed to creating more opportunities for older New Yorkers to downsize into smaller homes in communities they love." The state's own housing agenda already names this goal. <a href="https://hcr.ny.gov/news/affordable-housing-long-island-governor-hochul-announces-construction-has-begun-66-unit-senior" style="font-size:12.5px;font-weight:600">NYS HCR</a></div>
+          </div>
+        </div>
+        <p style="margin:14px 0 0;font-size:13px;color:rgba(32,30,29,.7)">Local, named voices from Nassau superintendents and residents: <a href="https://rvc-taxes.jeffpinto.com/voices.html" style="font-weight:600">voices</a></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- closing band -->
+  <div style="margin-top:8px;background:#1e6b3d;color:#f3f2f2;padding:44px 48px">
+    <div style="font-weight:800;font-size:34px;line-height:1.05;letter-spacing:-.02em;max-width:860px">A senior who never moves is left exactly as they are today. That is the test every proposal here passes.</div>
+    <div style="display:flex;gap:12px;margin-top:24px;flex-wrap:wrap">
+      <a href="#asks" style="display:inline-flex;background:#c5a44e;color:#201e1d;font-weight:800;font-size:14px;padding:13px 44px 13px 18px;text-decoration:none">Write to your representatives</a>
+      <a href="https://rvc-taxes.jeffpinto.com/validation.html" style="display:inline-flex;border:1px solid #f3f2f2;color:#f3f2f2;font-weight:800;font-size:14px;padding:13px 44px 13px 18px;text-decoration:none">Check every number</a>
+    </div>
+  </div>
+  <div style="display:flex;justify-content:space-between;padding:16px 48px;font-size:12px;font-weight:600;color:rgba(32,30,29,.6);flex-wrap:wrap;gap:8px">
+    <span>Jeff Pinto · Rockville Centre · <a href="mailto:jeff@bluecamelconsulting.com?subject=%5Brvc-taxes%5D%20">Contact</a></span>
+    <span>Every figure traces to a public primary source · Verified July 18, 2026</span>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { kitAddr: "1 College Pl, Rockville Centre, NY", kitName: "", kitEmail: "", building: false, error: "", cards: null, copied: {} };
+  componentDidMount() { this.build(false); }
+
+  // Verified officials. District number -> name/contact. Anything not listed
+  // renders as the district number plus the chamber's own lookup link.
+  reps = {
+    cd: {
+      "4": { name: "Rep. Laura Gillen", href: "https://gillen.house.gov/contact", page: "https://gillen.house.gov/", note: "not yet a cosponsor of H.R. 1340; lives in RVC" },
+      "3": { name: "Rep. Tom Suozzi", href: "https://suozzi.house.gov/contact", page: "https://suozzi.house.gov/", note: "already a cosponsor of H.R. 1340" }
+    },
+    sd: {
+      "6": { name: "Sen. Siela Bynoe", href: "https://www.nysenate.gov/senators/siela-bynoe/contact", page: "https://www.nysenate.gov/senators/siela-bynoe", email: "Bynoe@nysenate.gov", note: "SD-6 covers RVC; former Nassau legislator, career in housing" },
+      "9": { name: "Sen. Patricia Canzoneri-Fitzpatrick", href: "https://www.nysenate.gov/senators/patricia-canzoneri-fitzpatrick/contact", page: "https://www.nysenate.gov/senators/patricia-canzoneri-fitzpatrick", email: "canzoneri@nysenate.gov", note: "sponsor of S3309; lives in RVC" }
+    },
+    ad: { "21": { name: "Asm. Judy Griffin", href: "https://nyassembly.gov/mem/Judy-Griffin/contact/", page: "https://nyassembly.gov/mem/Judy-Griffin/", note: "district covers RVC, Lynbrook, Malverne, Baldwin" } }
+  };
+
+  mailto(email, letter) {
+    return "mailto:" + email + "?subject=" + encodeURIComponent(letter.split("\n")[0].replace("Subject: ", "")) + "&body=" + encodeURIComponent(letter.split("\n\n").slice(1).join("\n\n"));
+  }
+
+  letters(name, addr, schoolDist) {
+    const sig = (name || "[your name]") + "\n" + (addr || "[your address]");
+    return {
+      federal: "Subject: Please cosponsor H.R. 1340, the More Homes on the Market Act\n\nI am your constituent at " + (addr || "[address]") + ".\n\nOur school district just cut staff to balance its budget while hundreds of larger homes sit off the market. One reason is the federal home-sale capital gains exclusion, unchanged since 1997. H.R. 1340 doubles it and indexes it, with 146 cosponsors from both parties.\n\nPlease cosponsor H.R. 1340. Seniors who want to move should not face a five-figure tax bill for doing it.\n\n" + sig,
+      senate: "Subject: Please move S3309 through Finance\n\nI am your constituent at " + (addr || "[address]") + ".\n\nS3309 lets a senior keep their property tax exemption in the year they move. It cleared the Aging committee 7-0 in April 2026, then stalled in Finance. It removes a real penalty on downsizing at almost no cost.\n\nPlease push S3309 to a floor vote this session, and commission a fiscal note on a senior property tax deferral act on the Oregon and Massachusetts model.\n\n" + sig,
+      assembly: "Subject: Please advance A5288\n\nI am your constituent at " + (addr || "[address]") + ".\n\nA5288, the companion to S3309, lets a senior keep their property tax exemption in the year they move. It has not moved out of Real Property Taxation. It removes a real penalty on downsizing at almost no cost.\n\nPlease advance A5288 this session.\n\n" + sig,
+      county: "Subject: Publish senior exemption counts by school district\n\nI am your constituent at " + (addr || "[address]") + ".\n\nNo one outside the Assessment Department can say how many parcels hold the section 467 senior exemption in any school district, or what an expansion would shift onto other taxpayers. Every school board and village board deciding on the new 65% tier or the 2027 income ceiling needs that number.\n\nPlease direct the Department of Assessment to publish section 467 and Enhanced STAR parcel counts by school district and tier, every year.\n\n" + sig,
+      village: "Subject: Fiscal note before any section 467 expansion" + (schoolDist ? " (" + schoolDist + ")" : "") + "\n\nI live at " + (addr || "[address]") + ".\n\nBefore the village or district opts into the 65% senior exemption tier or the $75,000 income ceiling arriving in July 2027, please publish a parcel-level fiscal note: how many parcels qualify by tier, and what each option shifts onto non-exempt taxpayers. Relief measures deserve honest price tags, and expansions should be paired with downsizing options so the relief does not deepen the housing freeze.\n\n" + sig
+    };
+  }
+
+  async build(fromUser = true) {
+    const addr = this.state.kitAddr.trim();
+    if (!addr) { this.setState({ error: "Enter a street address first.", cards: null }); return; }
+    this.setState({ building: true, error: "" });
+    try {
+      // The Census geocoder does not send CORS headers; use its JSONP support.
+      const data = await new Promise((resolve, reject) => {
+        const cb = "__censusCb" + Date.now();
+        window[cb] = (d) => { delete window[cb]; s.remove(); resolve(d); };
+        const s = document.createElement("script");
+        s.src = "https://geocoding.geo.census.gov/geocoder/geographies/onelineaddress?address=" + encodeURIComponent(addr) + "&benchmark=Public_AR_Current&vintage=Current_Current&layers=all&format=jsonp&callback=" + cb;
+        s.onerror = () => { delete window[cb]; s.remove(); reject(new Error("geocoder unreachable")); };
+        document.head.appendChild(s);
+        setTimeout(() => { if (window[cb]) { delete window[cb]; s.remove(); reject(new Error("geocoder timeout")); } }, 12000);
+      });
+      const match = data && data.result && data.result.addressMatches && data.result.addressMatches[0];
+      if (!match) { this.setState({ building: false, error: "No match for that address. Include street number, village, and NY.", cards: null }); return; }
+      const g = match.geographies || {};
+      const pick = (frag) => { const k = Object.keys(g).find(k => k.toLowerCase().includes(frag)); return k && g[k] && g[k][0] ? g[k][0] : null; };
+      const cdRaw = pick("congressional"); const sldu = pick("upper"); const sldl = pick("lower"); const usd = pick("unified school");
+      const cd = cdRaw ? String(parseInt(cdRaw.CD119 || cdRaw.CD || cdRaw.BASENAME, 10)) : null;
+      const sd = sldu ? String(parseInt(sldu.SLDU || sldu.BASENAME, 10)) : null;
+      const ad = sldl ? String(parseInt(sldl.SLDL || sldl.BASENAME, 10)) : null;
+      const school = usd ? (usd.NAME || usd.BASENAME) : null;
+      const matched = match.matchedAddress || addr;
+      // remember the signup locally (prototype; production needs a backend)
+      if (fromUser) try {
+        const list = JSON.parse(localStorage.getItem("rvc-action-signups") || "[]");
+        list.push({ name: this.state.kitName, email: this.state.kitEmail, address: matched, at: new Date().toISOString() });
+        localStorage.setItem("rvc-action-signups", JSON.stringify(list));
+      } catch (e) {}
+      this.setState({ building: false, cards: { cd, sd, ad, school, matched } });
+    } catch (e) {
+      this.setState({ building: false, error: "Lookup failed (the Census geocoder may be busy). Try again in a minute.", cards: null });
+    }
+  }
+
+  copy(key, text) {
+    const done = (ok) => {
+      this.setState(s => ({ copied: { ...s.copied, [key]: ok ? true : false } }));
+      if (ok) setTimeout(() => this.setState(s => ({ copied: { ...s.copied, [key]: false } })), 2000);
+    };
+    const fallback = () => {
+      // execCommand path for contexts where the async clipboard API is policy-blocked
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      ta.style.position = "fixed"; ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.focus(); ta.select();
+      let ok = false;
+      try { ok = document.execCommand("copy"); } catch (e) {}
+      ta.remove();
+      done(ok);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(() => done(true)).catch(fallback);
+    } else fallback();
+  }
+
+  renderVals() {
+    const st = this.state;
+    const L = st.cards ? this.letters(st.kitName, st.cards.matched, st.cards.school) : null;
+    let kitCards = [];
+    if (st.cards) {
+      const c = st.cards;
+      const fed = this.reps.cd[c.cd]; const sen = this.reps.sd[c.sd]; const asm = this.reps.ad[c.ad];
+      const inRvc = c.matched.toLowerCase().includes("rockville centre");
+      kitCards = [
+        { key: "fed", level: "Federal · H.R. 1340", name: fed ? fed.name : "Your U.S. representative", nameHref: fed ? fed.page : "https://www.house.gov/representatives/find-your-representative", district: "NY congressional district " + (c.cd || "?") + (fed ? " · " + fed.note : ""), askText: fed && c.cd === "3" ? "Already a cosponsor. Say thanks, and ask him to push the Senate companion S. 3332." : "Ask them to cosponsor H.R. 1340, which unlocks senior home sales by fixing the 1997 capital gains cap.", letter: L.federal, primaryHref: fed ? fed.href : "https://www.house.gov/representatives/find-your-representative", primaryLabel: fed ? "Open contact form" : "Find your rep" },
+        { key: "sen", level: "State Senate · S3309", name: sen ? sen.name : "Your state senator", nameHref: sen ? sen.page : "https://www.nysenate.gov/find-my-senator", district: "Senate district " + (c.sd || "?") + (sen ? " · " + sen.note : ""), askText: "Ask them to move S3309 (exemption continuity in a move year) out of Finance, and to score a deferral act.", letter: L.senate, primaryHref: sen && sen.email ? this.mailto(sen.email, L.senate) : (sen ? sen.href : "https://www.nysenate.gov/find-my-senator"), primaryLabel: sen && sen.email ? "Open email" : (sen ? "Open contact form" : "Find your senator") },
+        { key: "asm", level: "State Assembly · A5288", name: asm ? asm.name : "Your Assembly member", nameHref: asm ? asm.page : "https://nyassembly.gov/mem/search/", district: "Assembly district " + (c.ad || "?") + (asm ? " · " + asm.note : ""), askText: "Ask them to advance A5288, the Assembly companion, out of Real Property Taxation.", letter: L.assembly, primaryHref: asm ? asm.href : "https://nyassembly.gov/mem/search/", primaryLabel: asm ? "Open contact form" : "Find your member" },
+        { key: "cty", level: "Nassau County · the data ask", name: inRvc ? "Leg. Scott Davis (District 1)" : "Your county legislator", nameHref: inRvc ? "https://www.nassaucountyny.gov/505/District-1---Scott-Davis" : "https://www.nassaucountyny.gov/2803/Find-My-Legislative-District", district: inRvc ? "District 1 covers all of RVC" : "District lines were redrawn for 2026; confirm with the county lookup", askText: "Ask them to direct the Assessment Department to publish senior exemption counts by school district and tier.", letter: L.county, primaryHref: inRvc ? this.mailto("SDavis@nassaucountyny.gov", L.county) : "https://www.nassaucountyny.gov/2803/Find-My-Legislative-District", primaryLabel: inRvc ? "Open email" : "Find your legislator" },
+        { key: "vil", level: "School district & village", name: c.school || "Your school & village boards", nameHref: inRvc ? "https://www.rvcny.gov/259/Mayor-Board-of-Trustees" : "https://www.longislandschools.com/nassau-county-schools.aspx", district: c.school ? "Your unified school district per the Census geocoder" : "", askText: "Ask for a parcel-level fiscal note before any section 467 expansion, paired with downsizing options.", letter: L.village, primaryHref: inRvc ? "https://www.rvcny.gov/259/Mayor-Board-of-Trustees" : "https://www.longislandschools.com/nassau-county-schools.aspx", primaryLabel: inRvc ? "Village board contacts" : "Find your district's board" }
+      ].map(card => ({
+        level: card.level, name: card.name, nameHref: card.nameHref, district: card.district, askText: card.askText,
+        primaryHref: card.primaryHref, primaryLabel: card.primaryLabel,
+        copyLabel: st.copied[card.key] ? "Copied" : "Copy letter",
+        onCopy: () => this.copy(card.key, card.letter)
+      }));
+    }
+    return {
+      kitAddr: st.kitAddr, kitName: st.kitName, kitEmail: st.kitEmail,
+      onAddr: (e) => this.setState({ kitAddr: e.target.value }),
+      onName: (e) => this.setState({ kitName: e.target.value }),
+      onEmail: (e) => this.setState({ kitEmail: e.target.value }),
+      onBuild: () => this.build(),
+      buildLabel: st.building ? "Looking up…" : "Build my letters",
+      kitError: st.error, kitReady: !!st.cards, kitCards,
+      kitFootnote: st.cards ? "Matched address: " + st.cards.matched + ". Congress and Albany accept mail through web forms only, so copy the letter, open the form, and paste. Signups are stored in this browser for now; a production mailing list needs a small backend." : ""
+    };
+  }
+}
+</script>
+</body>
+</html>

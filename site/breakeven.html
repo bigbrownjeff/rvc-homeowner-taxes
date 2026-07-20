@@ -1,62 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The Break-Even Instrument — Rockville Centre Schools × Housing</title>
 <meta name="description" content="What combination of housing turnover, new units, aid, and cost discipline keeps Rockville Centre's school budget whole without cuts or overrides? Every assumption on a slider.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
 <style>
-:root{--bg:#F1ECE2;--paper:#FAF6EC;--ink:#0E1116;--body:#2A2A2A;--muted:#6B6B6B;--rule:#231F1A;--ruleSoft:#C9C3B4;--accent:#1E3A8A;
---good:#4E7A58;--bad:#B05442;
---serif:'Source Serif 4','Source Serif Pro',Georgia,serif;--sans:'Inter',-apple-system,sans-serif;--mono:'IBM Plex Mono',ui-monospace,monospace}
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:var(--sans);background:var(--bg);color:var(--body);line-height:1.55}
-.wrap{max-width:1200px;margin:0 auto;padding:40px 56px 64px}
-.masthead{display:flex;justify-content:space-between;align-items:baseline;border-bottom:2px solid var(--rule);padding-bottom:10px}
-.masthead .t{font-family:var(--serif);font-weight:600;font-size:26px;color:var(--ink)}
-.masthead .m{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
-.masthead .m a{color:var(--accent);text-decoration:none}
-.head{margin:40px 0 8px;max-width:920px}
-.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:14px}
-h1{font-family:var(--serif);font-size:58px;font-weight:700;line-height:.98;letter-spacing:-.03em;color:var(--ink)}
-.standfirst{font-family:var(--serif);font-style:italic;font-size:20px;line-height:1.45;color:var(--body);margin:16px 0 0}
-.identity{background:var(--ink);color:var(--bg);font-family:var(--mono);font-size:13px;letter-spacing:.04em;padding:14px 20px;margin:26px 0 0}
-.identity b{color:#9DB4E8}
+:root{--good:#1e6b3d;--accent:#c5a44e;--bad:#8a2f1d}
+.wrap{max-width:1100px;margin:0 auto;padding:40px 48px 64px}
+.head{margin:16px 0 8px;max-width:920px}
+.eyebrow{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:16px}
+h1{margin:0;font-weight:800;font-size:56px;line-height:1.02;letter-spacing:-.025em;color:var(--ink)}
+.standfirst{font-size:18px;line-height:1.5;color:var(--ink);margin:16px 0 0}
+.identity{background:var(--green);color:var(--bg);font-size:14px;font-weight:600;letter-spacing:.02em;padding:14px 20px;margin:26px 0 0}
+.identity b{color:var(--gold)}
 .layout{display:grid;grid-template-columns:430px 1fr;gap:40px;margin-top:32px}
-.panel{background:var(--paper);border-top:2px solid var(--rule);padding:20px 22px}
-.panel h4{font-family:var(--mono);font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);font-weight:600;margin:0 0 14px}
+.panel{border-top:2px solid var(--rule-strong);padding:20px 0 0}
+.panel h4,.group h4{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin:0 0 14px}
 .ctl{margin-bottom:14px}
-.ctl label{display:flex;justify-content:space-between;align-items:baseline;font-size:12.5px;font-weight:600;color:var(--ink)}
-.ctl label .v{font-family:var(--mono);font-size:12px;color:var(--accent);font-weight:600}
-.ctl input[type=range]{width:100%;accent-color:var(--accent);height:4px;margin-top:6px}
-.ctl .note{font-family:var(--mono);font-size:8.6px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:2px}
-.group{border-top:1px solid var(--ruleSoft);padding-top:12px;margin-top:14px}
+.ctl label{display:flex;justify-content:space-between;align-items:baseline;font-size:13px;font-weight:600;color:var(--ink)}
+.ctl label .v{font-size:12.5px;font-weight:800;color:var(--green);font-variant-numeric:tabular-nums}
+.ctl input[type=range]{width:100%;accent-color:var(--green);height:4px;margin-top:6px}
+.ctl .note{font-size:10px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--muted-60);margin-top:2px}
+.group{border-top:1px solid var(--rule-hair);padding-top:12px;margin-top:14px}
 .results{display:flex;flex-direction:column;gap:18px}
-.pull{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;border-top:2px solid var(--rule);padding:16px 0 14px;border-bottom:1px solid var(--ruleSoft)}
-.pn .v{font-family:var(--serif);font-size:38px;font-weight:700;color:var(--ink);line-height:1;letter-spacing:-.02em}
-.pn .v i{font-style:italic;color:var(--accent);font-size:.5em;font-weight:400}
-.pn .l{font-family:var(--mono);font-size:9px;letter-spacing:.11em;text-transform:uppercase;color:var(--muted);margin-top:7px;line-height:1.5}
+.pull{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;border-top:2px solid var(--rule-strong);padding:16px 0 14px;border-bottom:1px solid var(--rule-hair)}
+.pn{border-right:1px solid var(--rule-hair);padding-right:18px}
+.pn:last-child{border-right:none;padding-right:0}
+.pn .v{font-size:36px;font-weight:800;color:var(--ink);line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.pn .v i{font-style:italic;color:var(--green);font-size:.5em;font-weight:400}
+.pn .l{font-size:10.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--muted-60);margin-top:7px;line-height:1.5}
 .meter{margin:4px 0 0}
-.meter .lab{display:flex;justify-content:space-between;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
-.meter .trk{height:22px;background:var(--paper);border:1px solid var(--ruleSoft);position:relative}
-.meter .fill{height:100%;background:var(--good);display:flex;align-items:center;color:#fff;font-family:var(--mono);font-size:9.5px;font-weight:600;padding-left:8px;white-space:nowrap}
-.verdict{font-family:var(--serif);font-size:19px;line-height:1.45;color:var(--ink)}
-.verdict b{color:var(--accent)}
-.darkbox{background:var(--ink);color:var(--bg);padding:18px 20px}
-.darkbox h4{font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:#9DB4E8;font-weight:600;margin-bottom:10px}
+.meter .lab{display:flex;justify-content:space-between;font-size:10.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted-60);margin-bottom:5px}
+.meter .trk{height:22px;background:var(--bg);border:1px solid var(--rule-hair);position:relative}
+.meter .fill{height:100%;background:var(--good);display:flex;align-items:center;color:#fff;font-size:10px;font-weight:800;padding-left:8px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.meter .fill[style*="accent"]{color:var(--ink)}
+.verdict{font-size:18px;font-weight:600;line-height:1.45;color:var(--ink);margin:0}
+.verdict b{color:var(--green)}
+.darkbox{background:var(--green);color:var(--bg);padding:22px 24px}
+.darkbox h4{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin:0 0 10px}
 .darkbox p,.darkbox li{font-size:13px;color:var(--bg);line-height:1.5}
-.darkbox ul{padding-left:18px;margin-top:6px}
-.assume{font-size:12px;color:var(--muted);border-top:1px solid var(--ruleSoft);padding-top:12px;line-height:1.6}
-a{color:var(--accent)}
-.foot{border-top:2px solid var(--rule);margin-top:48px;padding-top:16px;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);display:flex;justify-content:space-between}
-@media (max-width:1024px){.wrap{padding:24px 20px}.layout{grid-template-columns:1fr}h1{font-size:38px}.pull{grid-template-columns:1fr 1fr}}
+.darkbox ul{padding-left:18px;margin:6px 0 0}
+.darkbox b{color:#fff}
+.assume{font-size:12px;color:var(--muted-70);border-top:1px solid var(--rule-hair);padding-top:12px;line-height:1.6;margin:0}
+.assume b{color:var(--ink)}
+.assume code{font-family:inherit;font-weight:600}
+@media (max-width:1024px){.wrap{padding:24px 24px 48px}.layout{grid-template-columns:1fr}h1{font-size:36px}.pull{grid-template-columns:1fr 1fr}.pn:nth-child(2){border-right:none;padding-right:0}}
 </style>
 </head>
 <body>
+<div id="site-nav" data-current=""></div>
 <div class="wrap">
-  <div class="masthead"><span class="t">Rockville Centre · Housing &times; Schools</span><span class="m"><a href="index.html">Deck</a> · <a href="fiscal-math.html">Mechanics</a> · <a href="validation.html">Facts &amp; sources</a> · <a href="calculator.html">Calculator</a></span></div>
 
   <div class="head">
     <div class="eyebrow">The break-even instrument · illustrative until the county releases its data</div>
@@ -120,9 +117,9 @@ a{color:var(--accent)}
     </div>
   </div>
 
-  <div class="foot"><span>Rockville Centre housing &times; schools briefing · June 2026</span><span>rvc-taxes.jeffpinto.com</span></div>
 </div>
-
+<div class="site-foot"><span>Jeff Pinto &middot; Rockville Centre &middot; <a href="mailto:jeff@bluecamelconsulting.com?subject=%5Brvc-taxes%5D%20">Contact</a></span><span>rvc-taxes.jeffpinto.com</span></div>
+<script src="assets/nav.js"></script>
 <script>
 const $ = id => document.getElementById(id);
 const BUDGET = 141.3e6, W_LEVY = 0.78, W_AID = 0.15;

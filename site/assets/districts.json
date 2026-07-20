@@ -1,0 +1,2143 @@
+{
+  "_meta": {
+    "purpose": "Per-district source table for the Nassau address feature. Every field carries a source_ref (url, vintage, verified date). A field with no verifiable primary source is omitted, never estimated. See .claude/scratch/districts-provenance.md for the full per-field fetch log.",
+    "built": "2026-07-20",
+    "keying": "Objects are keyed by the Census school-district NAME as returned by the US Census geocoder district layers; geoid is the fallback key. sdType records which TIGER layer the district lives in: unified, elementary, or secondary.",
+    "schema": {
+      "dtfName": "district name as printed in the NYS DTF STAR tables",
+      "geoid": "Census TIGER school-district GEOID (state 36 + 5-digit LEA)",
+      "sdType": "unified | elementary | secondary (TIGERweb School layers 0/2/1)",
+      "starCredit": "2025 final STAR credit, Class 1 (Homestead for the two cities), dollars: {basic, enhanced}",
+      "starExemptSavings": "2025 final STAR exemption savings, Class 1: {basic, enhanced}",
+      "starMaxExemptSavings2026_27": "DTF maximum 2026-27 STAR exemption savings, Class 1: {basic, enhanced}",
+      "medianValue": "ACS 2020-24 5-yr B25077 median owner-occupied home value for the place FIPS named in source_refs (a place-level proxy where the district spans multiple places; district-geography cross-check logged in source_refs)",
+      "schoolRate": "school tax rate per $100 of county assessed value, from one representative in-district Nassau LRV parcel; tax year 2026 = school year 2025-26",
+      "libraryRate": "library tax rate per $100 county AV from the same LRV parcel",
+      "levy": "school district tax levy, dollars, fiscal year ending 2025 = 2024-25 school year (NYS OSC via data.ny.gov iq85-sdzs); multi-municipality districts are the sum of their segment rows",
+      "enrollment": "{cur: 2024-25 K-12, base: 2015-16 K-12} per NYSED data site (BEDS day counts)",
+      "jurisdiction": "village-in-town | town-unincorporated | city (tax-stack archetype)",
+      "source_refs": "per-field {url, vintage, verified}"
+    },
+    "coverage": "Full rows: 3 pilot districts (Rockville Centre UFSD, Long Beach City SD, Locust Valley CSD). All other DTF-listed Nassau districts carry STAR-only stub rows pending the fan-out.",
+    "notes": [
+      "DTF lists 55 taxing school districts for Nassau; the Nassau BOCES directory counts 56 districts. The three central high school districts (Bellmore-Merrick, Sewanhaka, Valley Stream CHSD) do not appear as separate DTF STAR rows: their levies ride on their component elementary districts’ bills. Addresses in those areas resolve through the Census elementary + secondary layers, not the unified layer.",
+      "Amityville and Cold Spring Harbor are Suffolk-home-county districts with Nassau territory; their 2025 STAR rows here come from the DTF Nassau page, but DTF publishes their 2026-27 max exemption savings on the Suffolk page (sd52), which is out of scope, so that field is omitted for them.",
+      "The DTF max-savings page spells one district “Floral Park-Bellrose”; normalized here to the comparison-table spelling “Floral Park-Bellerose”.",
+      "FOIL-gated §467 aggregates (parcel counts, exemption-gap dollars) are intentionally absent from this file on every framing.",
+      "Long Beach City SD schoolRate scope: the logged rate is the COUNTY-roll rate paid by the district’s Town of Hempstead portion (Lido Beach / Point Lookout). The City of Long Beach assesses its own roll; a city-parcel rate on the city AV basis is not yet verified and is omitted.",
+      "county_leg is present only where the repo’s same-day-verified officials table covers it (RVC, LD-1). Other districts’ county legislators are an officials-lane task, re-verified same-day before any politician-facing use."
+    ]
+  },
+  "districts": {
+    "Rockville Centre Union Free School District": {
+      "dtfName": "Rockville Centre",
+      "censusName": "Rockville Centre Union Free School District",
+      "geoid": "3624780",
+      "sdType": "unified",
+      "starCredit": {
+        "basic": 1089.0,
+        "enhanced": 3147.01
+      },
+      "starExemptSavings": {
+        "basic": 1068.0,
+        "enhanced": 2856.0
+      },
+      "starMaxExemptSavings2026_27": {
+        "basic": 1068.0,
+        "enhanced": 2856.0
+      },
+      "medianValue": 818700,
+      "schoolRate": 2247.867,
+      "libraryRate": 84.459,
+      "levy": 106470000,
+      "enrollment": {
+        "cur": 3276,
+        "base": 3533
+      },
+      "jurisdiction": "village-in-town",
+      "town": "Hempstead",
+      "county_leg": {
+        "name": "Leg. Scott Davis",
+        "district": "LD-1",
+        "url": "https://www.nassaucountyny.gov/505/District-1---Scott-Davis"
+      },
+      "board_url": "https://www.rvcschools.org/",
+      "source_refs": {
+        "starCredit": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+          "verified": "2026-07-20"
+        },
+        "starExemptSavings": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final",
+          "verified": "2026-07-20"
+        },
+        "starMaxExemptSavings2026_27": {
+          "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+          "vintage": "2026-27",
+          "verified": "2026-07-20"
+        },
+        "medianValue": {
+          "url": "https://data.census.gov/api/access/data/table?id=ACSDT5Y2024.B25077&g=160XX00US3663264",
+          "vintage": "ACS 2020-24 5-yr, Rockville Centre village (place 3663264)",
+          "verified": "2026-07-20",
+          "crosscheck": "district geography 9700000US3624780 = $811,100"
+        },
+        "schoolRate": {
+          "url": "https://lrv.nassaucountyny.gov/info/36366++00150/",
+          "vintage": "tax year 2026 (school 2025-26); Net School Tax 2247.867 + Net Library 84.459 per $100 on AV 653, Combined School Taxes $15,230.09",
+          "verified": "2026-07-20",
+          "note": "same in-village parcel as ledger row #f-rates; re-fetched and matched to the penny"
+        },
+        "levy": {
+          "url": "https://data.ny.gov/resource/iq85-sdzs.json?county=Nassau&school_name=Rockville%20Centre",
+          "vintage": "FY ending 2025 (2024-25)",
+          "verified": "2026-07-20",
+          "crosscheck": "ledger #f-budget26: 2025-26 levy $109.24M = +2.6% on this figure, exact"
+        },
+        "enrollment": {
+          "url": "https://data.nysed.gov/enrollment.php?year=2025&instid=800000049383",
+          "base_url": "https://data.nysed.gov/enrollment.php?year=2016&instid=800000049383",
+          "vintage": "2024-25 / 2015-16 K-12",
+          "verified": "2026-07-20",
+          "crosscheck": "matches ledger #f-enrollment 3,533 → 3,276"
+        },
+        "county_leg": {
+          "url": "https://www.nassaucountyny.gov/505/District-1---Scott-Davis",
+          "vintage": "2026 court-settlement map",
+          "verified": "2026-07-20 (repo officials table)"
+        },
+        "board_url": {
+          "url": "https://www.rvcschools.org/",
+          "verified": "2026-07-20"
+        },
+        "libraryRate": {
+          "url": "https://lrv.nassaucountyny.gov/info/36366++00150/",
+          "vintage": "tax year 2026 (school 2025-26); Net School Tax 2247.867 + Net Library 84.459 per $100 on AV 653, Combined School Taxes $15,230.09",
+          "verified": "2026-07-20",
+          "note": "same in-village parcel as ledger row #f-rates; re-fetched and matched to the penny"
+        }
+      }
+    },
+    "Long Beach City School District": {
+      "dtfName": "Long Beach",
+      "censusName": "Long Beach City School District",
+      "geoid": "3617730",
+      "sdType": "unified",
+      "starCredit": {
+        "basic": 619.13,
+        "enhanced": 1733.57
+      },
+      "starExemptSavings": {
+        "basic": 613.0,
+        "enhanced": 1733.57
+      },
+      "starMaxExemptSavings2026_27": {
+        "basic": 613.0,
+        "enhanced": 1734.0
+      },
+      "medianValue": 696400,
+      "schoolRate": 1238.265,
+      "libraryRate": 44.782,
+      "schoolRateScope": "county-roll (Town of Hempstead portion: Lido Beach / Point Lookout); City of Long Beach parcels are on the city’s own assessment roll and are not covered by this rate",
+      "levy": 109080539,
+      "enrollment": {
+        "cur": 3265,
+        "base": 3673
+      },
+      "jurisdiction": "city",
+      "town": "City of Long Beach (plus Lido Beach and Point Lookout in Town of Hempstead)",
+      "board_url": "https://www.lbeach.org/",
+      "source_refs": {
+        "starCredit": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+          "verified": "2026-07-20"
+        },
+        "starExemptSavings": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final",
+          "verified": "2026-07-20"
+        },
+        "starMaxExemptSavings2026_27": {
+          "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+          "vintage": "2026-27",
+          "verified": "2026-07-20"
+        },
+        "medianValue": {
+          "url": "https://data.census.gov/api/access/data/table?id=ACSDT5Y2024.B25077&g=160XX00US3643335",
+          "vintage": "ACS 2020-24 5-yr, Long Beach city (place 3643335); place is a proxy: the district also covers Lido Beach and Point Lookout",
+          "verified": "2026-07-20",
+          "crosscheck": "district geography 9700000US3617730 = $724,600"
+        },
+        "schoolRate": {
+          "url": "https://lrv.nassaucountyny.gov/info/60016++00250/",
+          "vintage": "tax year 2026 (school 2025-26); Net School Tax 1238.265 + Net Library 44.782 per $100 on AV 580; parcel 16 Harrogate St, Lido Beach, class 210.01 single-family",
+          "verified": "2026-07-20",
+          "note": "parcel’s Basic STAR line −$613.00 independently matches the DTF Basic exemption savings for this district"
+        },
+        "levy": {
+          "url": "https://data.ny.gov/resource/iq85-sdzs.json?county=Nassau&school_name=Long%20Beach",
+          "vintage": "FY ending 2025 (2024-25); sum of segment rows: city roll $84,062,477 + Town of Hempstead $25,018,062",
+          "verified": "2026-07-20",
+          "crosscheck": "LI Herald reported the adopted 2024-25 levy as $109.1M (liherald.com voters-pass-2024-25-city-school-district-budget,208000; page 403s automated fetch, figure from search-result text 2026-07-20)"
+        },
+        "enrollment": {
+          "url": "https://data.nysed.gov/enrollment.php?year=2025&instid=800000049221",
+          "base_url": "https://data.nysed.gov/enrollment.php?year=2016&instid=800000049221",
+          "vintage": "2024-25 / 2015-16 K-12",
+          "verified": "2026-07-20"
+        },
+        "board_url": {
+          "url": "https://www.lbeach.org/",
+          "verified": "2026-07-20"
+        },
+        "libraryRate": {
+          "url": "https://lrv.nassaucountyny.gov/info/60016++00250/",
+          "vintage": "tax year 2026 (school 2025-26); Net School Tax 1238.265 + Net Library 44.782 per $100 on AV 580; parcel 16 Harrogate St, Lido Beach, class 210.01 single-family",
+          "verified": "2026-07-20",
+          "note": "parcel’s Basic STAR line −$613.00 independently matches the DTF Basic exemption savings for this district"
+        }
+      }
+    },
+    "Locust Valley Central School District": {
+      "dtfName": "Locust Valley",
+      "censusName": "Locust Valley Central School District",
+      "geoid": "3617700",
+      "sdType": "unified",
+      "starCredit": {
+        "basic": 809.0,
+        "enhanced": 2257.0
+      },
+      "starExemptSavings": {
+        "basic": 793.0,
+        "enhanced": 1965.0
+      },
+      "starMaxExemptSavings2026_27": {
+        "basic": 793.0,
+        "enhanced": 1965.0
+      },
+      "medianValue": 846500,
+      "schoolRate": 1626.547,
+      "libraryRate": 68.394,
+      "levy": 88081852,
+      "enrollment": {
+        "cur": 1754,
+        "base": 2087
+      },
+      "jurisdiction": "town-unincorporated",
+      "town": "Oyster Bay",
+      "board_url": "https://www.locustvalleyschools.org/",
+      "source_refs": {
+        "starCredit": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+          "verified": "2026-07-20"
+        },
+        "starExemptSavings": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final",
+          "verified": "2026-07-20"
+        },
+        "starMaxExemptSavings2026_27": {
+          "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+          "vintage": "2026-27",
+          "verified": "2026-07-20"
+        },
+        "medianValue": {
+          "url": "https://data.census.gov/api/access/data/table?id=ACSDT5Y2024.B25077&g=160XX00US3643192",
+          "vintage": "ACS 2020-24 5-yr, Locust Valley CDP (place 3643192); place is a proxy: the district also covers Bayville, Lattingtown, Matinecock and Mill Neck",
+          "verified": "2026-07-20",
+          "crosscheck": "district geography 9700000US3617700 = $884,400"
+        },
+        "schoolRate": {
+          "url": "https://lrv.nassaucountyny.gov/info/30066++04760/",
+          "vintage": "tax year 2026 (school 2025-26); Net School Tax 1626.547 + Net Library 68.394 per $100 on AV 758; parcel 35 Weir Ln, Locust Valley, class 210.01 single-family",
+          "verified": "2026-07-20",
+          "note": "second in-district parcel 30021++00170 (18 Locust Pl) shows the identical 1626.547 rate"
+        },
+        "levy": {
+          "url": "https://data.ny.gov/resource/iq85-sdzs.json?county=Nassau&school_name=Locust%20Valley",
+          "vintage": "FY ending 2025 (2024-25); single Oyster Bay segment",
+          "verified": "2026-07-20"
+        },
+        "enrollment": {
+          "url": "https://data.nysed.gov/enrollment.php?year=2025&instid=800000048920",
+          "base_url": "https://data.nysed.gov/enrollment.php?year=2016&instid=800000048920",
+          "vintage": "2024-25 / 2015-16 K-12",
+          "verified": "2026-07-20",
+          "note": "−16.0% since 2015-16; the site’s “15% drop” Locust Valley claim is consistent"
+        },
+        "board_url": {
+          "url": "https://www.locustvalleyschools.org/",
+          "verified": "2026-07-20"
+        },
+        "libraryRate": {
+          "url": "https://lrv.nassaucountyny.gov/info/30066++04760/",
+          "vintage": "tax year 2026 (school 2025-26); Net School Tax 1626.547 + Net Library 68.394 per $100 on AV 758; parcel 35 Weir Ln, Locust Valley, class 210.01 single-family",
+          "verified": "2026-07-20",
+          "note": "second in-district parcel 30021++00170 (18 Locust Pl) shows the identical 1626.547 rate"
+        }
+      }
+    },
+    "Amityville Union Free School District": {
+      "dtfName": "Amityville",
+      "censusName": "Amityville Union Free School District",
+      "geoid": "3602940",
+      "sdType": "unified",
+      "starCredit": {
+        "basic": 1137.0,
+        "enhanced": 3375.0
+      },
+      "starExemptSavings": {
+        "basic": 1114.0,
+        "enhanced": 2938.0
+      },
+      "stub": true,
+      "source_refs": {
+        "starCredit": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+          "verified": "2026-07-20"
+        },
+        "starExemptSavings": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final",
+          "verified": "2026-07-20"
+        }
+      },
+      "note": "Suffolk-home-county district with Nassau territory; 2026-27 max exemption savings published on the DTF Suffolk page (out of scope), field omitted."
+    },
+    "Baldwin Union Free School District": {
+      "dtfName": "Baldwin",
+      "censusName": "Baldwin Union Free School District",
+      "geoid": "3603840",
+      "sdType": "unified",
+      "starCredit": {
+        "basic": 1108.0,
+        "enhanced": 3190.75
+      },
+      "starExemptSavings": {
+        "basic": 1086.0,
+        "enhanced": 3190.75
+      },
+      "starMaxExemptSavings2026_27": {
+        "basic": 1086.0,
+        "enhanced": 3191.0
+      },
+      "stub": true,
+      "source_refs": {
+        "starCredit": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+          "verified": "2026-07-20"
+        },
+        "starExemptSavings": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final",
+          "verified": "2026-07-20"
+        },
+        "starMaxExemptSavings2026_27": {
+          "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+          "vintage": "2026-27",
+          "verified": "2026-07-20"
+        }
+      }
+    },
+    "Bellmore Union Free School District": {
+      "dtfName": "Bellmore",
+      "censusName": "Bellmore Union Free School District",
+      "geoid": "3604410",
+      "sdType": "elementary",
+      "starCredit": {
+        "basic": 1086.0,
+        "enhanced": 3073.17
+      },
+      "starExemptSavings": {
+        "basic": 1065.0,
+        "enhanced": 2986.0
+      },
+      "starMaxExemptSavings2026_27": {
+        "basic": 1065.0,
+        "enhanced": 2986.0
+      },
+      "stub": true,
+      "source_refs": {
+        "starCredit": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+          "verified": "2026-07-20"
+        },
+        "starExemptSavings": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final",
+          "verified": "2026-07-20"
+        },
+        "starMaxExemptSavings2026_27": {
+          "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+          "vintage": "2026-27",
+          "verified": "2026-07-20"
+        }
+      }
+    },
+    "Bethpage Union Free School District": {
+      "dtfName": "Bethpage",
+      "censusName": "Bethpage Union Free School District",
+      "geoid": "3604740",
+      "sdType": "unified",
+      "starCredit": {
+        "basic": 899.0,
+        "enhanced": 2584.21
+      },
+      "starExemptSavings": {
+        "basic": 881.0,
+        "enhanced": 2584.21
+      },
+      "starMaxExemptSavings2026_27": {
+        "basic": 881.0,
+        "enhanced": 2584.0
+      },
+      "stub": true,
+      "source_refs": {
+        "starCredit": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+          "verified": "2026-07-20"
+        },
+        "starExemptSavings": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final",
+          "verified": "2026-07-20"
+        },
+        "starMaxExemptSavings2026_27": {
+          "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+          "vintage": "2026-27",
+          "verified": "2026-07-20"
+        }
+      }
+    },
+    "Carle Place Union Free School District": {
+      "dtfName": "Carle Place",
+      "censusName": "Carle Place Union Free School District",
+      "geoid": "3606540",
+      "sdType": "unified",
+      "starCredit": {
+        "basic": 878.0,
+        "enhanced": 2471.38
+      },
+      "starExemptSavings": {
+        "basic": 861.0,
+        "enhanced": 2456.0
+      },
+      "starMaxExemptSavings2026_27": {
+        "basic": 861.0,
+        "enhanced": 2456.0
+      },
+      "stub": true,
+      "source_refs": {
+        "starCredit": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+          "verified": "2026-07-20"
+        },
+        "starExemptSavings": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final",
+          "verified": "2026-07-20"
+        },
+        "starMaxExemptSavings2026_27": {
+          "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+          "vintage": "2026-27",
+          "verified": "2026-07-20"
+        }
+      }
+    },
+    "Cold Spring Harbor Central School District": {
+      "dtfName": "Cold Spring Harbor",
+      "censusName": "Cold Spring Harbor Central School District",
+      "geoid": "3608010",
+      "sdType": "unified",
+      "starCredit": {
+        "basic": 812.81,
+        "enhanced": 2275.87
+      },
+      "starExemptSavings": {
+        "basic": 801.0,
+        "enhanced": 1995.0
+      },
+      "stub": true,
+      "source_refs": {
+        "starCredit": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+          "verified": "2026-07-20"
+        },
+        "starExemptSavings": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final",
+          "verified": "2026-07-20"
+        }
+      },
+      "note": "Suffolk-home-county district with Nassau territory; 2026-27 max exemption savings published on the DTF Suffolk page (out of scope), field omitted."
+    },
+    "East Meadow Union Free School District": {
+      "dtfName": "East Meadow",
+      "censusName": "East Meadow Union Free School District",
+      "geoid": "3609840",
+      "sdType": "unified",
+      "starCredit": {
+        "basic": 752.37,
+        "enhanced": 2106.63
+      },
+      "starExemptSavings": {
+        "basic": 752.37,
+        "enhanced": 2106.63
+      },
+      "starMaxExemptSavings2026_27": {
+        "basic": 752.0,
+        "enhanced": 2107.0
+      },
+      "stub": true,
+      "source_refs": {
+        "starCredit": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+          "verified": "2026-07-20"
+        },
+        "starExemptSavings": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final",
+          "verified": "2026-07-20"
+        },
+        "starMaxExemptSavings2026_27": {
+          "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+          "vintage": "2026-27",
+          "verified": "2026-07-20"
+        }
+      }
+    },
+    "East Rockaway Union Free School District": {
+      "dtfName": "East Rockaway",
+      "censusName": "East Rockaway Union Free School District",
+      "geoid": "3609960",
+      "sdType": "unified",
+      "starCredit": {
+        "basic": 1055.0,
+        "enhanced": 3001.97
+      },
+      "starExemptSavings": {
+        "basic": 1035.0,
+        "enhanced": 3001.97
+      },
+      "starMaxExemptSavings2026_27": {
+        "basic": 1035.0,
+        "enhanced": 3002.0
+      },
+      "stub": true,
+      "source_refs": {
+        "starCredit": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+          "verified": "2026-07-20"
+        },
+        "starExemptSavings": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final",
+          "verified": "2026-07-20"
+        },
+        "starMaxExemptSavings2026_27": {
+          "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+          "vintage": "2026-27",
+          "verified": "2026-07-20"
+        }
+      }
+    },
+    "East Williston Union Free School District": {
+      "dtfName": "East Williston",
+      "censusName": "East Williston Union Free School District",
+      "geoid": "3610050",
+      "sdType": "unified",
+      "starCredit": {
+        "basic": 914.0,
+        "enhanced": 2574.48
+      },
+      "starExemptSavings": {
+        "basic": 896.0,
+        "enhanced": 2537.0
+      },
+      "starMaxExemptSavings2026_27": {
+        "basic": 896.0,
+        "enhanced": 2537.0
+      },
+      "stub": true,
+      "source_refs": {
+        "starCredit": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+          "verified": "2026-07-20"
+        },
+        "starExemptSavings": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final",
+          "verified": "2026-07-20"
+        },
+        "starMaxExemptSavings2026_27": {
+          "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+          "vintage": "2026-27",
+          "verified": "2026-07-20"
+        }
+      }
+    },
+    "Elmont Union Free School District": {
+      "dtfName": "Elmont",
+      "censusName": "Elmont Union Free School District",
+      "geoid": "3610620",
+      "sdType": "elementary",
+      "starCredit": {
+        "basic": 858.0,
+        "enhanced": 2432.72
+      },
+      "starExemptSavings": {
+        "basic": 841.0,
+        "enhanced": 2432.72
+      },
+      "starMaxExemptSavings2026_27": {
+        "basic": 841.0,
+        "enhanced": 2433.0
+      },
+      "stub": true,
+      "source_refs": {
+        "starCredit": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+          "verified": "2026-07-20"
+        },
+        "starExemptSavings": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final",
+          "verified": "2026-07-20"
+        },
+        "starMaxExemptSavings2026_27": {
+          "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+          "vintage": "2026-27",
+          "verified": "2026-07-20"
+        }
+      }
+    },
+    "Farmingdale Union Free School District": {
+      "dtfName": "Farmingdale",
+      "censusName": "Farmingdale Union Free School District",
+      "geoid": "3610980",
+      "sdType": "unified",
+      "starCredit": {
+        "basic": 993.0,
+        "enhanced": 2871.45
+      },
+      "starExemptSavings": {
+        "basic": 974.0,
+        "enhanced": 2871.45
+      },
+      "starMaxExemptSavings2026_27": {
+        "basic": 974.0,
+        "enhanced": 2871.0
+      },
+      "stub": true,
+      "source_refs": {
+        "starCredit": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+          "verified": "2026-07-20"
+        },
+        "starExemptSavings": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final",
+          "verified": "2026-07-20"
+        },
+        "starMaxExemptSavings2026_27": {
+          "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+          "vintage": "2026-27",
+          "verified": "2026-07-20"
+        }
+      }
+    },
+    "Floral Park-Bellerose Union Free School District": {
+      "dtfName": "Floral Park-Bellerose",
+      "censusName": "Floral Park-Bellerose Union Free School District",
+      "geoid": "3611160",
+      "sdType": "elementary",
+      "starCredit": {
+        "basic": 767.0,
+        "enhanced": 2184.58
+      },
+      "starExemptSavings": {
+        "basic": 752.0,
+        "enhanced": 2184.58
+      },
+      "starMaxExemptSavings2026_27": {
+        "basic": 752.0,
+        "enhanced": 2185.0
+      },
+      "stub": true,
+      "source_refs": {
+        "starCredit": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+          "verified": "2026-07-20"
+        },
+        "starExemptSavings": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final",
+          "verified": "2026-07-20"
+        },
+        "starMaxExemptSavings2026_27": {
+          "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+          "vintage": "2026-27",
+          "verified": "2026-07-20"
+        }
+      }
+    },
+    "Franklin Square Union Free School District": {
+      "dtfName": "Franklin Square",
+      "censusName": "Franklin Square Union Free School District",
+      "geoid": "3611460",
+      "sdType": "elementary",
+      "starCredit": {
+        "basic": 566.51,
+        "enhanced": 1586.21
+      },
+      "starExemptSavings": {
+        "basic": 566.51,
+        "enhanced": 1586.21
+      },
+      "starMaxExemptSavings2026_27": {
+        "basic": 567.0,
+        "enhanced": 1586.0
+      },
+      "stub": true,
+      "source_refs": {
+        "starCredit": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+          "verified": "2026-07-20"
+        },
+        "starExemptSavings": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final",
+          "verified": "2026-07-20"
+        },
+        "starMaxExemptSavings2026_27": {
+          "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+          "vintage": "2026-27",
+          "verified": "2026-07-20"
+        }
+      }
+    },
+    "Freeport Union Free School District": {
+      "dtfName": "Freeport",
+      "censusName": "Freeport Union Free School District",
+      "geoid": "3611550",
+      "sdType": "unified",
+      "starCredit": {
+        "basic": 909.6,
+        "enhanced": 2546.87
+      },
+      "starExemptSavings": {
+        "basic": 897.0,
+        "enhanced": 2546.87
+      },
+      "starMaxExemptSavings2026_27": {
+        "basic": 897.0,
+        "enhanced": 2547.0
+      },
+      "stub": true,
+      "source_refs": {
+        "starCredit": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+          "verified": "2026-07-20"
+        },
+        "starExemptSavings": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final",
+          "verified": "2026-07-20"
+        },
+        "starMaxExemptSavings2026_27": {
+          "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+          "vintage": "2026-27",
+          "verified": "2026-07-20"
+        }
+      }
+    },
+    "Garden City Union Free School District": {
+      "dtfName": "Garden City",
+      "censusName": "Garden City Union Free School District",
+      "geoid": "3611760",
+      "sdType": "unified",
+      "starCredit": {
+        "basic": 704.0,
+        "enhanced": 1975.87
+      },
+      "starExemptSavings": {
+        "basic": 690.0,
+        "enhanced": 1953.0
+      },
+      "starMaxExemptSavings2026_27": {
+        "basic": 690.0,
+        "enhanced": 1953.0
+      },
+      "stub": true,
+      "source_refs": {
+        "starCredit": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+          "verified": "2026-07-20"
+        },
+        "starExemptSavings": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final",
+          "verified": "2026-07-20"
+        },
+        "starMaxExemptSavings2026_27": {
+          "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+          "vintage": "2026-27",
+          "verified": "2026-07-20"
+        }
+      }
+    },
+    "Glen Cove City School District": {
+      "dtfName": "Glen Cove",
+      "censusName": "Glen Cove City School District",
+      "geoid": "3612180",
+      "sdType": "unified",
+      "starCredit": {
+        "basic": 800.44,
+        "enhanced": 2056.0
+      },
+      "starExemptSavings": {
+        "basic": 800.44,
+        "enhanced": 1789.0
+      },
+      "starMaxExemptSavings2026_27": {
+        "basic": 800.0,
+        "enhanced": 1789.0
+      },
+      "stub": true,
+      "source_refs": {
+        "starCredit": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+          "verified": "2026-07-20"
+        },
+        "starExemptSavings": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final",
+          "verified": "2026-07-20"
+        },
+        "starMaxExemptSavings2026_27": {
+          "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+          "vintage": "2026-27",
+          "verified": "2026-07-20"
+        }
+      },
+      "note": "City district; DTF lists it under tax class Homestead/H rather than Class 1.",
+      "jurisdiction": "city"
+    },
+    "Great Neck Union Free School District": {
+      "dtfName": "Great Neck",
+      "censusName": "Great Neck Union Free School District",
+      "geoid": "3612510",
+      "sdType": "unified",
+      "starCredit": {
+        "basic": 667.0,
+        "enhanced": 1855.0
+      },
+      "starExemptSavings": {
+        "basic": 654.0,
+        "enhanced": 1615.0
+      },
+      "starMaxExemptSavings2026_27": {
+        "basic": 654.0,
+        "enhanced": 1615.0
+      },
+      "stub": true,
+      "source_refs": {
+        "starCredit": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+          "verified": "2026-07-20"
+        },
+        "starExemptSavings": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final",
+          "verified": "2026-07-20"
+        },
+        "starMaxExemptSavings2026_27": {
+          "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+          "vintage": "2026-27",
+          "verified": "2026-07-20"
+        }
+      }
+    },
+    "Hempstead Union Free School District": {
+      "dtfName": "Hempstead",
+      "censusName": "Hempstead Union Free School District",
+      "geoid": "3614130",
+      "sdType": "unified",
+      "starCredit": {
+        "basic": 1133.75,
+        "enhanced": 3174.49
+      },
+      "starExemptSavings": {
+        "basic": 1133.75,
+        "enhanced": 3092.0
+      },
+      "starMaxExemptSavings2026_27": {
+        "basic": 1134.0,
+        "enhanced": 3092.0
+      },
+      "stub": true,
+      "source_refs": {
+        "starCredit": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+          "verified": "2026-07-20"
+        },
+        "starExemptSavings": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final",
+          "verified": "2026-07-20"
+        },
+        "starMaxExemptSavings2026_27": {
+          "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+          "vintage": "2026-27",
+          "verified": "2026-07-20"
+        }
+      }
+    },
+    "Herricks Union Free School District": {
+      "dtfName": "Herricks",
+      "censusName": "Herricks Union Free School District",
+      "geoid": "3614280",
+      "sdType": "unified",
+      "starCredit": {
+        "basic": 817.0,
+        "enhanced": 2298.84
+      },
+      "starExemptSavings": {
+        "basic": 801.0,
+        "enhanced": 2298.84
+      },
+      "starMaxExemptSavings2026_27": {
+        "basic": 801.0,
+        "enhanced": 2299.0
+      },
+      "stub": true,
+      "source_refs": {
+        "starCredit": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+          "verified": "2026-07-20"
+        },
+        "starExemptSavings": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final",
+          "verified": "2026-07-20"
+        },
+        "starMaxExemptSavings2026_27": {
+          "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+          "vintage": "2026-27",
+          "verified": "2026-07-20"
+        }
+      }
+    },
+    "Hewlett-Woodmere Union Free School District": {
+      "dtfName": "Hewlett-Woodmere",
+      "censusName": "Hewlett-Woodmere Union Free School District",
+      "geoid": "3631710",
+      "sdType": "unified",
+      "starCredit": {
+        "basic": 1163.0,
+        "enhanced": 3300.04
+      },
+      "starExemptSavings": {
+        "basic": 1141.0,
+        "enhanced": 3300.04
+      },
+      "starMaxExemptSavings2026_27": {
+        "basic": 1141.0,
+        "enhanced": 3300.0
+      },
+      "stub": true,
+      "source_refs": {
+        "starCredit": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+          "verified": "2026-07-20"
+        },
+        "starExemptSavings": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final",
+          "verified": "2026-07-20"
+        },
+        "starMaxExemptSavings2026_27": {
+          "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+          "vintage": "2026-27",
+          "verified": "2026-07-20"
+        }
+      }
+    },
+    "Hicksville Union Free School District": {
+      "dtfName": "Hicksville",
+      "censusName": "Hicksville Union Free School District",
+      "geoid": "3614340",
+      "sdType": "unified",
+      "starCredit": {
+        "basic": 693.0,
+        "enhanced": 1969.52
+      },
+      "starExemptSavings": {
+        "basic": 679.0,
+        "enhanced": 1969.52
+      },
+      "starMaxExemptSavings2026_27": {
+        "basic": 679.0,
+        "enhanced": 1970.0
+      },
+      "stub": true,
+      "source_refs": {
+        "starCredit": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+          "verified": "2026-07-20"
+        },
+        "starExemptSavings": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final",
+          "verified": "2026-07-20"
+        },
+        "starMaxExemptSavings2026_27": {
+          "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+          "vintage": "2026-27",
+          "verified": "2026-07-20"
+        }
+      }
+    },
+    "Island Park Union Free School District": {
+      "dtfName": "Island Park",
+      "censusName": "Island Park Union Free School District",
+      "geoid": "3615480",
+      "sdType": "unified",
+      "starCredit": {
+        "basic": 836.0,
+        "enhanced": 1949.0
+      },
+      "starExemptSavings": {
+        "basic": 794.0,
+        "enhanced": 1731.0
+      },
+      "starMaxExemptSavings2026_27": {
+        "basic": 794.0,
+        "enhanced": 1731.0
+      },
+      "stub": true,
+      "source_refs": {
+        "starCredit": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+          "verified": "2026-07-20"
+        },
+        "starExemptSavings": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final",
+          "verified": "2026-07-20"
+        },
+        "starMaxExemptSavings2026_27": {
+          "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+          "vintage": "2026-27",
+          "verified": "2026-07-20"
+        }
+      }
+    },
+    "Island Trees Union Free School District": {
+      "dtfName": "Island Trees",
+      "censusName": "Island Trees Union Free School District",
+      "geoid": "3615510",
+      "sdType": "unified",
+      "starCredit": {
+        "basic": 734.82,
+        "enhanced": 2057.51
+      },
+      "starExemptSavings": {
+        "basic": 734.82,
+        "enhanced": 2057.51
+      },
+      "starMaxExemptSavings2026_27": {
+        "basic": 735.0,
+        "enhanced": 2058.0
+      },
+      "stub": true,
+      "source_refs": {
+        "starCredit": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+          "verified": "2026-07-20"
+        },
+        "starExemptSavings": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final",
+          "verified": "2026-07-20"
+        },
+        "starMaxExemptSavings2026_27": {
+          "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+          "vintage": "2026-27",
+          "verified": "2026-07-20"
+        }
+      }
+    },
+    "Jericho Union Free School District": {
+      "dtfName": "Jericho",
+      "censusName": "Jericho Union Free School District",
+      "geoid": "3615810",
+      "sdType": "unified",
+      "starCredit": {
+        "basic": 951.0,
+        "enhanced": 2705.28
+      },
+      "starExemptSavings": {
+        "basic": 933.0,
+        "enhanced": 2487.0
+      },
+      "starMaxExemptSavings2026_27": {
+        "basic": 933.0,
+        "enhanced": 2487.0
+      },
+      "stub": true,
+      "source_refs": {
+        "starCredit": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+          "verified": "2026-07-20"
+        },
+        "starExemptSavings": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final",
+          "verified": "2026-07-20"
+        },
+        "starMaxExemptSavings2026_27": {
+          "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+          "vintage": "2026-27",
+          "verified": "2026-07-20"
+        }
+      }
+    },
+    "Lawrence Union Free School District": {
+      "dtfName": "Lawrence",
+      "censusName": "Lawrence Union Free School District",
+      "geoid": "3616830",
+      "sdType": "unified",
+      "starCredit": {
+        "basic": 443.64,
+        "enhanced": 1242.18
+      },
+      "starExemptSavings": {
+        "basic": 440.0,
+        "enhanced": 1242.18
+      },
+      "starMaxExemptSavings2026_27": {
+        "basic": 440.0,
+        "enhanced": 1242.0
+      },
+      "stub": true,
+      "source_refs": {
+        "starCredit": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+          "verified": "2026-07-20"
+        },
+        "starExemptSavings": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final",
+          "verified": "2026-07-20"
+        },
+        "starMaxExemptSavings2026_27": {
+          "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+          "vintage": "2026-27",
+          "verified": "2026-07-20"
+        }
+      }
+    },
+    "Levittown Union Free School District": {
+      "dtfName": "Levittown",
+      "censusName": "Levittown Union Free School District",
+      "geoid": "3617160",
+      "sdType": "unified",
+      "starCredit": {
+        "basic": 1162.0,
+        "enhanced": 3304.08
+      },
+      "starExemptSavings": {
+        "basic": 1139.0,
+        "enhanced": 3304.08
+      },
+      "starMaxExemptSavings2026_27": {
+        "basic": 1139.0,
+        "enhanced": 3304.0
+      },
+      "stub": true,
+      "source_refs": {
+        "starCredit": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+          "verified": "2026-07-20"
+        },
+        "starExemptSavings": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final",
+          "verified": "2026-07-20"
+        },
+        "starMaxExemptSavings2026_27": {
+          "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+          "vintage": "2026-27",
+          "verified": "2026-07-20"
+        }
+      }
+    },
+    "Lynbrook Union Free School District": {
+      "dtfName": "Lynbrook",
+      "censusName": "Lynbrook Union Free School District",
+      "geoid": "3617910",
+      "sdType": "unified",
+      "starCredit": {
+        "basic": 1069.0,
+        "enhanced": 3044.14
+      },
+      "starExemptSavings": {
+        "basic": 1048.0,
+        "enhanced": 3044.14
+      },
+      "starMaxExemptSavings2026_27": {
+        "basic": 1048.0,
+        "enhanced": 3044.0
+      },
+      "stub": true,
+      "source_refs": {
+        "starCredit": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+          "verified": "2026-07-20"
+        },
+        "starExemptSavings": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final",
+          "verified": "2026-07-20"
+        },
+        "starMaxExemptSavings2026_27": {
+          "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+          "vintage": "2026-27",
+          "verified": "2026-07-20"
+        }
+      }
+    },
+    "Malverne Union Free School District": {
+      "dtfName": "Malverne",
+      "censusName": "Malverne Union Free School District",
+      "geoid": "3618210",
+      "sdType": "unified",
+      "starCredit": {
+        "basic": 1003.0,
+        "enhanced": 2882.07
+      },
+      "starExemptSavings": {
+        "basic": 983.0,
+        "enhanced": 2882.07
+      },
+      "starMaxExemptSavings2026_27": {
+        "basic": 983.0,
+        "enhanced": 2882.0
+      },
+      "stub": true,
+      "source_refs": {
+        "starCredit": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+          "verified": "2026-07-20"
+        },
+        "starExemptSavings": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final",
+          "verified": "2026-07-20"
+        },
+        "starMaxExemptSavings2026_27": {
+          "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+          "vintage": "2026-27",
+          "verified": "2026-07-20"
+        }
+      }
+    },
+    "Manhasset Union Free School District": {
+      "dtfName": "Manhasset",
+      "censusName": "Manhasset Union Free School District",
+      "geoid": "3618270",
+      "sdType": "unified",
+      "starCredit": {
+        "basic": 528.0,
+        "enhanced": 1517.29
+      },
+      "starExemptSavings": {
+        "basic": 518.0,
+        "enhanced": 1423.0
+      },
+      "starMaxExemptSavings2026_27": {
+        "basic": 518.0,
+        "enhanced": 1423.0
+      },
+      "stub": true,
+      "source_refs": {
+        "starCredit": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+          "verified": "2026-07-20"
+        },
+        "starExemptSavings": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final",
+          "verified": "2026-07-20"
+        },
+        "starMaxExemptSavings2026_27": {
+          "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+          "vintage": "2026-27",
+          "verified": "2026-07-20"
+        }
+      }
+    },
+    "Massapequa Union Free School District": {
+      "dtfName": "Massapequa",
+      "censusName": "Massapequa Union Free School District",
+      "geoid": "3618630",
+      "sdType": "unified",
+      "starCredit": {
+        "basic": 979.0,
+        "enhanced": 2790.65
+      },
+      "starExemptSavings": {
+        "basic": 959.0,
+        "enhanced": 2724.0
+      },
+      "starMaxExemptSavings2026_27": {
+        "basic": 959.0,
+        "enhanced": 2724.0
+      },
+      "stub": true,
+      "source_refs": {
+        "starCredit": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+          "verified": "2026-07-20"
+        },
+        "starExemptSavings": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final",
+          "verified": "2026-07-20"
+        },
+        "starMaxExemptSavings2026_27": {
+          "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+          "vintage": "2026-27",
+          "verified": "2026-07-20"
+        }
+      }
+    },
+    "Merrick Union Free School District": {
+      "dtfName": "Merrick",
+      "censusName": "Merrick Union Free School District",
+      "geoid": "3619110",
+      "sdType": "elementary",
+      "starCredit": {
+        "basic": 1116.0,
+        "enhanced": 3169.77
+      },
+      "starExemptSavings": {
+        "basic": 1094.0,
+        "enhanced": 3169.77
+      },
+      "starMaxExemptSavings2026_27": {
+        "basic": 1094.0,
+        "enhanced": 3170.0
+      },
+      "stub": true,
+      "source_refs": {
+        "starCredit": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+          "verified": "2026-07-20"
+        },
+        "starExemptSavings": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final",
+          "verified": "2026-07-20"
+        },
+        "starMaxExemptSavings2026_27": {
+          "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+          "vintage": "2026-27",
+          "verified": "2026-07-20"
+        }
+      }
+    },
+    "Mineola Union Free School District": {
+      "dtfName": "Mineola",
+      "censusName": "Mineola Union Free School District",
+      "geoid": "3619500",
+      "sdType": "unified",
+      "starCredit": {
+        "basic": 724.82,
+        "enhanced": 2029.5
+      },
+      "starExemptSavings": {
+        "basic": 724.0,
+        "enhanced": 2029.5
+      },
+      "starMaxExemptSavings2026_27": {
+        "basic": 724.0,
+        "enhanced": 2030.0
+      },
+      "stub": true,
+      "source_refs": {
+        "starCredit": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+          "verified": "2026-07-20"
+        },
+        "starExemptSavings": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final",
+          "verified": "2026-07-20"
+        },
+        "starMaxExemptSavings2026_27": {
+          "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+          "vintage": "2026-27",
+          "verified": "2026-07-20"
+        }
+      }
+    },
+    "New Hyde Park-Garden City Park Union Free School District": {
+      "dtfName": "New Hyde Park-Garden City",
+      "censusName": "New Hyde Park-Garden City Park Union Free School District",
+      "geoid": "3620400",
+      "sdType": "elementary",
+      "starCredit": {
+        "basic": 756.0,
+        "enhanced": 2169.98
+      },
+      "starExemptSavings": {
+        "basic": 741.0,
+        "enhanced": 2169.98
+      },
+      "starMaxExemptSavings2026_27": {
+        "basic": 741.0,
+        "enhanced": 2170.0
+      },
+      "stub": true,
+      "source_refs": {
+        "starCredit": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+          "verified": "2026-07-20"
+        },
+        "starExemptSavings": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final",
+          "verified": "2026-07-20"
+        },
+        "starMaxExemptSavings2026_27": {
+          "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+          "vintage": "2026-27",
+          "verified": "2026-07-20"
+        }
+      }
+    },
+    "North Bellmore Union Free School District": {
+      "dtfName": "North Bellmore",
+      "censusName": "North Bellmore Union Free School District",
+      "geoid": "3620940",
+      "sdType": "elementary",
+      "starCredit": {
+        "basic": 1015.0,
+        "enhanced": 2878.02
+      },
+      "starExemptSavings": {
+        "basic": 995.0,
+        "enhanced": 2878.02
+      },
+      "starMaxExemptSavings2026_27": {
+        "basic": 995.0,
+        "enhanced": 2878.0
+      },
+      "stub": true,
+      "source_refs": {
+        "starCredit": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+          "verified": "2026-07-20"
+        },
+        "starExemptSavings": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final",
+          "verified": "2026-07-20"
+        },
+        "starMaxExemptSavings2026_27": {
+          "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+          "vintage": "2026-27",
+          "verified": "2026-07-20"
+        }
+      }
+    },
+    "North Merrick Union Free School District": {
+      "dtfName": "North Merrick",
+      "censusName": "North Merrick Union Free School District",
+      "geoid": "3621120",
+      "sdType": "elementary",
+      "starCredit": {
+        "basic": 1006.0,
+        "enhanced": 2861.61
+      },
+      "starExemptSavings": {
+        "basic": 986.0,
+        "enhanced": 2861.61
+      },
+      "starMaxExemptSavings2026_27": {
+        "basic": 986.0,
+        "enhanced": 2862.0
+      },
+      "stub": true,
+      "source_refs": {
+        "starCredit": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+          "verified": "2026-07-20"
+        },
+        "starExemptSavings": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final",
+          "verified": "2026-07-20"
+        },
+        "starMaxExemptSavings2026_27": {
+          "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+          "vintage": "2026-27",
+          "verified": "2026-07-20"
+        }
+      }
+    },
+    "North Shore Central School District": {
+      "dtfName": "North Shore",
+      "censusName": "North Shore Central School District",
+      "geoid": "3626370",
+      "sdType": "unified",
+      "starCredit": {
+        "basic": 846.0,
+        "enhanced": 2321.0
+      },
+      "starExemptSavings": {
+        "basic": 829.0,
+        "enhanced": 2060.0
+      },
+      "starMaxExemptSavings2026_27": {
+        "basic": 829.0,
+        "enhanced": 2060.0
+      },
+      "stub": true,
+      "source_refs": {
+        "starCredit": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+          "verified": "2026-07-20"
+        },
+        "starExemptSavings": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final",
+          "verified": "2026-07-20"
+        },
+        "starMaxExemptSavings2026_27": {
+          "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+          "vintage": "2026-27",
+          "verified": "2026-07-20"
+        }
+      }
+    },
+    "Oceanside Union Free School District": {
+      "dtfName": "Oceanside",
+      "censusName": "Oceanside Union Free School District",
+      "geoid": "3621570",
+      "sdType": "unified",
+      "starCredit": {
+        "basic": 929.0,
+        "enhanced": 2628.33
+      },
+      "starExemptSavings": {
+        "basic": 911.0,
+        "enhanced": 2628.33
+      },
+      "starMaxExemptSavings2026_27": {
+        "basic": 911.0,
+        "enhanced": 2628.0
+      },
+      "stub": true,
+      "source_refs": {
+        "starCredit": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+          "verified": "2026-07-20"
+        },
+        "starExemptSavings": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final",
+          "verified": "2026-07-20"
+        },
+        "starMaxExemptSavings2026_27": {
+          "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+          "vintage": "2026-27",
+          "verified": "2026-07-20"
+        }
+      }
+    },
+    "Oyster Bay-East Norwich Central School District": {
+      "dtfName": "Oyster Bay-East Norwich",
+      "censusName": "Oyster Bay-East Norwich Central School District",
+      "geoid": "3622290",
+      "sdType": "unified",
+      "starCredit": {
+        "basic": 670.0,
+        "enhanced": 1878.0
+      },
+      "starExemptSavings": {
+        "basic": 657.0,
+        "enhanced": 1667.0
+      },
+      "starMaxExemptSavings2026_27": {
+        "basic": 657.0,
+        "enhanced": 1667.0
+      },
+      "stub": true,
+      "source_refs": {
+        "starCredit": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+          "verified": "2026-07-20"
+        },
+        "starExemptSavings": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final",
+          "verified": "2026-07-20"
+        },
+        "starMaxExemptSavings2026_27": {
+          "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+          "vintage": "2026-27",
+          "verified": "2026-07-20"
+        }
+      }
+    },
+    "Plainedge Union Free School District": {
+      "dtfName": "Plainedge",
+      "censusName": "Plainedge Union Free School District",
+      "geoid": "3623190",
+      "sdType": "unified",
+      "starCredit": {
+        "basic": 1115.0,
+        "enhanced": 3137.5
+      },
+      "starExemptSavings": {
+        "basic": 1093.0,
+        "enhanced": 3137.5
+      },
+      "starMaxExemptSavings2026_27": {
+        "basic": 1093.0,
+        "enhanced": 3138.0
+      },
+      "stub": true,
+      "source_refs": {
+        "starCredit": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+          "verified": "2026-07-20"
+        },
+        "starExemptSavings": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final",
+          "verified": "2026-07-20"
+        },
+        "starMaxExemptSavings2026_27": {
+          "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+          "vintage": "2026-27",
+          "verified": "2026-07-20"
+        }
+      }
+    },
+    "Plainview-Old Bethpage Central School District": {
+      "dtfName": "Plainview-Old Bethpage",
+      "censusName": "Plainview-Old Bethpage Central School District",
+      "geoid": "3623220",
+      "sdType": "unified",
+      "starCredit": {
+        "basic": 1027.0,
+        "enhanced": 2906.77
+      },
+      "starExemptSavings": {
+        "basic": 1007.0,
+        "enhanced": 2906.77
+      },
+      "starMaxExemptSavings2026_27": {
+        "basic": 1007.0,
+        "enhanced": 2907.0
+      },
+      "stub": true,
+      "source_refs": {
+        "starCredit": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+          "verified": "2026-07-20"
+        },
+        "starExemptSavings": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final",
+          "verified": "2026-07-20"
+        },
+        "starMaxExemptSavings2026_27": {
+          "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+          "vintage": "2026-27",
+          "verified": "2026-07-20"
+        }
+      }
+    },
+    "Port Washington Union Free School District": {
+      "dtfName": "Port Washington",
+      "censusName": "Port Washington Union Free School District",
+      "geoid": "3623580",
+      "sdType": "unified",
+      "starCredit": {
+        "basic": 792.0,
+        "enhanced": 2270.13
+      },
+      "starExemptSavings": {
+        "basic": 776.0,
+        "enhanced": 2076.0
+      },
+      "starMaxExemptSavings2026_27": {
+        "basic": 776.0,
+        "enhanced": 2076.0
+      },
+      "stub": true,
+      "source_refs": {
+        "starCredit": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+          "verified": "2026-07-20"
+        },
+        "starExemptSavings": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final",
+          "verified": "2026-07-20"
+        },
+        "starMaxExemptSavings2026_27": {
+          "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+          "vintage": "2026-27",
+          "verified": "2026-07-20"
+        }
+      }
+    },
+    "Roosevelt Union Free School District": {
+      "dtfName": "Roosevelt",
+      "censusName": "Roosevelt Union Free School District",
+      "geoid": "3624990",
+      "sdType": "unified",
+      "starCredit": {
+        "basic": 809.73,
+        "enhanced": 2267.24
+      },
+      "starExemptSavings": {
+        "basic": 807.0,
+        "enhanced": 2267.24
+      },
+      "starMaxExemptSavings2026_27": {
+        "basic": 807.0,
+        "enhanced": 2267.0
+      },
+      "stub": true,
+      "source_refs": {
+        "starCredit": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+          "verified": "2026-07-20"
+        },
+        "starExemptSavings": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final",
+          "verified": "2026-07-20"
+        },
+        "starMaxExemptSavings2026_27": {
+          "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+          "vintage": "2026-27",
+          "verified": "2026-07-20"
+        }
+      }
+    },
+    "Roslyn Union Free School District": {
+      "dtfName": "Roslyn",
+      "censusName": "Roslyn Union Free School District",
+      "geoid": "3625050",
+      "sdType": "unified",
+      "starCredit": {
+        "basic": 881.0,
+        "enhanced": 2507.24
+      },
+      "starExemptSavings": {
+        "basic": 864.0,
+        "enhanced": 2507.24
+      },
+      "starMaxExemptSavings2026_27": {
+        "basic": 864.0,
+        "enhanced": 2507.0
+      },
+      "stub": true,
+      "source_refs": {
+        "starCredit": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+          "verified": "2026-07-20"
+        },
+        "starExemptSavings": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final",
+          "verified": "2026-07-20"
+        },
+        "starMaxExemptSavings2026_27": {
+          "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+          "vintage": "2026-27",
+          "verified": "2026-07-20"
+        }
+      }
+    },
+    "Seaford Union Free School District": {
+      "dtfName": "Seaford",
+      "censusName": "Seaford Union Free School District",
+      "geoid": "3626400",
+      "sdType": "unified",
+      "starCredit": {
+        "basic": 1072.0,
+        "enhanced": 3049.05
+      },
+      "starExemptSavings": {
+        "basic": 1051.0,
+        "enhanced": 3019.0
+      },
+      "starMaxExemptSavings2026_27": {
+        "basic": 1051.0,
+        "enhanced": 3019.0
+      },
+      "stub": true,
+      "source_refs": {
+        "starCredit": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+          "verified": "2026-07-20"
+        },
+        "starExemptSavings": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final",
+          "verified": "2026-07-20"
+        },
+        "starMaxExemptSavings2026_27": {
+          "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+          "vintage": "2026-27",
+          "verified": "2026-07-20"
+        }
+      }
+    },
+    "Syosset Central School District": {
+      "dtfName": "Syosset",
+      "censusName": "Syosset Central School District",
+      "geoid": "3628560",
+      "sdType": "unified",
+      "starCredit": {
+        "basic": 1124.0,
+        "enhanced": 3215.17
+      },
+      "starExemptSavings": {
+        "basic": 1102.0,
+        "enhanced": 3084.0
+      },
+      "starMaxExemptSavings2026_27": {
+        "basic": 1102.0,
+        "enhanced": 3084.0
+      },
+      "stub": true,
+      "source_refs": {
+        "starCredit": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+          "verified": "2026-07-20"
+        },
+        "starExemptSavings": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final",
+          "verified": "2026-07-20"
+        },
+        "starMaxExemptSavings2026_27": {
+          "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+          "vintage": "2026-27",
+          "verified": "2026-07-20"
+        }
+      }
+    },
+    "Uniondale Union Free School District": {
+      "dtfName": "Uniondale",
+      "censusName": "Uniondale Union Free School District",
+      "geoid": "3629280",
+      "sdType": "unified",
+      "starCredit": {
+        "basic": 750.0,
+        "enhanced": 2143.63
+      },
+      "starExemptSavings": {
+        "basic": 735.0,
+        "enhanced": 2088.0
+      },
+      "starMaxExemptSavings2026_27": {
+        "basic": 735.0,
+        "enhanced": 2088.0
+      },
+      "stub": true,
+      "source_refs": {
+        "starCredit": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+          "verified": "2026-07-20"
+        },
+        "starExemptSavings": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final",
+          "verified": "2026-07-20"
+        },
+        "starMaxExemptSavings2026_27": {
+          "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+          "vintage": "2026-27",
+          "verified": "2026-07-20"
+        }
+      }
+    },
+    "Valley Stream Union Free School District 13": {
+      "dtfName": "Valley Stream 13",
+      "censusName": "Valley Stream Union Free School District 13",
+      "geoid": "3629430",
+      "sdType": "elementary",
+      "starCredit": {
+        "basic": 797.0,
+        "enhanced": 2296.53
+      },
+      "starExemptSavings": {
+        "basic": 781.0,
+        "enhanced": 2296.53
+      },
+      "starMaxExemptSavings2026_27": {
+        "basic": 781.0,
+        "enhanced": 2297.0
+      },
+      "stub": true,
+      "source_refs": {
+        "starCredit": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+          "verified": "2026-07-20"
+        },
+        "starExemptSavings": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final",
+          "verified": "2026-07-20"
+        },
+        "starMaxExemptSavings2026_27": {
+          "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+          "vintage": "2026-27",
+          "verified": "2026-07-20"
+        }
+      }
+    },
+    "Valley Stream Union Free School District 24": {
+      "dtfName": "Valley Stream 24",
+      "censusName": "Valley Stream Union Free School District 24",
+      "geoid": "3629460",
+      "sdType": "elementary",
+      "starCredit": {
+        "basic": 847.0,
+        "enhanced": 2406.69
+      },
+      "starExemptSavings": {
+        "basic": 831.0,
+        "enhanced": 2406.69
+      },
+      "starMaxExemptSavings2026_27": {
+        "basic": 831.0,
+        "enhanced": 2407.0
+      },
+      "stub": true,
+      "source_refs": {
+        "starCredit": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+          "verified": "2026-07-20"
+        },
+        "starExemptSavings": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final",
+          "verified": "2026-07-20"
+        },
+        "starMaxExemptSavings2026_27": {
+          "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+          "vintage": "2026-27",
+          "verified": "2026-07-20"
+        }
+      }
+    },
+    "Valley Stream Union Free School District 30": {
+      "dtfName": "Valley Stream 30",
+      "censusName": "Valley Stream Union Free School District 30",
+      "geoid": "3629490",
+      "sdType": "elementary",
+      "starCredit": {
+        "basic": 852.43,
+        "enhanced": 2386.79
+      },
+      "starExemptSavings": {
+        "basic": 849.0,
+        "enhanced": 2386.79
+      },
+      "starMaxExemptSavings2026_27": {
+        "basic": 849.0,
+        "enhanced": 2387.0
+      },
+      "stub": true,
+      "source_refs": {
+        "starCredit": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+          "verified": "2026-07-20"
+        },
+        "starExemptSavings": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final",
+          "verified": "2026-07-20"
+        },
+        "starMaxExemptSavings2026_27": {
+          "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+          "vintage": "2026-27",
+          "verified": "2026-07-20"
+        }
+      }
+    },
+    "Wantagh Union Free School District": {
+      "dtfName": "Wantagh",
+      "censusName": "Wantagh Union Free School District",
+      "geoid": "3629850",
+      "sdType": "unified",
+      "starCredit": {
+        "basic": 1035.0,
+        "enhanced": 2941.15
+      },
+      "starExemptSavings": {
+        "basic": 1015.0,
+        "enhanced": 2941.15
+      },
+      "starMaxExemptSavings2026_27": {
+        "basic": 1015.0,
+        "enhanced": 2941.0
+      },
+      "stub": true,
+      "source_refs": {
+        "starCredit": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+          "verified": "2026-07-20"
+        },
+        "starExemptSavings": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final",
+          "verified": "2026-07-20"
+        },
+        "starMaxExemptSavings2026_27": {
+          "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+          "vintage": "2026-27",
+          "verified": "2026-07-20"
+        }
+      }
+    },
+    "West Hempstead Union Free School District": {
+      "dtfName": "West Hempstead",
+      "censusName": "West Hempstead Union Free School District",
+      "geoid": "3630660",
+      "sdType": "unified",
+      "starCredit": {
+        "basic": 896.0,
+        "enhanced": 2544.19
+      },
+      "starExemptSavings": {
+        "basic": 879.0,
+        "enhanced": 2544.19
+      },
+      "starMaxExemptSavings2026_27": {
+        "basic": 879.0,
+        "enhanced": 2544.0
+      },
+      "stub": true,
+      "source_refs": {
+        "starCredit": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+          "verified": "2026-07-20"
+        },
+        "starExemptSavings": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final",
+          "verified": "2026-07-20"
+        },
+        "starMaxExemptSavings2026_27": {
+          "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+          "vintage": "2026-27",
+          "verified": "2026-07-20"
+        }
+      }
+    },
+    "Westbury Union Free School District": {
+      "dtfName": "Westbury",
+      "censusName": "Westbury Union Free School District",
+      "geoid": "3630960",
+      "sdType": "unified",
+      "starCredit": {
+        "basic": 1156.0,
+        "enhanced": 3242.17
+      },
+      "starExemptSavings": {
+        "basic": 1133.0,
+        "enhanced": 3242.17
+      },
+      "starMaxExemptSavings2026_27": {
+        "basic": 1133.0,
+        "enhanced": 3242.0
+      },
+      "stub": true,
+      "source_refs": {
+        "starCredit": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+          "verified": "2026-07-20"
+        },
+        "starExemptSavings": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final",
+          "verified": "2026-07-20"
+        },
+        "starMaxExemptSavings2026_27": {
+          "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+          "vintage": "2026-27",
+          "verified": "2026-07-20"
+        }
+      }
+    }
+  }
+}

@@ -335,13 +335,15 @@
   }
   function lookupDistrict(data,c){
     if(!data||!c.school) return null;
-    if(data[c.school]) return data[c.school];
+    var dd=data.districts||data; // districts.json nests rows under "districts"; tolerate flat too
+    if(dd[c.school]) return dd[c.school];
     var norm=function(s){return String(s).toLowerCase().replace(/\s+/g," ").trim();};
     var target=norm(c.school),k;
-    for(k in data){ if(norm(k)===target) return data[k]; }
-    if(c.schoolGeoid){ for(k in data){ var v=data[k]; if(v&&(v.geoid===c.schoolGeoid||v.GEOID===c.schoolGeoid)) return v; } }
+    for(k in dd){ if(k==="_meta") continue; if(norm(k)===target) return dd[k]; }
+    if(c.schoolGeoid){ for(k in dd){ var v=dd[k]; if(v&&(v.geoid===c.schoolGeoid||v.GEOID===c.schoolGeoid)) return v; } }
     return null;
   }
+  function refUrl(r){ return r?(typeof r==="string"?r:r.url):null; }
   function fmtNum(n){ return Math.round(n).toLocaleString("en-US"); }
   function setSrc(id,ref){ var a=$(id); if(!a||!ref) return; if(String(ref).charAt(0)==="#") a.href="validation.html"+ref; else if(/^https?:/.test(ref)) a.href=ref; }
   function flashEl(id){ var el=$(id); if(!el) return; el.classList.remove("geo-flash"); void el.offsetWidth; el.classList.add("geo-flash"); }
@@ -375,15 +377,15 @@
         return;
       }
       var refs=d.source_refs||{},done=[];
-      if(d.starCredit&&typeof d.starCredit.enhanced==="number"&&typeof d.starCredit.basic==="number"&&refs.starCredit){
+      if(d.starCredit&&typeof d.starCredit.enhanced==="number"&&typeof d.starCredit.basic==="number"&&refUrl(refs.starCredit)){
         $("mvStar").textContent=fmtNum(d.starCredit.enhanced-d.starCredit.basic);
-        setSrc("msrcStar",refs.starCredit); flashEl("mrowStar"); done.push("the STAR dividend");
+        setSrc("msrcStar",refUrl(refs.starCredit)); flashEl("mrowStar"); done.push("the STAR dividend");
       }
-      if(typeof d.medianValue==="number"&&refs.medianValue){
+      if(typeof d.medianValue==="number"&&refUrl(refs.medianValue)){
         $("mvTransfer").textContent=fmtNum(d.medianValue*0.004);
         $("mvSale").textContent=fmtNum(d.medianValue/1000);
-        $("mvSaleGeo").textContent=d.town?String(d.town).replace(/ (town|city)$/i,""):(c.school||"local");
-        setSrc("msrcTransfer",refs.medianValue); flashEl("mrowTransfer"); done.push("the transfer tax");
+        $("mvSaleGeo").textContent=d.dtfName||(d.town?String(d.town).replace(/ (town|city)$/i,""):(c.school||"local"));
+        setSrc("msrcTransfer",refUrl(refs.medianValue)); flashEl("mrowTransfer"); done.push("the transfer tax");
       }
       if(done.length){
         show("Now showing figures for <b>"+dn+"</b>. Calculated for your district: "+done.join(" and ")+". The remaining lines are RVC-typical until we source them for your district.");

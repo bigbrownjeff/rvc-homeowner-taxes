@@ -402,7 +402,7 @@
       {key:"sen",level:"State Senate · S3309",name:sen?sen.name:"Your state senator",nameHref:sen?sen.page:"https://www.nysenate.gov/find-my-senator",district:"Senate district "+(c.sd||"?")+(sen?" · "+sen.note:""),askText:"Ask them to move S3309 (exemption continuity in a move year) out of Finance, and to score a deferral act.",letter:L.senate,primaryHref:(sen&&sen.email)?mailto(sen.email,L.senate):(sen?sen.href:"https://www.nysenate.gov/find-my-senator"),primaryLabel:(sen&&sen.email)?"Open email":(sen?"Open contact form":"Find your senator")},
       {key:"asm",level:"State Assembly · A5288",name:asm?asm.name:"Your Assembly member",nameHref:asm?asm.page:"https://nyassembly.gov/mem/search/",district:"Assembly district "+(c.ad||"?")+(asm?" · "+asm.note:""),askText:"Ask them to advance A5288, the Assembly companion, out of Real Property Taxation.",letter:L.assembly,primaryHref:(asm&&asm.email)?mailto(asm.email,L.assembly):(asm?asm.href:"https://nyassembly.gov/mem/search/"),primaryLabel:(asm&&asm.email)?"Open email":(asm?"Open contact form":"Find your member")},
       {key:"cty",level:"Nassau County · the data ask",name:inRvc?"Leg. Scott Davis (District 1)":"Your county legislator",nameHref:inRvc?"https://www.nassaucountyny.gov/505/District-1---Scott-Davis":"https://www.nassaucountyny.gov/2803/Find-My-Legislative-District",district:inRvc?"District 1 covers all of RVC":"District lines were redrawn for 2026; confirm with the county lookup",askText:"Ask them to direct the Assessment Department to publish senior exemption counts by school district and tier.",letter:L.county,primaryHref:inRvc?mailto("SDavis@nassaucountyny.gov",L.county):"https://www.nassaucountyny.gov/2803/Find-My-Legislative-District",primaryLabel:inRvc?"Open email":"Find your legislator"},
-      {key:"vil",level:"School district & village",name:c.school||"Your school & village boards",nameHref:inRvc?"https://www.rvcny.gov/259/Mayor-Board-of-Trustees":"https://www.longislandschools.com/nassau-county-schools.aspx",district:c.school?"Your unified school district per the Census geocoder":"",askText:"Ask for a parcel-level fiscal note before any section 467 expansion, paired with downsizing options.",letter:L.village,primaryHref:inRvc?"https://www.rvcny.gov/259/Mayor-Board-of-Trustees":"https://www.longislandschools.com/nassau-county-schools.aspx",primaryLabel:inRvc?"Village board contacts":"Find your district's board"}
+      {key:"vil",level:"School district & village",name:c.school||"Your school & village boards",nameHref:inRvc?"https://www.rvcny.gov/259/Mayor-Board-of-Trustees":"https://www.longislandschools.com/nassau-county-schools.aspx",district:c.school?("Your school district ("+(c.schoolKind||"unified")+") per the Census geocoder"+(c.chsd?", within "+c.chsd:"")):"",askText:"Ask for a parcel-level fiscal note before any section 467 expansion, paired with downsizing options.",letter:L.village,primaryHref:inRvc?"https://www.rvcny.gov/259/Mayor-Board-of-Trustees":"https://www.longislandschools.com/nassau-county-schools.aspx",primaryLabel:inRvc?"Village board contacts":"Find your district's board"}
     ];
     var wrap=$("kitCards");
     wrap.innerHTML="";
@@ -453,14 +453,24 @@
       if(!match){err.textContent="No match for that address. Include street number, village, and NY.";err.style.display="block";$("kitCards").style.display="none";$("kitFootnote").style.display="none";return;}
       var g=match.geographies||{};
       function pick(frag){var k=Object.keys(g).find(function(k){return k.toLowerCase().indexOf(frag)>=0;});return (k&&g[k]&&g[k][0])?g[k][0]:null;}
-      var cdRaw=pick("congressional"),sldu=pick("upper"),sldl=pick("lower"),usd=pick("unified school");
+      var cdRaw=pick("congressional"),sldu=pick("upper"),sldl=pick("lower");
+      // Nassau mixes unified districts (RVC, Long Beach) with elementary + central-high
+      // (CHSD) districts (Elmont, Valley Stream, Bellmore ...). Prefer the unified layer;
+      // otherwise the ELEMENTARY district is the resolved local district (where the
+      // parcel's school tax + STAR sit). The secondary layer carries the CHSD it pairs
+      // with for high school. Elementary/CHSD addresses must not fall through as unknown.
+      var usd=pick("unified school"),elem=pick("elementary school"),sec=pick("secondary school");
+      var schoolObj=usd||elem;
       var county=pick("counties"),subdiv=pick("county subdiv"),place=pick("incorporated");
       var c={
         cd:cdRaw?String(parseInt(cdRaw.CD119||cdRaw.CD||cdRaw.BASENAME,10)):null,
         sd:sldu?String(parseInt(sldu.SLDU||sldu.BASENAME,10)):null,
         ad:sldl?String(parseInt(sldl.SLDL||sldl.BASENAME,10)):null,
-        school:usd?(usd.NAME||usd.BASENAME):null,
-        schoolGeoid:usd?(usd.GEOID||null):null,
+        school:schoolObj?(schoolObj.NAME||schoolObj.BASENAME):null,
+        schoolGeoid:schoolObj?(schoolObj.GEOID||null):null,
+        schoolKind:usd?"unified":(elem?"elementary":null),
+        chsd:sec?(sec.NAME||sec.BASENAME):null,
+        chsdGeoid:sec?(sec.GEOID||null):null,
         countyName:county?(county.NAME||county.BASENAME):null,
         countyGeoid:county?(county.GEOID||null):null,
         isNassau:county?(county.GEOID==="36059"||String(county.NAME||"").toLowerCase().indexOf("nassau")>=0):null,

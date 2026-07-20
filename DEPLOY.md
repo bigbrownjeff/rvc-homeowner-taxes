@@ -1,44 +1,45 @@
 # Deploying rvc-taxes.jeffpinto.com
 
-Everything in `site/` is static — no build step. Hosting: Cloudflare Pages; DNS in the Cloudflare jeffpinto.com zone (moved from Hover 2026-07).
+Everything in `site/` is static (no build step) plus one advanced-mode worker (`site/_worker.js`) for `/api/signup` and legacy redirects. Hosting: Cloudflare Pages; DNS in the Cloudflare jeffpinto.com zone (moved from Hover 2026-07). Config lives in repo-root `wrangler.toml` (project name, output dir, KV binding).
 
-## One-time setup
-
-1. **Create the Pages project** (from repo root):
-   ```bash
-   npx wrangler login
-   npx wrangler pages project create rvc-taxes --production-branch main
-   ```
-
-2. **Deploy:**
-   ```bash
-   npx wrangler pages deploy site --project-name rvc-taxes
-   ```
-   First deploy gives you `https://rvc-taxes.pages.dev`. Verify it renders before touching DNS.
-
-3. **Custom domain** (done 2026-07-20):
-   Cloudflare dashboard → Workers & Pages → `rvc-taxes` → Custom domains → Add `rvc-taxes.jeffpinto.com`. The jeffpinto.com zone lives in the same Cloudflare account, so the proxied CNAME is created automatically — no manual DNS record, no registrar step. TLS is issued on activation (usually < 1 min).
-
-## Redeploys
+## Deploy
 
 ```bash
-npx wrangler pages deploy site --project-name rvc-taxes
+npx wrangler pages deploy        # reads wrangler.toml: project rvc-taxes, output site/
 ```
 Pages invalidates its own cache on deploy. Hard-refresh to bypass browser cache.
 
-## What's served
+If wrangler.toml is ever absent, the explicit form is `npx wrangler pages deploy site --project-name rvc-taxes` — but that skips the KV binding; `/api/signup` will 503 until the binding is attached (dashboard → rvc-taxes → Settings → Bindings, KV `SIGNUPS` → namespace id `55371b2ca075430faeeae249f9b036cc`).
+
+## One-time setup (done)
+
+- Pages project `rvc-taxes` created; custom domain `rvc-taxes.jeffpinto.com` attached 2026-07-20 (same-account zone: proxied CNAME auto-created).
+- KV namespace `SIGNUPS` (`55371b2ca075430faeeae249f9b036cc`) created 2026-07-20 for the action-kit mailing list. Read signups with:
+  ```bash
+  npx wrangler kv key list --namespace-id 55371b2ca075430faeeae249f9b036cc
+  npx wrangler kv key get "signup:<email>" --namespace-id 55371b2ca075430faeeae249f9b036cc
+  ```
+
+## What's served (July 2026 redesign — "Modernist" system, RVC green/gold, Archivo)
 
 | Path | Content |
 |------|---------|
-| `/` | 8-page legislator briefing (`site/index.html`, Editorial DS) — print-to-PDF friendly (⌘P → Save as PDF gives the 8-page handout) |
-| `/fiscal-math.html` | Long-form write-up of the honest fiscal mechanics (companion to briefing p. 5) |
-| `/RVC_Legislator_Deck.pptx` | 26-slide deck (15 live + appendix) — opens in PowerPoint / Keynote / Google Slides; regenerate with `tools/build_deck_pptx.py` |
-| `/calculator.html` | RVC Tax & Outcomes Calculator (corrected fork of the original) |
-| `/validation.html` | Fact-check & methodology page backing every number in the deck |
-| `/brief-2026-08.html` | August 2026 refresh brief (2-page print handout; source `docs/BRIEF_2026-08.md`, receipts `docs/_SOURCES.md`) |
-| `/reconcile.html` | Bill reconciliation calculator — real county/village roll mechanics, forward + back-solve modes (July 2026 math audit, `docs/MATH-AUDIT-2026-07.md`) |
+| `/` | The brief: main landing + action kit (Census-geocoder letter builder, five cards, prefilled mailtos, copy-letter) |
+| `/fiscal-math.html` | Mechanics: long-form fiscal write-up for aides |
+| `/validation.html` | Facts & sources: the ledger backing every number on the site |
+| `/voices.html` | Curated quote library (condensed); `/voices-library.html` = full archive |
+| `/calculator.html` | Tax & outcomes calculator (July 2026 audited constants; no chart libs) |
+| `/reconcile.html` | Bill reconciler — real county/village roll mechanics (math untouched by redesign) |
+| `/breakeven.html` | Break-even instrument (math untouched by redesign) |
+| `/deck.html` | The 8-page print briefing (old landing; print-first layout kept; ⌘P → PDF handout) |
+| `/governance.html`, `/governance-options.html`, `/redraw-evidence.html` | Governance memos (re-skinned) |
+| `/RVC_Legislator_Deck.pptx` | 26-slide deck; regenerate with `tools/build_deck_pptx.py` |
+| `/api/signup` | POST {name,email,address} → KV `SIGNUPS` (email required) |
+| `/brief-2026-08(.html)` | 301 → `/` (both `_redirects` and `_worker.js` handle it) |
 
 ## Notes
 
-- Design system: Editorial DS (jeffpinto.com) with the ink-blue policy accent (`#1E3A8A`); pages load Source Serif 4 / Inter / IBM Plex Mono from Google Fonts (system fallbacks included). The PPTX maps to Georgia/Arial/Courier New so it renders identically in PowerPoint, Keynote, and Google Slides without font installs. The calculator keeps its original styling and depends only on Chart.js from cdnjs.
-- A real-browser pass (fonts, print layout, chart rendering) is part of done — `curl` is not sufficient. Open both the pages.dev URL and the custom domain after DNS cutover.
+- Design source of truth: `design_handoff_rvc_site_redesign/` (checked into the repo) — tokens, copy rules (no em dashes), component patterns. Shared chrome: `site/assets/site.css` + `site/assets/nav.js`.
+- Contact routing: every contact link is `mailto:jeff@bluecamelconsulting.com?subject=[rvc-taxes] …` — never any other email.
+- Officials table in `/` (action kit): fetch-verified 2026-07-20 — Gillen CD-4, Suozzi CD-3, Bynoe SD-6 (RVC's senator under current lines), Canzoneri-Fitzpatrick SD-9 (S3309 sponsor), Griffin AD-21 (direct email griffinj@nyassembly.gov), Davis LD-1 (SDavis@nassaucountyny.gov). Re-verify before each politician-facing push.
+- A real-browser pass is part of done — `curl` is not sufficient. After deploy: check the custom domain, run the action kit with a real address, and click one Copy letter + one mailto.

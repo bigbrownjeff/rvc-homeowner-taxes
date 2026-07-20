@@ -1,92 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Redraw the Map? — Cost &amp; the Voice Argument for Consolidating Nassau's Schools</title>
 <meta name="description" content="Is Nassau County's 56-district patchwork wasteful, and would redrawing boundaries save money? A controlled comparison of consolidated vs. fragmented suburbs, plus the natural-experiment record. Draft for review.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
 <style>
 :root{
-  --bg:#F1ECE2; --paper:#FAF6EC; --ink:#0E1116; --body:#2A2A2A; --muted:#6B6B6B;
-  --rule:#231F1A; --ruleSoft:#C9C3B4; --accent:#1E3A8A;
-  --good:#4E7A58; --bad:#B05442;
-  --serif:'Source Serif 4','Source Serif Pro',Georgia,serif;
-  --sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
-  --mono:'IBM Plex Mono',ui-monospace,'SF Mono',Consolas,monospace;
+  --paper:transparent; --body:var(--ink); --muted:var(--muted-60);
+  --rule:var(--rule-strong); --ruleSoft:var(--rule-hair); --accent:var(--green);
+  --good:var(--green); --bad:var(--error);
+  --serif:'Archivo',system-ui,sans-serif; --sans:'Archivo',system-ui,sans-serif; --mono:'Archivo',system-ui,sans-serif;
 }
-*{margin:0;padding:0;box-sizing:border-box}
-html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
-body{font-family:var(--sans);background:var(--bg);color:var(--body);line-height:1.5}
-.page{width:8.5in;min-height:11in;margin:26px auto;background:var(--bg);border:1px solid var(--ruleSoft);padding:.6in .68in .5in;position:relative;display:flex;flex-direction:column}
-.masthead{display:flex;justify-content:space-between;align-items:baseline;border-bottom:2px solid var(--rule);padding-bottom:8px;margin-bottom:16px}
-.masthead .t{font-family:var(--serif);font-weight:600;font-size:15px;color:var(--ink)}
-.masthead .m{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
-.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:8px}
-.eyebrow .sq{display:inline-block;width:7px;height:7px;background:var(--accent);margin-right:8px}
-h1{font-family:var(--serif);color:var(--ink);font-weight:700;font-size:44px;line-height:1.0;letter-spacing:-.025em}
-h2{font-family:var(--serif);color:var(--ink);font-weight:700;font-size:25px;line-height:1.08;letter-spacing:-.02em;margin-bottom:6px}
-h3{font-family:var(--serif);color:var(--ink);font-weight:600;font-size:15.5px;line-height:1.2}
-.standfirst{font-family:var(--serif);font-style:italic;font-size:15px;line-height:1.5;color:var(--body);margin:10px 0 6px}
-p{font-size:12.2px;margin:.45rem 0}
+.page{max-width:980px;margin:0 auto;padding:44px 48px 26px;position:relative;overflow-wrap:break-word}
+.page+.page{border-top:2px solid var(--rule-strong)}
+.masthead{display:flex;justify-content:space-between;align-items:baseline;border-bottom:2px solid var(--rule-strong);padding-bottom:8px;margin-bottom:18px;gap:12px;flex-wrap:wrap}
+.masthead .t{font-weight:800;font-size:15px;color:var(--ink)}
+.masthead .m{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted-60)}
+.eyebrow{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--green);font-weight:800;margin-bottom:10px}
+.eyebrow .sq{display:inline-block;width:7px;height:7px;background:var(--green);margin-right:8px}
+h1{color:var(--ink);font-weight:800;font-size:44px;line-height:1.02;letter-spacing:-.025em;margin:0}
+h2{color:var(--ink);font-weight:800;font-size:25px;line-height:1.08;letter-spacing:-.015em;margin:0 0 6px}
+h3{color:var(--ink);font-weight:800;font-size:15.5px;line-height:1.25;margin:0}
+.standfirst{font-size:17px;line-height:1.5;color:var(--muted-75);margin:10px 0 6px}
+p{font-size:14px;margin:.5rem 0}
 .k{font-weight:600;color:var(--ink)}
-sup{font-size:8px;color:var(--accent);font-weight:600;font-family:var(--mono)}
-a{color:var(--accent);text-decoration:none}
-.rule2{border:none;border-top:2px solid var(--rule);margin:13px 0}
-.gradient{width:100%;border-collapse:collapse;font-size:12px;margin:10px 0}
-.gradient th{background:var(--ink);color:var(--bg);text-align:left;padding:7px 9px;font-family:var(--mono);font-size:8.8px;text-transform:uppercase;letter-spacing:.05em;font-weight:600}
+sup{font-size:9px;color:var(--green);font-weight:800}
+.rule2{border:none;border-top:2px solid var(--rule-strong);margin:13px 0}
+.gradient{width:100%;border-collapse:collapse;font-size:13px;margin:10px 0}
+.gradient th{background:var(--ink);color:var(--bg);text-align:left;padding:7px 9px;font-size:10px;text-transform:uppercase;letter-spacing:.05em;font-weight:800}
 .gradient th.num,.gradient td.num{text-align:right}
-.gradient td{padding:7px 9px;border-bottom:1px solid var(--ruleSoft);vertical-align:middle}
-.gradient tr:nth-child(even) td{background:var(--paper)}
-.gradient .nassau td{background:#e7ecf6 !important;font-weight:600}
-.gradient .admin{font-family:var(--serif);font-weight:700;font-size:14px;color:var(--ink)}
-.gradient .one{color:var(--good);font-weight:700}
-.gradient .many{color:var(--bad);font-weight:700}
-.gradient .note{font-size:9px;color:var(--muted)}
-.dark{background:var(--ink);color:var(--bg);padding:14px 18px;margin:12px 0}
-.dark .ey{font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#9DB4E8;margin-bottom:7px}
-.dark p{color:var(--bg);font-size:12px}
-.dark .big{font-family:var(--serif);font-size:18px;line-height:1.3;color:var(--bg);font-weight:600}
-.paperbox{background:var(--paper);border-top:2px solid var(--rule);padding:11px 16px;margin:10px 0}
-.paperbox.good{border-top-color:var(--good)} .paperbox.bad{border-top-color:var(--bad)}
-.paperbox .ey{font-family:var(--mono);font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:5px}
-.paperbox.good .ey{color:oklch(0.40 0.09 150)} .paperbox.bad .ey{color:oklch(0.42 0.13 25)}
-.wall{display:grid;grid-template-columns:repeat(3,1fr);border-top:2px solid var(--rule);margin:11px 0}
-.cell{border-bottom:1px solid var(--ruleSoft);border-right:1px solid var(--ruleSoft);padding:10px 14px 10px 0;margin-right:14px}
+.gradient td{padding:7px 9px;border-bottom:1px solid var(--rule-row);vertical-align:middle}
+.gradient .nassau td{background:rgba(197,164,78,.16);font-weight:600}
+.gradient .admin{font-weight:800;font-size:14px;color:var(--ink)}
+.gradient .one{color:var(--green);font-weight:800}
+.gradient .many{color:var(--error);font-weight:800}
+.gradient .note{font-size:10px;color:var(--muted-60)}
+.dark{background:var(--ink);color:var(--bg);padding:16px 20px;margin:12px 0}
+.dark .ey{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;font-weight:800}
+.dark p{color:var(--bg);font-size:13.5px}
+.dark .big{font-size:18px;line-height:1.35;color:var(--bg);font-weight:800}
+.dark a{color:var(--gold)}
+.paperbox{border-top:2px solid var(--rule-strong);padding:12px 0 4px;margin:12px 0}
+.paperbox.good{border-top-color:var(--green)} .paperbox.bad{border-top-color:var(--error)}
+.paperbox .ey{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--green);font-weight:800;margin-bottom:5px}
+.paperbox.good .ey{color:var(--green)} .paperbox.bad .ey{color:var(--error)}
+.wall{display:grid;grid-template-columns:repeat(3,1fr);border-top:2px solid var(--rule-strong);margin:11px 0}
+.cell{border-bottom:1px solid var(--rule-hair);border-right:1px solid var(--rule-hair);padding:12px 14px 12px 0;margin-right:14px}
 .cell:nth-child(3n){border-right:none;margin-right:0}
-.cell .ey{font-family:var(--mono);font-size:8.2px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
-.cell .ey b{color:var(--accent)}
-.cell .kpi{font-family:var(--serif);font-size:24px;font-weight:700;color:var(--ink);line-height:1;letter-spacing:-.02em}
-.cell .kpi i{font-style:italic;color:var(--accent);font-size:.55em;font-weight:400}
-.cell .claim{font-size:10.2px;color:var(--body);margin-top:5px;line-height:1.4}
-.cell .src{font-family:var(--mono);font-size:7.4px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:5px}
-.scen{width:100%;border-collapse:collapse;font-size:11px;margin:8px 0}
-.scen th{background:var(--ink);color:var(--bg);text-align:left;padding:6px 8px;font-family:var(--mono);font-size:8.4px;text-transform:uppercase;letter-spacing:.05em}
-.scen td{padding:6px 8px;border-bottom:1px solid var(--ruleSoft);vertical-align:top}
-.scen tr:nth-child(even) td{background:var(--paper)}
-.scen .win td{background:#e6efe8 !important}
-.scen .rowlab{font-family:var(--mono);font-size:8.4px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600}
-.rows{border-top:2px solid var(--rule)}
-.row{display:grid;grid-template-columns:150px 1fr;gap:16px;padding:9px 0;border-bottom:1px solid var(--ruleSoft)}
-.row .lab{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:600;line-height:1.5;padding-top:2px}
-.row .lab .sub{color:var(--muted);font-weight:400;display:block;margin-top:3px;letter-spacing:.07em}
+.cell .ey{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted-60);margin-bottom:6px;font-weight:800}
+.cell .ey b{color:var(--green)}
+.cell .kpi{font-size:26px;font-weight:800;color:var(--ink);line-height:1;letter-spacing:-.02em}
+.cell .kpi i{font-style:normal;color:var(--green);font-size:.55em;font-weight:600}
+.cell .claim{font-size:12px;color:var(--ink);margin-top:6px;line-height:1.45}
+.cell .src{font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted-60);margin-top:6px;font-weight:600}
+.scen{width:100%;border-collapse:collapse;font-size:12.5px;margin:8px 0}
+.scen th{background:var(--ink);color:var(--bg);text-align:left;padding:6px 8px;font-size:10px;text-transform:uppercase;letter-spacing:.05em;font-weight:800}
+.scen td{padding:6px 8px;border-bottom:1px solid var(--rule-row);vertical-align:top}
+.scen .win td{background:rgba(30,107,61,.08)}
+.scen .rowlab{font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted-60);font-weight:800}
+.rows{border-top:2px solid var(--rule-strong)}
+.row{display:grid;grid-template-columns:150px 1fr;gap:16px;padding:11px 0;border-bottom:1px solid var(--rule-hair)}
+.row .lab{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--green);font-weight:800;line-height:1.5;padding-top:2px}
+.row .lab .sub{color:var(--muted-60);font-weight:600;display:block;margin-top:3px;letter-spacing:.06em}
 .row h3{margin-bottom:2px}
-.row p{font-size:11.2px;margin:.12rem 0}
-.pfoot{margin-top:auto;border-top:1px solid var(--ruleSoft);padding-top:7px;display:flex;justify-content:space-between;font-family:var(--mono);font-size:8.2px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-.draft{position:absolute;top:.62in;right:.68in;font-family:var(--mono);font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:#fff;background:var(--accent);padding:2px 8px}
+.row p{font-size:13px;margin:.2rem 0}
+.pfoot{border-top:1px solid var(--rule-hair);margin-top:18px;padding-top:8px;display:flex;justify-content:space-between;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted-60);font-weight:600;gap:12px;flex-wrap:wrap}
+.draft{position:static;display:inline-block;margin:0 0 12px;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--bg);background:var(--green);padding:3px 9px;font-weight:800}
 ul{padding-left:16px;margin:.3rem 0}
-li{font-size:11.4px;margin:.2rem 0}
-@page{size:letter;margin:0}
-@media print{
-  body{background:var(--bg)}
-  .page{margin:0;border:none;page-break-after:always;width:8.5in;height:11in;min-height:0;overflow:hidden;padding:.5in .62in .38in}
-  .page:last-child{page-break-after:auto}
-}
-@media screen and (max-width:900px){.page{width:auto;min-height:auto;padding:6%}.wall{grid-template-columns:1fr}.row{grid-template-columns:1fr;gap:5px}}
+li{font-size:13.5px;margin:.25rem 0}
+@media(max-width:900px){.page{padding:32px 24px 20px}.wall{grid-template-columns:1fr}.row{grid-template-columns:1fr;gap:6px}h1{font-size:34px}h2{font-size:22px}.draft{position:static;display:inline-block;margin-bottom:10px}table{display:block;overflow-x:auto}}
 </style>
 </head>
 <body>
+<div id="site-nav" data-current=""></div>
 
 <!-- ===================== PAGE 1 — THE PROOF ===================== -->
 <div class="page">
@@ -170,7 +160,7 @@ li{font-size:11.4px;margin:.2rem 0}
   </div>
   <div class="dark"><div class="ey"><b>Bottom line — on cost</b></div>
     <p class="big">The patchwork isn't efficient — but redrawing the map is the wrong cure for the one thing it gets wrong.</p>
-    <p style="margin-top:6px">The waste is real and narrow: ~$1,900/pupil of duplicated administration. A boundary redraw overshoots Nassau's already-optimal district size into diseconomy, has a third-to-half of its prize eaten by union leveling-up and lost BOCES aid, carries severe risk (top-district home-value hits, Memphis-style secession, stranded liabilities, lost local control), and has <span class="k" style="color:var(--bg)">never once passed on Long Island.</span> What captures most of the same prize — <span class="k" style="color:var(--bg)">~$120–200M/yr, fast payback, a legal path, boards left in place</span> — is virtual consolidation: mandated shared back-office through BOCES. Don't redraw the lines to save money — empty the duplicated offices behind them. <span style="color:#9DB4E8">But money was never the whole question. The one prize a redraw buys that shared services can't is a single political voice — turn the page.</span></p>
+    <p style="margin-top:6px">The waste is real and narrow: ~$1,900/pupil of duplicated administration. A boundary redraw overshoots Nassau's already-optimal district size into diseconomy, has a third-to-half of its prize eaten by union leveling-up and lost BOCES aid, carries severe risk (top-district home-value hits, Memphis-style secession, stranded liabilities, lost local control), and has <span class="k" style="color:var(--bg)">never once passed on Long Island.</span> What captures most of the same prize — <span class="k" style="color:var(--bg)">~$120–200M/yr, fast payback, a legal path, boards left in place</span> — is virtual consolidation: mandated shared back-office through BOCES. Don't redraw the lines to save money — empty the duplicated offices behind them. <span style="color:#c5a44e">But money was never the whole question. The one prize a redraw buys that shared services can't is a single political voice — turn the page.</span></p>
   </div>
   <p style="font-size:9.5px;color:var(--muted)"><sup>1</sup> NCES CCD / F-33 FY2022-23 (Montgomery 2400480, Fairfax 5101260, Broward 1200180, Garden City 3611760, Uniondale 3629280, Port Washington 3623580, Ridgewood 3413830). <sup>2</sup> Westchester Index; OSC education revenues &amp; expenditures. <sup>3</sup> Duncombe &amp; Yinger, <em>Does School District Consolidation Cut Costs?</em> (EF&amp;P 2007); Andrews/Duncombe/Yinger 2002; NYSED Reorganization Primer; NYSUT FS 25-3; Memphis: Chalkbeat/Siegel-Hawley AERJ 2018; Louisville: CGR/Savitch; Unigov: Abell Foundation; EdBuild <em>Fractured</em>. Full workups: <span style="font-family:var(--mono);font-size:8.5px">docs/findings/corollary-counties.md · consolidation-experiments.md · cleanslate-model.md</span>.</p>
   <div class="pfoot"><span>The cost verdict — but not the last word; the voice argument follows</span><span>4 / 6</span></div>
@@ -217,5 +207,7 @@ li{font-size:11.4px;margin:.2rem 0}
   <div class="pfoot"><span>Sources: AQE 2017 · Kelleher &amp; Lowery 2004 · Henig 2013 · findings/megadistrict-voice.md · nassau-voice.md</span><span>6 / 6</span></div>
 </div>
 
+<div class="site-foot"><span>Jeff Pinto &middot; Rockville Centre &middot; <a href="mailto:jeff@bluecamelconsulting.com?subject=%5Brvc-taxes%5D%20redraw-evidence">Contact</a></span><span>Evidence memo &middot; June 2026</span></div>
+<script src="assets/nav.js"></script>
 </body>
 </html>

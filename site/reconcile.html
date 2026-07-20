@@ -1,59 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Bill Reconciliation — What an RVC Property-Tax Bill Is Actually Made Of</title>
 <meta name="description" content="Reconcile a real Rockville Centre property-tax bill against the actual Nassau County and village mechanics: county roll at 0.1% LOA, per-$100 rates, the village's own roll, and STAR. Includes a back-solve mode.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
 <style>
-:root{--bg:#F1ECE2;--paper:#FAF6EC;--ink:#0E1116;--body:#2A2A2A;--muted:#6B6B6B;--rule:#231F1A;--ruleSoft:#C9C3B4;--accent:#1E3A8A;
---good:#4E7A58;--bad:#B05442;
---serif:'Source Serif 4','Source Serif Pro',Georgia,serif;--sans:'Inter',-apple-system,sans-serif;--mono:'IBM Plex Mono',ui-monospace,monospace}
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:var(--sans);background:var(--bg);color:var(--body);line-height:1.55}
-.wrap{max-width:960px;margin:0 auto;padding:40px 56px 64px}
-.masthead{display:flex;justify-content:space-between;align-items:baseline;border-bottom:2px solid var(--rule);padding-bottom:10px}
-.masthead .t{font-family:var(--serif);font-weight:600;font-size:26px;color:var(--ink)}
-.masthead .m{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
-.masthead .m a{color:var(--accent);text-decoration:none}
-.head{margin:40px 0 8px;max-width:860px}
-.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:14px}
-h1{font-family:var(--serif);font-size:42px;font-weight:700;line-height:1.05;letter-spacing:-.03em;color:var(--ink)}
-.standfirst{font-family:var(--serif);font-style:italic;font-size:18px;line-height:1.45;color:var(--body);margin:16px 0 0}
-.provenance{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;color:var(--muted);margin-top:14px;line-height:1.7}
-h2{font-family:var(--serif);font-size:24px;font-weight:700;letter-spacing:-.015em;color:var(--ink);border-top:2px solid var(--rule);padding-top:18px;margin:36px 0 12px}
-h2 .no{font-family:var(--mono);font-size:12px;letter-spacing:.12em;color:var(--accent);vertical-align:6px;margin-right:10px}
-p{font-size:14.5px;margin:0 0 12px;max-width:860px}
-a{color:var(--accent)}
+.wrap{max-width:1100px;margin:0 auto;padding:40px 48px 64px}
+.head{margin:16px 0 8px;max-width:860px}
+.eyebrow{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:16px}
+h1{margin:0;font-weight:800;font-size:50px;line-height:1.02;letter-spacing:-.025em;color:var(--ink)}
+.standfirst{font-size:18px;line-height:1.5;color:var(--ink);margin:16px 0 0}
+.provenance{font-size:12px;font-weight:600;color:var(--muted-60);margin-top:14px;line-height:1.7}
+h2{font-size:22px;font-weight:800;letter-spacing:-.015em;color:var(--ink);border-top:2px solid var(--rule-strong);padding-top:22px;margin:36px 0 12px}
+h2 .no{font-size:12px;font-weight:800;letter-spacing:.1em;color:var(--green);vertical-align:6px;margin-right:10px}
+p{font-size:15px;margin:0 0 12px;max-width:860px}
 b,strong{color:var(--ink)}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin:16px 0}
-.panel{background:var(--paper);border-top:2px solid var(--rule);padding:16px 18px}
-.panel h4{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:12px}
-label{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:10px 0 4px}
-input,select{width:100%;padding:8px 10px;font-family:var(--mono);font-size:13px;border:1px solid var(--ruleSoft);background:#fff;color:var(--ink);border-radius:2px}
-input:focus,select:focus{outline:2px solid var(--accent)}
-.hint{font-size:11.5px;color:var(--muted);margin-top:3px;line-height:1.45}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin:16px 0}
+.panel{border-top:2px solid var(--rule-strong);padding:16px 0 0}
+.panel h4{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin:0 0 12px}
+label{display:block;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted-60);margin:12px 0 4px}
+input,select{width:100%;padding:10px 12px;font-family:'Archivo',system-ui,sans-serif;font-size:14px;text-align:left;border:1px solid var(--ink);background:var(--bg);color:var(--ink);border-radius:0}
+select{font-weight:600}
+input:focus,select:focus{outline:2px solid var(--green)}
+.hint{font-size:12px;color:var(--muted-65);margin-top:3px;line-height:1.45}
 table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13.5px}
-th{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;border-bottom:2px solid var(--rule);padding:6px 8px}
-td{padding:7px 8px;border-bottom:1px solid var(--ruleSoft)}
-td.num{font-family:var(--mono);text-align:right;white-space:nowrap}
-tr.total td{border-top:2px solid var(--rule);border-bottom:none;font-weight:600;color:var(--ink)}
-.darkbox{background:var(--ink);color:var(--bg);padding:18px 22px;margin:18px 0}
-.darkbox h4{font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:#9DB4E8;font-weight:600;margin-bottom:10px}
+th{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted-60);text-align:left;border-bottom:2px solid var(--rule-strong);padding:6px 8px}
+td{padding:7px 8px;border-bottom:1px solid var(--rule-row)}
+td.num{font-weight:600;font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+tr.total td{border-top:2px solid var(--rule-strong);border-bottom:none;font-weight:800;color:var(--ink)}
+.darkbox{background:var(--green);color:var(--bg);padding:22px 24px;margin:18px 0}
+.darkbox h4{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin:0 0 10px}
 .darkbox p{font-size:13.5px;color:var(--bg)}
 .darkbox b{color:#fff}
-.darkbox a{color:#9DB4E8}
-.pass{color:var(--good);font-weight:600}
-.fail{color:var(--bad);font-weight:600}
-.foot{border-top:2px solid var(--rule);margin-top:48px;padding-top:16px;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
-@media (max-width:900px){.wrap{padding:24px 20px}h1{font-size:30px}.grid{grid-template-columns:1fr}}
+.darkbox a{color:var(--gold)}
+.pass{color:var(--green);font-weight:800}
+.fail{color:var(--error);font-weight:800}
+@media (max-width:760px){.wrap{padding:24px 24px 48px}h1{font-size:34px}.grid{grid-template-columns:1fr}td.num{white-space:normal}}
 </style>
 </head>
 <body>
+<div id="site-nav" data-current=""></div>
 <div class="wrap">
-  <div class="masthead"><span class="t">Rockville Centre · Housing &times; Schools</span><span class="m"><a href="index.html">Deck</a> · <a href="brief-2026-08.html">Brief</a> · <a href="validation.html">Facts &amp; sources</a> · <a href="calculator.html">Calculator</a></span></div>
 
   <div class="head">
     <div class="eyebrow">Reconciliation Tool · July 2026</div>
@@ -153,8 +144,9 @@ tr.total td{border-top:2px solid var(--rule);border-bottom:none;font-weight:600;
     <tr><td>B — $900K-EMV home</td><td>AV 900 · mkt $1,000,000 · eq 0.87% · FY26</td><td class="num">sch 20,230.80 · lib 760.13 · gen 1,857.57 · vil 6,080.43 · tot 28,928.94</td><td id="t2"></td></tr>
   </table>
 
-  <div class="foot"><span>Jeff Pinto · Rockville Centre</span><span>Sources: Nassau LRV parcel tax tables · Village FY27 adopted budget · NYS ORPTS · DTF STAR tables</span></div>
 </div>
+<div class="site-foot"><span>Jeff Pinto &middot; Rockville Centre &middot; <a href="mailto:jeff@bluecamelconsulting.com?subject=%5Brvc-taxes%5D%20">Contact</a></span><span>Sources: Nassau LRV parcel tax tables &middot; Village FY27 adopted budget &middot; NYS ORPTS &middot; DTF STAR tables</span></div>
+<script src="assets/nav.js"></script>
 <script>
 'use strict';
 const $ = id => document.getElementById(id);

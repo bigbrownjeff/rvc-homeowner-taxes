@@ -1,0 +1,7 @@
+name = "rvc-taxes"
+pages_build_output_dir = "site"
+compatibility_date = "2026-07-01"
+
+[[kv_namespaces]]
+binding = "SIGNUPS"
+id = "55371b2ca075430faeeae249f9b036cc"

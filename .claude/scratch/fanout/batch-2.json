@@ -1,0 +1,1007 @@
+{
+  "Baldwin Union Free School District": {
+    "dtfName": "Baldwin",
+    "censusName": "Baldwin Union Free School District",
+    "geoid": "3603840",
+    "sdType": "unified",
+    "starCredit": {
+      "basic": 1108.0,
+      "enhanced": 3190.75
+    },
+    "starExemptSavings": {
+      "basic": 1086.0,
+      "enhanced": 3190.75
+    },
+    "starMaxExemptSavings2026_27": {
+      "basic": 1086.0,
+      "enhanced": 3191.0
+    },
+    "source_refs": {
+      "starCredit": {
+        "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+        "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+        "verified": "2026-07-20"
+      },
+      "starExemptSavings": {
+        "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+        "vintage": "2025 final",
+        "verified": "2026-07-20"
+      },
+      "starMaxExemptSavings2026_27": {
+        "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+        "vintage": "2026-27",
+        "verified": "2026-07-20"
+      },
+      "medianValue": {
+        "url": "https://data.census.gov/api/access/data/table?id=ACSDT5Y2024.B25077&g=9700000US3603840",
+        "vintage": "ACS 2020-24 5-yr B25077, school-district geography",
+        "verified": "2026-07-20"
+      },
+      "schoolRate": {
+        "url": "https://lrv.nassaucountyny.gov/info/54022++03390/ \u2192 POST /gstaxes.php PARID='54022  01990/54022  03390' TOWN_NAME=Hempstead",
+        "vintage": "tax year 2026 (school 2025-26)",
+        "verified": "2026-07-20",
+        "note": "representative in-district Class-1 parcel; parcel info page School District = 'BALDWIN UFSD - 10', AV 438"
+      },
+      "libraryRate": {
+        "url": "https://lrv.nassaucountyny.gov/info/54022++03390/ \u2192 POST /gstaxes.php PARID='54022  01990/54022  03390' TOWN_NAME=Hempstead",
+        "vintage": "tax year 2026 (school 2025-26)",
+        "verified": "2026-07-20",
+        "note": "representative in-district Class-1 parcel; parcel info page School District = 'BALDWIN UFSD - 10', AV 438"
+      },
+      "levy": {
+        "url": "https://data.ny.gov/resource/iq85-sdzs.json?school_name=Baldwin&fiscal_year_ending=2025",
+        "vintage": "FY ending 2025 (2024-25)",
+        "verified": "2026-07-20",
+        "note": "Hempstead (single segment)"
+      },
+      "enrollment": {
+        "url": "https://data.nysed.gov/enrollment.php?year=2025&instid=800000049578",
+        "base_url": "https://data.nysed.gov/enrollment.php?year=2016&instid=800000049578",
+        "vintage": "2024-25 / 2015-16 K-12 (BEDS day)",
+        "verified": "2026-07-20"
+      },
+      "board_url": {
+        "url": "https://www.baldwinschools.org/",
+        "verified": "2026-07-20",
+        "note": "probed HTTP 200"
+      }
+    },
+    "medianValue": 595100,
+    "schoolRate": 2279.106,
+    "libraryRate": 126.199,
+    "levy": 106372709,
+    "enrollment": {
+      "cur": 4309,
+      "base": 4730
+    },
+    "town": "Hempstead",
+    "board_url": "https://www.baldwinschools.org/"
+  },
+  "Cold Spring Harbor Central School District": {
+    "dtfName": "Cold Spring Harbor",
+    "censusName": "Cold Spring Harbor Central School District",
+    "geoid": "3608010",
+    "sdType": "unified",
+    "starCredit": {
+      "basic": 812.81,
+      "enhanced": 2275.87
+    },
+    "starExemptSavings": {
+      "basic": 801.0,
+      "enhanced": 1995.0
+    },
+    "source_refs": {
+      "starCredit": {
+        "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+        "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+        "verified": "2026-07-20"
+      },
+      "starExemptSavings": {
+        "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+        "vintage": "2025 final",
+        "verified": "2026-07-20"
+      },
+      "medianValue": {
+        "url": "https://data.census.gov/api/access/data/table?id=ACSDT5Y2024.B25077&g=9700000US3608010",
+        "vintage": "ACS 2020-24 5-yr B25077, school-district geography",
+        "verified": "2026-07-20"
+      },
+      "schoolRate": {
+        "url": "https://lrv.nassaucountyny.gov/info/26+++C+17090/ \u2192 POST /gstaxes.php PARID='26   C 17090' TOWN_NAME=Oyster Bay",
+        "vintage": "tax year 2026 (school 2025-26)",
+        "verified": "2026-07-20",
+        "note": "representative in-district Class-1 parcel; parcel info page School District = 'COLD SPRING HARBOR CSD - 11', AV 1511"
+      },
+      "libraryRate": {
+        "url": "https://lrv.nassaucountyny.gov/info/26+++C+17090/ \u2192 POST /gstaxes.php PARID='26   C 17090' TOWN_NAME=Oyster Bay",
+        "vintage": "tax year 2026 (school 2025-26)",
+        "verified": "2026-07-20",
+        "note": "representative in-district Class-1 parcel; parcel info page School District = 'COLD SPRING HARBOR CSD - 11', AV 1511"
+      },
+      "levy": {
+        "url": "https://data.ny.gov/resource/iq85-sdzs.json?school_name=Cold%20Spring%20Harbor&fiscal_year_ending=2025",
+        "vintage": "FY ending 2025 (2024-25)",
+        "verified": "2026-07-20",
+        "note": "Nassau/Oyster Bay $15,388,245 + Suffolk/Huntington $55,297,307"
+      },
+      "enrollment": {
+        "url": "https://data.nysed.gov/enrollment.php?year=2025&instid=800000037394",
+        "base_url": "https://data.nysed.gov/enrollment.php?year=2016&instid=800000037394",
+        "vintage": "2024-25 / 2015-16 K-12 (BEDS day)",
+        "verified": "2026-07-20"
+      },
+      "board_url": {
+        "url": "https://www.csh.k12.ny.us/",
+        "verified": "2026-07-20",
+        "note": "probed HTTP 200"
+      },
+      "_scope": "Suffolk-home district; the parcel is a Nassau-side (Laurel Hollow, Town of Oyster Bay) parcel so schoolRate/libraryRate are the NASSAU-roll rate only. The Suffolk-side (Huntington) rate is assessed on a different roll and is out of scope. medianValue is the full district geography (spans both counties)."
+    },
+    "note": "Suffolk-home-county district with Nassau territory; 2026-27 max exemption savings published on the DTF Suffolk page (out of scope), field omitted.",
+    "medianValue": 1625500,
+    "schoolRate": 1625.624,
+    "libraryRate": 71.301,
+    "levy": 70685552,
+    "enrollment": {
+      "cur": 1528,
+      "base": 1804
+    },
+    "town": "Oyster Bay",
+    "board_url": "https://www.csh.k12.ny.us/"
+  },
+  "Elmont Union Free School District": {
+    "dtfName": "Elmont",
+    "censusName": "Elmont Union Free School District",
+    "geoid": "3610620",
+    "sdType": "elementary",
+    "starCredit": {
+      "basic": 858.0,
+      "enhanced": 2432.72
+    },
+    "starExemptSavings": {
+      "basic": 841.0,
+      "enhanced": 2432.72
+    },
+    "starMaxExemptSavings2026_27": {
+      "basic": 841.0,
+      "enhanced": 2433.0
+    },
+    "source_refs": {
+      "starCredit": {
+        "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+        "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+        "verified": "2026-07-20"
+      },
+      "starExemptSavings": {
+        "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+        "vintage": "2025 final",
+        "verified": "2026-07-20"
+      },
+      "starMaxExemptSavings2026_27": {
+        "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+        "vintage": "2026-27",
+        "verified": "2026-07-20"
+      },
+      "medianValue": {
+        "url": "https://data.census.gov/api/access/data/table?id=ACSDT5Y2024.B25077&g=9500000US3610620",
+        "vintage": "ACS 2020-24 5-yr B25077, school-district geography",
+        "verified": "2026-07-20"
+      },
+      "schoolRate": {
+        "url": "https://lrv.nassaucountyny.gov/info/32490++00100/ \u2192 POST /gstaxes.php PARID='32490  00100' TOWN_NAME=Hempstead",
+        "vintage": "tax year 2026 (school 2025-26)",
+        "verified": "2026-07-20",
+        "note": "representative in-district Class-1 parcel; parcel info page School District = 'ELMONT UFSD - 16', AV 346"
+      },
+      "libraryRate": {
+        "url": "https://lrv.nassaucountyny.gov/info/32490++00100/ \u2192 POST /gstaxes.php PARID='32490  00100' TOWN_NAME=Hempstead",
+        "vintage": "tax year 2026 (school 2025-26)",
+        "verified": "2026-07-20",
+        "note": "representative in-district Class-1 parcel; parcel info page School District = 'ELMONT UFSD - 16', AV 346"
+      },
+      "levy": {
+        "url": "https://data.ny.gov/resource/iq85-sdzs.json?school_name=Elmont&fiscal_year_ending=2025",
+        "vintage": "FY ending 2025 (2024-25)",
+        "verified": "2026-07-20",
+        "note": "Hempstead (single segment); elementary district's own levy, excludes Sewanhaka CHSD which levies separately as a component"
+      },
+      "enrollment": {
+        "url": "https://data.nysed.gov/enrollment.php?year=2025&instid=800000049455",
+        "base_url": "https://data.nysed.gov/enrollment.php?year=2016&instid=800000049455",
+        "vintage": "2024-25 / 2015-16 K-12 (BEDS day)",
+        "verified": "2026-07-20"
+      },
+      "board_url": {
+        "url": "https://www.elmontschools.org/",
+        "verified": "2026-07-20",
+        "note": "probed HTTP 200"
+      },
+      "_scope": "ELEMENTARY district inside Sewanhaka CHSD. The LRV parcel shows a SINGLE 'Net School Tax' line (1737.658), which is the combined Elmont-elementary + Sewanhaka-CHSD school levy; Nassau bills them as one school line, not separable at the parcel level, so the CHSD portion cannot be isolated from this source."
+    },
+    "medianValue": 606600,
+    "schoolRate": 1737.658,
+    "libraryRate": 35.984,
+    "levy": 118054467,
+    "enrollment": {
+      "cur": 3170,
+      "base": 3601
+    },
+    "town": "Hempstead",
+    "board_url": "https://www.elmontschools.org/"
+  },
+  "Freeport Union Free School District": {
+    "dtfName": "Freeport",
+    "censusName": "Freeport Union Free School District",
+    "geoid": "3611550",
+    "sdType": "unified",
+    "starCredit": {
+      "basic": 909.6,
+      "enhanced": 2546.87
+    },
+    "starExemptSavings": {
+      "basic": 897.0,
+      "enhanced": 2546.87
+    },
+    "starMaxExemptSavings2026_27": {
+      "basic": 897.0,
+      "enhanced": 2547.0
+    },
+    "source_refs": {
+      "starCredit": {
+        "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+        "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+        "verified": "2026-07-20"
+      },
+      "starExemptSavings": {
+        "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+        "vintage": "2025 final",
+        "verified": "2026-07-20"
+      },
+      "starMaxExemptSavings2026_27": {
+        "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+        "vintage": "2026-27",
+        "verified": "2026-07-20"
+      },
+      "medianValue": {
+        "url": "https://data.census.gov/api/access/data/table?id=ACSDT5Y2024.B25077&g=9700000US3611550",
+        "vintage": "ACS 2020-24 5-yr B25077, school-district geography",
+        "verified": "2026-07-20"
+      },
+      "schoolRate": {
+        "url": "https://lrv.nassaucountyny.gov/info/62076++01160/ \u2192 POST /gstaxes.php PARID='62076  01160' TOWN_NAME=Hempstead",
+        "vintage": "tax year 2026 (school 2025-26)",
+        "verified": "2026-07-20",
+        "note": "representative in-district Class-1 parcel; parcel info page School District = 'FREEPORT - 9', AV 515"
+      },
+      "libraryRate": {
+        "url": "https://lrv.nassaucountyny.gov/info/62076++01160/ \u2192 POST /gstaxes.php PARID='62076  01160' TOWN_NAME=Hempstead",
+        "vintage": "tax year 2026 (school 2025-26)",
+        "verified": "2026-07-20",
+        "note": "representative in-district Class-1 parcel; parcel info page School District = 'FREEPORT - 9', AV 515"
+      },
+      "levy": {
+        "url": "https://data.ny.gov/resource/iq85-sdzs.json?school_name=Freeport&fiscal_year_ending=2025",
+        "vintage": "FY ending 2025 (2024-25)",
+        "verified": "2026-07-20",
+        "note": "Hempstead (single segment)"
+      },
+      "enrollment": {
+        "url": "https://data.nysed.gov/enrollment.php?year=2025&instid=800000049608",
+        "base_url": "https://data.nysed.gov/enrollment.php?year=2016&instid=800000049608",
+        "vintage": "2024-25 / 2015-16 K-12 (BEDS day)",
+        "verified": "2026-07-20"
+      },
+      "board_url": {
+        "url": "https://www.freeportschools.org/",
+        "verified": "2026-07-20",
+        "note": "probed HTTP 200"
+      }
+    },
+    "medianValue": 502900,
+    "schoolRate": 1819.195,
+    "libraryRate": 141.172,
+    "levy": 87162040.72,
+    "enrollment": {
+      "cur": 6125,
+      "base": 6874
+    },
+    "town": "Hempstead",
+    "board_url": "https://www.freeportschools.org/"
+  },
+  "Hempstead Union Free School District": {
+    "dtfName": "Hempstead",
+    "censusName": "Hempstead Union Free School District",
+    "geoid": "3614130",
+    "sdType": "unified",
+    "starCredit": {
+      "basic": 1133.75,
+      "enhanced": 3174.49
+    },
+    "starExemptSavings": {
+      "basic": 1133.75,
+      "enhanced": 3092.0
+    },
+    "starMaxExemptSavings2026_27": {
+      "basic": 1134.0,
+      "enhanced": 3092.0
+    },
+    "source_refs": {
+      "starCredit": {
+        "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+        "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+        "verified": "2026-07-20"
+      },
+      "starExemptSavings": {
+        "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+        "vintage": "2025 final",
+        "verified": "2026-07-20"
+      },
+      "starMaxExemptSavings2026_27": {
+        "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+        "vintage": "2026-27",
+        "verified": "2026-07-20"
+      },
+      "medianValue": {
+        "url": "https://data.census.gov/api/access/data/table?id=ACSDT5Y2024.B25077&g=9700000US3614130",
+        "vintage": "ACS 2020-24 5-yr B25077, school-district geography",
+        "verified": "2026-07-20"
+      },
+      "schoolRate": {
+        "url": "https://lrv.nassaucountyny.gov/info/34396++01120/ \u2192 POST /gstaxes.php PARID='34396  01120' TOWN_NAME=Hempstead",
+        "vintage": "tax year 2026 (school 2025-26)",
+        "verified": "2026-07-20",
+        "note": "representative in-district Class-1 parcel; parcel info page School District = 'HEMPSTEAD - 1', AV 368"
+      },
+      "levy": {
+        "url": "https://data.ny.gov/resource/iq85-sdzs.json?school_name=Hempstead&fiscal_year_ending=2025",
+        "vintage": "FY ending 2025 (2024-25)",
+        "verified": "2026-07-20",
+        "note": "Hempstead (single segment)"
+      },
+      "enrollment": {
+        "url": "https://data.nysed.gov/enrollment.php?year=2025&instid=800000049875",
+        "base_url": "https://data.nysed.gov/enrollment.php?year=2016&instid=800000049875",
+        "vintage": "2024-25 / 2015-16 K-12 (BEDS day)",
+        "verified": "2026-07-20"
+      },
+      "board_url": {
+        "url": "https://www.hempsteadschools.org/",
+        "verified": "2026-07-20",
+        "note": "probed HTTP 200"
+      },
+      "_scope": "No 'Net Library Tax' line on the school bill (Hempstead Village public library is funded outside the school tax); libraryRate omitted, not a fetch failure."
+    },
+    "medianValue": 451700,
+    "schoolRate": 2267.491,
+    "levy": 75934370,
+    "enrollment": {
+      "cur": 5071,
+      "base": 7488
+    },
+    "town": "Hempstead",
+    "board_url": "https://www.hempsteadschools.org/"
+  },
+  "Island Park Union Free School District": {
+    "dtfName": "Island Park",
+    "censusName": "Island Park Union Free School District",
+    "geoid": "3615480",
+    "sdType": "unified",
+    "starCredit": {
+      "basic": 836.0,
+      "enhanced": 1949.0
+    },
+    "starExemptSavings": {
+      "basic": 794.0,
+      "enhanced": 1731.0
+    },
+    "starMaxExemptSavings2026_27": {
+      "basic": 794.0,
+      "enhanced": 1731.0
+    },
+    "source_refs": {
+      "starCredit": {
+        "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+        "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+        "verified": "2026-07-20"
+      },
+      "starExemptSavings": {
+        "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+        "vintage": "2025 final",
+        "verified": "2026-07-20"
+      },
+      "starMaxExemptSavings2026_27": {
+        "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+        "vintage": "2026-27",
+        "verified": "2026-07-20"
+      },
+      "medianValue": {
+        "url": "https://data.census.gov/api/access/data/table?id=ACSDT5Y2024.B25077&g=9700000US3615480",
+        "vintage": "ACS 2020-24 5-yr B25077, school-district geography",
+        "verified": "2026-07-20"
+      },
+      "schoolRate": {
+        "url": "https://lrv.nassaucountyny.gov/info/43006++03500/ \u2192 POST /gstaxes.php PARID='43006  03500' TOWN_NAME=Hempstead",
+        "vintage": "tax year 2026 (school 2025-26)",
+        "verified": "2026-07-20",
+        "note": "representative in-district Class-1 parcel; parcel info page School District = 'ISLAND PARK UFSD - 31', AV 554"
+      },
+      "libraryRate": {
+        "url": "https://lrv.nassaucountyny.gov/info/43006++03500/ \u2192 POST /gstaxes.php PARID='43006  03500' TOWN_NAME=Hempstead",
+        "vintage": "tax year 2026 (school 2025-26)",
+        "verified": "2026-07-20",
+        "note": "representative in-district Class-1 parcel; parcel info page School District = 'ISLAND PARK UFSD - 31', AV 554"
+      },
+      "levy": {
+        "url": "https://data.ny.gov/resource/iq85-sdzs.json?school_name=Island%20Park&fiscal_year_ending=2025",
+        "vintage": "FY ending 2025 (2024-25)",
+        "verified": "2026-07-20",
+        "note": "Hempstead (single segment)"
+      },
+      "enrollment": {
+        "url": "https://data.nysed.gov/enrollment.php?year=2025&instid=800000049252",
+        "base_url": "https://data.nysed.gov/enrollment.php?year=2016&instid=800000049252",
+        "vintage": "2024-25 / 2015-16 K-12 (BEDS day)",
+        "verified": "2026-07-20"
+      },
+      "board_url": {
+        "url": "https://www.ips.k12.ny.us/",
+        "verified": "2026-07-20",
+        "note": "probed HTTP 200"
+      }
+    },
+    "medianValue": 635200,
+    "schoolRate": 1686.568,
+    "libraryRate": 109.598,
+    "levy": 25737543,
+    "enrollment": {
+      "cur": 655,
+      "base": 704
+    },
+    "town": "Hempstead",
+    "board_url": "https://www.ips.k12.ny.us/"
+  },
+  "Levittown Union Free School District": {
+    "dtfName": "Levittown",
+    "censusName": "Levittown Union Free School District",
+    "geoid": "3617160",
+    "sdType": "unified",
+    "starCredit": {
+      "basic": 1162.0,
+      "enhanced": 3304.08
+    },
+    "starExemptSavings": {
+      "basic": 1139.0,
+      "enhanced": 3304.08
+    },
+    "starMaxExemptSavings2026_27": {
+      "basic": 1139.0,
+      "enhanced": 3304.0
+    },
+    "source_refs": {
+      "starCredit": {
+        "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+        "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+        "verified": "2026-07-20"
+      },
+      "starExemptSavings": {
+        "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+        "vintage": "2025 final",
+        "verified": "2026-07-20"
+      },
+      "starMaxExemptSavings2026_27": {
+        "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+        "vintage": "2026-27",
+        "verified": "2026-07-20"
+      },
+      "medianValue": {
+        "url": "https://data.census.gov/api/access/data/table?id=ACSDT5Y2024.B25077&g=9700000US3617160",
+        "vintage": "ACS 2020-24 5-yr B25077, school-district geography",
+        "verified": "2026-07-20"
+      },
+      "schoolRate": {
+        "url": "https://lrv.nassaucountyny.gov/info/45229++00130/ \u2192 POST /gstaxes.php PARID='45229  00130' TOWN_NAME=Hempstead",
+        "vintage": "tax year 2026 (school 2025-26)",
+        "verified": "2026-07-20",
+        "note": "representative in-district Class-1 parcel; parcel info page School District = 'LEVITTOWN UFSD - 5', AV 398"
+      },
+      "libraryRate": {
+        "url": "https://lrv.nassaucountyny.gov/info/45229++00130/ \u2192 POST /gstaxes.php PARID='45229  00130' TOWN_NAME=Hempstead",
+        "vintage": "tax year 2026 (school 2025-26)",
+        "verified": "2026-07-20",
+        "note": "representative in-district Class-1 parcel; parcel info page School District = 'LEVITTOWN UFSD - 5', AV 398"
+      },
+      "levy": {
+        "url": "https://data.ny.gov/resource/iq85-sdzs.json?school_name=Levittown&fiscal_year_ending=2025",
+        "vintage": "FY ending 2025 (2024-25)",
+        "verified": "2026-07-20",
+        "note": "Hempstead (single segment)"
+      },
+      "enrollment": {
+        "url": "https://data.nysed.gov/enrollment.php?year=2025&instid=800000049713",
+        "base_url": "https://data.nysed.gov/enrollment.php?year=2016&instid=800000049713",
+        "vintage": "2024-25 / 2015-16 K-12 (BEDS day)",
+        "verified": "2026-07-20"
+      },
+      "board_url": {
+        "url": "https://www.levittownschools.com/",
+        "verified": "2026-07-20",
+        "note": "probed HTTP 200"
+      },
+      "_starcheck": "parcel STAR Savings -$3,304.08 = districts.json Enhanced exempt savings 3304.08, exact"
+    },
+    "medianValue": 600700,
+    "schoolRate": 2360.054,
+    "libraryRate": 123.455,
+    "levy": 158813038,
+    "enrollment": {
+      "cur": 7061,
+      "base": 7085
+    },
+    "town": "Hempstead",
+    "board_url": "https://www.levittownschools.com/"
+  },
+  "Massapequa Union Free School District": {
+    "dtfName": "Massapequa",
+    "censusName": "Massapequa Union Free School District",
+    "geoid": "3618630",
+    "sdType": "unified",
+    "starCredit": {
+      "basic": 979.0,
+      "enhanced": 2790.65
+    },
+    "starExemptSavings": {
+      "basic": 959.0,
+      "enhanced": 2724.0
+    },
+    "starMaxExemptSavings2026_27": {
+      "basic": 959.0,
+      "enhanced": 2724.0
+    },
+    "source_refs": {
+      "starCredit": {
+        "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+        "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+        "verified": "2026-07-20"
+      },
+      "starExemptSavings": {
+        "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+        "vintage": "2025 final",
+        "verified": "2026-07-20"
+      },
+      "starMaxExemptSavings2026_27": {
+        "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+        "vintage": "2026-27",
+        "verified": "2026-07-20"
+      },
+      "medianValue": {
+        "url": "https://data.census.gov/api/access/data/table?id=ACSDT5Y2024.B25077&g=9700000US3618630",
+        "vintage": "ACS 2020-24 5-yr B25077, school-district geography",
+        "verified": "2026-07-20"
+      },
+      "schoolRate": {
+        "url": "https://lrv.nassaucountyny.gov/info/52160++00270/ \u2192 POST /gstaxes.php PARID='52160  00270' TOWN_NAME=Oyster Bay",
+        "vintage": "tax year 2026 (school 2025-26)",
+        "verified": "2026-07-20",
+        "note": "representative in-district Class-1 parcel; parcel info page School District = 'MASSAPEQUA UFSD - 23', AV 580"
+      },
+      "libraryRate": {
+        "url": "https://lrv.nassaucountyny.gov/info/52160++00270/ \u2192 POST /gstaxes.php PARID='52160  00270' TOWN_NAME=Oyster Bay",
+        "vintage": "tax year 2026 (school 2025-26)",
+        "verified": "2026-07-20",
+        "note": "representative in-district Class-1 parcel; parcel info page School District = 'MASSAPEQUA UFSD - 23', AV 580"
+      },
+      "levy": {
+        "url": "https://data.ny.gov/resource/iq85-sdzs.json?school_name=Massapequa&fiscal_year_ending=2025",
+        "vintage": "FY ending 2025 (2024-25)",
+        "verified": "2026-07-20",
+        "note": "Oyster Bay (single segment)"
+      },
+      "enrollment": {
+        "url": "https://data.nysed.gov/enrollment.php?year=2025&instid=800000048704",
+        "base_url": "https://data.nysed.gov/enrollment.php?year=2016&instid=800000048704",
+        "vintage": "2024-25 / 2015-16 K-12 (BEDS day)",
+        "verified": "2026-07-20"
+      },
+      "board_url": {
+        "url": "https://www.msd.k12.ny.us/",
+        "verified": "2026-07-20",
+        "note": "probed HTTP 200"
+      }
+    },
+    "medianValue": 678300,
+    "schoolRate": 1993.324,
+    "libraryRate": 76.739,
+    "levy": 178753644,
+    "enrollment": {
+      "cur": 6460,
+      "base": 7124
+    },
+    "town": "Oyster Bay",
+    "board_url": "https://www.msd.k12.ny.us/"
+  },
+  "North Bellmore Union Free School District": {
+    "dtfName": "North Bellmore",
+    "censusName": "North Bellmore Union Free School District",
+    "geoid": "3620940",
+    "sdType": "elementary",
+    "starCredit": {
+      "basic": 1015.0,
+      "enhanced": 2878.02
+    },
+    "starExemptSavings": {
+      "basic": 995.0,
+      "enhanced": 2878.02
+    },
+    "starMaxExemptSavings2026_27": {
+      "basic": 995.0,
+      "enhanced": 2878.0
+    },
+    "source_refs": {
+      "starCredit": {
+        "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+        "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+        "verified": "2026-07-20"
+      },
+      "starExemptSavings": {
+        "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+        "vintage": "2025 final",
+        "verified": "2026-07-20"
+      },
+      "starMaxExemptSavings2026_27": {
+        "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+        "vintage": "2026-27",
+        "verified": "2026-07-20"
+      },
+      "medianValue": {
+        "url": "https://data.census.gov/api/access/data/table?id=ACSDT5Y2024.B25077&g=9500000US3620940",
+        "vintage": "ACS 2020-24 5-yr B25077, school-district geography",
+        "verified": "2026-07-20"
+      },
+      "schoolRate": {
+        "url": "https://lrv.nassaucountyny.gov/info/51331++00180/ \u2192 POST /gstaxes.php PARID='51331  00180' TOWN_NAME=Hempstead",
+        "vintage": "tax year 2026 (school 2025-26)",
+        "verified": "2026-07-20",
+        "note": "representative in-district Class-1 parcel; parcel info page School District = 'N BELLMORE UFSD - 4', AV 549"
+      },
+      "libraryRate": {
+        "url": "https://lrv.nassaucountyny.gov/info/51331++00180/ \u2192 POST /gstaxes.php PARID='51331  00180' TOWN_NAME=Hempstead",
+        "vintage": "tax year 2026 (school 2025-26)",
+        "verified": "2026-07-20",
+        "note": "representative in-district Class-1 parcel; parcel info page School District = 'N BELLMORE UFSD - 4', AV 549"
+      },
+      "levy": {
+        "url": "https://data.ny.gov/resource/iq85-sdzs.json?school_name=North%20Bellmore&fiscal_year_ending=2025",
+        "vintage": "FY ending 2025 (2024-25)",
+        "verified": "2026-07-20",
+        "note": "Hempstead (single segment); elementary district's own levy, excludes Bellmore-Merrick CHSD"
+      },
+      "enrollment": {
+        "url": "https://data.nysed.gov/enrollment.php?year=2025&instid=800000049730",
+        "base_url": "https://data.nysed.gov/enrollment.php?year=2016&instid=800000049730",
+        "vintage": "2024-25 / 2015-16 K-12 (BEDS day)",
+        "verified": "2026-07-20"
+      },
+      "board_url": {
+        "url": "https://www.northbellmoreschools.org/",
+        "verified": "2026-07-20",
+        "note": "probed HTTP 200"
+      },
+      "_scope": "ELEMENTARY district inside Bellmore-Merrick CHSD. LRV parcel shows a SINGLE 'Net School Tax' line (2055.727) = combined North Bellmore-elementary + Bellmore-Merrick-CHSD; not separable at parcel level."
+    },
+    "medianValue": 653000,
+    "schoolRate": 2055.727,
+    "libraryRate": 96.431,
+    "levy": 84696129,
+    "enrollment": {
+      "cur": 2128,
+      "base": 2100
+    },
+    "town": "Hempstead",
+    "board_url": "https://www.northbellmoreschools.org/"
+  },
+  "Oyster Bay-East Norwich Central School District": {
+    "dtfName": "Oyster Bay-East Norwich",
+    "censusName": "Oyster Bay-East Norwich Central School District",
+    "geoid": "3622290",
+    "sdType": "unified",
+    "starCredit": {
+      "basic": 670.0,
+      "enhanced": 1878.0
+    },
+    "starExemptSavings": {
+      "basic": 657.0,
+      "enhanced": 1667.0
+    },
+    "starMaxExemptSavings2026_27": {
+      "basic": 657.0,
+      "enhanced": 1667.0
+    },
+    "source_refs": {
+      "starCredit": {
+        "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+        "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+        "verified": "2026-07-20"
+      },
+      "starExemptSavings": {
+        "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+        "vintage": "2025 final",
+        "verified": "2026-07-20"
+      },
+      "starMaxExemptSavings2026_27": {
+        "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+        "vintage": "2026-27",
+        "verified": "2026-07-20"
+      },
+      "medianValue": {
+        "url": "https://data.census.gov/api/access/data/table?id=ACSDT5Y2024.B25077&g=9700000US3622290",
+        "vintage": "ACS 2020-24 5-yr B25077, school-district geography",
+        "verified": "2026-07-20"
+      },
+      "schoolRate": {
+        "url": "https://lrv.nassaucountyny.gov/info/27042++00110/ \u2192 POST /gstaxes.php PARID='27042  00110' TOWN_NAME=Oyster Bay",
+        "vintage": "tax year 2026 (school 2025-26)",
+        "verified": "2026-07-20",
+        "note": "representative in-district Class-1 parcel; parcel info page School District = 'O BAY/OYSTER BAY - E NORWICH CSD #6 - 9', AV 367"
+      },
+      "libraryRate": {
+        "url": "https://lrv.nassaucountyny.gov/info/27042++00110/ \u2192 POST /gstaxes.php PARID='27042  00110' TOWN_NAME=Oyster Bay",
+        "vintage": "tax year 2026 (school 2025-26)",
+        "verified": "2026-07-20",
+        "note": "representative in-district Class-1 parcel; parcel info page School District = 'O BAY/OYSTER BAY - E NORWICH CSD #6 - 9', AV 367"
+      },
+      "levy": {
+        "url": "https://data.ny.gov/resource/iq85-sdzs.json?school_name=Oyster%20Bay-East%20Norwich&fiscal_year_ending=2025",
+        "vintage": "FY ending 2025 (2024-25)",
+        "verified": "2026-07-20",
+        "note": "Oyster Bay (single segment)"
+      },
+      "enrollment": {
+        "url": "https://data.nysed.gov/enrollment.php?year=2025&instid=800000048868",
+        "base_url": "https://data.nysed.gov/enrollment.php?year=2016&instid=800000048868",
+        "vintage": "2024-25 / 2015-16 K-12 (BEDS day)",
+        "verified": "2026-07-20"
+      },
+      "board_url": {
+        "url": "https://www.obenschools.org/",
+        "verified": "2026-07-20",
+        "note": "probed HTTP 200"
+      }
+    },
+    "medianValue": 871000,
+    "schoolRate": 1362.757,
+    "libraryRate": 48.927,
+    "levy": 58195044,
+    "enrollment": {
+      "cur": 1310,
+      "base": 1569
+    },
+    "town": "Oyster Bay",
+    "board_url": "https://www.obenschools.org/"
+  },
+  "Roosevelt Union Free School District": {
+    "dtfName": "Roosevelt",
+    "censusName": "Roosevelt Union Free School District",
+    "geoid": "3624990",
+    "sdType": "unified",
+    "starCredit": {
+      "basic": 809.73,
+      "enhanced": 2267.24
+    },
+    "starExemptSavings": {
+      "basic": 807.0,
+      "enhanced": 2267.24
+    },
+    "starMaxExemptSavings2026_27": {
+      "basic": 807.0,
+      "enhanced": 2267.0
+    },
+    "source_refs": {
+      "starCredit": {
+        "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+        "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+        "verified": "2026-07-20"
+      },
+      "starExemptSavings": {
+        "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+        "vintage": "2025 final",
+        "verified": "2026-07-20"
+      },
+      "starMaxExemptSavings2026_27": {
+        "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+        "vintage": "2026-27",
+        "verified": "2026-07-20"
+      },
+      "medianValue": {
+        "url": "https://data.census.gov/api/access/data/table?id=ACSDT5Y2024.B25077&g=9700000US3624990",
+        "vintage": "ACS 2020-24 5-yr B25077, school-district geography",
+        "verified": "2026-07-20"
+      },
+      "schoolRate": {
+        "url": "https://lrv.nassaucountyny.gov/info/55333++01020/ \u2192 POST /gstaxes.php PARID='55333  01020' TOWN_NAME=Hempstead",
+        "vintage": "tax year 2026 (school 2025-26)",
+        "verified": "2026-07-20",
+        "note": "representative in-district Class-1 parcel; parcel info page School District = 'ROOSEVELT UFSD - 8', AV 393"
+      },
+      "levy": {
+        "url": "https://data.ny.gov/resource/iq85-sdzs.json?school_name=Roosevelt&fiscal_year_ending=2025",
+        "vintage": "FY ending 2025 (2024-25)",
+        "verified": "2026-07-20",
+        "note": "Hempstead (single segment)"
+      },
+      "enrollment": {
+        "url": "https://data.nysed.gov/enrollment.php?year=2025&instid=800000049648",
+        "base_url": "https://data.nysed.gov/enrollment.php?year=2016&instid=800000049648",
+        "vintage": "2024-25 / 2015-16 K-12 (BEDS day)",
+        "verified": "2026-07-20"
+      },
+      "board_url": {
+        "url": "https://www.rufsd.org/",
+        "verified": "2026-07-20",
+        "note": "probed HTTP 200"
+      },
+      "_scope": "No 'Net Library Tax' line on the school bill; libraryRate omitted (structural absence, not a fetch failure)."
+    },
+    "medianValue": 476700,
+    "schoolRate": 1619.46,
+    "levy": 24278096,
+    "enrollment": {
+      "cur": 3020,
+      "base": 3170
+    },
+    "town": "Hempstead",
+    "board_url": "https://www.rufsd.org/"
+  },
+  "Uniondale Union Free School District": {
+    "dtfName": "Uniondale",
+    "censusName": "Uniondale Union Free School District",
+    "geoid": "3629280",
+    "sdType": "unified",
+    "starCredit": {
+      "basic": 750.0,
+      "enhanced": 2143.63
+    },
+    "starExemptSavings": {
+      "basic": 735.0,
+      "enhanced": 2088.0
+    },
+    "starMaxExemptSavings2026_27": {
+      "basic": 735.0,
+      "enhanced": 2088.0
+    },
+    "source_refs": {
+      "starCredit": {
+        "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+        "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+        "verified": "2026-07-20"
+      },
+      "starExemptSavings": {
+        "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+        "vintage": "2025 final",
+        "verified": "2026-07-20"
+      },
+      "starMaxExemptSavings2026_27": {
+        "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+        "vintage": "2026-27",
+        "verified": "2026-07-20"
+      },
+      "medianValue": {
+        "url": "https://data.census.gov/api/access/data/table?id=ACSDT5Y2024.B25077&g=9700000US3629280",
+        "vintage": "ACS 2020-24 5-yr B25077, school-district geography",
+        "verified": "2026-07-20"
+      },
+      "schoolRate": {
+        "url": "https://lrv.nassaucountyny.gov/info/34079++00160/ \u2192 POST /gstaxes.php PARID='34079  00160' TOWN_NAME=Hempstead",
+        "vintage": "tax year 2026 (school 2025-26)",
+        "verified": "2026-07-20",
+        "note": "representative in-district Class-1 parcel; parcel info page School District = 'UNIONDALE UFSD - 2', AV 331"
+      },
+      "levy": {
+        "url": "https://data.ny.gov/resource/iq85-sdzs.json?school_name=Uniondale&fiscal_year_ending=2025",
+        "vintage": "FY ending 2025 (2024-25)",
+        "verified": "2026-07-20",
+        "note": "Hempstead (single segment)"
+      },
+      "enrollment": {
+        "url": "https://data.nysed.gov/enrollment.php?year=2025&instid=800000049792",
+        "base_url": "https://data.nysed.gov/enrollment.php?year=2016&instid=800000049792",
+        "vintage": "2024-25 / 2015-16 K-12 (BEDS day)",
+        "verified": "2026-07-20"
+      },
+      "board_url": {
+        "url": "https://www.uniondaleschools.org/",
+        "verified": "2026-07-20",
+        "note": "probed HTTP 200"
+      },
+      "_scope": "No 'Net Library Tax' line on the school bill; libraryRate omitted (structural absence, not a fetch failure)."
+    },
+    "medianValue": 516100,
+    "schoolRate": 1531.163,
+    "levy": 134565503,
+    "enrollment": {
+      "cur": 5768,
+      "base": 6736
+    },
+    "town": "Hempstead",
+    "board_url": "https://www.uniondaleschools.org/"
+  },
+  "Wantagh Union Free School District": {
+    "dtfName": "Wantagh",
+    "censusName": "Wantagh Union Free School District",
+    "geoid": "3629850",
+    "sdType": "unified",
+    "starCredit": {
+      "basic": 1035.0,
+      "enhanced": 2941.15
+    },
+    "starExemptSavings": {
+      "basic": 1015.0,
+      "enhanced": 2941.15
+    },
+    "starMaxExemptSavings2026_27": {
+      "basic": 1015.0,
+      "enhanced": 2941.0
+    },
+    "source_refs": {
+      "starCredit": {
+        "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+        "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+        "verified": "2026-07-20"
+      },
+      "starExemptSavings": {
+        "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+        "vintage": "2025 final",
+        "verified": "2026-07-20"
+      },
+      "starMaxExemptSavings2026_27": {
+        "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+        "vintage": "2026-27",
+        "verified": "2026-07-20"
+      },
+      "medianValue": {
+        "url": "https://data.census.gov/api/access/data/table?id=ACSDT5Y2024.B25077&g=9700000US3629850",
+        "vintage": "ACS 2020-24 5-yr B25077, school-district geography",
+        "verified": "2026-07-20"
+      },
+      "schoolRate": {
+        "url": "https://lrv.nassaucountyny.gov/info/56233++00130/ \u2192 POST /gstaxes.php PARID='56233  00130' TOWN_NAME=Hempstead",
+        "vintage": "tax year 2026 (school 2025-26)",
+        "verified": "2026-07-20",
+        "note": "representative in-district Class-1 parcel; parcel info page School District = 'WANTAGH UFSD - 23', AV 550"
+      },
+      "libraryRate": {
+        "url": "https://lrv.nassaucountyny.gov/info/56233++00130/ \u2192 POST /gstaxes.php PARID='56233  00130' TOWN_NAME=Hempstead",
+        "vintage": "tax year 2026 (school 2025-26)",
+        "verified": "2026-07-20",
+        "note": "representative in-district Class-1 parcel; parcel info page School District = 'WANTAGH UFSD - 23', AV 550"
+      },
+      "levy": {
+        "url": "https://data.ny.gov/resource/iq85-sdzs.json?school_name=Wantagh&fiscal_year_ending=2025",
+        "vintage": "FY ending 2025 (2024-25)",
+        "verified": "2026-07-20",
+        "note": "Hempstead (single segment)"
+      },
+      "enrollment": {
+        "url": "https://data.nysed.gov/enrollment.php?year=2025&instid=800000049334",
+        "base_url": "https://data.nysed.gov/enrollment.php?year=2016&instid=800000049334",
+        "vintage": "2024-25 / 2015-16 K-12 (BEDS day)",
+        "verified": "2026-07-20"
+      },
+      "board_url": {
+        "url": "https://www.wantaghschools.org/",
+        "verified": "2026-07-20",
+        "note": "probed HTTP 200"
+      }
+    },
+    "medianValue": 711700,
+    "schoolRate": 2100.824,
+    "libraryRate": 90.897,
+    "levy": 67051549,
+    "enrollment": {
+      "cur": 2710,
+      "base": 3012
+    },
+    "town": "Hempstead",
+    "board_url": "https://www.wantaghschools.org/"
+  }
+}

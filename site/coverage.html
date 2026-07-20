@@ -262,6 +262,12 @@ var DIMS = [
       return clamp01(h/3);
   }},
   { id:"starParcels", label:"Enhanced-STAR parcels ★", northStar:true, score:function(r){
+      // Deliberately keyed to enhStarParcels, a field NO row carries yet. The rows do
+      // carry enhStarExemptParcels (the Enhanced-STAR EXEMPTION-program count from
+      // aa3i-eamx), but that legacy subset is NOT the true §467 parcel count Ask #3
+      // seeks, so it must not light this north-star column. Do not repoint this scorer
+      // at enhStarExemptParcels; this column stays empty until the credit-recipient
+      // count lands (see the panel copy and validation.html#unknown).
       return (numOk(r.enhStarParcels)&&hasRef(r,"enhStarParcels"))?1:0;
   }},
   { id:"levy", label:"School levy", score:function(r){ return (numOk(r.levy)&&hasRef(r,"levy"))?1:0; } },

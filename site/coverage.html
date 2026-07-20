@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Coverage by district &middot; RVC Housing &times; Schools</title>
+<meta name="description" content="Which Nassau school districts the campaign can serve with accurate, ledger-sourced figures today. A live completeness matrix derived from the per-district source table, plus the campaign instruments that track progress.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+/* Modernist / RVC tokens (site.css). Zero radius, no cards/shadows/images, flush-left. */
+.hero{padding:56px 48px 30px;max-width:1100px}
+.hero .eyebrow{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#1e6b3d;margin-bottom:16px}
+.hero h1{margin:0 0 20px;font-weight:800;font-size:52px;line-height:1.03;letter-spacing:-.025em;max-width:900px}
+.hero .lede{margin:0;font-size:19px;line-height:1.5;max-width:780px}
+.sec{margin:0 48px;border-top:2px solid rgba(32,30,29,.4);padding:32px 0}
+.eyebrow{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#1e6b3d;margin-bottom:8px}
+.secintro{margin:0 0 18px;font-size:16px;max-width:760px;line-height:1.55}
+
+/* how-to-read */
+.howto{border-left:3px solid #1e6b3d;padding:2px 0 2px 16px;margin:0 0 20px;max-width:760px}
+.howto h2{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:rgba(32,30,29,.6);margin:0 0 10px}
+.howto ul{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+.howto li{display:flex;align-items:center;gap:11px;font-size:14px;line-height:1.4}
+.howto .sw{flex:none}
+
+/* stats strip */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:2px solid rgba(32,30,29,.4);margin:0 0 22px;max-width:1000px}
+.stats .tile{padding:16px 16px 16px 0;border-right:1px solid rgba(32,30,29,.25)}
+.stats .tile:last-child{border-right:none}
+.stats .big{font-weight:800;font-size:34px;line-height:1;letter-spacing:-.02em}
+.stats .cap{font-size:11.5px;margin-top:8px;color:rgba(32,30,29,.75);line-height:1.4}
+.stats .cap b{color:#201e1d;font-weight:800}
+
+/* matrix */
+.scroller{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid rgba(32,30,29,.25)}
+table.matrix{border-collapse:separate;border-spacing:0;width:100%;min-width:820px}
+table.matrix th,table.matrix td{padding:0;text-align:center;vertical-align:middle}
+table.matrix thead th{position:sticky;top:0;z-index:3;background:#f3f2f2;border-bottom:2px solid rgba(32,30,29,.4);
+  font-size:10px;letter-spacing:.03em;text-transform:uppercase;color:rgba(32,30,29,.6);font-weight:800;
+  padding:11px 6px;line-height:1.25;white-space:normal;min-width:60px;cursor:pointer;user-select:none}
+table.matrix thead th:hover{color:#201e1d}
+table.matrix thead th.sorted{color:#1e6b3d}
+table.matrix thead th.sorted::after{content:"";display:inline-block;margin-left:4px;border:4px solid transparent;vertical-align:middle}
+table.matrix thead th.sorted.asc::after{border-bottom-color:#1e6b3d;margin-bottom:2px}
+table.matrix thead th.sorted.desc::after{border-top-color:#1e6b3d;margin-top:2px}
+th.rowhead,td.rowhead{position:sticky;left:0;z-index:2;background:#f3f2f2;text-align:left;min-width:200px;max-width:200px;
+  border-right:1px solid rgba(32,30,29,.25);padding:11px 12px}
+thead th.rowhead{z-index:4}
+td.rowhead .s-name{display:block;font-weight:800;font-size:13.5px;color:#201e1d;line-height:1.2}
+td.rowhead .s-meta{display:block;font-size:10.5px;color:rgba(32,30,29,.6);letter-spacing:.02em;margin-top:3px}
+td.rowhead .s-cited{display:inline-block;font-size:9.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#1e6b3d;margin-top:4px}
+tbody tr{border-top:1px solid rgba(32,30,29,.2)}
+tbody td{border-top:1px solid rgba(32,30,29,.2);padding:10px 6px;min-width:60px}
+tbody tr:hover td,tbody tr:hover td.rowhead{background:rgba(197,164,78,.14)}
+tbody tr.cited td.rowhead{border-left:3px solid #c5a44e}
+td.pctcell{font-weight:800;font-size:12.5px;min-width:56px}
+th.pcthead{min-width:56px}
+.rowpct{display:flex;flex-direction:column;align-items:center;gap:4px}
+.rowpct .bar{width:36px;height:4px;background:rgba(32,30,29,.2);overflow:hidden}
+.rowpct .bar span{display:block;height:100%;background:#1e6b3d}
+tfoot td{border-top:2px solid #201e1d;padding:11px 6px;font-size:12px;font-weight:800;color:#201e1d}
+tfoot td.rowhead{text-transform:none;letter-spacing:0}
+th.ns,td.ns{background:rgba(197,164,78,.10)}
+thead th.ns{border-bottom-color:#c5a44e}
+
+/* harvey ball */
+.hb{display:inline-block;width:19px;height:19px;vertical-align:middle}
+.hb circle.rim{fill:none;stroke:rgba(32,30,29,.35);stroke-width:2}
+.hb .fill{fill:#1e6b3d}
+.cellwrap{display:flex;justify-content:center}
+
+.foot{margin-top:18px;font-size:13px;color:rgba(32,30,29,.7);line-height:1.55;max-width:900px}
+.foot code{font-weight:600}
+.stamp{font-size:11.5px;color:rgba(32,30,29,.6);margin-top:8px}
+
+/* campaign instruments */
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:2px solid rgba(32,30,29,.4);max-width:1100px}
+.pillar{padding:20px 22px 22px 0;border-right:1px solid rgba(32,30,29,.25)}
+.pillar:last-child{border-right:none;padding-right:0}
+.pillar .plabel{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#1e6b3d;margin-bottom:12px}
+.pillar .metric{margin:0 0 12px}
+.pillar .metric .m-big{font-weight:800;font-size:26px;line-height:1;letter-spacing:-.02em}
+.pillar .metric .m-cap{font-size:12px;color:rgba(32,30,29,.75);margin-top:5px;line-height:1.4}
+.pillar .pnote{font-size:12.5px;color:rgba(32,30,29,.75);line-height:1.5;margin:12px 0 0}
+.pillar a{font-weight:600}
+.expect{border-left:3px solid #c5a44e;padding:2px 0 2px 18px;margin:26px 0 0;max-width:820px}
+.expect h3{margin:0 0 12px;font-size:16px;font-weight:800}
+.expect p{margin:0 0 12px;font-size:14px;line-height:1.6}
+.expect p:last-child{margin-bottom:0}
+.expect b{font-weight:800}
+
+.suffolk{border:1px solid rgba(32,30,29,.3);padding:16px 18px;margin:20px 0 0;max-width:820px}
+.suffolk h3{margin:0 0 8px;font-size:14px;font-weight:800}
+.suffolk p{margin:0;font-size:13px;line-height:1.55;color:rgba(32,30,29,.8)}
+
+.band{margin-top:8px;background:#1e6b3d;color:#f3f2f2;padding:40px 48px}
+.band .headline{font-weight:800;font-size:28px;line-height:1.12;letter-spacing:-.02em;max-width:880px}
+.band .btns{display:flex;gap:12px;margin-top:24px;flex-wrap:wrap}
+.band .primary{display:inline-flex;background:#c5a44e;color:#201e1d;font-weight:800;font-size:14px;padding:13px 44px 13px 18px;text-decoration:none}
+.band .secondary{display:inline-flex;border:1px solid #f3f2f2;color:#f3f2f2;font-weight:800;font-size:14px;padding:13px 44px 13px 18px;text-decoration:none}
+
+@media(max-width:760px){
+  .hero{padding:40px 24px 24px}
+  .hero h1{font-size:37px}
+  .hero .lede{font-size:17px}
+  .sec{margin:0 24px;padding:26px 0}
+  .stats{grid-template-columns:1fr 1fr}
+  .stats .tile{padding:14px 12px}
+  .stats .tile:nth-child(2){border-right:none;padding-right:0}
+  .stats .tile:nth-child(3){padding-left:0}
+  .pillars{grid-template-columns:1fr}
+  .pillar{border-right:none;border-bottom:1px solid rgba(32,30,29,.25);padding:18px 0}
+  .pillar:last-child{border-bottom:none}
+  .band{padding:32px 24px}
+}
+</style>
+</head>
+<body>
+<div id="site-nav" data-current="factcheck"></div>
+
+<div class="hero">
+  <div class="eyebrow">Coverage by district &middot; derived live from the source table</div>
+  <h1>Which districts we can serve, and what to source next.</h1>
+  <p class="lede">One grid. Every Nassau school district down the side, every data dimension across the top. A filled dot means the figure is complete and traced to a primary source. A half dot means it is partly sourced. An empty ring means it is not sourced yet. Nothing here is typed by hand. It is computed every time this page loads from <a href="assets/districts.json">the per-district source table</a>, so a cell can only show complete when its source link resolves. Provenance is documented in the <a href="validation.html#districts">facts ledger</a>.</p>
+</div>
+
+<div class="sec" id="how">
+  <div class="eyebrow">01 &middot; How to read the grid</div>
+  <div class="howto">
+    <h2>The three states</h2>
+    <ul>
+      <li><span class="sw" id="lg-full"></span> <span><b>Complete</b>: the field is present and its <code>source_ref</code> points to a live ledger row or primary source.</span></li>
+      <li><span class="sw" id="lg-half"></span> <span><b>Partly sourced</b>: some of the field's parts are in, more to gather (for example, STAR credit and exemption logged but the 2026-27 maximum lives on an out-of-scope page).</span></li>
+      <li><span class="sw" id="lg-empty"></span> <span><b>Not sourced yet</b>: no verified figure for this district on this dimension. The next thing to chase.</span></li>
+    </ul>
+  </div>
+  <p class="secintro">Rows are ordered least-complete first, so the top rows are the ones worth sourcing next. The gold left-edge marks the ten districts our own content quotes by name (their coverage is the campaign's credibility floor). The gold column is the north star: Enhanced-STAR parcel turnover. Click any header to sort.</p>
+
+  <div class="stats" id="stats"></div>
+
+  <div class="scroller" role="region" aria-label="Coverage matrix, scroll sideways to see all dimensions">
+    <table class="matrix" id="matrix">
+      <thead><tr id="headrow"></tr></thead>
+      <tbody id="body"></tbody>
+      <tfoot id="foot"></tfoot>
+    </table>
+  </div>
+
+  <p class="foot">
+    Each percentage is the share of a dimension's parts that are sourced. A district's overall number is the mean across all dimensions. The whole grid is derived at load time from the same <code>districts.json</code> the action kit reads, so it never needs manual upkeep: source a district and this page moves on its own. The computed result is also exposed as <code>window.COVERAGE_SUMMARY</code> for a later sourcing agent to read. County-legislator and school-board contacts are the per-district official fields the source table carries; the federal representative, state senator, and Assembly member resolve live by district number in the action kit for every Nassau address.
+  </p>
+  <p class="stamp" id="stamp"></p>
+
+  <div class="suffolk">
+    <h3>Outside Nassau, not served</h3>
+    <p>Three districts our content names by way of example sit in <b>Suffolk County</b>, outside this data plan (different assessment system, no Nassau parcel roll, a separate STAR county table): <b>Northport</b>, <b>Three Village</b>, and <b>Brentwood</b> (former superintendent Michael Cohen). They are structurally unservable here, not merely incomplete, so they are not rows in the grid. They remain narrative examples only; the action kit detects a non-Nassau address and degrades to RVC-typical figures rather than showing wrong numbers.</p>
+  </div>
+</div>
+
+<div class="sec" id="instruments">
+  <div class="eyebrow">02 &middot; Campaign instruments</div>
+  <p class="secintro">What we are actually moving, tracked honestly. Three levers: the north-star data ask, the legislation, and residents taking action. Every number below is either sourced, read live, or labeled as a manual tally.</p>
+  <div class="pillars" id="pillars">
+    <div class="pillar">
+      <div class="plabel">a &middot; North star: Enhanced-STAR parcel turnover</div>
+      <div class="metric">
+        <div class="m-big" id="ns-count">0 / 55</div>
+        <div class="m-cap">districts with a sourced Enhanced-STAR parcel count in the source table.</div>
+      </div>
+      <p class="pnote">Each parcel that comes off Enhanced STAR year over year is roughly one senior move: one family home freed, plus the state's <a href="validation.html#f-dividend">downsizing dividend</a>. The clean per-district number is not published yet. New York publishes Enhanced-STAR <em>exemption-program</em> recipient counts by district (<a href="https://data.ny.gov/resource/aa3i-eamx.json">data.ny.gov, aa3i-eamx</a>: Rockville Centre 395 for the 2025 levy year, down from 428 in 2023). That is a shrinking legacy subset only. It excludes the post-2016 credit-check recipients and is not the &sect;467 count <a href="validation.html#unknown">Ask #3</a> seeks. A true parcel count needs the credit recipients added, a derivation or FOIL still pending. This column stays empty until that lands.</p>
+    </div>
+    <div class="pillar">
+      <div class="plabel">b &middot; Legislation</div>
+      <div class="metric">
+        <div class="m-big" id="leg-cosponsors">&mdash;</div>
+        <div class="m-cap">H.R. 1340 cosponsors. <span id="leg-gillen"></span></div>
+      </div>
+      <p class="pnote" id="leg-posture"></p>
+      <p class="pnote"><span id="leg-replies">0</span> office replies &middot; <span id="leg-walk">0</span> walkthroughs booked (manual tally). Cosponsor counts and committee posture drift; <a href="validation.html#f-hr1340">re-verify same-day</a> before anything politician-facing goes out.</p>
+    </div>
+    <div class="pillar">
+      <div class="plabel">c &middot; Residents acting</div>
+      <div class="metric">
+        <div class="m-big" id="eng-lookups">&mdash;</div>
+        <div class="m-cap">address lookups run in the action kit.</div>
+      </div>
+      <p class="pnote"><span id="eng-letters">&mdash;</span> letters copied &middot; <span id="eng-signups">&mdash;</span> update-list signups. Counts only: no addresses, no personal data, aggregate integers. Reads live from the site's count endpoint; shows a dash where the endpoint is unreachable (for example, opening this file without the site running).</p>
+    </div>
+  </div>
+
+  <div class="expect" id="expect">
+    <h3>What to realistically expect</h3>
+    <p>The honest target is <b>stabilization, not restoration</b>. Enrollment fell from <a href="validation.html#f-enrollment">3,533 in 2015-16 to 3,276 in 2024-25</a>, down 257. Each senior-to-family turnover adds about 1.4 students (the turnover model in <a href="index.html#money">Follow one home sale</a>). Refilling all 257 seats would take roughly 184 extra turnovers (257 divided by 1.4) on top of the natural rate. The realistic aim is to slow the slide and protect programs, not to win every seat back.</p>
+    <p><b>The direct dollars to a homeowner who stays are small.</b> When one &sect;467-exempt home turns over it stops shifting roughly $7,300 a year of school tax onto its neighbors (the neighbor-relief figure in Follow one home sale, order-of-magnitude). Spread across the district's roughly 7,400 owner-occupied parcels (<a href="validation.html#f-senior-share">ACS: 7,453 owner households</a>), that is about $1 per parcel per year per turnover. The case is cumulative and about stopping the shift, not a rebate anyone receives.</p>
+    <p><b>The $2,058 downsizing dividend is the state's saving, not the homeowner's.</b> It is the difference between the Enhanced and Basic STAR credit (<a href="validation.html#f-dividend">ledger</a>) that Albany keeps when a senior downsizes. It funds the incentives on the brief. It is not cash back to any resident.</p>
+    <p><b>Where real individual dollars live: the personal levers.</b> A grievance to challenge an over-assessment, registering for the STAR credit, checking <a href="validation.html#s467">&sect;467</a> eligibility, and, for a senior who is actually downsizing, <a href="validation.html#f-s3309">S3309</a> keeping the exemption in the move year. Those move real money for an individual household. The campaign's targets are stabilization, burden-shift relief, and program protection. It never promises cash back.</p>
+  </div>
+</div>
+
+<div class="band">
+  <div class="headline">A cell shows complete only when its source link resolves. That is the same rule the whole site runs on.</div>
+  <div class="btns">
+    <a class="primary" href="validation.html#districts">See the per-district provenance</a>
+    <a class="secondary" href="index.html#asks">Look up your address</a>
+  </div>
+</div>
+
+<div class="site-foot"><span>Jeff Pinto &middot; Rockville Centre &middot; <a href="mailto:jeff@bluecamelconsulting.com?subject=%5Brvc-taxes%5D%20coverage">Contact</a></span><span>Derived live from the source table &middot; ledger updated July 20, 2026</span></div>
+
+<script src="assets/nav.js"></script>
+<script>
+/* ============================================================================
+   Coverage matrix for the RVC Housing x Schools campaign.
+
+   Rows  = every Nassau school district in assets/districts.json (keyed by the
+           US Census school-district NAME).
+   Cols  = the data dimensions a per-district "follow one home sale" needs.
+
+   Every cell fraction is DERIVED from field presence + a resolving source_ref
+   in districts.json. A field with no source_ref can never show complete, so the
+   grid is literally the ledger-sourcing status. No value is authored here.
+
+   States:  frac <= 0 -> empty (not sourced) | 0<frac<1 -> partial | >=1 complete
+   Export:  window.COVERAGE_SUMMARY for a later sourcing agent.
+   ============================================================================ */
+
+/* The ten districts our own content quotes by name (Census NAMEs). Their
+   coverage is the campaign's credibility floor, so they are flagged. */
+var CITED = {
+  "Rockville Centre Union Free School District":1,
+  "Long Beach City School District":1,
+  "Locust Valley Central School District":1,
+  "North Shore Central School District":1,
+  "Oyster Bay-East Norwich Central School District":1,
+  "Hewlett-Woodmere Union Free School District":1,
+  "Levittown Union Free School District":1,
+  "Baldwin Union Free School District":1,
+  "Lynbrook Union Free School District":1,
+  "Malverne Union Free School District":1
+};
+
+/* ---- field/source helpers ---- */
+function numOk(v){ return typeof v==="number" && isFinite(v); }
+function objNums(o,keys){ return !!o && keys.every(function(k){return numOk(o[k]);}); }
+function hasRef(row,f){
+  var refs=row.source_refs; if(!refs) return false;
+  var r=refs[f]; if(!r) return false;
+  return typeof r==="string" ? r.length>0 : !!r.url;
+}
+function clamp01(n){ return n<0?0:(n>1?1:n); }
+
+/* ---- dimensions: id, header label, scorer(row)->frac in [0,1] ---- */
+var DIMS = [
+  { id:"resolution", label:"Address → district", score:function(r){ return r.geoid?1:0; } },
+  { id:"star", label:"STAR amounts", score:function(r){
+      var h=0;
+      if(objNums(r.starCredit,["basic","enhanced"])&&hasRef(r,"starCredit")) h++;
+      if(objNums(r.starExemptSavings,["basic","enhanced"])&&hasRef(r,"starExemptSavings")) h++;
+      if(objNums(r.starMaxExemptSavings2026_27,["basic","enhanced"])&&hasRef(r,"starMaxExemptSavings2026_27")) h++;
+      return clamp01(h/3);
+  }},
+  { id:"starParcels", label:"Enhanced-STAR parcels ★", northStar:true, score:function(r){
+      return (numOk(r.enhStarParcels)&&hasRef(r,"enhStarParcels"))?1:0;
+  }},
+  { id:"levy", label:"School levy", score:function(r){ return (numOk(r.levy)&&hasRef(r,"levy"))?1:0; } },
+  { id:"rate", label:"School tax rate", score:function(r){ return (numOk(r.schoolRate)&&hasRef(r,"schoolRate"))?1:0; } },
+  { id:"value", label:"Median home value", score:function(r){ return (numOk(r.medianValue)&&hasRef(r,"medianValue"))?1:0; } },
+  { id:"enrollment", label:"Enrollment / decline", score:function(r){ return (objNums(r.enrollment,["cur","base"])&&hasRef(r,"enrollment"))?1:0; } },
+  { id:"officials", label:"County & board contacts", score:function(r){
+      var h=0; if(r.county_leg&&hasRef(r,"county_leg")) h++; if(r.board_url&&hasRef(r,"board_url")) h++; return clamp01(h/2);
+  }}
+];
+
+function stateFor(frac){ if(frac<=0) return "empty"; if(frac>=1) return "complete"; return "partial"; }
+function pct(frac){ return Math.round(frac*100); }
+
+/* ---- harvey ball SVG (three states), static markup only ---- */
+function harveyBall(state){
+  var rim='<circle class="rim" cx="10" cy="10" r="8"></circle>';
+  var fill="";
+  if(state==="complete") fill='<circle class="fill" cx="10" cy="10" r="8"></circle>';
+  else if(state==="partial") fill='<path class="fill" d="M10 2 A8 8 0 0 0 10 18 Z"></path>';
+  var title = state==="complete"?"complete":(state==="partial"?"partly sourced":"not sourced yet");
+  return '<svg class="hb" viewBox="0 0 20 20" role="img" aria-label="'+title+'">'+rim+fill+'</svg>';
+}
+
+/* ---- load the per-district source table ---- */
+function loadDistricts(){
+  return fetch("assets/districts.json",{cache:"no-store"}).then(function(r){
+    if(!r.ok) throw new Error("no source table");
+    return r.json();
+  }).then(function(j){
+    var dd=(j&&j.districts)||j||{};
+    var rows=[];
+    for(var name in dd){
+      if(name==="_meta") continue;
+      if(!Object.prototype.hasOwnProperty.call(dd,name)) continue;
+      rows.push({name:name, data:dd[name]});
+    }
+    return rows;
+  });
+}
+
+/* ---- compute ---- */
+var VIEW={ rows:[], colAvg:{}, overallPct:0, sortKey:"overall", sortDir:1 };
+
+function build(raw){
+  var rows=raw.map(function(x){
+    var d=x.data||{}, sec={}, sum=0;
+    DIMS.forEach(function(def){
+      var f=def.score(d)||0; sec[def.id]={frac:f,state:stateFor(f)}; sum+=f;
+    });
+    var overall=DIMS.length?sum/DIMS.length:0;
+    var meta=(d.sdType||"district");
+    if(d.jurisdiction) meta+=" · "+d.jurisdiction;
+    return { name:x.name, dtf:d.dtfName||"", meta:meta, cited:!!CITED[x.name], sec:sec, overall:overall };
+  });
+  VIEW.rows=rows;
+
+  var colAvg={};
+  DIMS.forEach(function(def){
+    var t=0; rows.forEach(function(r){ t+=r.sec[def.id].frac; });
+    colAvg[def.id]= rows.length? t/rows.length : 0;
+  });
+  VIEW.colAvg=colAvg;
+
+  var allSum=0,allN=0;
+  rows.forEach(function(r){ DIMS.forEach(function(d){ allSum+=r.sec[d.id].frac; allN++; }); });
+  VIEW.overallPct = allN? pct(allSum/allN) : 0;
+
+  var moneyDims=["levy","rate","value","enrollment"];
+  var fullyModeled=rows.filter(function(r){ return moneyDims.every(function(k){ return r.sec[k].frac>=0.999; }); }).length;
+  var starComplete=rows.filter(function(r){ return r.sec.star.frac>=0.999; }).length;
+  var nsComplete=rows.filter(function(r){ return r.sec.starParcels.frac>=0.999; }).length;
+
+  renderStats({ overallPct:VIEW.overallPct, total:rows.length, fullyModeled:fullyModeled,
+                starComplete:starComplete, nsComplete:nsComplete });
+  renderHeader(); applySort(); renderFootRow();
+  publishSummary(rows);
+  paintInstruments(nsComplete, rows.length);
+}
+
+/* ---- stat tiles (text via textContent) ---- */
+function strong(t){ var b=document.createElement("b"); b.textContent=t; return b; }
+function tile(host, big, capNodes){
+  var d=document.createElement("div"); d.className="tile";
+  var b=document.createElement("div"); b.className="big"; b.textContent=big; d.appendChild(b);
+  var c=document.createElement("div"); c.className="cap";
+  (Array.isArray(capNodes)?capNodes:[capNodes]).forEach(function(n){ c.appendChild(typeof n==="string"?document.createTextNode(n):n); });
+  d.appendChild(c); host.appendChild(d);
+}
+function renderStats(m){
+  var host=document.getElementById("stats"); host.textContent="";
+  tile(host, m.overallPct+"%", ["of all tracked data points are ", strong("sourced and complete"), " across "+m.total+" districts and 8 dimensions."]);
+  tile(host, m.starComplete+" / "+m.total, ["districts have ", strong("every STAR amount"), " logged. The two partly-sourced are Suffolk-home districts whose 2026-27 maximum lives off-scope."]);
+  tile(host, m.fullyModeled+" / "+m.total, ["districts are ", strong("fully modeled"), " for follow-one-home-sale (levy, rate, value, enrollment all sourced)."]);
+  tile(host, m.nsComplete+" / "+m.total, ["districts have the ", strong("Enhanced-STAR parcel count"), ", the north-star input. Pending derivation."]);
+}
+
+/* ---- matrix ---- */
+function headerCell(label, sortKey, cls){
+  var th=document.createElement("th"); th.scope="col"; th.textContent=label;
+  if(cls) th.className=cls;
+  th.dataset.sort=sortKey; th.title="Sort by "+label.toLowerCase(); th.tabIndex=0;
+  th.addEventListener("click",function(){ setSort(sortKey); });
+  th.addEventListener("keydown",function(e){ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); setSort(sortKey); } });
+  return th;
+}
+function renderHeader(){
+  var hr=document.getElementById("headrow"); hr.textContent="";
+  hr.appendChild(headerCell("District","name","rowhead"));
+  DIMS.forEach(function(def){ hr.appendChild(headerCell(def.label,def.id,def.northStar?"ns":"")); });
+  hr.appendChild(headerCell("Overall","overall","pcthead"));
+}
+function renderBody(){
+  var body=document.getElementById("body"); body.textContent="";
+  VIEW.rows.forEach(function(r){
+    var tr=document.createElement("tr"); if(r.cited) tr.className="cited";
+    var rh=document.createElement("td"); rh.className="rowhead"; rh.scope="row";
+    var nm=document.createElement("span"); nm.className="s-name"; nm.textContent=r.name; rh.appendChild(nm);
+    var mt=document.createElement("span"); mt.className="s-meta"; mt.textContent=r.meta; rh.appendChild(mt);
+    if(r.cited){ var cf=document.createElement("span"); cf.className="s-cited"; cf.textContent="Cited on site"; rh.appendChild(cf); }
+    tr.appendChild(rh);
+    DIMS.forEach(function(def){
+      var td=document.createElement("td"); if(def.northStar) td.className="ns";
+      var cell=r.sec[def.id];
+      var w=document.createElement("div"); w.className="cellwrap"; w.innerHTML=harveyBall(cell.state);
+      td.appendChild(w); td.title=def.label+": "+pct(cell.frac)+"%";
+      tr.appendChild(td);
+    });
+    var pc=document.createElement("td"); pc.className="pctcell";
+    var box=document.createElement("div"); box.className="rowpct";
+    var val=document.createElement("span"); val.textContent=pct(r.overall)+"%"; box.appendChild(val);
+    var bar=document.createElement("div"); bar.className="bar";
+    var span=document.createElement("span"); span.style.width=pct(r.overall)+"%"; bar.appendChild(span);
+    box.appendChild(bar); pc.appendChild(box); tr.appendChild(pc);
+    body.appendChild(tr);
+  });
+}
+function renderFootRow(){
+  var foot=document.getElementById("foot"); foot.textContent="";
+  var ftr=document.createElement("tr");
+  var fl=document.createElement("td"); fl.className="rowhead"; fl.textContent="Dimension sourced"; ftr.appendChild(fl);
+  DIMS.forEach(function(def){
+    var td=document.createElement("td"); if(def.northStar) td.className="ns"; td.textContent=pct(VIEW.colAvg[def.id])+"%"; ftr.appendChild(td);
+  });
+  var tot=document.createElement("td"); tot.textContent=VIEW.overallPct+"%"; ftr.appendChild(tot);
+  foot.appendChild(ftr);
+}
+
+/* ---- sort (default overall ascending = least-complete first) ---- */
+function rowVal(r,k){ if(k==="name") return null; return k==="overall"?r.overall:r.sec[k].frac; }
+function applySort(){
+  var k=VIEW.sortKey,d=VIEW.sortDir;
+  VIEW.rows.sort(function(a,b){
+    if(k==="name") return d*a.name.localeCompare(b.name);
+    var av=rowVal(a,k),bv=rowVal(b,k);
+    if(av!==bv) return d*(av-bv);
+    return a.name.localeCompare(b.name);
+  });
+  renderBody(); updateSortMarkers();
+}
+function setSort(key){
+  if(VIEW.sortKey===key){ VIEW.sortDir=-VIEW.sortDir; } else { VIEW.sortKey=key; VIEW.sortDir=1; }
+  applySort();
+}
+function updateSortMarkers(){
+  var ths=document.querySelectorAll("#headrow th");
+  Array.prototype.forEach.call(ths,function(th){
+    var on=th.dataset.sort===VIEW.sortKey;
+    th.classList.toggle("sorted",on);
+    th.classList.toggle("asc",on&&VIEW.sortDir===1);
+    th.classList.toggle("desc",on&&VIEW.sortDir===-1);
+    if(on) th.setAttribute("aria-sort",VIEW.sortDir===1?"ascending":"descending"); else th.removeAttribute("aria-sort");
+  });
+}
+
+/* ---- future-agent hook ---- */
+function publishSummary(rows){
+  window.COVERAGE_SUMMARY={
+    generatedAt:new Date().toISOString(),
+    dimensions:DIMS.map(function(d){return {id:d.id,label:d.label,northStar:!!d.northStar};}),
+    overallPct:VIEW.overallPct,
+    rows:rows.map(function(r){
+      var sec={}; DIMS.forEach(function(d){ sec[d.id]={state:r.sec[d.id].state,frac:Math.round(r.sec[d.id].frac*100)/100}; });
+      return { name:r.name, cited:r.cited, pct:pct(r.overall), dimensions:sec };
+    })
+  };
+}
+
+/* ---- campaign instruments ---- */
+function paintInstruments(nsComplete,total){
+  var el=document.getElementById("ns-count"); if(el) el.textContent=nsComplete+" / "+total;
+  // (b) legislation: hand-maintained manual file (Jeff edits) + ledger-sourced cosponsor count
+  fetch("assets/instruments-manual.json",{cache:"no-store"}).then(function(r){return r.ok?r.json():null;}).then(function(m){
+    var lg=(m&&m.legislation)||{};
+    var co=document.getElementById("leg-cosponsors"); if(co&&typeof lg.hr1340_cosponsors==="number") co.textContent=String(lg.hr1340_cosponsors);
+    var gi=document.getElementById("leg-gillen"); if(gi) gi.textContent=lg.hr1340_note||"";
+    var po=document.getElementById("leg-posture"); if(po) po.textContent=lg.committee_posture||"";
+    var rp=document.getElementById("leg-replies"); if(rp&&typeof lg.office_replies==="number") rp.textContent=String(lg.office_replies);
+    var wk=document.getElementById("leg-walk"); if(wk&&typeof lg.walkthroughs_booked==="number") wk.textContent=String(lg.walkthroughs_booked);
+  }).catch(function(){});
+  // (c) residents: count-only endpoint. Dash when unreachable (e.g. file:// or site down).
+  fetch("/api/count",{cache:"no-store"}).then(function(r){return r.ok?r.json():null;}).then(function(c){
+    if(!c) return;
+    var lk=document.getElementById("eng-lookups"); if(lk) lk.textContent=fmtCount(c.lookup);
+    var lt=document.getElementById("eng-letters"); if(lt) lt.textContent=fmtCount(c.letter);
+    var sg=document.getElementById("eng-signups"); if(sg) sg.textContent=fmtCount(c.signup);
+  }).catch(function(){});
+}
+function fmtCount(n){ return (typeof n==="number"&&isFinite(n))?n.toLocaleString("en-US"):"—"; }
+
+/* ---- legend + boot ---- */
+function paintLegend(){
+  document.getElementById("lg-full").innerHTML=harveyBall("complete");
+  document.getElementById("lg-half").innerHTML=harveyBall("partial");
+  document.getElementById("lg-empty").innerHTML=harveyBall("empty");
+}
+(function boot(){
+  paintLegend();
+  loadDistricts().then(function(rows){
+    var stamp=document.getElementById("stamp");
+    if(!rows.length){ stamp.textContent="No source table loaded. This page reads assets/districts.json."; return; }
+    build(rows);
+    var d=new Date();
+    stamp.textContent="Computed live from "+rows.length+" districts at "+d.toISOString().replace("T"," ").slice(0,16)+" UTC.";
+  }).catch(function(){
+    document.getElementById("stamp").textContent="Could not load assets/districts.json.";
+    // instruments band still tries manual + count sources independently
+    paintInstruments(0,55);
+  });
+})();
+</script>
+</body>
+</html>

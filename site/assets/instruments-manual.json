@@ -1,0 +1,12 @@
+{
+  "_comment": "Hand-maintained campaign-instrument counters read by coverage.html (pillar b, Legislation). Ledger discipline applies: every number here is either sourced (name the source in its _note) or a manual tally Jeff keeps by hand. The daily officials/bill sweep updates the cosponsor count and committee posture; office replies and walkthroughs are entered by hand as they happen. Re-verify H.R. 1340 cosponsors same-day before anything politician-facing goes out.",
+  "updated": "2026-07-20",
+  "legislation": {
+    "hr1340_cosponsors": 146,
+    "hr1340_source": "https://www.congress.gov/bill/119th-congress/house-bill/1340",
+    "hr1340_note": "Rep. Gillen (NY-4) is not yet a cosponsor.",
+    "committee_posture": "H.R. 1340 sits in House Ways & Means; the Senate companion S.3332 is in Senate Finance. In Albany, S3309 cleared Senate Aging 7-0 and was held in Finance; A5288 sits in Assembly Real Property Taxation.",
+    "office_replies": 0,
+    "walkthroughs_booked": 0
+  }
+}

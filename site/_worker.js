@@ -24,9 +24,46 @@ export default {
         first: existing ? existing.first : new Date().toISOString(),
         last: new Date().toISOString(),
       }));
+      if (!existing) await bumpCount(env, "signup"); // count distinct signups, no PII
       return new Response(JSON.stringify({ ok: true }), { headers: { "Content-Type": "application/json" } });
+    }
+
+    // Count-only engagement counter. Aggregate integers only: NO addresses, NO PII,
+    // no IP storage. POST {event:"lookup"|"letter"} increments; GET returns totals.
+    if (url.pathname === "/api/count") {
+      if (!env.SIGNUPS) return json({ lookup: 0, letter: 0, signup: 0 });
+      if (request.method === "GET") {
+        const [lookup, letter, signup] = await Promise.all([
+          readCount(env, "lookup"), readCount(env, "letter"), readCount(env, "signup"),
+        ]);
+        return json({ lookup, letter, signup });
+      }
+      if (request.method === "POST") {
+        let body;
+        try { body = await request.json(); } catch { return new Response("bad json", { status: 400 }); }
+        const event = (body && body.event || "").trim();
+        if (event !== "lookup" && event !== "letter") return new Response("bad event", { status: 400 });
+        const n = await bumpCount(env, event);
+        return json({ ok: true, event, count: n });
+      }
+      return new Response("method not allowed", { status: 405 });
     }
 
     return env.ASSETS.fetch(request);
   },
 };
+
+// KV has no atomic increment; read-modify-write is fine for a non-critical,
+// count-only tally (a lost race under-counts by one, never leaks anything).
+function json(obj) {
+  return new Response(JSON.stringify(obj), { headers: { "Content-Type": "application/json" } });
+}
+async function readCount(env, event) {
+  const v = parseInt(await env.SIGNUPS.get("count:" + event), 10);
+  return Number.isFinite(v) ? v : 0;
+}
+async function bumpCount(env, event) {
+  const n = (await readCount(env, event)) + 1;
+  await env.SIGNUPS.put("count:" + event, String(n));
+  return n;
+}

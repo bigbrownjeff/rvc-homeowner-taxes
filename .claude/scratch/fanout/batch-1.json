@@ -1,0 +1,661 @@
+{
+  "_meta": {
+    "batch": "batch-1 (13 Nassau school districts)",
+    "built": "2026-07-20",
+    "method": "Replicates the L1 pilot recipe (see .claude/scratch/districts-provenance.md) across 13 districts. Per-field fetch log in batch-1-provenance.md. Fields here: medianValue, enrollment, levy, schoolRate, libraryRate, board_url, town, jurisdiction. STAR fields are NOT restated: they already live in the existing districts.json stub rows and were not re-verified today; the merge into districts.json keeps those stub STAR values.",
+    "schema": "mirrors the districts.json pilot full-row schema minus the STAR trio (kept from stubs) and county_leg (officials lane, out of scope for this batch).",
+    "gates": "Every schoolRate/libraryRate parcel passed the in-district HARD GATE: the LRV /info/<PARID> page School District label was confirmed to name the target district before the rate was trusted (this caught a Valley Stream 30 seed that landed in Elmont UFSD, and an East Williston abbreviation E WILLISTON). Elementary districts (Franklin Square, New Hyde Park-Garden City Park, Valley Stream 30) use Census summary level 9500000US; their single Net School Tax line is the combined elementary + CHSD rate (not itemized on the county bill). libraryRate 0.0 = verified structural absence of a Net Library Tax line on the Class-1 bill (confirmed on 2 parcels), not a fetch miss."
+  },
+  "districts": {
+    "Amityville Union Free School District": {
+      "dtfName": "Amityville",
+      "censusName": "Amityville Union Free School District",
+      "geoid": "3602940",
+      "sdType": "unified",
+      "medianValue": 514100,
+      "enrollment": {
+        "cur": 2678,
+        "base": 2986
+      },
+      "jurisdiction": "village-in-town",
+      "board_url": "https://www.amityvilleschools.org/",
+      "source_refs": {
+        "medianValue": {
+          "url": "https://data.census.gov/api/access/data/table?id=ACSDT5Y2024.B25077&g=9700000US3602940",
+          "vintage": "ACS 2020-24 5-yr B25077, school-district geography (9700000US3602940)",
+          "verified": "2026-07-20"
+        },
+        "enrollment": {
+          "url": "https://data.nysed.gov/enrollment.php?year=2025&instid=800000037782",
+          "base_url": "https://data.nysed.gov/enrollment.php?year=2016&instid=800000037782",
+          "vintage": "2024-25 / 2015-16 K-12 (NYSED)",
+          "verified": "2026-07-20",
+          "instid": "800000037782"
+        },
+        "board_url": {
+          "url": "https://www.amityvilleschools.org/",
+          "vintage": "probed 200 (browser UA)",
+          "verified": "2026-07-20"
+        }
+      },
+      "gaps": [
+        "levy: OSC lists a Nassau/Oyster Bay row ($19,648,866) but Census TIGER places Amityville UFSD entirely in Suffolk (bbox lon -73.43..-73.40); the district's true levy is on the Suffolk OSC dataset (out of scope). Omitted rather than record a conflicting Nassau-county figure.",
+        "schoolRate/libraryRate: no Nassau Class-1 parcel resolves to Amityville school district (probed the SW county-line area); LRV covers Nassau parcels only and this district's territory is in Suffolk. Omitted."
+      ],
+      "note": "Suffolk-home-county district; only the district-wide ACS median and NYSED enrollment are Nassau-verifiable. Levy and parcel tax rate are Nassau-out-of-scope gaps (see gaps).",
+      "town": "Town of Babylon (Suffolk home county); the OSC Nassau row is filed under Town of Oyster Bay"
+    },
+    "Carle Place Union Free School District": {
+      "dtfName": "Carle Place",
+      "censusName": "Carle Place Union Free School District",
+      "geoid": "3606540",
+      "sdType": "unified",
+      "medianValue": 727700,
+      "enrollment": {
+        "cur": 1306,
+        "base": 1370
+      },
+      "levy": 46850434,
+      "schoolRate": 1765.269,
+      "libraryRate": 0.0,
+      "jurisdiction": "village-in-town",
+      "board_url": "https://www.cps.k12.ny.us/",
+      "source_refs": {
+        "medianValue": {
+          "url": "https://data.census.gov/api/access/data/table?id=ACSDT5Y2024.B25077&g=9700000US3606540",
+          "vintage": "ACS 2020-24 5-yr B25077, school-district geography (9700000US3606540)",
+          "verified": "2026-07-20"
+        },
+        "enrollment": {
+          "url": "https://data.nysed.gov/enrollment.php?year=2025&instid=800000048971",
+          "base_url": "https://data.nysed.gov/enrollment.php?year=2016&instid=800000048971",
+          "vintage": "2024-25 / 2015-16 K-12 (NYSED)",
+          "verified": "2026-07-20",
+          "instid": "800000048971"
+        },
+        "board_url": {
+          "url": "https://www.cps.k12.ny.us/",
+          "vintage": "probed 200 (browser UA)",
+          "verified": "2026-07-20"
+        },
+        "levy": {
+          "url": "https://data.ny.gov/resource/iq85-sdzs.json?county=Nassau&school_name=Carle%20Place&fiscal_year_ending=2025",
+          "vintage": "FY ending 2025 (2024-25); segments: North Hempstead $46,850,434",
+          "verified": "2026-07-20"
+        },
+        "schoolRate": {
+          "url": "https://lrv.nassaucountyny.gov/info/10012++00010/",
+          "vintage": "tax year 2026 (school 2025-26); parcel 316 GLEN COVE AVE CARLE PLACE 11514 (10012  00010), Class 1 code 210.01, LRV school district 'CARLE PLACE UFSD - 11'; Net School Tax rate 1765.269, no Net Library Tax line (structural absence, verified) per $100 AV; rate-consistency cross-check: parcel 315 ROSLYN AVE CARLE PLACE 11514 (10012  00070) shows identical school rate",
+          "verified": "2026-07-20"
+        },
+        "libraryRate": {
+          "url": "https://lrv.nassaucountyny.gov/info/10012++00010/",
+          "vintage": "tax year 2026 (school 2025-26); parcel 316 GLEN COVE AVE CARLE PLACE 11514 (10012  00010), Class 1 code 210.01, LRV school district 'CARLE PLACE UFSD - 11'; Net School Tax rate 1765.269, no Net Library Tax line (structural absence, verified) per $100 AV; rate-consistency cross-check: parcel 315 ROSLYN AVE CARLE PLACE 11514 (10012  00070) shows identical school rate",
+          "verified": "2026-07-20"
+        }
+      },
+      "town": "North Hempstead"
+    },
+    "East Williston Union Free School District": {
+      "dtfName": "East Williston",
+      "censusName": "East Williston Union Free School District",
+      "geoid": "3610050",
+      "sdType": "unified",
+      "medianValue": 1187000,
+      "enrollment": {
+        "cur": 1571,
+        "base": 1711
+      },
+      "levy": 61374159,
+      "schoolRate": 1838.915,
+      "libraryRate": 0.0,
+      "jurisdiction": "village-in-town",
+      "board_url": "https://www.ewsdonline.org/",
+      "source_refs": {
+        "medianValue": {
+          "url": "https://data.census.gov/api/access/data/table?id=ACSDT5Y2024.B25077&g=9700000US3610050",
+          "vintage": "ACS 2020-24 5-yr B25077, school-district geography (9700000US3610050)",
+          "verified": "2026-07-20"
+        },
+        "enrollment": {
+          "url": "https://data.nysed.gov/enrollment.php?year=2025&instid=800000049157",
+          "base_url": "https://data.nysed.gov/enrollment.php?year=2016&instid=800000049157",
+          "vintage": "2024-25 / 2015-16 K-12 (NYSED)",
+          "verified": "2026-07-20",
+          "instid": "800000049157"
+        },
+        "board_url": {
+          "url": "https://www.ewsdonline.org/",
+          "vintage": "probed 200 (browser UA)",
+          "verified": "2026-07-20"
+        },
+        "levy": {
+          "url": "https://data.ny.gov/resource/iq85-sdzs.json?county=Nassau&school_name=East%20Williston&fiscal_year_ending=2025",
+          "vintage": "FY ending 2025 (2024-25); segments: North Hempstead $61,374,159",
+          "verified": "2026-07-20"
+        },
+        "schoolRate": {
+          "url": "https://lrv.nassaucountyny.gov/info/09214++02560/",
+          "vintage": "tax year 2026 (school 2025-26); parcel 206 GLENMORE ST EAST WILLISTON 11596 (09214  02560), Class 1 code 210.01, LRV school district 'E WILLISTON UFSD - 2'; Net School Tax rate 1838.915, no Net Library Tax line (structural absence, verified) per $100 AV; rate-consistency cross-check: parcel 214 GLENMORE ST EAST WILLISTON 11596 (09214  02650) shows identical school rate",
+          "verified": "2026-07-20"
+        },
+        "libraryRate": {
+          "url": "https://lrv.nassaucountyny.gov/info/09214++02560/",
+          "vintage": "tax year 2026 (school 2025-26); parcel 206 GLENMORE ST EAST WILLISTON 11596 (09214  02560), Class 1 code 210.01, LRV school district 'E WILLISTON UFSD - 2'; Net School Tax rate 1838.915, no Net Library Tax line (structural absence, verified) per $100 AV; rate-consistency cross-check: parcel 214 GLENMORE ST EAST WILLISTON 11596 (09214  02650) shows identical school rate",
+          "verified": "2026-07-20"
+        }
+      },
+      "town": "North Hempstead"
+    },
+    "Franklin Square Union Free School District": {
+      "dtfName": "Franklin Square",
+      "censusName": "Franklin Square Union Free School District",
+      "geoid": "3611460",
+      "sdType": "elementary",
+      "medianValue": 675500,
+      "enrollment": {
+        "cur": 1738,
+        "base": 1857
+      },
+      "levy": 64139154,
+      "schoolRate": 1133.01,
+      "libraryRate": 50.021,
+      "jurisdiction": "town-unincorporated",
+      "board_url": "https://www.franklinsquare.k12.ny.us/",
+      "source_refs": {
+        "medianValue": {
+          "url": "https://data.census.gov/api/access/data/table?id=ACSDT5Y2024.B25077&g=9500000US3611460",
+          "vintage": "ACS 2020-24 5-yr B25077, school-district geography (9500000US3611460)",
+          "verified": "2026-07-20"
+        },
+        "enrollment": {
+          "url": "https://data.nysed.gov/enrollment.php?year=2025&instid=800000049437",
+          "base_url": "https://data.nysed.gov/enrollment.php?year=2016&instid=800000049437",
+          "vintage": "2024-25 / 2015-16 K-12 (NYSED)",
+          "verified": "2026-07-20",
+          "instid": "800000049437"
+        },
+        "board_url": {
+          "url": "https://www.franklinsquare.k12.ny.us/",
+          "vintage": "probed 200 (browser UA)",
+          "verified": "2026-07-20"
+        },
+        "levy": {
+          "url": "https://data.ny.gov/resource/iq85-sdzs.json?county=Nassau&school_name=Franklin%20Square&fiscal_year_ending=2025",
+          "vintage": "FY ending 2025 (2024-25); segments: Hempstead $64,139,154 | ELEMENTARY district levy only; the central high school district (CHSD) levy is separate and rides the same parcel bill",
+          "verified": "2026-07-20"
+        },
+        "schoolRate": {
+          "url": "https://lrv.nassaucountyny.gov/info/35126++01510/",
+          "vintage": "tax year 2026 (school 2025-26); parcel 246 JEFFERSON ST FRANKLIN SQUARE 11010 (35126  01510), Class 1 code 210.01, LRV school district 'FRANKLIN SQUARE UFSD - 17'; Net School Tax rate 1133.01, Net Library 50.021 per $100 AV | single combined Net School Tax line = elementary + CHSD combined (not itemized on the county bill); rate-consistency cross-check: parcel 218 JEFFERSON ST FRANKLIN SQUARE 11010 (35126  01650) shows identical school rate",
+          "verified": "2026-07-20"
+        },
+        "libraryRate": {
+          "url": "https://lrv.nassaucountyny.gov/info/35126++01510/",
+          "vintage": "tax year 2026 (school 2025-26); parcel 246 JEFFERSON ST FRANKLIN SQUARE 11010 (35126  01510), Class 1 code 210.01, LRV school district 'FRANKLIN SQUARE UFSD - 17'; Net School Tax rate 1133.01, Net Library 50.021 per $100 AV | single combined Net School Tax line = elementary + CHSD combined (not itemized on the county bill); rate-consistency cross-check: parcel 218 JEFFERSON ST FRANKLIN SQUARE 11010 (35126  01650) shows identical school rate",
+          "verified": "2026-07-20"
+        }
+      },
+      "town": "Hempstead"
+    },
+    "Great Neck Union Free School District": {
+      "dtfName": "Great Neck",
+      "censusName": "Great Neck Union Free School District",
+      "geoid": "3612510",
+      "sdType": "unified",
+      "medianValue": 1001500,
+      "enrollment": {
+        "cur": 6600,
+        "base": 6394
+      },
+      "levy": 236985206,
+      "schoolRate": 1355.724,
+      "libraryRate": 58.151,
+      "jurisdiction": "village-in-town",
+      "board_url": "https://www.greatneck.k12.ny.us/",
+      "source_refs": {
+        "medianValue": {
+          "url": "https://data.census.gov/api/access/data/table?id=ACSDT5Y2024.B25077&g=9700000US3612510",
+          "vintage": "ACS 2020-24 5-yr B25077, school-district geography (9700000US3612510)",
+          "verified": "2026-07-20"
+        },
+        "enrollment": {
+          "url": "https://data.nysed.gov/enrollment.php?year=2025&instid=800000049062",
+          "base_url": "https://data.nysed.gov/enrollment.php?year=2016&instid=800000049062",
+          "vintage": "2024-25 / 2015-16 K-12 (NYSED)",
+          "verified": "2026-07-20",
+          "instid": "800000049062"
+        },
+        "board_url": {
+          "url": "https://www.greatneck.k12.ny.us/",
+          "vintage": "probed 200 (browser UA)",
+          "verified": "2026-07-20"
+        },
+        "levy": {
+          "url": "https://data.ny.gov/resource/iq85-sdzs.json?county=Nassau&school_name=Great%20Neck&fiscal_year_ending=2025",
+          "vintage": "FY ending 2025 (2024-25); segments: North Hempstead $236,985,206",
+          "verified": "2026-07-20"
+        },
+        "schoolRate": {
+          "url": "https://lrv.nassaucountyny.gov/info/02038++01640/",
+          "vintage": "tax year 2026 (school 2025-26); parcel 43 MAPLE DR GREAT NECK 11021 (02038  01640), Class 1 code 210.01, LRV school district 'GREAT NECK UFSD - 7'; Net School Tax rate 1355.724, Net Library 58.151 per $100 AV; rate-consistency cross-check: parcel 41 MAPLE DR GREAT NECK 11021 (02038  01670) shows identical school rate",
+          "verified": "2026-07-20"
+        },
+        "libraryRate": {
+          "url": "https://lrv.nassaucountyny.gov/info/02038++01640/",
+          "vintage": "tax year 2026 (school 2025-26); parcel 43 MAPLE DR GREAT NECK 11021 (02038  01640), Class 1 code 210.01, LRV school district 'GREAT NECK UFSD - 7'; Net School Tax rate 1355.724, Net Library 58.151 per $100 AV; rate-consistency cross-check: parcel 41 MAPLE DR GREAT NECK 11021 (02038  01670) shows identical school rate",
+          "verified": "2026-07-20"
+        }
+      },
+      "town": "North Hempstead"
+    },
+    "Hicksville Union Free School District": {
+      "dtfName": "Hicksville",
+      "censusName": "Hicksville Union Free School District",
+      "geoid": "3614340",
+      "sdType": "unified",
+      "medianValue": 624600,
+      "enrollment": {
+        "cur": 5286,
+        "base": 5230
+      },
+      "levy": 115533074,
+      "schoolRate": 1406.8,
+      "libraryRate": 62.657,
+      "jurisdiction": "village-in-town",
+      "board_url": "https://www.hicksvillepublicschools.org/",
+      "source_refs": {
+        "medianValue": {
+          "url": "https://data.census.gov/api/access/data/table?id=ACSDT5Y2024.B25077&g=9700000US3614340",
+          "vintage": "ACS 2020-24 5-yr B25077, school-district geography (9700000US3614340)",
+          "verified": "2026-07-20"
+        },
+        "enrollment": {
+          "url": "https://data.nysed.gov/enrollment.php?year=2025&instid=800000048806",
+          "base_url": "https://data.nysed.gov/enrollment.php?year=2016&instid=800000048806",
+          "vintage": "2024-25 / 2015-16 K-12 (NYSED)",
+          "verified": "2026-07-20",
+          "instid": "800000048806"
+        },
+        "board_url": {
+          "url": "https://www.hicksvillepublicschools.org/",
+          "vintage": "probed 200 (browser UA)",
+          "verified": "2026-07-20"
+        },
+        "levy": {
+          "url": "https://data.ny.gov/resource/iq85-sdzs.json?county=Nassau&school_name=Hicksville&fiscal_year_ending=2025",
+          "vintage": "FY ending 2025 (2024-25); segments: Oyster Bay $115,533,074",
+          "verified": "2026-07-20"
+        },
+        "schoolRate": {
+          "url": "https://lrv.nassaucountyny.gov/info/12247++01190/",
+          "vintage": "tax year 2026 (school 2025-26); parcel 90 KRAEMER ST HICKSVILLE 11801 (12247  01190), Class 1 code 210.01, LRV school district 'HICKSVILLE UFSD - 17'; Net School Tax rate 1406.8, Net Library 62.657 per $100 AV; rate-consistency cross-check: parcel 107 BAY AVE HICKSVILLE 11801 (12182  00330) shows identical school rate",
+          "verified": "2026-07-20"
+        },
+        "libraryRate": {
+          "url": "https://lrv.nassaucountyny.gov/info/12247++01190/",
+          "vintage": "tax year 2026 (school 2025-26); parcel 90 KRAEMER ST HICKSVILLE 11801 (12247  01190), Class 1 code 210.01, LRV school district 'HICKSVILLE UFSD - 17'; Net School Tax rate 1406.8, Net Library 62.657 per $100 AV; rate-consistency cross-check: parcel 107 BAY AVE HICKSVILLE 11801 (12182  00330) shows identical school rate",
+          "verified": "2026-07-20"
+        }
+      },
+      "town": "Oyster Bay"
+    },
+    "Lawrence Union Free School District": {
+      "dtfName": "Lawrence",
+      "censusName": "Lawrence Union Free School District",
+      "geoid": "3616830",
+      "sdType": "unified",
+      "medianValue": 933200,
+      "enrollment": {
+        "cur": 2155,
+        "base": 2645
+      },
+      "levy": 85954300,
+      "schoolRate": 887.273,
+      "libraryRate": 36.015,
+      "jurisdiction": "village-in-town",
+      "board_url": "https://www.lawrence.org/",
+      "source_refs": {
+        "medianValue": {
+          "url": "https://data.census.gov/api/access/data/table?id=ACSDT5Y2024.B25077&g=9700000US3616830",
+          "vintage": "ACS 2020-24 5-yr B25077, school-district geography (9700000US3616830)",
+          "verified": "2026-07-20"
+        },
+        "enrollment": {
+          "url": "https://data.nysed.gov/enrollment.php?year=2025&instid=800000049493",
+          "base_url": "https://data.nysed.gov/enrollment.php?year=2016&instid=800000049493",
+          "vintage": "2024-25 / 2015-16 K-12 (NYSED)",
+          "verified": "2026-07-20",
+          "instid": "800000049493"
+        },
+        "board_url": {
+          "url": "https://www.lawrence.org/",
+          "vintage": "probed 200 (browser UA)",
+          "verified": "2026-07-20"
+        },
+        "levy": {
+          "url": "https://data.ny.gov/resource/iq85-sdzs.json?county=Nassau&school_name=Lawrence&fiscal_year_ending=2025",
+          "vintage": "FY ending 2025 (2024-25); segments: Hempstead $85,954,300",
+          "verified": "2026-07-20"
+        },
+        "schoolRate": {
+          "url": "https://lrv.nassaucountyny.gov/info/40185++00100/",
+          "vintage": "tax year 2026 (school 2025-26); parcel 274 CARYL DR LAWRENCE 11559 (40185  00100), Class 1 code 210.01, LRV school district 'LAWRENCE UFSD - 15'; Net School Tax rate 887.273, Net Library 36.015 per $100 AV; rate-consistency cross-check: parcel 56 WASHINGTON AVE CEDARHURST 11516 (39419  00250) shows identical school rate",
+          "verified": "2026-07-20"
+        },
+        "libraryRate": {
+          "url": "https://lrv.nassaucountyny.gov/info/40185++00100/",
+          "vintage": "tax year 2026 (school 2025-26); parcel 274 CARYL DR LAWRENCE 11559 (40185  00100), Class 1 code 210.01, LRV school district 'LAWRENCE UFSD - 15'; Net School Tax rate 887.273, Net Library 36.015 per $100 AV; rate-consistency cross-check: parcel 56 WASHINGTON AVE CEDARHURST 11516 (39419  00250) shows identical school rate",
+          "verified": "2026-07-20"
+        }
+      },
+      "town": "Hempstead"
+    },
+    "Manhasset Union Free School District": {
+      "dtfName": "Manhasset",
+      "censusName": "Manhasset Union Free School District",
+      "geoid": "3618270",
+      "sdType": "unified",
+      "medianValue": 1781100,
+      "enrollment": {
+        "cur": 3007,
+        "base": 3329
+      },
+      "levy": 99748822,
+      "schoolRate": 1083.777,
+      "libraryRate": 62.92,
+      "jurisdiction": "village-in-town",
+      "board_url": "https://www.manhassetschools.org/",
+      "source_refs": {
+        "medianValue": {
+          "url": "https://data.census.gov/api/access/data/table?id=ACSDT5Y2024.B25077&g=9700000US3618270",
+          "vintage": "ACS 2020-24 5-yr B25077, school-district geography (9700000US3618270)",
+          "verified": "2026-07-20"
+        },
+        "enrollment": {
+          "url": "https://data.nysed.gov/enrollment.php?year=2025&instid=800000049069",
+          "base_url": "https://data.nysed.gov/enrollment.php?year=2016&instid=800000049069",
+          "vintage": "2024-25 / 2015-16 K-12 (NYSED)",
+          "verified": "2026-07-20",
+          "instid": "800000049069"
+        },
+        "board_url": {
+          "url": "https://www.manhassetschools.org/",
+          "vintage": "probed 200 (browser UA)",
+          "verified": "2026-07-20"
+        },
+        "levy": {
+          "url": "https://data.ny.gov/resource/iq85-sdzs.json?county=Nassau&school_name=Manhasset&fiscal_year_ending=2025",
+          "vintage": "FY ending 2025 (2024-25); segments: North Hempstead $99,748,822",
+          "verified": "2026-07-20"
+        },
+        "schoolRate": {
+          "url": "https://lrv.nassaucountyny.gov/info/03099++00060/",
+          "vintage": "tax year 2026 (school 2025-26); parcel 174 RYDER RD MANHASSET 11030 (03099  00060), Class 1 code 210.01, LRV school district 'MANHASSET UFSD - 6'; Net School Tax rate 1083.777, Net Library 62.92 per $100 AV; rate-consistency cross-check: parcel 162 LINDBERG ST MANHASSET 11030 (03  F0500190) shows identical school rate",
+          "verified": "2026-07-20"
+        },
+        "libraryRate": {
+          "url": "https://lrv.nassaucountyny.gov/info/03099++00060/",
+          "vintage": "tax year 2026 (school 2025-26); parcel 174 RYDER RD MANHASSET 11030 (03099  00060), Class 1 code 210.01, LRV school district 'MANHASSET UFSD - 6'; Net School Tax rate 1083.777, Net Library 62.92 per $100 AV; rate-consistency cross-check: parcel 162 LINDBERG ST MANHASSET 11030 (03  F0500190) shows identical school rate",
+          "verified": "2026-07-20"
+        }
+      },
+      "town": "North Hempstead"
+    },
+    "New Hyde Park-Garden City Park Union Free School District": {
+      "dtfName": "New Hyde Park-Garden City",
+      "censusName": "New Hyde Park-Garden City Park Union Free School District",
+      "geoid": "3620400",
+      "sdType": "elementary",
+      "medianValue": 757800,
+      "enrollment": {
+        "cur": 1419,
+        "base": 1678
+      },
+      "levy": 76279549,
+      "schoolRate": 1549.988,
+      "libraryRate": 59.028,
+      "jurisdiction": "town-unincorporated",
+      "board_url": "https://www.nhp-gcp.org/",
+      "source_refs": {
+        "medianValue": {
+          "url": "https://data.census.gov/api/access/data/table?id=ACSDT5Y2024.B25077&g=9500000US3620400",
+          "vintage": "ACS 2020-24 5-yr B25077, school-district geography (9500000US3620400)",
+          "verified": "2026-07-20"
+        },
+        "enrollment": {
+          "url": "https://data.nysed.gov/enrollment.php?year=2025&instid=800000049088",
+          "base_url": "https://data.nysed.gov/enrollment.php?year=2016&instid=800000049088",
+          "vintage": "2024-25 / 2015-16 K-12 (NYSED)",
+          "verified": "2026-07-20",
+          "instid": "800000049088"
+        },
+        "board_url": {
+          "url": "https://www.nhp-gcp.org/",
+          "vintage": "probed 200 (browser UA)",
+          "verified": "2026-07-20"
+        },
+        "levy": {
+          "url": "https://data.ny.gov/resource/iq85-sdzs.json?county=Nassau&school_name=New%20Hyde%20Park-Garden%20City&fiscal_year_ending=2025",
+          "vintage": "FY ending 2025 (2024-25); segments: Hempstead $7,948,175, North Hempstead $68,331,374 | ELEMENTARY district levy only; the central high school district (CHSD) levy is separate and rides the same parcel bill",
+          "verified": "2026-07-20"
+        },
+        "schoolRate": {
+          "url": "https://lrv.nassaucountyny.gov/info/33104++03340/",
+          "vintage": "tax year 2026 (school 2025-26); parcel 3 SOUTH EIGHTH ST NEW HYDE PARK 11040 (33104  03340), Class 1 code 210.01, LRV school district 'NEW HYDE PARK-GARDEN CITY PARK - 5'; Net School Tax rate 1549.988, Net Library 59.028 per $100 AV | single combined Net School Tax line = elementary + CHSD combined (not itemized on the county bill); rate-consistency cross-check: parcel 3 S 10TH ST NEW HYDE PARK 11040 (33106  02060) shows identical school rate",
+          "verified": "2026-07-20"
+        },
+        "libraryRate": {
+          "url": "https://lrv.nassaucountyny.gov/info/33104++03340/",
+          "vintage": "tax year 2026 (school 2025-26); parcel 3 SOUTH EIGHTH ST NEW HYDE PARK 11040 (33104  03340), Class 1 code 210.01, LRV school district 'NEW HYDE PARK-GARDEN CITY PARK - 5'; Net School Tax rate 1549.988, Net Library 59.028 per $100 AV | single combined Net School Tax line = elementary + CHSD combined (not itemized on the county bill); rate-consistency cross-check: parcel 3 S 10TH ST NEW HYDE PARK 11040 (33106  02060) shows identical school rate",
+          "verified": "2026-07-20"
+        }
+      },
+      "town": "North Hempstead"
+    },
+    "Oceanside Union Free School District": {
+      "dtfName": "Oceanside",
+      "censusName": "Oceanside Union Free School District",
+      "geoid": "3621570",
+      "sdType": "unified",
+      "medianValue": 641500,
+      "enrollment": {
+        "cur": 5179,
+        "base": 5578
+      },
+      "levy": 130349860,
+      "schoolRate": 1877.382,
+      "libraryRate": 115.483,
+      "jurisdiction": "village-in-town",
+      "board_url": "https://www.oceansideschools.org/",
+      "source_refs": {
+        "medianValue": {
+          "url": "https://data.census.gov/api/access/data/table?id=ACSDT5Y2024.B25077&g=9700000US3621570",
+          "vintage": "ACS 2020-24 5-yr B25077, school-district geography (9700000US3621570)",
+          "verified": "2026-07-20"
+        },
+        "enrollment": {
+          "url": "https://data.nysed.gov/enrollment.php?year=2025&instid=800000049558",
+          "base_url": "https://data.nysed.gov/enrollment.php?year=2016&instid=800000049558",
+          "vintage": "2024-25 / 2015-16 K-12 (NYSED)",
+          "verified": "2026-07-20",
+          "instid": "800000049558"
+        },
+        "board_url": {
+          "url": "https://www.oceansideschools.org/",
+          "vintage": "probed 200 (browser UA)",
+          "verified": "2026-07-20"
+        },
+        "levy": {
+          "url": "https://data.ny.gov/resource/iq85-sdzs.json?county=Nassau&school_name=Oceanside&fiscal_year_ending=2025",
+          "vintage": "FY ending 2025 (2024-25); segments: Hempstead $130,349,860",
+          "verified": "2026-07-20"
+        },
+        "schoolRate": {
+          "url": "https://lrv.nassaucountyny.gov/info/38372++00750/",
+          "vintage": "tax year 2026 (school 2025-26); parcel 3097 TRINITY ST OCEANSIDE 11572 (38372  00750), Class 1 code 210.01, LRV school district 'OCEANSIDE UFSD - 11'; Net School Tax rate 1877.382, Net Library 115.483 per $100 AV; rate-consistency cross-check: parcel 3156 FOURTH ST OCEANSIDE 11572 (43368  01470) shows identical school rate",
+          "verified": "2026-07-20"
+        },
+        "libraryRate": {
+          "url": "https://lrv.nassaucountyny.gov/info/38372++00750/",
+          "vintage": "tax year 2026 (school 2025-26); parcel 3097 TRINITY ST OCEANSIDE 11572 (38372  00750), Class 1 code 210.01, LRV school district 'OCEANSIDE UFSD - 11'; Net School Tax rate 1877.382, Net Library 115.483 per $100 AV; rate-consistency cross-check: parcel 3156 FOURTH ST OCEANSIDE 11572 (43368  01470) shows identical school rate",
+          "verified": "2026-07-20"
+        }
+      },
+      "town": "Hempstead"
+    },
+    "Port Washington Union Free School District": {
+      "dtfName": "Port Washington",
+      "censusName": "Port Washington Union Free School District",
+      "geoid": "3623580",
+      "sdType": "unified",
+      "medianValue": 1053000,
+      "enrollment": {
+        "cur": 5231,
+        "base": 5283
+      },
+      "levy": 161546663,
+      "schoolRate": 1621.518,
+      "libraryRate": 72.866,
+      "jurisdiction": "village-in-town",
+      "board_url": "https://www.portnet.org/",
+      "source_refs": {
+        "medianValue": {
+          "url": "https://data.census.gov/api/access/data/table?id=ACSDT5Y2024.B25077&g=9700000US3623580",
+          "vintage": "ACS 2020-24 5-yr B25077, school-district geography (9700000US3623580)",
+          "verified": "2026-07-20"
+        },
+        "enrollment": {
+          "url": "https://data.nysed.gov/enrollment.php?year=2025&instid=800000049106",
+          "base_url": "https://data.nysed.gov/enrollment.php?year=2016&instid=800000049106",
+          "vintage": "2024-25 / 2015-16 K-12 (NYSED)",
+          "verified": "2026-07-20",
+          "instid": "800000049106"
+        },
+        "board_url": {
+          "url": "https://www.portnet.org/",
+          "vintage": "probed 200 (browser UA)",
+          "verified": "2026-07-20"
+        },
+        "levy": {
+          "url": "https://data.ny.gov/resource/iq85-sdzs.json?county=Nassau&school_name=Port%20Washington&fiscal_year_ending=2025",
+          "vintage": "FY ending 2025 (2024-25); segments: North Hempstead $161,546,663",
+          "verified": "2026-07-20"
+        },
+        "schoolRate": {
+          "url": "https://lrv.nassaucountyny.gov/info/05055++00030/",
+          "vintage": "tax year 2026 (school 2025-26); parcel 41 CARLTON AVE PORT WASHINGTON 11050 (05055  00030), Class 1 code 210.01, LRV school district 'PORT WASHINGTON UFSD - 4'; Net School Tax rate 1621.518, Net Library 72.866 per $100 AV; rate-consistency cross-check: parcel 32 SOUTH WASHINGTON ST PORT WASHINGTON 11050 (05055  01340) shows identical school rate",
+          "verified": "2026-07-20"
+        },
+        "libraryRate": {
+          "url": "https://lrv.nassaucountyny.gov/info/05055++00030/",
+          "vintage": "tax year 2026 (school 2025-26); parcel 41 CARLTON AVE PORT WASHINGTON 11050 (05055  00030), Class 1 code 210.01, LRV school district 'PORT WASHINGTON UFSD - 4'; Net School Tax rate 1621.518, Net Library 72.866 per $100 AV; rate-consistency cross-check: parcel 32 SOUTH WASHINGTON ST PORT WASHINGTON 11050 (05055  01340) shows identical school rate",
+          "verified": "2026-07-20"
+        }
+      },
+      "town": "North Hempstead"
+    },
+    "Syosset Central School District": {
+      "dtfName": "Syosset",
+      "censusName": "Syosset Central School District",
+      "geoid": "3628560",
+      "sdType": "unified",
+      "medianValue": 934600,
+      "enrollment": {
+        "cur": 6980,
+        "base": 6247
+      },
+      "levy": 226511537,
+      "schoolRate": 2296.55,
+      "libraryRate": 82.423,
+      "jurisdiction": "village-in-town",
+      "board_url": "https://www.syossetschools.org/",
+      "source_refs": {
+        "medianValue": {
+          "url": "https://data.census.gov/api/access/data/table?id=ACSDT5Y2024.B25077&g=9700000US3628560",
+          "vintage": "ACS 2020-24 5-yr B25077, school-district geography (9700000US3628560)",
+          "verified": "2026-07-20"
+        },
+        "enrollment": {
+          "url": "https://data.nysed.gov/enrollment.php?year=2025&instid=800000048948",
+          "base_url": "https://data.nysed.gov/enrollment.php?year=2016&instid=800000048948",
+          "vintage": "2024-25 / 2015-16 K-12 (NYSED)",
+          "verified": "2026-07-20",
+          "instid": "800000048948"
+        },
+        "board_url": {
+          "url": "https://www.syossetschools.org/",
+          "vintage": "probed 200 (browser UA)",
+          "verified": "2026-07-20"
+        },
+        "levy": {
+          "url": "https://data.ny.gov/resource/iq85-sdzs.json?county=Nassau&school_name=Syosset&fiscal_year_ending=2025",
+          "vintage": "FY ending 2025 (2024-25); segments: Oyster Bay $226,511,537",
+          "verified": "2026-07-20"
+        },
+        "schoolRate": {
+          "url": "https://lrv.nassaucountyny.gov/info/15087++00100/",
+          "vintage": "tax year 2026 (school 2025-26); parcel 3 ROBERT CIR SYOSSET 11791 (15087  00100), Class 1 code 210.01, LRV school district 'SYOSSET/SYOSSET CSD # 2 - 12'; Net School Tax rate 2296.55, Net Library 82.423 per $100 AV; rate-consistency cross-check: parcel 6 TEIBROOK AVE SYOSSET 11791 (15087  00020) shows identical school rate",
+          "verified": "2026-07-20"
+        },
+        "libraryRate": {
+          "url": "https://lrv.nassaucountyny.gov/info/15087++00100/",
+          "vintage": "tax year 2026 (school 2025-26); parcel 3 ROBERT CIR SYOSSET 11791 (15087  00100), Class 1 code 210.01, LRV school district 'SYOSSET/SYOSSET CSD # 2 - 12'; Net School Tax rate 2296.55, Net Library 82.423 per $100 AV; rate-consistency cross-check: parcel 6 TEIBROOK AVE SYOSSET 11791 (15087  00020) shows identical school rate",
+          "verified": "2026-07-20"
+        }
+      },
+      "town": "Oyster Bay"
+    },
+    "Valley Stream Union Free School District 30": {
+      "dtfName": "Valley Stream 30",
+      "censusName": "Valley Stream Union Free School District 30",
+      "geoid": "3629490",
+      "sdType": "elementary",
+      "medianValue": 617500,
+      "enrollment": {
+        "cur": 1348,
+        "base": 1537
+      },
+      "levy": 52023322,
+      "schoolRate": 1704.851,
+      "libraryRate": 0.0,
+      "jurisdiction": "town-unincorporated",
+      "board_url": "https://www.valleystream30.com/",
+      "source_refs": {
+        "medianValue": {
+          "url": "https://data.census.gov/api/access/data/table?id=ACSDT5Y2024.B25077&g=9500000US3629490",
+          "vintage": "ACS 2020-24 5-yr B25077, school-district geography (9500000US3629490)",
+          "verified": "2026-07-20"
+        },
+        "enrollment": {
+          "url": "https://data.nysed.gov/enrollment.php?year=2025&instid=800000049261",
+          "base_url": "https://data.nysed.gov/enrollment.php?year=2016&instid=800000049261",
+          "vintage": "2024-25 / 2015-16 K-12 (NYSED)",
+          "verified": "2026-07-20",
+          "instid": "800000049261"
+        },
+        "board_url": {
+          "url": "https://www.valleystream30.com/",
+          "vintage": "probed 200 (browser UA)",
+          "verified": "2026-07-20"
+        },
+        "levy": {
+          "url": "https://data.ny.gov/resource/iq85-sdzs.json?county=Nassau&school_name=Valley%20Stream%2030&fiscal_year_ending=2025",
+          "vintage": "FY ending 2025 (2024-25); segments: Hempstead $52,023,322 | ELEMENTARY district levy only; the central high school district (CHSD) levy is separate and rides the same parcel bill",
+          "verified": "2026-07-20"
+        },
+        "schoolRate": {
+          "url": "https://lrv.nassaucountyny.gov/info/37288++02200/",
+          "vintage": "tax year 2026 (school 2025-26); parcel 143 CASPER ST VALLEY STREAM 11580 (37288  02200), Class 1 code 210.01, LRV school district 'VALLEY STREAM UFSD 30 - 30'; Net School Tax rate 1704.851, no Net Library Tax line (structural absence, verified) per $100 AV | single combined Net School Tax line = elementary + CHSD combined (not itemized on the county bill); rate-consistency cross-check: parcel 151 CASPER ST VALLEY STREAM 11580 (37288  02240) shows identical school rate",
+          "verified": "2026-07-20"
+        },
+        "libraryRate": {
+          "url": "https://lrv.nassaucountyny.gov/info/37288++02200/",
+          "vintage": "tax year 2026 (school 2025-26); parcel 143 CASPER ST VALLEY STREAM 11580 (37288  02200), Class 1 code 210.01, LRV school district 'VALLEY STREAM UFSD 30 - 30'; Net School Tax rate 1704.851, no Net Library Tax line (structural absence, verified) per $100 AV | single combined Net School Tax line = elementary + CHSD combined (not itemized on the county bill); rate-consistency cross-check: parcel 151 CASPER ST VALLEY STREAM 11580 (37288  02240) shows identical school rate",
+          "verified": "2026-07-20"
+        }
+      },
+      "town": "Hempstead"
+    }
+  }
+}

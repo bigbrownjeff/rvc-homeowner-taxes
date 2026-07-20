@@ -6,7 +6,7 @@
   var items=[
     {id:'brief',label:'The brief',href:'index.html'},
     {id:'mechanics',label:'Mechanics',href:'fiscal-math.html'},
-    {id:'factcheck',label:'Fact check',href:'validation.html'},
+    {id:'factcheck',label:'Facts &amp; sources',href:'validation.html'},
     {id:'voices',label:'Voices',href:'voices.html'},
     {id:'calculator',label:'Calculator',href:'calculator.html'}
   ];

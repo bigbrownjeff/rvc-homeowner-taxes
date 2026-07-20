@@ -1,225 +1,162 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fact-Check &amp; Corrections — RVC Homeowner Taxes Project</title>
-<meta name="description" content="Every figure in the RVC taxes project, validated against primary public sources — verdicts, corrections, and receipts.">
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Facts &amp; Sources — RVC Homeowner Taxes Project</title>
+<meta name="description" content="The fact ledger for the RVC taxes project: every figure cited anywhere on this site — its value, its primary source, how it was verified, and which pages use it.">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--navy:#1a2744;--navy2:#2a3f6a;--gold:#c5a44e;--blue:#3b6cb5;--ink:#1e293b;--muted:#5b6b80;--line:#e2e8f0;
---green:#15803d;--greenbg:#e6f4ea;--red:#b91c1c;--redbg:#fdecec;--amber:#92600a;--amberbg:#fdf3d7;--purple:#6b34a8;--purplebg:#f1e8fb;--bg:#f4f6fa}
+:root{--bg:#F1ECE2;--paper:#FAF6EC;--ink:#0E1116;--body:#2A2A2A;--muted:#6B6B6B;--rule:#231F1A;--ruleSoft:#C9C3B4;--accent:#1E3A8A;
+--serif:'Source Serif 4',Georgia,serif;--sans:'Inter',-apple-system,sans-serif;--mono:'IBM Plex Mono',ui-monospace,monospace}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55}
-.hero{background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff;padding:2.6rem 1.5rem 2.2rem;text-align:center;border-bottom:4px solid var(--gold)}
-.hero h1{font-size:1.9rem;letter-spacing:-.3px}
-.hero p{opacity:.88;max-width:62rem;margin:.6rem auto 0;font-size:.98rem}
-.wrap{max-width:62rem;margin:0 auto;padding:1.5rem 1.2rem 4rem}
-h2{color:var(--navy);font-size:1.35rem;margin:2.2rem 0 .8rem;padding-bottom:.35rem;border-bottom:2px solid var(--gold)}
-h3{color:var(--navy);font-size:1.02rem;margin:1.2rem 0 .4rem}
-p{margin:.55rem 0;font-size:.95rem}
-.pills{display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap;margin-top:1.1rem}
-.pill{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:99px;padding:.35rem .95rem;font-size:.85rem}
-.pill b{color:#ffd97a}
-.card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:1.1rem 1.25rem;margin:.9rem 0;box-shadow:0 1px 3px rgba(16,24,40,.06)}
-.card.red{border-left:5px solid var(--red)} .card.green{border-left:5px solid var(--green)} .card.gold{border-left:5px solid var(--gold)}
-.card h3{margin-top:0}
-table{width:100%;border-collapse:collapse;font-size:.86rem;margin:.7rem 0;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 1px 3px rgba(16,24,40,.06)}
-th{background:var(--navy);color:#fff;text-align:left;padding:.55rem .7rem;font-size:.74rem;text-transform:uppercase;letter-spacing:.5px}
-td{padding:.55rem .7rem;border-bottom:1px solid var(--line);vertical-align:top}
-tr:last-child td{border-bottom:none}
-tr:nth-child(even) td{background:#f8fafc}
-.old{color:var(--red);text-decoration:line-through;text-decoration-thickness:1px;text-decoration-color:rgba(185,28,28,.55)}
-.new{color:var(--green);font-weight:700}
-.v{display:inline-block;font-size:.7rem;font-weight:800;letter-spacing:.4px;padding:.1rem .5rem;border-radius:99px;text-transform:uppercase;white-space:nowrap}
-.v.ok{background:var(--greenbg);color:var(--green)} .v.bad{background:var(--redbg);color:var(--red)}
-.v.old{background:var(--amberbg);color:var(--amber)} .v.unv{background:var(--purplebg);color:var(--purple)}
-details{background:#fff;border:1px solid var(--line);border-radius:10px;margin:.6rem 0;box-shadow:0 1px 3px rgba(16,24,40,.05)}
-summary{cursor:pointer;padding:.8rem 1rem;font-weight:700;color:var(--navy);font-size:.95rem}
-summary:hover{background:#f6f8fc}
-details>div{padding:0 1rem 1rem}
-a{color:var(--blue);text-decoration:none} a:hover{text-decoration:underline}
-ul{padding-left:1.3rem;margin:.5rem 0} li{margin:.3rem 0;font-size:.93rem}
-.toc{display:flex;gap:.5rem;flex-wrap:wrap;margin:1rem 0 0}
-.toc a{background:#fff;border:1px solid var(--line);border-radius:99px;padding:.32rem .8rem;font-size:.83rem;color:var(--navy);font-weight:600}
-.toc a:hover{border-color:var(--blue);text-decoration:none}
-.foot{text-align:center;color:var(--muted);font-size:.82rem;padding:2rem 1rem;border-top:1px solid var(--line)}
-code{background:#eef1f6;border-radius:4px;padding:.05rem .35rem;font-size:.85em}
-@media print{.hero{padding:1.2rem}.card,table,details{box-shadow:none}details[open] summary~*{display:block}}
-</style>
-</head>
-<body>
+body{font-family:var(--sans);background:var(--bg);color:var(--body);line-height:1.55}
+.wrap{max-width:960px;margin:0 auto;padding:36px 28px 64px}
+.masthead{display:flex;justify-content:space-between;align-items:baseline;border-bottom:2px solid var(--rule);padding-bottom:10px;margin-bottom:8px;flex-wrap:wrap;gap:6px}
+.masthead .t{font-family:var(--serif);font-weight:600;font-size:22px;color:var(--ink)}
+.masthead .m{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.crumbs{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;margin:10px 0 26px}
+.crumbs a{color:var(--accent);text-decoration:none}.crumbs a:hover{text-decoration:underline}
+h1{font-family:var(--serif);font-size:40px;font-weight:700;line-height:1.05;letter-spacing:-.02em;color:var(--ink);margin:6px 0 14px}
+.lede{font-size:15.5px;max-width:64ch}
+h2{font-family:var(--serif);font-size:24px;font-weight:700;color:var(--ink);margin:40px 0 6px;padding-bottom:6px;border-bottom:2px solid var(--rule)}
+h2 .anchor{font-family:var(--mono);font-size:11px;color:var(--ruleSoft);text-decoration:none;margin-left:6px}
+h2 .anchor:hover{color:var(--accent)}
+.note{font-size:13px;color:var(--muted);margin:4px 0 10px}
+p{margin:.55rem 0;font-size:14.5px}
+a{color:var(--accent)}
+table{width:100%;border-collapse:collapse;font-size:12.5px;margin:12px 0 4px;background:var(--paper)}
+th{background:var(--ink);color:var(--bg);text-align:left;padding:7px 9px;font-family:var(--mono);font-size:9.5px;text-transform:uppercase;letter-spacing:.06em}
+td{padding:7px 9px;border-bottom:1px solid var(--ruleSoft);vertical-align:top}
+td.f{font-weight:600;color:var(--ink);width:34%}
+td.u{font-family:var(--mono);font-size:11px;width:20%}
+td.u a{text-decoration:none}td.u a:hover{text-decoration:underline}
+.toc{display:flex;gap:.5rem;flex-wrap:wrap;margin:18px 0 0}
+.toc a{background:var(--paper);border:1px solid var(--ruleSoft);padding:.3rem .7rem;font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink);text-decoration:none}
+.toc a:hover{border-color:var(--accent);color:var(--accent)}
+.rulebox{background:var(--paper);border-left:3px solid var(--accent);padding:12px 16px;margin:16px 0;font-size:14px}
+.watch{background:var(--paper);border:1px solid var(--ruleSoft);padding:12px 16px;margin:14px 0}
+.watch li{font-size:13.5px;margin:.35rem 0}
+ul{padding-left:20px}
+.foot{border-top:2px solid var(--rule);margin-top:48px;padding-top:14px;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px}
+@media print{.wrap{padding:0}.toc{display:none}}
+code{background:var(--bg);border:1px solid var(--ruleSoft);padding:.05rem .3rem;font-size:.9em}
+</style></head><body><div class="wrap">
 
-<div class="hero">
-  <h1>Fact-Check &amp; Corrections</h1>
-  <p>Every factual claim in the RVC Homeowner Taxes project — the action plan, the financial model, and the tax calculator — validated against primary public sources on <b>June 9, 2026</b>. Six independent research passes; ~120 claims; receipts linked throughout.</p>
-  <div class="pills">
-    <span class="pill"><b>≈½</b> confirmed</span>
-    <span class="pill"><b>≈¼</b> outdated / imprecise</span>
-    <span class="pill"><b>≈¼</b> wrong</span>
-    <span class="pill"><b>4</b> would-be-fatal errors fixed</span>
-  </div>
-</div>
+<div class="masthead"><span class="t">Rockville Centre · Housing × Schools</span><span class="m">The fact ledger · updated July 20, 2026</span></div>
+<div class="crumbs"><a href="index.html">Deck</a> · <a href="brief-2026-08.html">Brief</a> · <a href="fiscal-math.html">Mechanics</a> · <a href="breakeven.html">Break-even</a> · <a href="reconcile.html">Reconciler</a> · <a href="calculator.html">Calculator</a> · <a href="voices.html">Voices</a> · <a href="governance.html">Governance</a></div>
 
-<div class="wrap">
+<h1>Facts &amp; sources</h1>
+<p class="lede">Every figure cited anywhere on this site lives in one row of this ledger: the value, the primary source, how and when it was verified, and which pages use it. If a number on any page isn't traceable to a row here (or to the inline citations of the standalone memos indexed <a href="#memos">below</a>), it doesn't belong on the site.</p>
+
+<div class="rulebox"><strong>Maintenance rule.</strong> Numbers change here first. To update a figure: fix its row (value, source, verified date), then propagate to every page in its <em>used on</em> column. A figure with no live row gets removed from the site, not defended.</div>
 
 <div class="toc">
-  <a href="#bigfour">The Big Four</a><a href="#concepts">Framing fixes</a><a href="#numbers">Number-by-number</a>
-  <a href="#false">False &amp; misattributed</a><a href="#unverified">Unverifiable</a><a href="#survives">What survives</a>
-  <a href="#receipts">Receipts</a><a href="index.html">→ The 8-page deck</a><a href="calculator.html">→ Calculator (corrected)</a>
+  <a href="#demo">Demographics</a><a href="#schools">RVC schools</a><a href="#star">STAR</a><a href="#s467">§467 exemption</a>
+  <a href="#village">Village</a><a href="#assess">Assessment</a><a href="#leg">Legislation</a><a href="#derived">Derived</a>
+  <a href="#memos">Memo pages</a><a href="#watch">Vintage watch</a><a href="#unknown">Known unknowns</a>
 </div>
 
-<h2 id="bigfour">The Big Four — errors that would have been fatal in Albany</h2>
-
-<div class="card red"><h3>1 · "Exemptions cost the schools $6.9M a year" — wrong kind of money</h3>
-<p>New York school districts levy a <b>fixed dollar amount</b>. Exemptions don't reduce district revenue — they shift the levy onto non-exempt neighbors (NYS Comptroller: <i>"Every exemption granted on a property shifts the tax burden to the non-exempt properties."</i>). And STAR — the largest piece of the claimed gap — is <b>reimbursed by the State</b> (RPTL §1306-a); it costs the district $0. The "$688K–$3.4M recaptured school revenue" scenarios mislabel <i>taxpayer relief and state savings</i> as district revenue, and the "deficit coverage 18–91%" table compares categories that can't be added. The deck rebuilds this math honestly (page 5) — and the honest version is still persuasive.</p></div>
-
-<div class="card red"><h3>2 · The §467 senior-exemption table was shifted $8,400 — and is outdated</h3>
-<p>The project claimed 50% off for incomes up to <span class="old">$58,399</span>, sliding to 5% at <span class="old">$66,799</span>. Per Nassau's official brochure: <span class="new">50% requires income ≤ $50,000; $58,399 is the ceiling of the <i>minimum</i> 5% tier; no higher tier exists</span>. Since Dec 2025 (Ch. 581), the scale actually runs <b>5–65%</b> (65% for income ≤ $47,000), and the statutory income cap rises to <b>$75,000 on July 1, 2027</b>. Bonus implication: RVC's senior median income (~$77–80K) means the <i>median</i> senior homeowner doesn't qualify for §467 at all — which breaks the project's "1,404 parcels × $4,900" arithmetic (see #4).</p></div>
-
-<div class="card red"><h3>3 · "Prop 19-style portability for NY" — solving a California problem New York doesn't have</h3>
-<p>California needs portability because Prop 13 taxes <i>acquisition</i> value — selling re-bases you upward. New York taxes <i>current assessed</i> value (RPTL §305): there is no basis to port, Nassau sales don't trigger reassessment (the roll is frozen for a 6th straight year), and a downsizing senior's taxes already fall with the cheaper home. The state-level centerpiece was rebuilt on NY-native vehicles: <b>S3309/A5288</b> (keep your exemption in the year you move — out of the Aging Committee 7–0), a <b>senior tax-deferral enabling act</b> (Oregon/Massachusetts/Washington/Texas precedents), and <b>S3574</b> (renewal-notice protection).</p></div>
-
-<div class="card red"><h3>4 · The story was stale: the deficit is already closed — by cutting classrooms</h3>
-<p>The documents treat the $3.78M deficit as looming. It ended: the board adopted a <b>$141,323,369</b> budget (+1.03%) on Apr 16, 2026, eliminating <b>≈22 teaching positions and 40 teaching assistants</b>, and voters passed it <b>1,915–1,195 on May 19, 2026</b> (levy +2.06%, under the final ≈2.1% cap — the "2.45%/$111.9M" figure was January's superseded projection). This is better ammunition than a projection: the cuts are what "do nothing about housing turnover" looks like. (Also: Mary Beth Joyce, the cited budget analyst, won a board seat in that same election.)</p></div>
-
-<h2 id="concepts">Framing fixes (concepts, not just digits)</h2>
+<h2 id="demo">Demographics &amp; housing<a class="anchor" href="#demo">#</a></h2>
+<p class="note">Geography: Rockville Centre village = place FIPS 3663264. "2019–23" and "2020–24" are ACS 5-year vintages; 2020–24 (released Dec 2025) is the latest published. Full working notes: <a href="findings/demographics.md">findings/demographics.md</a>.</p>
 <table>
-<tr><th style="width:38%">Replace</th><th>With</th></tr>
-<tr><td class="old">"Recaptured school tax revenue"; "deficit coverage"</td><td><span class="new">Burden-shift relief</span> to other taxpayers + <span class="new">state savings</span>. The only channels that add <i>district</i> revenue from turnover: the <b>tax-base growth factor</b> (buyer renovations physically expand the taxable base, lawfully raising the levy cap), <b>enrollment-linked aid</b>, and <b>budget-vote sustainability</b>.</td></tr>
-<tr><td class="old">Enhanced STAR counted in district losses ($2,680/parcel)</td><td>STAR is a state charge. A senior→family transition saves <span class="new">NY State ≈$2,058/yr</span> (Enhanced credit $3,147 → Basic $1,089) — the <b>"downsizing dividend"</b> that can fund the incentives.</td></tr>
-<tr><td class="old">"Seniors lose §467/STAR benefits if they move" (lock-in driver)</td><td>Mostly myth: Enhanced STAR follows an eligible owner to any NY primary residence; §467 applies wherever adopted; Nassau waives its 12-month wait for prior holders. The <i>real</i> frictions: move-<b>year</b> timing (S3309 fixes it), capital gains, inventory.</td></tr>
-<tr><td class="old">"STAR credit conversion shifts $2,680/parcel from local burden to state"</td><td>The exemption is <i>already</i> state-funded; conversion changes payment plumbing and lets the benefit grow ≤2%/yr — good for the homeowner, neutral for the levy.</td></tr>
-<tr><td class="old">"1,404 exempt senior parcels (18% of owner homes)"</td><td><span class="new">2,076 senior-owned homes (27.9% — ACS B25007)</span>, of which the §467-eligible subset is <b>unknown until the county publishes parcel data</b>. Never multiply every senior home by a full benefit stack.</td></tr>
-<tr><td class="old">"288 seats of spare capacity"</td><td>A ~260–290-student <i>enrollment decline</i> (NYSED: 3,533→3,276). No public capacity study exists; say "empty seats" only in that bounded sense.</td></tr>
-<tr><td class="old">Marginal cost = $0 (plan) and $5K one-time (model) and $12K/yr (same model)</td><td>One labeled assumption: low marginal cost <i>while spare seats last</i>, rising as they fill. (The model's own ratio row said new students cost 3× the "recaptured" revenue — quietly contradicting its headline.)</td></tr>
+<tr><th>Fact</th><th>Source · verification</th><th>Used on</th></tr>
+<tr id="f-senior-share"><td class="f">27.9% of owner-occupied homes have a householder 65+ — 2,076 of 7,453 (1,206 aged 65–74 + 681 aged 75–84 + 189 aged 85+)</td><td><a href="https://data.census.gov/table/ACSDT5Y2023.B25007?g=1600000US3663264">ACS 2019–23 B25007</a>; latest vintage agrees: 28.0% (2,081 of 7,444, 2020–24). Fetched from data.census.gov 6/9/26; re-checked 7/18/26</td><td class="u"><a href="index.html">deck</a> · <a href="brief-2026-08.html">brief</a> · <a href="fiscal-math.html">mechanics</a> · <a href="breakeven.html">break-even</a></td></tr>
+<tr id="f-home-value"><td class="f">Median owner-occupied home value ≈ $820K ($818,700)</td><td><a href="https://data.census.gov/table/ACSDT5Y2024.B25077?g=1600000US3663264">ACS 2020–24 B25077</a>; Zillow 6/2026 agrees (~$807–819K). Redfin's $555K median <em>sale</em> is co-op-skewed — never use it for single-family value</td><td class="u"><a href="index.html">deck</a> · <a href="brief-2026-08.html">brief</a> · <a href="fiscal-math.html">mechanics</a> · <a href="calculator.html">calculator</a></td></tr>
+<tr id="f-hh-income"><td class="f">Median household income $144,516 (2019–23); $151,938 (2020–24)</td><td><a href="https://data.census.gov/table/ACSDT5Y2023.B19013?g=1600000US3663264">ACS B19013</a>, exact</td><td class="u"><a href="index.html">deck</a></td></tr>
+<tr id="f-senior-income"><td class="f">Median household income, 65+ householders: $76,815 (2019–23); $79,722 (2020–24)</td><td><a href="https://data.census.gov/table/ACSDT5Y2023.B19049?g=1600000US3663264">ACS B19049_005</a> — the reason the <em>median</em> senior homeowner does not qualify for §467</td><td class="u">ledger reference</td></tr>
+<tr id="f-pop"><td class="f">Population ~25.7K; 65+ share 20.1%; median age 42.9; homeownership 75.1%; 10,332 housing units / 7,444 owner-occupied (2020–24)</td><td><a href="https://data.census.gov/table/ACSST5Y2023.S0101?g=1600000US3663264">ACS S0101 / DP04 / B25003</a></td><td class="u">ledger reference</td></tr>
+<tr id="f-boomer-homes"><td class="f">Empty-nest boomers hold large homes at ~2× the rate of millennials with kids (28% vs 16%)</td><td><a href="https://www.redfin.com/news/empty-nest-large-homes-2026/">Redfin, 2026 refresh</a> — Redfin's stat, not the Minneapolis Fed's (the <a href="https://www.minneapolisfed.org/article/2024/how-higher-property-taxes-increase-home-affordability">Fed piece</a> is the separate carrying-cost/lock-in mechanism)</td><td class="u"><a href="index.html">deck</a> · <a href="brief-2026-08.html">brief</a></td></tr>
+<tr id="f-nassau-65"><td class="f">Share of Nassau households with a member 65+: 38.9% (2019–23) → 39.6% (2020–24)</td><td><a href="https://data.census.gov/table/ACSDT5Y2023.B11007?g=0500000US36059">ACS B11007, Nassau County</a></td><td class="u"><a href="index.html">deck</a> · <a href="calculator.html">calculator</a></td></tr>
+<tr id="f-lockin"><td class="f">Lock-in evidence: §121 exclusion ($250K/$500K) unindexed since 1997, ~1.9M senior-owned homes now above it (~$620B gains); age-based exemptions measurably increase staying put; higher carrying costs shift large homes to younger families</td><td><a href="https://www.aei.org/articles/capital-gain-regulations-on-home-sales-and-baby-boomer-lock-in/">AEI</a> · <a href="https://www.nber.org/papers/w25468">NBER w25468 (Banzhaf et al.)</a> · <a href="https://www.minneapolisfed.org/article/2024/how-higher-property-taxes-increase-home-affordability">Minneapolis Fed (Horwich, 2024)</a></td><td class="u"><a href="index.html">deck</a> · <a href="brief-2026-08.html">brief</a> · <a href="fiscal-math.html">mechanics</a></td></tr>
 </table>
 
-<h2 id="numbers">Number-by-number corrections</h2>
-
-<h3>Rockville Centre UFSD &amp; village</h3>
+<h2 id="schools">Rockville Centre UFSD<a class="anchor" href="#schools">#</a></h2>
 <table>
-<tr><th>Item</th><th style="width:24%">Project said</th><th style="width:33%">Verified value (source)</th></tr>
-<tr><td>2025-26 budget</td><td>$139.89M <span class="v ok">Confirmed</span></td><td>$139,889,187 — district budget PDF; passed 1,955–970 (May 2025)</td></tr>
-<tr><td>2025-26 levy / increase</td><td>$109.24M / +2.6% <span class="v ok">Confirmed</span></td><td>Exact (LI Herald / Patch)</td></tr>
-<tr><td>2026-27 allowable levy</td><td class="old">$111,911,163 (+2.45%)</td><td><span class="new">Final cap ≈2.1%; adopted +2.06%</span> — the 2.45% was January's projection <span class="v old">Outdated</span></td></tr>
-<tr><td>2026-27 outcome</td><td class="old">"$3.78M deficit projected"</td><td><span class="new">Closed: $141.32M budget, −22.2 teachers/−40 TAs, passed 1,915–1,195 (5/19/26)</span> <span class="v old">Outdated</span></td></tr>
-<tr><td>State aid</td><td class="old">$22M (15.7%)</td><td><span class="new">≈$20–21M (~15%)</span>; $19.8M published for 2024-25 <span class="v unv">Unsupported</span></td></tr>
-<tr><td>Enrollment</td><td class="old">3,326 (2025-26); 3,548 in 2016</td><td><span class="new">NYSED: 3,533 (2015-16) → 3,276 (2024-25)</span>; "3,548" is the district's own count; 3,326 appears in no public source; 3,260 projected 2026-27 (district)</td></tr>
-<tr><td>Per-pupil spending</td><td class="old">$42,050</td><td><span class="new">$37,973 NYSED official (2023-24)</span>; $40.2K ST-3 actuals; $42.1K is budget÷enrolled (a different, larger measure)</td></tr>
-<tr><td>Reserves</td><td class="old">"$8M = 8% of budget"</td><td>$8M is 5.7–5.9% of budget. Verified pieces: <span class="new">unappropriated $4.8M (3.5%; 4% legal max), appropriated $2.8M→$1.6M, ERS/TRS ≈$4.15M</span>; "$8M / 14% peers / GC $27M" are the Joyce analysis (attribute, don't assert)</td></tr>
-<tr><td>Garden City comparison</td><td class="old">"$27M reserves on a similar $122.7M budget"</td><td>GC's 2025-26 <i>budget</i> is <span class="new">$137.8M</span> ($122.7M ≈ its 2023-24 actual spend); the $27M figure is not independently confirmed <span class="v unv">Unverified</span></td></tr>
-<tr><td>STAR savings (RVC, Class 1)</td><td class="old">Basic $1,220 / Enhanced $2,680</td><td><span class="new">Exemption $1,068 / $2,856 · Credit $1,089 / $3,147.01</span> (DTF 2025 final) <span class="v bad">Wrong</span></td></tr>
-<tr><td>Enhanced STAR income limit</td><td>$110,750 (2026) <span class="v ok">Confirmed</span></td><td>2025-26: $107,300; 2026-27: $110,750 (DTF)</td></tr>
-<tr><td>"$15,230 avg school tax" (model cell B42)</td><td class="old">labeled school tax</td><td><b>July 2026 correction of this pass's own June verdict:</b> the March label was <i>right</i>. $15,230.09 is a real 2025-26 <b>school + library</b> bill (in-village parcel, county taxable AV 653: $14,678.57 + $551.52 — Nassau LRV tax table). June's re-label of it as "the total" was wrong, and the 2.073% "total effective rate" built on it understated real totals ~19%. A typical in-village <i>total</i> ≈ $21.1K incl. the village line. See <a href="reconcile.html">reconcile.html</a> and docs/MATH-AUDIT-2026-07.md <span class="v ok">Resolved</span></td></tr>
-<tr><td>Bill split</td><td class="old">school 62 / village 18 / county 12 / town 3 / library 3 / special 2</td><td>July 2026, from verified in-village parcel tables: <span class="new">school ~70 / village ~21 / county ~6 / library ~2.6 / town ~0.5 / special 0</span> — in-village parcels pay no county police-district, town highway/park/refuse, or fire/sanitary lines (the village levy funds RVC's own police, sanitation, roads). June's levy-derived county ~12 / town ~2 matched the <i>out-of-village</i> profile</td></tr>
-<tr><td>Village budget</td><td>$60.9M / levy $41.7M <span class="v ok">Confirmed</span></td><td>$60,884,752 / $41,744,386 (68.6%) — adopted FY2025-26</td></tr>
-<tr><td>Sewage</td><td class="old">"RVC is one of 6 municipal sewer districts" (implying own treatment)</td><td><span class="new">Collects and pumps to Nassau's Bay Park/South Shore facility</span> — RVC's plant is offline <span class="v bad">Wrong</span></td></tr>
-<tr><td>Volunteer FD "saves $8–12M/yr"</td><td class="old">stated as fact</td><td>No published study — now labeled an unofficial estimate <span class="v unv">Unverified</span></td></tr>
+<tr><th>Fact</th><th>Source · verification</th><th>Used on</th></tr>
+<tr id="f-enrollment"><td class="f">K-12 enrollment 3,533 (2015-16) → 3,276 (2024-25); district projects 3,260 for 2026-27</td><td><a href="https://data.nysed.gov/enrollment.php?year=2025&amp;instid=800000049383">NYSED data site</a></td><td class="u"><a href="index.html">deck</a> · <a href="brief-2026-08.html">brief</a> · <a href="calculator.html">calculator</a></td></tr>
+<tr id="f-budget27"><td class="f">2026-27 adopted budget $141,323,369 (+1.03%); levy +2.06% (~$2.25M); 22.2 teaching + 40 TA positions cut, 13 facilitators restored; passed 1,915–1,195 on May 19, 2026</td><td><a href="https://www.liherald.com/rockvillecentre/stories/rockville-centre-school-board-adopts-1413m-budget-preserves-tax-cap,221736">LI Herald (adoption)</a> · <a href="https://www.liherald.com/stories/school-budget-passes-in-rockville-centre,222477">LI Herald (vote)</a> · <a href="https://www.rvcschools.org/43656_3">district budget page</a></td><td class="u"><a href="index.html">deck</a> · <a href="brief-2026-08.html">brief</a> · <a href="calculator.html">calculator</a> · <a href="breakeven.html">break-even</a> · <a href="voices.html">voices</a></td></tr>
+<tr id="f-budget26"><td class="f">2025-26 baseline: budget $139,889,187; levy $109.24M (+2.6%) — revenue mix ≈78% levy / 15% aid / 7% other</td><td>District budget PDF; LI Herald / Patch (passed 1,955–970, May 2025)</td><td class="u"><a href="breakeven.html">break-even</a></td></tr>
+<tr id="f-cap"><td class="f">School-district levy growth capped at 2% for 2026-27 — 5th straight year — vs a 2.63% inflation factor</td><td><a href="https://www.osc.ny.gov/press/releases/2026/01/dinapoli-school-district-tax-cap-levy-remains-at-2-percent">OSC release, Jan 2026</a></td><td class="u"><a href="brief-2026-08.html">brief</a> · <a href="breakeven.html">break-even</a></td></tr>
+<tr id="f-perpupil"><td class="f">Per-pupil spending $37,973 (NYSED official, 2023-24)</td><td>NYSED; note $42.1K = budget÷enrolled, a different, larger measure — don't mix them</td><td class="u"><a href="index.html">deck</a> · <a href="calculator.html">calculator</a></td></tr>
+<tr id="f-61pct"><td class="f">61% of Nassau's 56 school districts lost enrollment over the past decade</td><td><a href="https://www.nassauboces.org/schooldistrictdirectory">Nassau BOCES directory</a> (the 56) · LI Herald (Apr 2025), citing BOCES decade data</td><td class="u"><a href="index.html">deck</a> · <a href="brief-2026-08.html">brief</a> · <a href="voices.html">voices</a></td></tr>
+<tr id="f-rates"><td class="f">2025-26 rates per $100 of county AV: school $2,247.867 · library $84.459 · general (county+town), in-village parcels $206.397 / out-of-village ≈$886.816</td><td>Nassau LRV parcel tax tables (<a href="https://lrv.nassaucountyny.gov/info/36366++00150/">in-village sample</a> · <a href="https://lrv.nassaucountyny.gov/info/36503++00090/">out-of-village sample</a>); line items × AV reproduce printed bills to the penny (7/18/26). Full audit: <code>docs/MATH-AUDIT-2026-07.md</code> in the repo</td><td class="u"><a href="reconcile.html">reconciler</a> · <a href="calculator.html">calculator</a></td></tr>
+<tr id="f-15230"><td class="f">$15,230.09 = a real 2025-26 <em>school + library</em> bill on a typical in-village parcel (county AV 653) — not a total; typical in-village <em>total</em> ≈ $21.1K including the village line</td><td>Same LRV tax table ("Combined School Taxes $15,230.09")</td><td class="u"><a href="reconcile.html">reconciler</a> · <a href="calculator.html">calculator</a></td></tr>
 </table>
 
-<h3>Demographics &amp; housing</h3>
+<h2 id="star">STAR<a class="anchor" href="#star">#</a></h2>
 <table>
-<tr><th>Item</th><th style="width:24%">Project said</th><th style="width:33%">Verified value (source)</th></tr>
-<tr><td>Senior-owned share of owner homes</td><td class="old">18% (~1,404 parcels)</td><td><span class="new">27.9% — 2,076 of 7,453 owner households (ACS B25007)</span>; the affected base was <i>under</i>counted by ~48% <span class="v bad">Wrong</span></td></tr>
-<tr><td>Homeownership / owner units</td><td class="old">78% / ~7,800</td><td><span class="new">74.5% / 7,453</span> (no ACS vintage shows 78%) <span class="v bad">Wrong</span></td></tr>
-<tr><td>Median home value</td><td class="old">$735,000 "(ACS)"</td><td><span class="new">ACS 2020-24: $818,700 · Zillow 6/2026: ~$807–819K</span> (matches no ACS vintage; Redfin's $555K median sale is co-op-skewed) <span class="v bad">Wrong label</span></td></tr>
-<tr><td>"2.073% effective tax rate"</td><td class="old">presented as data</td><td>Circular ($15,230 ÷ $735K) — and, per the July 2026 audit, built on a school+library-only bill: the real total on a median home is ≈2.6% of current market value (verified components: school 2247.867 + library 84.459 + general 206.397 per $100 of county AV, plus the village's own roll at $69.89/$100). Corrected in the calculator <span class="v bad">Wrong</span></td></tr>
-<tr><td>65+ population / median age</td><td>19.6% / 42.9</td><td><span class="new">20.1%</span> / 42.9 ✓ (2020-24 ACS)</td></tr>
-<tr><td>Median HH income</td><td>$144,516 <span class="v ok">Confirmed</span></td><td>Exact (2019-23 ACS); 2020-24: $151,938</td></tr>
-<tr><td>65+ median HH income</td><td class="old">$82,000</td><td><span class="new">$76,815 (2019-23) / $79,722 (2020-24)</span> <span class="v old">High</span></td></tr>
-<tr><td>Income by age table</td><td class="old">invented 10-yr brackets</td><td>ACS only publishes 25-44 ($210,409), 45-64 ($179,214), 65+ ($79,722) for RVC — old values failed internal consistency <span class="v bad">Wrong</span></td></tr>
-<tr><td>Itemization rates</td><td class="old">RVC 68% / Nassau 62% / NY 35% / US 13%</td><td><span class="new">25.7% / ~19.8% / 10.4% / 9.6%</span> (IRS SOI TY2022) — claimed figures are pre-TCJA magnitudes <span class="v bad">Wrong</span></td></tr>
-<tr><td>Boomer large-home stat</td><td class="old">"Minneapolis Fed: 28% vs 14%"</td><td><span class="new">Redfin (Jan 2024): 28.2% vs 14.2%; 2026 refresh 28%/16%</span>. The Minneapolis Fed article (Horwich, Nov 2024) is real but is the separate property-tax/lock-in piece <span class="v bad">Misattributed</span></td></tr>
-<tr><td>Nassau facts</td><td class="old">pop 1.36M; budget $3.7B; avg tax $13,680</td><td><span class="new">~1.40M; $4.2B (FY2025/26); ATTOM Nassau avg $13,059 (2023)</span>; income $146,202 #1 in NY ✓; 65+-household share 38.9%→39.6% ✓</td></tr>
-<tr><td>NYS / US avg property tax</td><td class="old">$6,600 / $3,500</td><td><span class="new">$7,732 / $4,427 (ATTOM 2025 averages)</span> <span class="v old">Outdated</span></td></tr>
+<tr><th>Fact</th><th>Source · verification</th><th>Used on</th></tr>
+<tr id="f-star-exempt"><td class="f">Max 2026–27 STAR <em>exemption</em> savings, RVC school district, Class 1: Basic $1,068 / Enhanced $2,856 (unchanged from 2025)</td><td><a href="https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm">DTF max savings table, Nassau</a> (fetched 7/18/26)</td><td class="u"><a href="calculator.html">calculator</a> · <a href="reconcile.html">reconciler</a> · <a href="governance-options.html">gov-options</a></td></tr>
+<tr id="f-star-credit"><td class="f">2025 final STAR <em>credit</em> amounts, RVC Class 1: Basic $1,089 / Enhanced $3,147.01. 2026 final credits not yet published (DTF page still 2025-labeled as of 7/20/26)</td><td><a href="https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm">DTF 2025 final credit/exemption savings, Nassau</a></td><td class="u"><a href="index.html">deck</a> · <a href="brief-2026-08.html">brief</a> · <a href="fiscal-math.html">mechanics</a> · <a href="calculator.html">calculator</a> · <a href="reconcile.html">reconciler</a></td></tr>
+<tr id="f-star-2026"><td class="f">2026 STAR changes: automatic Basic→Enhanced upgrade at 65; only one resident owner must be 65+; income test counts resident owners/spouses only</td><td><a href="https://www.tax.ny.gov/star/changes/">DTF "It's getting easier to qualify for STAR"</a></td><td class="u"><a href="index.html">deck</a> · <a href="brief-2026-08.html">brief</a></td></tr>
+<tr id="f-star-limit"><td class="f">Enhanced STAR income limit $110,750 (2026 benefit, 2024 income); $113,550 (2027). Basic: $500K credit / $250K exemption</td><td><a href="https://www.tax.ny.gov/pit/property/star/eligibility.htm">DTF STAR eligibility</a></td><td class="u"><a href="index.html">deck</a> · <a href="brief-2026-08.html">brief</a></td></tr>
+<tr id="f-star-funded"><td class="f">STAR is state-funded — a state charge, never a district loss</td><td><a href="https://www.nysenate.gov/legislation/laws/RPT/1306-A">RPTL §1306-a</a>, statute text</td><td class="u"><a href="index.html">deck</a> · <a href="brief-2026-08.html">brief</a> · <a href="fiscal-math.html">mechanics</a> · <a href="governance-options.html">gov-options</a></td></tr>
 </table>
 
-<h3>Politics &amp; legislation (June 2026 roster)</h3>
+<h2 id="s467">§467 senior exemption<a class="anchor" href="#s467">#</a></h2>
 <table>
-<tr><th>Item</th><th style="width:24%">Project said</th><th style="width:33%">Verified (source)</th></tr>
-<tr><td>RVC's state senator</td><td class="old">Todd Kaminsky (SD-9)</td><td><span class="new">Patricia Canzoneri-Fitzpatrick (R, SD-9)</span> — an RVC resident; Kaminsky resigned July 2022 <span class="v bad">Wrong</span></td></tr>
-<tr><td>RVC's Assembly member</td><td class="old">Ed Ra (AD-19)</td><td><span class="new">Judy Griffin (D, AD-21)</span> — AD-19 doesn't cover RVC <span class="v bad">Wrong</span></td></tr>
-<tr><td>Schumer</td><td class="old">"Senate Majority Leader"</td><td><span class="new">Minority Leader</span> (Thune holds the majority) <span class="v bad">Wrong</span></td></tr>
-<tr><td>Rep. Laura Gillen</td><td>NY-4, RVC resident, SALT champion <span class="v ok">Confirmed</span></td><td>✓ — and facing a June 23, 2026 primary; <b>not yet</b> a cosponsor of H.R. 1340</td></tr>
-<tr><td>S5175A (65% §467 tier)</td><td class="old">pending bill to support conditionally</td><td><span class="new">Law — Ch. 581 of 2025 (signed Dec 5, 2025)</span>; Nassau already applies 65% ≤ $47K; §467 income cap → $75,000 eff. 7/1/2027 <span class="v old">Status flip</span></td></tr>
-<tr><td>Federal vehicle</td><td class="old">"AEI-style proposal" (unnamed)</td><td><span class="new">H.R. 1340 (Panetta/Kelly, 117+ cosponsors) / S. 3332 (Cornyn/Bennet/Schiff)</span> — double &amp; index §121</td></tr>
-<tr><td>NY mobility bills</td><td class="old">"Prop 19-style portability" (no bill exists)</td><td><span class="new">S3309/A5288</span> (exemption continuity in a move year; Aging 7–0, Apr 2026); <span class="new">S3574</span> (renewal notices)</td></tr>
-<tr><td>Hempstead "18% tax cut"</td><td class="old">town tax cut</td><td>General-Fund levy only (~$5M; town-wide levy ≈ flat); Supervisor is <span class="new">John Ferretti</span> <span class="v old">Oversold</span></td></tr>
-<tr><td>Nassau school districts: 56 · BOCES "61% declining"</td><td><span class="v ok">Confirmed</span></td><td>Nassau BOCES directory; LI Herald (Apr 2025) citing BOCES decade data</td></tr>
+<tr><th>Fact</th><th>Source · verification</th><th>Used on</th></tr>
+<tr id="f-467-scale"><td class="f">Sliding scale at the $50K option: 50% at income ≤ $50,000, stepping down to 5% at ≈$58,400. Nassau applies the 65% tier for income ≤ $47,000</td><td><a href="https://www.tax.ny.gov/pit/property/exemption/seniorexempt.htm">DTF senior-exemption page</a> (updated 5/14/26) · <a href="https://www.nassaucountyny.gov/DocumentCenter/View/49404/">Nassau brochure (Rev. 3-26)</a></td><td class="u"><a href="index.html">deck</a> · <a href="brief-2026-08.html">brief</a> · <a href="fiscal-math.html">mechanics</a> · <a href="governance-options.html">gov-options</a></td></tr>
+<tr id="f-467-tiers"><td class="f">Ch. 581 of 2025 (A.3698-A/S.5175-A, signed Dec 5, 2025): optional 65/60/55% tiers, taxable years from Jan 1, 2026. It does <em>not</em> change income limits</td><td><a href="https://www.nysenate.gov/legislation/bills/2025/A3698/amendment/A">A3698-A</a> · <a href="https://www.tax.ny.gov/pdf/publications/orpts/legis/legsum25.pdf">DTF 2025 legislative summary (PDF, full-text extracted)</a></td><td class="u"><a href="brief-2026-08.html">brief</a> · <a href="governance-options.html">gov-options</a> · <a href="index.html">deck</a></td></tr>
+<tr id="f-467-75k"><td class="f">The maximum income limit localities may adopt rises $50,000 → $75,000 on July 1, 2027 (local opt-in) — the brief's central decision window</td><td><a href="https://www.nysenate.gov/legislation/laws/RPT/467">RPTL §467(3)(a) statute text</a> — raw HTML carries both versions with "NB Effective" markers (fetched 7/18/26). The enacting chapter is unidentified (it is not in DTF's 2022–25 summaries and is not Ch. 581) — <strong>cite the statute, never name a chapter</strong></td><td class="u"><a href="index.html">deck</a> · <a href="brief-2026-08.html">brief</a> · <a href="fiscal-math.html">mechanics</a></td></tr>
+<tr id="f-burden-shift"><td class="f">Exemptions shift the levy onto non-exempt taxpayers; they don't reduce district revenue ("Every exemption granted on a property shifts the tax burden to the non-exempt properties")</td><td><a href="https://www.osc.ny.gov/files/local-government/publications/pdf/propertytax_exemptions_0.pdf">OSC, Property Tax Exemptions (PDF)</a></td><td class="u"><a href="index.html">deck</a> · <a href="brief-2026-08.html">brief</a> · <a href="fiscal-math.html">mechanics</a> · <a href="governance-options.html">gov-options</a></td></tr>
 </table>
 
-<h3>Coalition districts</h3>
+<h2 id="village">Village of Rockville Centre<a class="anchor" href="#village">#</a></h2>
 <table>
-<tr><th>District</th><th style="width:30%">Project said</th><th style="width:34%">Verified (NYSED 2024-25 / news)</th></tr>
-<tr><td>Levittown</td><td class="old">"TWO schools closed (Pintail Lane, Cherrywood)" as current evidence; $233.8M budget; 7,177 students</td><td>Those schools closed in <span class="new">1976 / mid-1970s</span> — usable only as historical precedent; 6 elementaries operate today; budget <span class="new">$274.1M</span>; 7,061 students <span class="v bad">Misleading</span></td></tr>
-<tr><td>Long Beach</td><td class="old">closure debate, ~2,800 students</td><td>Debate ✓ — but <span class="new">East Elementary stayed OPEN</span> (spring 2025); 3,265 students <span class="v bad">Outcome wrong</span></td></tr>
-<tr><td>Hempstead / Baldwin / Island Trees / Hewlett-Woodmere</td><td class="old">~7,000 / ~5,500 / ~3,000 / 3,100+</td><td><span class="new">5,071 / 4,309 / 2,261 / 2,650</span> <span class="v bad">Overstated</span></td></tr>
-<tr><td>Locust Valley</td><td>2,034→1,818, proj. 1,725; "five homes under $1M" <span class="v ok">Confirmed</span></td><td>Supt. Kristen Turnow's figures &amp; quote check out (NYSED BEDS-day: 1,754)</td></tr>
-<tr><td>Oyster Bay-East Norwich</td><td>−15% since 2015; Supt. Ianni; ToOB §467 <span class="v ok">Confirmed</span></td><td>NYSED: 1,569→1,310 (−16.5%); Dr. Francesco Ianni ✓</td></tr>
-<tr><td>Massapequa / Lynbrook / Malverne / Great Neck / Uniondale demos</td><td><span class="v ok">Confirmed</span></td><td>6,460 / 2,725 / 1,801 / 6,600 exact / 65% Hispanic·32% Black ✓</td></tr>
-<tr><td>Roosevelt</td><td class="old">listed as decline example</td><td><span class="new">Growing — 3,020</span>; drop it from the decline list <span class="v bad">Wrong direction</span></td></tr>
+<tr><th>Fact</th><th>Source · verification</th><th>Used on</th></tr>
+<tr id="f-fy27"><td class="f">FY2026-27 adopted (Apr 30, 2026): budget $63,641,946; levy $44,488,056 (+6.6% vs FY26's $41.74M); tax rate $69.89 → $74.91 per $100 village AV (+7.2%)</td><td><a href="https://www.rvcny.gov/sites/g/files/vyhlif4946/f/uploads/village_of_rockville_centre_fy27_adopted_budget.pdf">Adopted FY27 budget (PDF)</a> — figures machine-verified by pypdf extraction 7/18/26; corroborated by <a href="https://www.liherald.com/rockvillecentre/stories/rockville-centre-proposes-636-million-budget-with-tax-increase,221192">LI Herald</a></td><td class="u"><a href="brief-2026-08.html">brief</a> · <a href="governance.html">governance</a> · <a href="reconcile.html">reconciler</a></td></tr>
+<tr id="f-village-roll"><td class="f">The village assesses its own roll: AV $59,732,924 (FY26) / $59,388,849 (FY27); level of assessment (equalization rate) 0.87 (2025), 0.96 (2024), 0.99 (2023)</td><td>Adopted budget PDF (levy ÷ AV × 100 = 74.91 exactly) · <a href="https://data.ny.gov/resource/e6pv-77bh.json?%24q=ROCKVILLE">NYS ORPTS via data.ny.gov</a></td><td class="u"><a href="reconcile.html">reconciler</a></td></tr>
 </table>
 
-<h3>Calculator macro layer (federal &amp; NYS)</h3>
+<h2 id="assess">Nassau assessment mechanics<a class="anchor" href="#assess">#</a></h2>
 <table>
-<tr><th>Item</th><th style="width:26%">Calculator said</th><th style="width:33%">Verified (source)</th></tr>
-<tr><td>2025 federal &amp; NYS brackets, standard deductions</td><td><span class="v ok">Confirmed exactly</span></td><td>IRS Rev. Proc. 2024-40 (+OBBBA $31,500/$15,750/$23,625); DTF 2025 tables</td></tr>
-<tr><td>OBBBA SALT for 2026</td><td class="old">hardcoded $40,000 / $500,000</td><td><span class="new">2026: $40,400 cap / $505,000 threshold</span> (+1%/yr→2029; $10K floor; reverts 2030) — page now says it models TY2025</td></tr>
-<tr><td>NAEP 2024 (NY vs US)</td><td class="old">214/233/<b>266</b>/<b>279</b> vs 216/236/259/274 + "ranks"</td><td><span class="new">215/234/257/271 vs 214/237/257/272</span> — NY is at/below national in 3 of 4 cells; the flattering 8th-grade gaps don't exist and NAEP publishes no ranks <span class="v bad">Wrong</span></td></tr>
-<tr><td>NY per-pupil vs US</td><td class="old">"$36,293, 91% above $15,633" (and "132%" elsewhere)</td><td><span class="new">Census FY2024: NY $31,918 vs US $17,619 (+81%, #1)</span> — one vintage, used consistently</td></tr>
-<tr><td>AIM aid</td><td class="old">$7.6B</td><td><span class="new">$715.2M/yr</span> (OSC) — a 10× error <span class="v bad">Wrong</span></td></tr>
-<tr><td>Title I to RVC</td><td class="old">"~$3,700 per disadvantaged student"</td><td><span class="new">$126,911 total (2025-26)</span> ≈ 0.09% of budget <span class="v bad">Wrong</span></td></tr>
-<tr><td>2026 NYS rate cut</td><td class="old">"4%–6.85% → 3.9%–5.9%"</td><td>Bottom <span class="new">five</span> brackets only → 3.9/4.4/5.15/5.4/5.9% (2026), −0.1pt again 2027; <b>6.85% unchanged</b></td></tr>
-<tr><td>Debt &amp; interest</td><td class="old">$36.2T debt; $962B interest; $2,640/person; "first time &gt; defense"</td><td><span class="new">$38.86T (3/2026); ~$1.03T FY2025; ~$3,000/person; first exceeded defense in FY2024</span></td></tr>
-<tr><td>Program stats</td><td class="old">SS $1.5T/$1,922/51.5M/67.9M/79%; Medicare $912B; Medicaid $616B; ACA $85B; MA 51%; IRMAA $206K; SNAP $114B</td><td><span class="new">FY2025/2026: $1.6T / $2,071 / ~53M / ~71M / 77% payable; $987B; $669B; ~$125B; 54%; $218K (2026); ~$100B (FY2024)</span></td></tr>
-<tr><td>LIRR</td><td class="old">ridership 89.3M (2024); Zone 4 monthly ~$349</td><td><span class="new">75.5M (+15.8%); monthly $264.25, peak one-way $13.50 (2026)</span> <span class="v bad">Wrong</span></td></tr>
-<tr><td>DOCCS / courts / incarceration</td><td class="old">$4.3B; $139K/inmate; −60% since 1999; courts $3.4B</td><td><span class="new">$3.3B ops (FY2026); $115K+ (2021 official); −54%; ~$3.0B</span></td></tr>
-<tr><td>NYS Medicaid</td><td class="old">$34.2B state / $109.6B total; "2015 agreement" saved Nassau $80M/yr</td><td><span class="new">FY2025: $37.7B / $103.1B; takeover enacted 2012-13 (phased by 2015); savings figure unofficial</span></td></tr>
+<tr><th>Fact</th><th>Source · verification</th><th>Used on</th></tr>
+<tr id="f-freeze"><td class="f">County roll carried forward since the 2020-21 reassessment; Class 1 published level of assessment 0.1% (ARC residential ratio 0.060%); class-1 AV growth capped 6%/yr, 20%/5yr (RPTL §1805); next grievance window opens Jan 2, 2027</td><td><a href="https://www.nassaucountyny.gov/1517/Frequently-Asked-Questions">Nassau ARC FAQ</a> · <a href="https://www.nassaucountyny.gov/5739/20262027-Tentative-Assessment-Rolls">2026/27 tentative rolls</a> · LRV parcel pages (§1805 cap language printed on-page). Freeze continuation is reported county practice — no affirmative press release exists; phrase accordingly</td><td class="u"><a href="brief-2026-08.html">brief</a> · <a href="fiscal-math.html">mechanics</a> · <a href="calculator.html">calculator</a> · <a href="reconcile.html">reconciler</a> · <a href="governance-options.html">gov-options</a></td></tr>
 </table>
 
-<h2 id="false">Effectively false or misattributed (the blunt list)</h2>
-<ul>
-  <li>§467 tiers "$58,399 → 50%, sliding to $66,799" — <b>no such tiers exist in NY law</b>.</li>
-  <li>Levittown's school closures presented as current evidence — they happened in <b>1976</b>.</li>
-  <li>Long Beach's East Elementary implied closed — it <b>stayed open</b>.</li>
-  <li>Kaminsky (resigned 2022), Ed Ra (wrong district), Schumer "Majority Leader".</li>
-  <li>Itemization 68%/62%/35%/13% — actuals 25.7%/~19.8%/10.4%/9.6% (IRS SOI 2022).</li>
-  <li>STAR $1,220/$2,680 — matches no DTF row for RVC.</li>
-  <li>Homeownership 78% / ~7,800 owner homes — 74.5% / 7,453.</li>
-  <li>"Minneapolis Fed" large-homes stat — it's <b>Redfin's</b>.</li>
-  <li>NAEP 8th-grade advantages and "ranks" — don't exist.</li>
-  <li>AIM "$7.6B" (10× too high); Title I "$3,700/student" ($126,911 total); LIRR "$349 monthly" ($264.25).</li>
-</ul>
+<h2 id="leg">Legislation &amp; officeholders<a class="anchor" href="#leg">#</a></h2>
+<table>
+<tr><th>Fact</th><th>Source · verification</th><th>Used on</th></tr>
+<tr id="f-s3309"><td class="f">S3309/A5288 (keep your exemption in the year you move) did <em>not</em> pass the 2026 session: S3309 cleared Senate Aging 7–0 (Apr 21, 2026), died in Finance; A5288 never left Assembly Real Property Taxation. The ask: advance both in 2027</td><td><a href="https://www.nysenate.gov/legislation/bills/2025/S3309">S3309 action history</a> · <a href="https://www.nysenate.gov/legislation/bills/2025/A5288">A5288</a> (fetched 7/18/26)</td><td class="u"><a href="index.html">deck</a> · <a href="brief-2026-08.html">brief</a></td></tr>
+<tr id="f-hr1340"><td class="f">H.R. 1340 (More Homes on the Market Act — double &amp; index the §121 exclusion): 146 cosponsors incl. Suozzi and Malliotakis; <strong>Rep. Gillen is not a cosponsor</strong>. Senate companion S. 3332 (Cornyn/Bennet, Dec 3, 2025); NAR + AARP endorsed</td><td><a href="https://www.congress.gov/bill/119th-congress/house-bill/1340">Congress.gov</a> (canonical; bot-blocks fetches) — verified via <a href="https://www.billtrack50.com/billdetail/1833162">BillTrack50</a> + <a href="https://www.govinfo.gov/app/details/BILLS-119hr1340ih">GovInfo</a> + sponsor releases (7/18/26)</td><td class="u"><a href="index.html">deck</a> · <a href="brief-2026-08.html">brief</a></td></tr>
+<tr id="f-transfer"><td class="f">NYS transfer tax 0.4% ($2 per $500), seller-paid; 1% mansion tax ≥$1M (buyer). Nassau has no county transfer tax (1999 authorization expired 2001)</td><td><a href="https://www.tax.ny.gov/bus/transfer/rptidx.htm">DTF real-estate transfer tax</a></td><td class="u"><a href="index.html">deck</a> · <a href="brief-2026-08.html">brief</a> · <a href="fiscal-math.html">mechanics</a></td></tr>
+<tr id="f-office"><td class="f">The roster: Rep. Laura Gillen (NY-4, RVC resident) · Sen. Patricia Canzoneri-Fitzpatrick (R, SD-9, RVC resident) · Asm. Judy Griffin (D, AD-21) · Bruce Blakeman: GOP nominee for governor (general Nov 3, 2026) — county asks aim at the legislature, not the executive</td><td>Member pages; Blakeman candidacy via <a href="https://www.cbsnews.com/newyork/news/bruce-blakeman-running-for-new-york-governor-2026/">CBS New York</a> (no primary gov't source exists for a candidacy)</td><td class="u"><a href="index.html">deck</a> · <a href="brief-2026-08.html">brief</a></td></tr>
+</table>
 
-<h2 id="unverified">Unverifiable as published — label as estimates, or go get the data</h2>
-<ul>
-  <li><b>$15,230 "average total tax bill"</b> — resolved July 2026: it is a verified school+library-only bill; typical in-village <i>total</i> ≈ $21.1K. Bill components now verified against Nassau LRV parcel tax tables (see <a href="reconcile.html">reconcile.html</a>).</li>
-  <li><b>How many RVC parcels actually hold §467 / Enhanced STAR, by tier</b> — knowable only from county roll data / FOIL. Until then no aggregate "exemption gap" number should be published. <i>This became Ask #3 of the deck.</i></li>
-  <li><b>RVC UFSD's own §467 adoption + ceiling + 65%-tier posture</b> — supported only by county-wide statements; confirm with the district clerk.</li>
-  <li>"288 seats of spare capacity" (no facilities study); Riverside's "+$15K/student" (a resident's public comment); "$22M state aid"; "$15K/family retail spending"; "20–40 parcels per §467 tier"; Garden City's "$27M reserves".</li>
-</ul>
+<h2 id="derived">Derived figures<a class="anchor" href="#derived">#</a></h2>
+<p class="note">Arithmetic on ledger rows — no independent source; update automatically when a parent row changes.</p>
+<table>
+<tr><th>Figure</th><th>Derivation</th><th>Used on</th></tr>
+<tr id="f-dividend"><td class="f">≈$2,058/yr state savings per Enhanced→Basic STAR transition (the "downsizing dividend")</td><td>$3,147.01 − $1,089 (<a href="#f-star-credit">2025 final credits</a>)</td><td class="u"><a href="index.html">deck</a> · <a href="brief-2026-08.html">brief</a> · <a href="fiscal-math.html">mechanics</a></td></tr>
+<tr id="f-3280"><td class="f">≈$3,280 one-time state transfer tax per sale</td><td>0.4% × $820,000 (<a href="#f-home-value">median value</a>)</td><td class="u"><a href="brief-2026-08.html">brief</a> · <a href="fiscal-math.html">mechanics</a></td></tr>
+<tr id="f-257"><td class="f">−257 students since 2015-16</td><td>3,533 − 3,276 (<a href="#f-enrollment">NYSED</a>)</td><td class="u"><a href="brief-2026-08.html">brief</a> · <a href="index.html">deck</a></td></tr>
+<tr id="f-attrition"><td class="f">Natural senior attrition ≈3–5%/yr of 2,076 senior-owned homes ≈ 60–100 transitions/yr</td><td>Actuarial-range assumption × <a href="#f-senior-share">B25007 count</a> — labeled an assumption wherever used</td><td class="u"><a href="breakeven.html">break-even</a></td></tr>
+</table>
 
-<h2 id="survives">What survives — the corrected case is still strong</h2>
-<div class="card green">
-<p><b>The hypothesis holds; it just needed honest plumbing.</b> Verified: the squeeze is real and now has a body count (62 classroom positions cut to balance 2026-27, with revenue growing ~1% against +$2M health insurance alone, and 61% of Nassau's 56 districts declining). The homes exist (2,076 senior-owned — <i>more</i> than the project assumed). The lock-in is real and fixable (§121 unindexed since 1997 with ~1.9M senior homes above the caps — AEI; benefit-timing traps — S3309 fixes; missing downsize inventory). And the honest fiscal upside is attractive: each transition saves the State ~$2,058/yr in STAR (which can fund the carrots), pays ~$3,300 in one-time transfer tax, relieves the §467 burden-shift on neighbors, grows the levy cap through renovations, and refills empty seats. Every ask has a live vehicle and a named, current officeholder — including two RVC residents (Rep. Gillen and Sen. Canzoneri-Fitzpatrick).</p>
-<p style="margin-top:.4rem"><a href="index.html"><b>→ Read the rebuilt 8-page deck</b></a></p>
-</div>
+<h2 id="memos">The standalone memos — facts cited inline<a class="anchor" href="#memos">#</a></h2>
+<p class="note">Four pages are self-contained studies whose facts appear once, on that page, each claim cited inline where it's made (with [VERIFIED]/[REPORTED]/[ESTIMATE] labels where used). This ledger indexes them rather than duplicating their citation lists.</p>
+<table>
+<tr><th>Page</th><th>Fact families</th><th>Receipts</th></tr>
+<tr><td class="f"><a href="governance.html">governance.html</a> — how Nassau got its taxing districts</td><td>1812/1853/1925 school-district law; Ch. 516 of 1928 special districts; OSC 2007 counts ($400M levy, $946/household, 51.8% of town revenue); Lundine 2008 savings estimates ($23.8–35.7M, $18M Hempstead sanitation); Duncombe-Yinger consolidation economics; CWSSI $130.5M; county-guarantee refund machine (~$89M FY2024, NIFA)</td><td>Inline links + source list on-page; <code>docs/GOVERNANCE_REVIEW.md</code> in the repo</td></tr>
+<tr><td class="f"><a href="redraw-evidence.html">redraw-evidence.html</a> — the consolidation evidence memo</td><td>NCES F-33 FY2022-23 admin-$/pupil gradient (Nassau ~$2,800 vs Montgomery MD $968 → ~$1,900/pupil, ~$370M/yr admin gap); total-$/pupil and grad-rate comparisons; flagged county-weighted estimates</td><td>Inline; sources-and-method section on-page</td></tr>
+<tr><td class="f"><a href="governance-options.html">governance-options.html</a> — the two-brief decision memo</td><td>Incidence-labeled savings levers (RVC vs Town-of-Hempstead); Wake County / Twin Cities desegregation evidence; recurrence-tested consolidation numbers</td><td>Inline; method + rejected-levers section on-page</td></tr>
+<tr><td class="f"><a href="voices.html">voices.html</a> — the quotes library</td><td>30+ verbatim quotes, 2023–2026 (LI Herald, News 12, Patch, Northport Journal, TBR, LI Press); the closure file (Northport 2021, Three Village 2024, Long Beach 2025, North Shore LIPA cliff)</td><td>Every quote links to its source; nothing paraphrased</td></tr>
+<tr><td class="f"><a href="calculator.html">calculator.html</a> — macro layer (federal &amp; NYS context figures)</td><td>2025 IRS/NYS brackets &amp; standard deductions; OBBBA SALT schedule; NAEP 2024; Census FY2024 per-pupil; program stats (SS/Medicare/Medicaid/SNAP); LIRR; DOCCS; NYS Medicaid</td><td><a href="findings/calculator-macro.md">findings/calculator-macro.md</a> (25 claims, per-claim receipts)</td></tr>
+</table>
 
-<h2 id="receipts">Receipts</h2>
-<p>Per-claim verdicts with quotes, URLs, and vintages (six research passes + the internal-consistency audit):</p>
-<details><summary>School finance — 18 claims</summary><div><p><a href="findings/school-finance.md">findings/school-finance.md</a> — budget/levy/deficit confirmed; cap projection superseded (final ≈2.1%); state aid unsupported at $22M; NYSED enrollment &amp; per-pupil actuals; Riverside &amp; "288 seats" are residents' assertions; Joyce post verified (she was a candidate, elected May 19, 2026).</p></div></details>
-<details><summary>Exemptions &amp; STAR — 15 claims</summary><div><p><a href="findings/exemptions.md">findings/exemptions.md</a> — correct Nassau §467 tier table (65% ≤$47K → 5% at $57,500–58,399); DTF STAR amounts; RPTL §1306-a; OSC burden-shift; frozen roll &amp; no sale reassessment; Ch. 581 of 2025; $75K cap 7/1/2027; transfer/mansion tax; deferral statutes (OR/MA/WA/TX); NY circuit-breaker inventory.</p></div></details>
-<details><summary>Demographics &amp; housing — 20 claims</summary><div><p><a href="findings/demographics.md">findings/demographics.md</a> — ACS B25007 senior-owner count; home-value vintages; itemization (IRS SOI); Redfin vs Minneapolis Fed; AEI 1.9M; NBER w25468; Nassau county stats; ATTOM averages.</p></div></details>
-<details><summary>Politics &amp; legislation — 15 claims</summary><div><p><a href="findings/politics.md">findings/politics.md</a> — June 2026 roster (Gillen, Canzoneri-Fitzpatrick, Griffin, Blakeman, Schumer/Thune); H.R. 1340 / S. 3332 cosponsors; S3309/A5288/S3574 status; Prop 19 mechanics &amp; LAO; Hempstead 18% caveat; Nassau $4.2B.</p></div></details>
-<details><summary>Coalition districts — 15 claims</summary><div><p><a href="findings/coalition.md">findings/coalition.md</a> — NYSED 2024-25 enrollment for every named district; Levittown 1976 closures; Long Beach outcome; Locust Valley/OBEN/Hewlett-Woodmere confirmations.</p></div></details>
-<details><summary>Calculator macro layer — 25 claims</summary><div><p><a href="findings/calculator-macro.md">findings/calculator-macro.md</a> — IRS/DTF bracket confirmations; OBBBA SALT schedule; FY2025 federal actuals (CBO); NAEP 2024; Census FY2024 per-pupil; AIM; Title I; MTA/LIRR; DOCCS; NYS Medicaid; village budget/library/electric/sewer.</p></div></details>
-<details><summary>Internal-consistency audit — 16 cross-document contradictions</summary><div><p><a href="findings/internal-consistency.md">findings/internal-consistency.md</a> — three senior-parcel counts (1,404/1,405/1,342); two STAR sets; $4,563 vs $10,330 effective senior tax (root cause: cell B42 labels the total bill as school tax); mismatched scenario bases; "$8M = 8%" arithmetic; the model's 0.3× revenue-to-cost row vs the plan's "pure upside" prose; broken cell notes.</p></div></details>
+<h2 id="watch">Vintage watch — figures that will change<a class="anchor" href="#watch">#</a></h2>
+<div class="watch"><ul>
+<li><strong>2026 final STAR credit amounts</strong> — DTF had not published them as of July 20, 2026 (<a href="https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm">page</a> still 2025-labeled). When they land: update <a href="#f-star-credit">the credit row</a> and re-derive the <a href="#f-dividend">downsizing dividend</a>.</li>
+<li><strong>H.R. 1340 cosponsor count / Gillen status</strong> — volatile; re-verify same-day before anything goes in front of a politician.</li>
+<li><strong>ACS 2021–25 vintage</strong> (expected Dec 2026) — refresh all demographic rows. Pages currently print 2019–23 values in places; the pending design refresh standardizes on the latest vintage (28.0% senior share, $818,700 value, $151,938 income).</li>
+<li><strong>2027/28 tentative roll</strong> (published Jan 2027) — county EMVs jump toward FMV (+21% on the sample parcel); reconciler examples will need re-verification.</li>
+<li><strong>§467 $75K opt-in window opens July 1, 2027</strong> — the brief's decision clock; watch for the RVC UFSD / village / county resolutions.</li>
+</ul></div>
 
-<div class="foot">
-  Fact-check completed June 9, 2026 · Methodology: every claim traced to a primary source (statute, agency table, NYSED/Census/IRS data, or named article); claims that could not be traced are labeled, not repeated.<br>
-  <a href="index.html">8-page legislator deck</a> · <a href="calculator.html">RVC Tax &amp; Outcomes Calculator (corrected)</a> · Full corrections spec &amp; receipts in the project repo (<code>docs/</code>).
-</div>
+<h2 id="unknown">Known unknowns — figures this site refuses to print<a class="anchor" href="#unknown">#</a></h2>
+<div class="watch"><ul>
+<li><strong>Parcel-level §467 / Enhanced STAR counts by tier for RVC</strong> — FOIL to Nassau Assessment still open. Until it lands, no aggregate "exemption gap" dollar figure appears anywhere on this site; the §467-eligible subset of the 2,076 senior-owned homes is unknown. (This gap is itself Ask #3 of the deck.)</li>
+<li><strong>RVC UFSD's own §467 adoption posture</strong> (ceiling, 65%-tier stance) — supported only by county-wide statements; confirm with the district clerk before attributing.</li>
+<li><strong>District facilities capacity</strong> — no public study exists; "empty seats" is used only in the bounded enrollment-decline sense, never as a capacity claim.</li>
+</ul></div>
 
-</div>
-</body>
-</html>
+<div class="foot"><span>rvc-taxes.jeffpinto.com · working files in the project repo (docs/)</span><span>Ledger updated July 20, 2026</span></div>
+</div></body></html>

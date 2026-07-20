@@ -1,0 +1,997 @@
+{
+  "_meta": {
+    "purpose": "Batch 4 of the districts fan-out: full rows for 13 Nassau school districts, mirroring the pilot schema in site/assets/districts.json. Every field carries a source_ref (url, vintage, verified). Fields that cannot be verified from a primary source are OMITTED, never estimated. Do NOT merge blindly: intended to be reconciled into site/assets/districts.json.",
+    "batch": 4,
+    "built": "2026-07-20",
+    "method": "Replicates the L1 pilot method (.claude/scratch/districts-provenance.md): Census B25077 school-district geography, NYSED search_schools.php instid + enrollment.php, OSC iq85-sdzs levy, Nassau GIS REST parcel discovery -> LRV /info cookie -> POST /gstaxes.php for Class-1 school/library rates.",
+    "notes": [
+      "medianValue uses the SCHOOL-DISTRICT geography directly (preferred), not a place proxy: unified districts = sumlevel 970 (9700000US<geoid>); the two ELEMENTARY districts (Floral Park-Bellerose, Valley Stream 24) = sumlevel 950 (9500000US<geoid>). ACS does not publish B25077 for these under the 970 prefix.",
+      "Elementary districts (Floral Park-Bellerose = Sewanhaka CHSD component; Valley Stream 24 = Valley Stream CHSD component): the Nassau LRV school bill shows a SINGLE combined Net School Tax line (elementary + CHSD billed together), not separate elementary and CHSD lines. The recorded schoolRate is that combined rate. Confirmed by the STAR-savings line matching the DTF elementary-district exempt savings to the dollar.",
+      "Glen Cove City SD: schoolRate/libraryRate OMITTED. Glen Cove assesses its own roll; the county LRV explicitly returns 'located within the City of Glen Cove' and shows no school tax lines. Same archetype as the Long Beach pilot gap. levy is still available from OSC.",
+      "libraryRate is present only where the sampled Class-1 parcel's school bill carries a separate Net Library Tax line. East Rockaway, Malverne, Mineola, North Shore, and the two elementary districts show no such line on the sampled parcel and libraryRate is omitted (library funded off the school bill).",
+      "Every parcel with a STAR line independently reproduces the DTF exempt-savings figure to the dollar (Floral Park-Bellerose 752, Malverne 983, North Shore 829, Valley Stream 24 831, Seaford enhanced 3019) - a cross-source validation of the correct district and rate.",
+      "STAR fields (starCredit / starExemptSavings / starMaxExemptSavings2026_27) are carried unchanged from the existing verified stub rows in districts.json (DTF, 2026-07-20).",
+      "county_leg intentionally omitted (officials lane; re-verify same-day before any politician-facing use).",
+      "No FOIL-gated section-467 / exemption-gap figures appear here, per the standing rule."
+    ],
+    "gaps": [
+      "Glen Cove schoolRate + libraryRate: city-roll archetype; needs a City of Glen Cove tax bill / city assessor source.",
+      "Separate elementary-vs-CHSD rate split for Floral Park-Bellerose and Valley Stream 24: the county LRV bills them as one combined line, so the split is not separable from this source.",
+      "libraryRate for East Rockaway, Malverne, Mineola, North Shore (no school-bill library line on the sampled parcel)."
+    ]
+  },
+  "districts": {
+    "Bethpage Union Free School District": {
+      "dtfName": "Bethpage",
+      "censusName": "Bethpage Union Free School District",
+      "geoid": "3604740",
+      "sdType": "unified",
+      "starCredit": {
+        "basic": 899.0,
+        "enhanced": 2584.21
+      },
+      "starExemptSavings": {
+        "basic": 881.0,
+        "enhanced": 2584.21
+      },
+      "starMaxExemptSavings2026_27": {
+        "basic": 881.0,
+        "enhanced": 2584.0
+      },
+      "medianValue": 630900,
+      "schoolRate": 1845.861,
+      "libraryRate": 70.722,
+      "levy": 71513844,
+      "enrollment": {
+        "cur": 2957,
+        "base": 2880
+      },
+      "jurisdiction": "town-unincorporated",
+      "town": "Oyster Bay",
+      "board_url": "https://www.bethpagecommunity.com/",
+      "source_refs": {
+        "starCredit": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+          "verified": "2026-07-20"
+        },
+        "starExemptSavings": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final",
+          "verified": "2026-07-20"
+        },
+        "starMaxExemptSavings2026_27": {
+          "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+          "vintage": "2026-27",
+          "verified": "2026-07-20"
+        },
+        "medianValue": {
+          "url": "https://data.census.gov/api/access/data/table?id=ACSDT5Y2024.B25077&g=9700000US3604740",
+          "vintage": "ACS 2020-24 5-yr B25077, school-district geography (preferred; not a place proxy); unified (sumlevel 970)",
+          "verified": "2026-07-20"
+        },
+        "schoolRate": {
+          "url": "https://lrv.nassaucountyny.gov/info/46108++00030/ -> POST /gstaxes.php PARID='46108  00030' TOWN_NAME=Oyster Bay",
+          "vintage": "tax year 2026 (school 2025-26); parcel 23 Sheridan Ave, Bethpage (Class 1); AV 477 -> Net School 1845.861 = $8,804.76 + Net Library 70.722 = $337.34 = Combined $9,142.10 (reproduces to the penny)",
+          "verified": "2026-07-20"
+        },
+        "libraryRate": {
+          "url": "https://lrv.nassaucountyny.gov/info/46108++00030/ -> POST /gstaxes.php PARID='46108  00030' TOWN_NAME=Oyster Bay",
+          "vintage": "tax year 2026 (school 2025-26); parcel 23 Sheridan Ave, Bethpage (Class 1); AV 477 -> Net School 1845.861 = $8,804.76 + Net Library 70.722 = $337.34 = Combined $9,142.10 (reproduces to the penny)",
+          "verified": "2026-07-20"
+        },
+        "levy": {
+          "url": "https://data.ny.gov/resource/iq85-sdzs.json?county=Nassau&fiscal_year_ending=2025 (school_name=Bethpage)",
+          "vintage": "FY ending 2025 (2024-25); single Oyster Bay segment",
+          "verified": "2026-07-20"
+        },
+        "enrollment": {
+          "url": "https://data.nysed.gov/enrollment.php?year=2025&instid=800000048758",
+          "base_url": "https://data.nysed.gov/enrollment.php?year=2016&instid=800000048758",
+          "instid_lookup": "https://data.nysed.gov/search_schools.php?term=<name> (type 16 = district)",
+          "vintage": "2024-25 / 2015-16 K-12",
+          "verified": "2026-07-20"
+        },
+        "board_url": {
+          "url": "https://www.bethpagecommunity.com/",
+          "verified": "2026-07-20",
+          "note": "probed HTTP 200"
+        }
+      }
+    },
+    "East Rockaway Union Free School District": {
+      "dtfName": "East Rockaway",
+      "censusName": "East Rockaway Union Free School District",
+      "geoid": "3609960",
+      "sdType": "unified",
+      "starCredit": {
+        "basic": 1055.0,
+        "enhanced": 3001.97
+      },
+      "starExemptSavings": {
+        "basic": 1035.0,
+        "enhanced": 3001.97
+      },
+      "starMaxExemptSavings2026_27": {
+        "basic": 1035.0,
+        "enhanced": 3002.0
+      },
+      "medianValue": 567200,
+      "schoolRate": 2144.262,
+      "levy": 33401742,
+      "enrollment": {
+        "cur": 1126,
+        "base": 1172
+      },
+      "jurisdiction": "village-in-town",
+      "town": "Hempstead",
+      "board_url": "https://www.eastrockawayschools.org/",
+      "source_refs": {
+        "starCredit": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+          "verified": "2026-07-20"
+        },
+        "starExemptSavings": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final",
+          "verified": "2026-07-20"
+        },
+        "starMaxExemptSavings2026_27": {
+          "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+          "vintage": "2026-27",
+          "verified": "2026-07-20"
+        },
+        "medianValue": {
+          "url": "https://data.census.gov/api/access/data/table?id=ACSDT5Y2024.B25077&g=9700000US3609960",
+          "vintage": "ACS 2020-24 5-yr B25077, school-district geography (preferred; not a place proxy); unified (sumlevel 970)",
+          "verified": "2026-07-20"
+        },
+        "schoolRate": {
+          "url": "https://lrv.nassaucountyny.gov/info/42003++00160/ -> POST /gstaxes.php PARID='42003  00160' TOWN_NAME=Hempstead",
+          "vintage": "tax year 2026 (school 2025-26); parcel 77 Lawson Ave, East Rockaway (Class 1); AV 317 -> Net School 2144.262 = $6,797.31 = Combined $6,797.31 (reproduces); no separate Net Library Tax line on the sampled parcel's school bill | STAR line absent (no exemption on this parcel); reproduction is the internal cross-check",
+          "verified": "2026-07-20"
+        },
+        "levy": {
+          "url": "https://data.ny.gov/resource/iq85-sdzs.json?county=Nassau&fiscal_year_ending=2025 (school_name=East Rockaway)",
+          "vintage": "FY ending 2025 (2024-25); single Hempstead segment",
+          "verified": "2026-07-20"
+        },
+        "enrollment": {
+          "url": "https://data.nysed.gov/enrollment.php?year=2025&instid=800000049403",
+          "base_url": "https://data.nysed.gov/enrollment.php?year=2016&instid=800000049403",
+          "instid_lookup": "https://data.nysed.gov/search_schools.php?term=<name> (type 16 = district)",
+          "vintage": "2024-25 / 2015-16 K-12",
+          "verified": "2026-07-20"
+        },
+        "board_url": {
+          "url": "https://www.eastrockawayschools.org/",
+          "verified": "2026-07-20",
+          "note": "probed HTTP 200"
+        }
+      }
+    },
+    "Floral Park-Bellerose Union Free School District": {
+      "dtfName": "Floral Park-Bellerose",
+      "censusName": "Floral Park-Bellerose Union Free School District",
+      "geoid": "3611160",
+      "sdType": "elementary",
+      "starCredit": {
+        "basic": 767.0,
+        "enhanced": 2184.58
+      },
+      "starExemptSavings": {
+        "basic": 752.0,
+        "enhanced": 2184.58
+      },
+      "starMaxExemptSavings2026_27": {
+        "basic": 752.0,
+        "enhanced": 2185.0
+      },
+      "medianValue": 777300,
+      "schoolRate": 1560.415,
+      "levy": 59382912.56,
+      "enrollment": {
+        "cur": 1448,
+        "base": 1458
+      },
+      "jurisdiction": "village-in-town",
+      "town": "Hempstead",
+      "board_url": "https://www.fpbsd.org/",
+      "source_refs": {
+        "starCredit": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+          "verified": "2026-07-20"
+        },
+        "starExemptSavings": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final",
+          "verified": "2026-07-20"
+        },
+        "starMaxExemptSavings2026_27": {
+          "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+          "vintage": "2026-27",
+          "verified": "2026-07-20"
+        },
+        "medianValue": {
+          "url": "https://data.census.gov/api/access/data/table?id=ACSDT5Y2024.B25077&g=9500000US3611160",
+          "vintage": "ACS 2020-24 5-yr B25077, school-district geography (preferred; not a place proxy); ELEMENTARY (sumlevel 950)",
+          "verified": "2026-07-20"
+        },
+        "schoolRate": {
+          "url": "https://lrv.nassaucountyny.gov/info/32074++13480/ -> POST /gstaxes.php PARID='32074  13480' TOWN_NAME=Hempstead",
+          "vintage": "tax year 2026 (school 2025-26); parcel 89 Plainfield Ave, Floral Park (Class 1); AV 782 -> Net School 1560.415 = $12,202.45 = Combined $12,202.45 (reproduces); STAR Savings -$752.00 matches DTF Basic exempt savings $752 exactly | ELEMENTARY district: component of Sewanhaka Central High School District. The Nassau LRV school bill shows a SINGLE combined Net School Tax line (elementary + Sewanhaka CHSD billed together), NOT separate lines. 1560.415 is the combined school rate as billed. No separate library line on the sampled parcel.",
+          "verified": "2026-07-20"
+        },
+        "levy": {
+          "url": "https://data.ny.gov/resource/iq85-sdzs.json?county=Nassau&fiscal_year_ending=2025 (school_name=Floral Park-Bellerose)",
+          "vintage": "FY ending 2025 (2024-25); sum of segments: Hempstead $50,147,190.88 + North Hempstead $9,235,721.68",
+          "verified": "2026-07-20"
+        },
+        "enrollment": {
+          "url": "https://data.nysed.gov/enrollment.php?year=2025&instid=800000049337",
+          "base_url": "https://data.nysed.gov/enrollment.php?year=2016&instid=800000049337",
+          "instid_lookup": "https://data.nysed.gov/search_schools.php?term=<name> (type 16 = district)",
+          "vintage": "2024-25 / 2015-16 K-12",
+          "verified": "2026-07-20"
+        },
+        "board_url": {
+          "url": "https://www.fpbsd.org/",
+          "verified": "2026-07-20",
+          "note": "probed HTTP 200"
+        }
+      }
+    },
+    "Glen Cove City School District": {
+      "dtfName": "Glen Cove",
+      "censusName": "Glen Cove City School District",
+      "geoid": "3612180",
+      "sdType": "unified",
+      "starCredit": {
+        "basic": 800.44,
+        "enhanced": 2056.0
+      },
+      "starExemptSavings": {
+        "basic": 800.44,
+        "enhanced": 1789.0
+      },
+      "starMaxExemptSavings2026_27": {
+        "basic": 800.0,
+        "enhanced": 1789.0
+      },
+      "medianValue": 698900,
+      "schoolRateScope": "CITY district on its own assessment roll. The Nassau County LRV gstaxes response for a Glen Cove parcel returns 'This property is located within the City of Glen Cove. Tax information for this property can be obtained by calling the City of Glen Cove' and shows NO school/general tax lines (only county/town). School + library rate on the city AV basis are NOT verifiable from the county source and are OMITTED. Same archetype as the Long Beach pilot case.",
+      "levy": 77336931,
+      "enrollment": {
+        "cur": 3063,
+        "base": 3179
+      },
+      "jurisdiction": "city",
+      "town": "City of Glen Cove",
+      "board_url": "https://www.glencoveschools.org/",
+      "source_refs": {
+        "starCredit": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+          "verified": "2026-07-20"
+        },
+        "starExemptSavings": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final",
+          "verified": "2026-07-20"
+        },
+        "starMaxExemptSavings2026_27": {
+          "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+          "vintage": "2026-27",
+          "verified": "2026-07-20"
+        },
+        "medianValue": {
+          "url": "https://data.census.gov/api/access/data/table?id=ACSDT5Y2024.B25077&g=9700000US3612180",
+          "vintage": "ACS 2020-24 5-yr B25077, school-district geography (preferred; not a place proxy); unified (sumlevel 970)",
+          "verified": "2026-07-20"
+        },
+        "schoolRate": {
+          "omitted": true,
+          "reason": "CITY district on its own assessment roll. The Nassau County LRV gstaxes response for a Glen Cove parcel returns 'This property is located within the City of Glen Cove. Tax information for this property can be obtained by calling the City of Glen Cove' and shows NO school/general tax lines (only county/town). School + library rate on the city AV basis are NOT verifiable from the county source and are OMITTED. Same archetype as the Long Beach pilot case.",
+          "verified": "2026-07-20"
+        },
+        "levy": {
+          "url": "https://data.ny.gov/resource/iq85-sdzs.json?county=Nassau&fiscal_year_ending=2025 (school_name=Glen Cove)",
+          "vintage": "FY ending 2025 (2024-25); single Glen Cove (city) segment",
+          "verified": "2026-07-20"
+        },
+        "enrollment": {
+          "url": "https://data.nysed.gov/enrollment.php?year=2025&instid=800000049886",
+          "base_url": "https://data.nysed.gov/enrollment.php?year=2016&instid=800000049886",
+          "instid_lookup": "https://data.nysed.gov/search_schools.php?term=<name> (type 16 = district)",
+          "vintage": "2024-25 / 2015-16 K-12",
+          "verified": "2026-07-20"
+        },
+        "board_url": {
+          "url": "https://www.glencoveschools.org/",
+          "verified": "2026-07-20",
+          "note": "probed HTTP 200"
+        }
+      }
+    },
+    "Hewlett-Woodmere Union Free School District": {
+      "dtfName": "Hewlett-Woodmere",
+      "censusName": "Hewlett-Woodmere Union Free School District",
+      "geoid": "3631710",
+      "sdType": "unified",
+      "starCredit": {
+        "basic": 1163.0,
+        "enhanced": 3300.04
+      },
+      "starExemptSavings": {
+        "basic": 1141.0,
+        "enhanced": 3300.04
+      },
+      "starMaxExemptSavings2026_27": {
+        "basic": 1141.0,
+        "enhanced": 3300.0
+      },
+      "medianValue": 829100,
+      "schoolRate": 2357.17,
+      "libraryRate": 139.853,
+      "levy": 108577501,
+      "enrollment": {
+        "cur": 2650,
+        "base": 2938
+      },
+      "jurisdiction": "town-unincorporated",
+      "town": "Hempstead",
+      "board_url": "https://www.hewlett-woodmere.net/",
+      "source_refs": {
+        "starCredit": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+          "verified": "2026-07-20"
+        },
+        "starExemptSavings": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final",
+          "verified": "2026-07-20"
+        },
+        "starMaxExemptSavings2026_27": {
+          "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+          "vintage": "2026-27",
+          "verified": "2026-07-20"
+        },
+        "medianValue": {
+          "url": "https://data.census.gov/api/access/data/table?id=ACSDT5Y2024.B25077&g=9700000US3631710",
+          "vintage": "ACS 2020-24 5-yr B25077, school-district geography (preferred; not a place proxy); unified (sumlevel 970)",
+          "verified": "2026-07-20"
+        },
+        "schoolRate": {
+          "url": "https://lrv.nassaucountyny.gov/info/41024++00420/ -> POST /gstaxes.php PARID='41024  00420' TOWN_NAME=Hempstead",
+          "vintage": "tax year 2026 (school 2025-26); parcel 1019 Walsh Ave, Woodmere (Class 1); AV 429 -> Net School 2357.17 = $10,112.26 + Net Library 139.853 = $599.97 = Combined $10,712.23 (reproduces)",
+          "verified": "2026-07-20"
+        },
+        "libraryRate": {
+          "url": "https://lrv.nassaucountyny.gov/info/41024++00420/ -> POST /gstaxes.php PARID='41024  00420' TOWN_NAME=Hempstead",
+          "vintage": "tax year 2026 (school 2025-26); parcel 1019 Walsh Ave, Woodmere (Class 1); AV 429 -> Net School 2357.17 = $10,112.26 + Net Library 139.853 = $599.97 = Combined $10,712.23 (reproduces)",
+          "verified": "2026-07-20"
+        },
+        "levy": {
+          "url": "https://data.ny.gov/resource/iq85-sdzs.json?county=Nassau&fiscal_year_ending=2025 (school_name=Hewlett-Woodmere)",
+          "vintage": "FY ending 2025 (2024-25); single Hempstead segment",
+          "verified": "2026-07-20"
+        },
+        "enrollment": {
+          "url": "https://data.nysed.gov/enrollment.php?year=2025&instid=800000049523",
+          "base_url": "https://data.nysed.gov/enrollment.php?year=2016&instid=800000049523",
+          "instid_lookup": "https://data.nysed.gov/search_schools.php?term=<name> (type 16 = district)",
+          "vintage": "2024-25 / 2015-16 K-12",
+          "verified": "2026-07-20"
+        },
+        "board_url": {
+          "url": "https://www.hewlett-woodmere.net/",
+          "verified": "2026-07-20",
+          "note": "probed HTTP 200"
+        }
+      }
+    },
+    "Jericho Union Free School District": {
+      "dtfName": "Jericho",
+      "censusName": "Jericho Union Free School District",
+      "geoid": "3615810",
+      "sdType": "unified",
+      "starCredit": {
+        "basic": 951.0,
+        "enhanced": 2705.28
+      },
+      "starExemptSavings": {
+        "basic": 933.0,
+        "enhanced": 2487.0
+      },
+      "starMaxExemptSavings2026_27": {
+        "basic": 933.0,
+        "enhanced": 2487.0
+      },
+      "medianValue": 1057200,
+      "schoolRate": 1932.341,
+      "libraryRate": 90.916,
+      "levy": 115460400,
+      "enrollment": {
+        "cur": 3230,
+        "base": 2999
+      },
+      "jurisdiction": "town-unincorporated",
+      "town": "Oyster Bay",
+      "board_url": "https://www.jerichoschools.org/",
+      "source_refs": {
+        "starCredit": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+          "verified": "2026-07-20"
+        },
+        "starExemptSavings": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final",
+          "verified": "2026-07-20"
+        },
+        "starMaxExemptSavings2026_27": {
+          "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+          "vintage": "2026-27",
+          "verified": "2026-07-20"
+        },
+        "medianValue": {
+          "url": "https://data.census.gov/api/access/data/table?id=ACSDT5Y2024.B25077&g=9700000US3615810",
+          "vintage": "ACS 2020-24 5-yr B25077, school-district geography (preferred; not a place proxy); unified (sumlevel 970)",
+          "verified": "2026-07-20"
+        },
+        "schoolRate": {
+          "url": "https://lrv.nassaucountyny.gov/info/11354++00020/ -> POST /gstaxes.php PARID='11354  00020' TOWN_NAME=Oyster Bay",
+          "vintage": "tax year 2026 (school 2025-26); parcel 135 Seaman Rd, Jericho (Class 1); AV 713 -> Net School 1932.341 = $13,777.59 + Net Library 90.916 = $648.23 = Combined $14,425.82 (reproduces)",
+          "verified": "2026-07-20"
+        },
+        "libraryRate": {
+          "url": "https://lrv.nassaucountyny.gov/info/11354++00020/ -> POST /gstaxes.php PARID='11354  00020' TOWN_NAME=Oyster Bay",
+          "vintage": "tax year 2026 (school 2025-26); parcel 135 Seaman Rd, Jericho (Class 1); AV 713 -> Net School 1932.341 = $13,777.59 + Net Library 90.916 = $648.23 = Combined $14,425.82 (reproduces)",
+          "verified": "2026-07-20"
+        },
+        "levy": {
+          "url": "https://data.ny.gov/resource/iq85-sdzs.json?county=Nassau&fiscal_year_ending=2025 (school_name=Jericho)",
+          "vintage": "FY ending 2025 (2024-25); sum of segments: North Hempstead $6,751,320.00 + Oyster Bay $108,709,080.00",
+          "verified": "2026-07-20"
+        },
+        "enrollment": {
+          "url": "https://data.nysed.gov/enrollment.php?year=2025&instid=800000048822",
+          "base_url": "https://data.nysed.gov/enrollment.php?year=2016&instid=800000048822",
+          "instid_lookup": "https://data.nysed.gov/search_schools.php?term=<name> (type 16 = district)",
+          "vintage": "2024-25 / 2015-16 K-12",
+          "verified": "2026-07-20"
+        },
+        "board_url": {
+          "url": "https://www.jerichoschools.org/",
+          "verified": "2026-07-20",
+          "note": "probed HTTP 200"
+        }
+      }
+    },
+    "Malverne Union Free School District": {
+      "dtfName": "Malverne",
+      "censusName": "Malverne Union Free School District",
+      "geoid": "3618210",
+      "sdType": "unified",
+      "starCredit": {
+        "basic": 1003.0,
+        "enhanced": 2882.07
+      },
+      "starExemptSavings": {
+        "basic": 983.0,
+        "enhanced": 2882.07
+      },
+      "starMaxExemptSavings2026_27": {
+        "basic": 983.0,
+        "enhanced": 2882.0
+      },
+      "medianValue": 618200,
+      "schoolRate": 2058.618,
+      "levy": 48660033,
+      "enrollment": {
+        "cur": 1801,
+        "base": 1659
+      },
+      "jurisdiction": "village-in-town",
+      "town": "Hempstead",
+      "board_url": "https://www.malverneschools.org/",
+      "source_refs": {
+        "starCredit": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+          "verified": "2026-07-20"
+        },
+        "starExemptSavings": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final",
+          "verified": "2026-07-20"
+        },
+        "starMaxExemptSavings2026_27": {
+          "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+          "vintage": "2026-27",
+          "verified": "2026-07-20"
+        },
+        "medianValue": {
+          "url": "https://data.census.gov/api/access/data/table?id=ACSDT5Y2024.B25077&g=9700000US3618210",
+          "vintage": "ACS 2020-24 5-yr B25077, school-district geography (preferred; not a place proxy); unified (sumlevel 970)",
+          "verified": "2026-07-20"
+        },
+        "schoolRate": {
+          "url": "https://lrv.nassaucountyny.gov/info/37345++00240/ -> POST /gstaxes.php PARID='37345  00240' TOWN_NAME=Hempstead",
+          "vintage": "tax year 2026 (school 2025-26); parcel 46 Nottingham Rd, Malverne (Class 1); AV 443 -> Net School 2058.618 = $9,119.68 = Combined $9,119.68 (reproduces); STAR Savings -$983.00 matches DTF Basic exempt savings $983 exactly. No separate library line. | A second nearby Malverne-addressed parcel (37511 00410) showed a different rate (1640.379) with STAR -$781, i.e. it sits in a DIFFERENT school district (hamlet name != school district); confirmed 37345 00240 as Malverne UFSD via the STAR-savings match.",
+          "verified": "2026-07-20"
+        },
+        "levy": {
+          "url": "https://data.ny.gov/resource/iq85-sdzs.json?county=Nassau&fiscal_year_ending=2025 (school_name=Malverne)",
+          "vintage": "FY ending 2025 (2024-25); single Hempstead segment",
+          "verified": "2026-07-20"
+        },
+        "enrollment": {
+          "url": "https://data.nysed.gov/enrollment.php?year=2025&instid=800000049551",
+          "base_url": "https://data.nysed.gov/enrollment.php?year=2016&instid=800000049551",
+          "instid_lookup": "https://data.nysed.gov/search_schools.php?term=<name> (type 16 = district)",
+          "vintage": "2024-25 / 2015-16 K-12",
+          "verified": "2026-07-20"
+        },
+        "board_url": {
+          "url": "https://www.malverneschools.org/",
+          "verified": "2026-07-20",
+          "note": "probed HTTP 200"
+        }
+      }
+    },
+    "Mineola Union Free School District": {
+      "dtfName": "Mineola",
+      "censusName": "Mineola Union Free School District",
+      "geoid": "3619500",
+      "sdType": "unified",
+      "starCredit": {
+        "basic": 724.82,
+        "enhanced": 2029.5
+      },
+      "starExemptSavings": {
+        "basic": 724.0,
+        "enhanced": 2029.5
+      },
+      "starMaxExemptSavings2026_27": {
+        "basic": 724.0,
+        "enhanced": 2030.0
+      },
+      "medianValue": 674000,
+      "schoolRate": 1449.641,
+      "levy": 87217536,
+      "enrollment": {
+        "cur": 2794,
+        "base": 2695
+      },
+      "jurisdiction": "village-in-town",
+      "town": "North Hempstead",
+      "board_url": "https://www.mineola.k12.ny.us/",
+      "source_refs": {
+        "starCredit": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+          "verified": "2026-07-20"
+        },
+        "starExemptSavings": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final",
+          "verified": "2026-07-20"
+        },
+        "starMaxExemptSavings2026_27": {
+          "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+          "vintage": "2026-27",
+          "verified": "2026-07-20"
+        },
+        "medianValue": {
+          "url": "https://data.census.gov/api/access/data/table?id=ACSDT5Y2024.B25077&g=9700000US3619500",
+          "vintage": "ACS 2020-24 5-yr B25077, school-district geography (preferred; not a place proxy); unified (sumlevel 970)",
+          "verified": "2026-07-20"
+        },
+        "schoolRate": {
+          "url": "https://lrv.nassaucountyny.gov/info/09336++03900/ -> POST /gstaxes.php PARID='09336  03900' TOWN_NAME=North Hempstead",
+          "vintage": "tax year 2026 (school 2025-26); parcel 346 Nassau Blvd, Mineola (Class 1); AV 508 -> Net School 1449.641 = $7,364.18 = Combined $7,364.18 (reproduces); no separate Net Library Tax line on the sampled parcel's school bill",
+          "verified": "2026-07-20"
+        },
+        "levy": {
+          "url": "https://data.ny.gov/resource/iq85-sdzs.json?county=Nassau&fiscal_year_ending=2025 (school_name=Mineola)",
+          "vintage": "FY ending 2025 (2024-25); single North Hempstead segment",
+          "verified": "2026-07-20"
+        },
+        "enrollment": {
+          "url": "https://data.nysed.gov/enrollment.php?year=2025&instid=800000049007",
+          "base_url": "https://data.nysed.gov/enrollment.php?year=2016&instid=800000049007",
+          "instid_lookup": "https://data.nysed.gov/search_schools.php?term=<name> (type 16 = district)",
+          "vintage": "2024-25 / 2015-16 K-12",
+          "verified": "2026-07-20"
+        },
+        "board_url": {
+          "url": "https://www.mineola.k12.ny.us/",
+          "verified": "2026-07-20",
+          "note": "probed HTTP 200"
+        }
+      }
+    },
+    "North Shore Central School District": {
+      "dtfName": "North Shore",
+      "censusName": "North Shore Central School District",
+      "geoid": "3626370",
+      "sdType": "unified",
+      "starCredit": {
+        "basic": 846.0,
+        "enhanced": 2321.0
+      },
+      "starExemptSavings": {
+        "basic": 829.0,
+        "enhanced": 2060.0
+      },
+      "starMaxExemptSavings2026_27": {
+        "basic": 829.0,
+        "enhanced": 2060.0
+      },
+      "medianValue": 954400,
+      "schoolRate": 1716.315,
+      "levy": 92540475.27,
+      "enrollment": {
+        "cur": 2541,
+        "base": 2687
+      },
+      "jurisdiction": "town-unincorporated",
+      "town": "Oyster Bay",
+      "board_url": "https://www.northshoreschools.org/",
+      "source_refs": {
+        "starCredit": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+          "verified": "2026-07-20"
+        },
+        "starExemptSavings": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final",
+          "verified": "2026-07-20"
+        },
+        "starMaxExemptSavings2026_27": {
+          "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+          "vintage": "2026-27",
+          "verified": "2026-07-20"
+        },
+        "medianValue": {
+          "url": "https://data.census.gov/api/access/data/table?id=ACSDT5Y2024.B25077&g=9700000US3626370",
+          "vintage": "ACS 2020-24 5-yr B25077, school-district geography (preferred; not a place proxy); unified (sumlevel 970)",
+          "verified": "2026-07-20"
+        },
+        "schoolRate": {
+          "url": "https://lrv.nassaucountyny.gov/info/21057++00020/ -> POST /gstaxes.php PARID='21057  00020' TOWN_NAME=Oyster Bay",
+          "vintage": "tax year 2026 (school 2025-26); parcel 36 Hillcrest Dr, Glen Head (Class 1); AV 663 -> Net School 1716.315 = $11,379.17 = Combined $11,379.17 (reproduces); STAR Savings -$829.00 matches DTF Basic exempt savings $829 exactly. No separate library line. | District labeled 'GLEN HEAD/NORTH SHORE CSD # 1' on the parcel; spans Sea Cliff/Roslyn Harbor villages plus Glen Head/Glenwood Landing unincorporated (sampled parcel is unincorporated Glen Head).",
+          "verified": "2026-07-20"
+        },
+        "levy": {
+          "url": "https://data.ny.gov/resource/iq85-sdzs.json?county=Nassau&fiscal_year_ending=2025 (school_name=North Shore)",
+          "vintage": "FY ending 2025 (2024-25); sum of segments: North Hempstead $4,212,476.28 + Oyster Bay $88,327,998.99",
+          "verified": "2026-07-20"
+        },
+        "enrollment": {
+          "url": "https://data.nysed.gov/enrollment.php?year=2025&instid=800000048966",
+          "base_url": "https://data.nysed.gov/enrollment.php?year=2016&instid=800000048966",
+          "instid_lookup": "https://data.nysed.gov/search_schools.php?term=<name> (type 16 = district)",
+          "vintage": "2024-25 / 2015-16 K-12",
+          "verified": "2026-07-20"
+        },
+        "board_url": {
+          "url": "https://www.northshoreschools.org/",
+          "verified": "2026-07-20",
+          "note": "probed HTTP 200"
+        }
+      }
+    },
+    "Plainview-Old Bethpage Central School District": {
+      "dtfName": "Plainview-Old Bethpage",
+      "censusName": "Plainview-Old Bethpage Central School District",
+      "geoid": "3623220",
+      "sdType": "unified",
+      "starCredit": {
+        "basic": 1027.0,
+        "enhanced": 2906.77
+      },
+      "starExemptSavings": {
+        "basic": 1007.0,
+        "enhanced": 2906.77
+      },
+      "starMaxExemptSavings2026_27": {
+        "basic": 1007.0,
+        "enhanced": 2907.0
+      },
+      "medianValue": 819500,
+      "schoolRate": 2076.266,
+      "libraryRate": 101.352,
+      "levy": 143232660,
+      "enrollment": {
+        "cur": 5406,
+        "base": 4865
+      },
+      "jurisdiction": "town-unincorporated",
+      "town": "Oyster Bay",
+      "board_url": "https://www.pobschools.org/",
+      "source_refs": {
+        "starCredit": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+          "verified": "2026-07-20"
+        },
+        "starExemptSavings": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final",
+          "verified": "2026-07-20"
+        },
+        "starMaxExemptSavings2026_27": {
+          "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+          "vintage": "2026-27",
+          "verified": "2026-07-20"
+        },
+        "medianValue": {
+          "url": "https://data.census.gov/api/access/data/table?id=ACSDT5Y2024.B25077&g=9700000US3623220",
+          "vintage": "ACS 2020-24 5-yr B25077, school-district geography (preferred; not a place proxy); unified (sumlevel 970)",
+          "verified": "2026-07-20"
+        },
+        "schoolRate": {
+          "url": "https://lrv.nassaucountyny.gov/info/12477++00140/ -> POST /gstaxes.php PARID='12477  00140' TOWN_NAME=Oyster Bay",
+          "vintage": "tax year 2026 (school 2025-26); parcel 73 Victor St, Plainview (Class 1); AV 479 -> Net School 2076.266 = $9,945.31 + Net Library 101.352 = $485.48 = Combined $10,430.79 (reproduces)",
+          "verified": "2026-07-20"
+        },
+        "libraryRate": {
+          "url": "https://lrv.nassaucountyny.gov/info/12477++00140/ -> POST /gstaxes.php PARID='12477  00140' TOWN_NAME=Oyster Bay",
+          "vintage": "tax year 2026 (school 2025-26); parcel 73 Victor St, Plainview (Class 1); AV 479 -> Net School 2076.266 = $9,945.31 + Net Library 101.352 = $485.48 = Combined $10,430.79 (reproduces)",
+          "verified": "2026-07-20"
+        },
+        "levy": {
+          "url": "https://data.ny.gov/resource/iq85-sdzs.json?county=Nassau&fiscal_year_ending=2025 (school_name=Plainview-Old Bethpage)",
+          "vintage": "FY ending 2025 (2024-25); single Oyster Bay segment",
+          "verified": "2026-07-20"
+        },
+        "enrollment": {
+          "url": "https://data.nysed.gov/enrollment.php?year=2025&instid=800000048891",
+          "base_url": "https://data.nysed.gov/enrollment.php?year=2016&instid=800000048891",
+          "instid_lookup": "https://data.nysed.gov/search_schools.php?term=<name> (type 16 = district)",
+          "vintage": "2024-25 / 2015-16 K-12",
+          "verified": "2026-07-20"
+        },
+        "board_url": {
+          "url": "https://www.pobschools.org/",
+          "verified": "2026-07-20",
+          "note": "probed HTTP 200"
+        }
+      }
+    },
+    "Seaford Union Free School District": {
+      "dtfName": "Seaford",
+      "censusName": "Seaford Union Free School District",
+      "geoid": "3626400",
+      "sdType": "unified",
+      "starCredit": {
+        "basic": 1072.0,
+        "enhanced": 3049.05
+      },
+      "starExemptSavings": {
+        "basic": 1051.0,
+        "enhanced": 3019.0
+      },
+      "starMaxExemptSavings2026_27": {
+        "basic": 1051.0,
+        "enhanced": 3019.0
+      },
+      "medianValue": 656700,
+      "schoolRate": 2177.895,
+      "libraryRate": 85.485,
+      "levy": 59930530,
+      "enrollment": {
+        "cur": 2184,
+        "base": 2283
+      },
+      "jurisdiction": "town-unincorporated",
+      "town": "Hempstead",
+      "board_url": "https://www.seaford.k12.ny.us/",
+      "source_refs": {
+        "starCredit": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+          "verified": "2026-07-20"
+        },
+        "starExemptSavings": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final",
+          "verified": "2026-07-20"
+        },
+        "starMaxExemptSavings2026_27": {
+          "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+          "vintage": "2026-27",
+          "verified": "2026-07-20"
+        },
+        "medianValue": {
+          "url": "https://data.census.gov/api/access/data/table?id=ACSDT5Y2024.B25077&g=9700000US3626400",
+          "vintage": "ACS 2020-24 5-yr B25077, school-district geography (preferred; not a place proxy); unified (sumlevel 970)",
+          "verified": "2026-07-20"
+        },
+        "schoolRate": {
+          "url": "https://lrv.nassaucountyny.gov/info/57148++01590/ -> POST /gstaxes.php PARID='57148  01590' TOWN_NAME=Hempstead",
+          "vintage": "tax year 2026 (school 2025-26); parcel 38 Estella St, Seaford (Class 1); AV 401 -> Net School 2177.895 = $8,733.36 + Net Library 85.485 = $342.79 = Combined $9,076.15 (reproduces); STAR Savings -$3,019.00 matches DTF Enhanced exempt savings $3,019 exactly",
+          "verified": "2026-07-20"
+        },
+        "libraryRate": {
+          "url": "https://lrv.nassaucountyny.gov/info/57148++01590/ -> POST /gstaxes.php PARID='57148  01590' TOWN_NAME=Hempstead",
+          "vintage": "tax year 2026 (school 2025-26); parcel 38 Estella St, Seaford (Class 1); AV 401 -> Net School 2177.895 = $8,733.36 + Net Library 85.485 = $342.79 = Combined $9,076.15 (reproduces); STAR Savings -$3,019.00 matches DTF Enhanced exempt savings $3,019 exactly",
+          "verified": "2026-07-20"
+        },
+        "levy": {
+          "url": "https://data.ny.gov/resource/iq85-sdzs.json?county=Nassau&fiscal_year_ending=2025 (school_name=Seaford)",
+          "vintage": "FY ending 2025 (2024-25); single Hempstead segment",
+          "verified": "2026-07-20"
+        },
+        "enrollment": {
+          "url": "https://data.nysed.gov/enrollment.php?year=2025&instid=800000049690",
+          "base_url": "https://data.nysed.gov/enrollment.php?year=2016&instid=800000049690",
+          "instid_lookup": "https://data.nysed.gov/search_schools.php?term=<name> (type 16 = district)",
+          "vintage": "2024-25 / 2015-16 K-12",
+          "verified": "2026-07-20"
+        },
+        "board_url": {
+          "url": "https://www.seaford.k12.ny.us/",
+          "verified": "2026-07-20",
+          "note": "probed HTTP 200"
+        }
+      }
+    },
+    "Valley Stream Union Free School District 24": {
+      "dtfName": "Valley Stream 24",
+      "censusName": "Valley Stream Union Free School District 24",
+      "geoid": "3629460",
+      "sdType": "elementary",
+      "starCredit": {
+        "basic": 847.0,
+        "enhanced": 2406.69
+      },
+      "starExemptSavings": {
+        "basic": 831.0,
+        "enhanced": 2406.69
+      },
+      "starMaxExemptSavings2026_27": {
+        "basic": 831.0,
+        "enhanced": 2407.0
+      },
+      "medianValue": 614500,
+      "schoolRate": 1719.061,
+      "levy": 47641480,
+      "enrollment": {
+        "cur": 1036,
+        "base": 1100
+      },
+      "jurisdiction": "village-in-town",
+      "town": "Hempstead",
+      "board_url": "https://valleystreamschooldistrict24.org/",
+      "source_refs": {
+        "starCredit": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+          "verified": "2026-07-20"
+        },
+        "starExemptSavings": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final",
+          "verified": "2026-07-20"
+        },
+        "starMaxExemptSavings2026_27": {
+          "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+          "vintage": "2026-27",
+          "verified": "2026-07-20"
+        },
+        "medianValue": {
+          "url": "https://data.census.gov/api/access/data/table?id=ACSDT5Y2024.B25077&g=9500000US3629460",
+          "vintage": "ACS 2020-24 5-yr B25077, school-district geography (preferred; not a place proxy); ELEMENTARY (sumlevel 950)",
+          "verified": "2026-07-20"
+        },
+        "schoolRate": {
+          "url": "https://lrv.nassaucountyny.gov/info/37343++01120/ -> POST /gstaxes.php PARID='37343  01120' TOWN_NAME=Hempstead",
+          "vintage": "tax year 2026 (school 2025-26); parcel 22 Hamilton Pl, Valley Stream (Class 1); AV 447 -> Net School 1719.061 = $7,684.20 = Combined $7,684.20 (reproduces); STAR Savings -$831.00 matches DTF Basic exempt savings $831 exactly | ELEMENTARY district: component of Valley Stream Central High School District. The Nassau LRV school bill shows a SINGLE combined Net School Tax line (elementary + Valley Stream CHSD billed together), NOT separate lines. 1719.061 is the combined school rate as billed. No separate library line on the sampled parcel.",
+          "verified": "2026-07-20"
+        },
+        "levy": {
+          "url": "https://data.ny.gov/resource/iq85-sdzs.json?county=Nassau&fiscal_year_ending=2025 (school_name=Valley Stream 24)",
+          "vintage": "FY ending 2025 (2024-25); single Hempstead segment",
+          "verified": "2026-07-20"
+        },
+        "enrollment": {
+          "url": "https://data.nysed.gov/enrollment.php?year=2025&instid=800000049326",
+          "base_url": "https://data.nysed.gov/enrollment.php?year=2016&instid=800000049326",
+          "instid_lookup": "https://data.nysed.gov/search_schools.php?term=<name> (type 16 = district)",
+          "vintage": "2024-25 / 2015-16 K-12",
+          "verified": "2026-07-20"
+        },
+        "board_url": {
+          "url": "https://valleystreamschooldistrict24.org/",
+          "verified": "2026-07-20",
+          "note": "probed HTTP 200"
+        }
+      }
+    },
+    "Westbury Union Free School District": {
+      "dtfName": "Westbury",
+      "censusName": "Westbury Union Free School District",
+      "geoid": "3630960",
+      "sdType": "unified",
+      "starCredit": {
+        "basic": 1156.0,
+        "enhanced": 3242.17
+      },
+      "starExemptSavings": {
+        "basic": 1133.0,
+        "enhanced": 3242.17
+      },
+      "starMaxExemptSavings2026_27": {
+        "basic": 1133.0,
+        "enhanced": 3242.0
+      },
+      "medianValue": 570000,
+      "schoolRate": 2315.833,
+      "libraryRate": 78.587,
+      "levy": 78218042,
+      "enrollment": {
+        "cur": 4328,
+        "base": 4934
+      },
+      "jurisdiction": "village-in-town",
+      "town": "North Hempstead",
+      "board_url": "https://www.westburyschools.org/",
+      "source_refs": {
+        "starCredit": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final (2026 finals unpublished as of 2026-07-20)",
+          "verified": "2026-07-20"
+        },
+        "starExemptSavings": {
+          "url": "https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm",
+          "vintage": "2025 final",
+          "verified": "2026-07-20"
+        },
+        "starMaxExemptSavings2026_27": {
+          "url": "https://www.tax.ny.gov/pit/property/star/max-savings/school-district/sd28.htm",
+          "vintage": "2026-27",
+          "verified": "2026-07-20"
+        },
+        "medianValue": {
+          "url": "https://data.census.gov/api/access/data/table?id=ACSDT5Y2024.B25077&g=9700000US3630960",
+          "vintage": "ACS 2020-24 5-yr B25077, school-district geography (preferred; not a place proxy); unified (sumlevel 970)",
+          "verified": "2026-07-20"
+        },
+        "schoolRate": {
+          "url": "https://lrv.nassaucountyny.gov/info/10184++02320/ -> POST /gstaxes.php PARID='10184  02320' TOWN_NAME=North Hempstead",
+          "vintage": "tax year 2026 (school 2025-26); parcel 256 Lewis Ave, Westbury (Class 1); AV 398 -> Net School 2315.833 = $9,217.02 + Net Library 78.587 = $312.78 = Combined $9,529.80 (reproduces)",
+          "verified": "2026-07-20"
+        },
+        "libraryRate": {
+          "url": "https://lrv.nassaucountyny.gov/info/10184++02320/ -> POST /gstaxes.php PARID='10184  02320' TOWN_NAME=North Hempstead",
+          "vintage": "tax year 2026 (school 2025-26); parcel 256 Lewis Ave, Westbury (Class 1); AV 398 -> Net School 2315.833 = $9,217.02 + Net Library 78.587 = $312.78 = Combined $9,529.80 (reproduces)",
+          "verified": "2026-07-20"
+        },
+        "levy": {
+          "url": "https://data.ny.gov/resource/iq85-sdzs.json?county=Nassau&fiscal_year_ending=2025 (school_name=Westbury)",
+          "vintage": "FY ending 2025 (2024-25); sum of segments: Hempstead $1,847,372.00 + North Hempstead $76,370,670.00",
+          "verified": "2026-07-20"
+        },
+        "enrollment": {
+          "url": "https://data.nysed.gov/enrollment.php?year=2025&instid=800000049217",
+          "base_url": "https://data.nysed.gov/enrollment.php?year=2016&instid=800000049217",
+          "instid_lookup": "https://data.nysed.gov/search_schools.php?term=<name> (type 16 = district)",
+          "vintage": "2024-25 / 2015-16 K-12",
+          "verified": "2026-07-20"
+        },
+        "board_url": {
+          "url": "https://www.westburyschools.org/",
+          "verified": "2026-07-20",
+          "note": "probed HTTP 200"
+        }
+      }
+    }
+  }
+}

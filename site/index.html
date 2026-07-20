@@ -18,6 +18,10 @@
 .kitcards{display:grid;grid-template-columns:1fr 1fr;gap:0 56px;max-width:1100px;margin-top:22px;border-top:2px solid rgba(32,30,29,.4)}
 .res-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;max-width:900px}
 .band-pad{padding:44px 48px}
+#moneyGeo{border-left:3px solid #1e6b3d;padding:9px 0 9px 13px;margin:0 0 14px;font-size:13.5px;font-weight:600;line-height:1.45;max-width:720px}
+.geo-flash{animation:geoflash 1.1s ease-out}
+@keyframes geoflash{0%{background:#c5a44e}100%{background:transparent}}
+@media(prefers-reduced-motion:reduce){.geo-flash{animation:none}}
 @media(max-width:760px){
   .px{margin:0 24px}
   .hero-pad{padding:44px 24px 36px}
@@ -108,39 +112,11 @@
   </div>
 </div>
 
-<!-- the money -->
-<div id="money" class="px" style="border-top:2px solid rgba(32,30,29,.4);padding:34px 0">
-  <div class="grid-label" style="max-width:1000px">
-    <div style="font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#1e6b3d">02 · Follow<br>one home sale</div>
-    <div style="max-width:760px">
-      <p style="margin:0 0 16px;font-size:17px">A senior sells. A young family buys. Four things happen, to four different balance sheets.</p>
-      <div style="border-top:1px solid rgba(32,30,29,.25)">
-        <div style="display:grid;grid-template-columns:150px 1fr;gap:16px;padding:13px 0;border-bottom:1px solid rgba(32,30,29,.25)">
-          <div style="font-weight:800;font-size:22px">$2,058<span style="font-size:13px;font-weight:600;color:rgba(32,30,29,.6)">/yr</span></div>
-          <div style="font-size:14px"><b>New York State saves enough, every year after the sale, to fund every incentive on this page.</b>&nbsp;The Enhanced STAR credit becomes a Basic credit. STAR is state money, so Albany keeps the difference. &nbsp;<a href="https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm" style="font-size:12.5px;font-weight:600">DTF 2025 tables</a></div>
-        </div>
-        <div style="display:grid;grid-template-columns:150px 1fr;gap:16px;padding:13px 0;border-bottom:1px solid rgba(32,30,29,.25)">
-          <div style="font-weight:800;font-size:22px">~$3,300</div>
-          <div style="font-size:14px"><b>New York State collects</b>, once at closing: 0.4% transfer tax on a typical $820K RVC sale. <a href="https://www.tax.ny.gov/bus/transfer/rptidx.htm" style="font-size:12.5px;font-weight:600">Tax Law Art. 31</a></div>
-        </div>
-        <div style="display:grid;grid-template-columns:150px 1fr;gap:16px;padding:13px 0;border-bottom:1px solid rgba(32,30,29,.25)">
-          <div style="font-weight:800;font-size:22px">~$7,300<span style="font-size:13px;font-weight:600;color:rgba(32,30,29,.6)">/yr</span></div>
-          <div style="font-size:14px"><b>Neighbors get relief.</b> School tax that a §467 exempt parcel was shifting onto every other taxpayer stops shifting when the home turns over. <a href="https://www.osc.ny.gov/files/local-government/publications/pdf/propertytax_exemptions_0.pdf" style="font-size:12.5px;font-weight:600">Comptroller guidance</a></div>
-        </div>
-        <div style="display:grid;grid-template-columns:150px 1fr;gap:16px;padding:13px 0">
-          <div style="font-weight:800;font-size:22px">+1.4<span style="font-size:13px;font-weight:600;color:rgba(32,30,29,.6)"> students</span></div>
-          <div style="font-size:14px"><b>The district gains</b>: students into seats emptied by a 257-student decline, renovations that lawfully grow the levy cap, a reason to maintain infrastructure designed when Nassau had more kids, and parents who vote for school budgets. <a href="https://www.osc.ny.gov/local-government/property-tax-cap/real-property-tax-cap-information-glossary" style="font-size:12.5px;font-weight:600">Growth factor rules</a></div>
-        </div>
-      </div>
-      <p style="margin:14px 0 0;font-size:13px;color:rgba(32,30,29,.7)">Full mechanics write-up for aides: <a href="fiscal-math.html" style="font-weight:600">fiscal-math</a> · every number checked at <a href="validation.html" style="font-weight:600">validation</a> · run your own scenario in the <a href="calculator.html" style="font-weight:600">calculator</a></p>
-    </div>
-  </div>
-</div>
-
-<!-- asks / act now -->
+<!-- action kit (moved to the bottom of Section 01) -->
 <div id="asks" class="px" style="border-top:2px solid rgba(32,30,29,.4);padding:34px 0 10px">
   <div style="font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#1e6b3d;margin-bottom:6px">03 · Four asks. One click each.</div>
-  <p style="margin:0 0 20px;font-size:17px;max-width:740px">Your representatives change with your street address, so start there. We look up your congressional, state senate, assembly, and school districts, then draft a letter for each office with your name and address filled in. A short note that names the bill and says you live in their district is the single most effective thing a resident can do.</p>
+  <p style="margin:0 0 12px;font-size:17px;max-width:740px">Your representatives change with your street address, so start there. We look up your congressional, state senate, assembly, and school districts, then draft a letter for each office with your name and address filled in. A short note that names the bill and says you live in their district is the single most effective thing a resident can do.</p>
+  <p style="margin:0 0 20px;font-size:15px;max-width:740px;color:rgba(32,30,29,.8)">This works for any address in Nassau County. Enter yours to see your school district, the officials who represent you, and what one home sale looks like where you live.</p>
   <div class="kitform">
     <div style="display:flex;flex-direction:column;gap:4px">
       <label for="kitAddr" style="font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:rgba(32,30,29,.6)">Street address, village, NY</label>
@@ -154,12 +130,42 @@
       <label for="kitEmail" style="font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:rgba(32,30,29,.6)">Email (optional)</label>
       <input id="kitEmail" value="" placeholder="jane@example.com" style="font-family:'Archivo',sans-serif;font-size:14px;padding:10px 12px;border:1px solid #201e1d;background:#f3f2f2;color:#201e1d">
     </div>
-    <button id="kitBuild" style="font-family:'Archivo',sans-serif;cursor:pointer;background:#1e6b3d;color:#f3f2f2;font-weight:800;font-size:14px;padding:11px 36px 11px 16px;border:none;text-align:left">Build my letters</button>
+    <button id="kitBuild" style="font-family:'Archivo',sans-serif;cursor:pointer;background:#1e6b3d;color:#f3f2f2;font-weight:800;font-size:14px;padding:11px 36px 11px 16px;border:none;text-align:left">See my details</button>
   </div>
   <div style="font-size:12px;color:rgba(32,30,29,.65);margin-bottom:4px">Prefilled with Village Hall; change it to your address. The lookup runs in your browser against the U.S. Census Bureau geocoder. Email is optional and joins the project's update list.</div>
   <div id="kitError" style="display:none;font-size:13.5px;font-weight:600;color:#8a2f1d;margin-top:10px"></div>
   <div id="kitCards" class="kitcards" style="display:none"></div>
   <div id="kitFootnote" style="display:none;font-size:12px;color:rgba(32,30,29,.65);margin-top:12px"></div>
+</div>
+
+<!-- the money -->
+<div id="money" class="px" style="border-top:2px solid rgba(32,30,29,.4);padding:34px 0">
+  <div class="grid-label" style="max-width:1000px">
+    <div style="font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#1e6b3d">02 · Follow<br>one home sale</div>
+    <div style="max-width:760px">
+      <p style="margin:0 0 16px;font-size:17px">A senior sells. A young family buys. Four things happen, to four different balance sheets.</p>
+      <div id="moneyGeo" style="display:none"></div>
+      <div style="border-top:1px solid rgba(32,30,29,.25)">
+        <div style="display:grid;grid-template-columns:150px 1fr;gap:16px;padding:13px 0;border-bottom:1px solid rgba(32,30,29,.25)">
+          <div id="mrowStar" style="font-weight:800;font-size:22px">$<span id="mvStar">2,058</span><span style="font-size:13px;font-weight:600;color:rgba(32,30,29,.6)">/yr</span></div>
+          <div style="font-size:14px"><b>New York State saves enough, every year after the sale, to fund every incentive on this page.</b>&nbsp;The Enhanced STAR credit becomes a Basic credit. STAR is state money, so Albany keeps the difference. &nbsp;<a id="msrcStar" href="https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm" style="font-size:12.5px;font-weight:600">DTF 2025 tables</a></div>
+        </div>
+        <div style="display:grid;grid-template-columns:150px 1fr;gap:16px;padding:13px 0;border-bottom:1px solid rgba(32,30,29,.25)">
+          <div id="mrowTransfer" style="font-weight:800;font-size:22px">~$<span id="mvTransfer">3,300</span></div>
+          <div style="font-size:14px"><b>New York State collects</b>, once at closing: 0.4% transfer tax on a typical $<span id="mvSale">820</span>K <span id="mvSaleGeo">RVC</span> sale. <a id="msrcTransfer" href="https://www.tax.ny.gov/bus/transfer/rptidx.htm" style="font-size:12.5px;font-weight:600">Tax Law Art. 31</a></div>
+        </div>
+        <div style="display:grid;grid-template-columns:150px 1fr;gap:16px;padding:13px 0;border-bottom:1px solid rgba(32,30,29,.25)">
+          <div style="font-weight:800;font-size:22px">~$7,300<span style="font-size:13px;font-weight:600;color:rgba(32,30,29,.6)">/yr</span></div>
+          <div style="font-size:14px"><b>Neighbors get relief.</b> School tax that a §467 exempt parcel was shifting onto every other taxpayer stops shifting when the home turns over. <a href="https://www.osc.ny.gov/files/local-government/publications/pdf/propertytax_exemptions_0.pdf" style="font-size:12.5px;font-weight:600">Comptroller guidance</a></div>
+        </div>
+        <div style="display:grid;grid-template-columns:150px 1fr;gap:16px;padding:13px 0">
+          <div style="font-weight:800;font-size:22px">+1.4<span style="font-size:13px;font-weight:600;color:rgba(32,30,29,.6)"> students</span></div>
+          <div style="font-size:14px"><b>The district gains</b>: students into seats emptied by a 257-student decline, renovations that lawfully grow the levy cap, a reason to maintain infrastructure designed when Nassau had more kids, and parents who vote for school budgets. <a href="https://www.osc.ny.gov/local-government/property-tax-cap/real-property-tax-cap-information-glossary" style="font-size:12.5px;font-weight:600">Growth factor rules</a></div>
+        </div>
+      </div>
+      <p style="margin:14px 0 0;font-size:13px;color:rgba(32,30,29,.7)">Full mechanics write-up for aides: <a href="fiscal-math.html" style="font-weight:600">fiscal-math</a> · every number checked at <a href="validation.html" style="font-weight:600">validation</a> · run your own scenario in the <a href="calculator.html" style="font-weight:600">calculator</a></p>
+    </div>
+  </div>
 </div>
 
 <!-- legislator layer -->
@@ -260,6 +266,7 @@
   };
   var $=function(id){return document.getElementById(id)};
   var copied={};
+  var BTN="See my details";
 
   function mailto(email,letter){
     var subject=letter.split("\n")[0].replace("Subject: ","");
@@ -313,6 +320,78 @@
   }
 
   function esc(t){var d=document.createElement("div");d.textContent=t;return d.innerHTML;}
+
+  // ---- geo-specific "Follow one home sale" refresh (Nassau only) ----
+  // Every displayed figure comes ONLY from a districts.json field that carries a
+  // source_ref. Missing file, missing district, or missing field -> the honest
+  // RVC-typical baseline stays, never a fabricated per-district number. The §467
+  // neighbor-relief line and the turnover figure are NOT geo-swapped (the exempt
+  // share is still FOIL-gated; no per-district exemption dollar renders).
+  var _districtsP,_moneyBase;
+  function loadDistricts(){
+    if(_districtsP) return _districtsP;
+    _districtsP=fetch("assets/districts.json").then(function(r){return r.ok?r.json():null;}).catch(function(){return null;});
+    return _districtsP;
+  }
+  function lookupDistrict(data,c){
+    if(!data||!c.school) return null;
+    if(data[c.school]) return data[c.school];
+    var norm=function(s){return String(s).toLowerCase().replace(/\s+/g," ").trim();};
+    var target=norm(c.school),k;
+    for(k in data){ if(norm(k)===target) return data[k]; }
+    if(c.schoolGeoid){ for(k in data){ var v=data[k]; if(v&&(v.geoid===c.schoolGeoid||v.GEOID===c.schoolGeoid)) return v; } }
+    return null;
+  }
+  function fmtNum(n){ return Math.round(n).toLocaleString("en-US"); }
+  function setSrc(id,ref){ var a=$(id); if(!a||!ref) return; if(String(ref).charAt(0)==="#") a.href="validation.html"+ref; else if(/^https?:/.test(ref)) a.href=ref; }
+  function flashEl(id){ var el=$(id); if(!el) return; el.classList.remove("geo-flash"); void el.offsetWidth; el.classList.add("geo-flash"); }
+  function captureMoneyBase(){
+    if(_moneyBase) return;
+    _moneyBase={};
+    ["mvStar","mvTransfer","mvSale","mvSaleGeo"].forEach(function(id){var el=$(id);_moneyBase[id]=el?el.textContent:"";});
+    _moneyBase.srcStar=($("msrcStar")||{}).href; _moneyBase.srcTransfer=($("msrcTransfer")||{}).href;
+  }
+  function restoreMoneyBase(){
+    if(!_moneyBase) return;
+    ["mvStar","mvTransfer","mvSale","mvSaleGeo"].forEach(function(id){var el=$(id);if(el)el.textContent=_moneyBase[id];});
+    if($("msrcStar")&&_moneyBase.srcStar)$("msrcStar").href=_moneyBase.srcStar;
+    if($("msrcTransfer")&&_moneyBase.srcTransfer)$("msrcTransfer").href=_moneyBase.srcTransfer;
+  }
+  function refreshMoney(c){
+    var banner=$("moneyGeo"); if(!banner) return;
+    captureMoneyBase();
+    function show(html){ banner.innerHTML=html; banner.style.display="block"; }
+    if(c.isNassau===false){
+      restoreMoneyBase();
+      show("This address is outside Nassau. The figures below are RVC-typical, not specific to your area.");
+      return;
+    }
+    var dn=esc(c.school||"your district");
+    loadDistricts().then(function(data){
+      restoreMoneyBase();
+      var d=lookupDistrict(data,c);
+      if(!d){
+        show("We do not yet have verified figures for "+dn+". The figures below are RVC-typical. See <a href=\"validation.html\" style=\"font-weight:600\">the facts ledger</a> for coverage.");
+        return;
+      }
+      var refs=d.source_refs||{},done=[];
+      if(d.starCredit&&typeof d.starCredit.enhanced==="number"&&typeof d.starCredit.basic==="number"&&refs.starCredit){
+        $("mvStar").textContent=fmtNum(d.starCredit.enhanced-d.starCredit.basic);
+        setSrc("msrcStar",refs.starCredit); flashEl("mrowStar"); done.push("the STAR dividend");
+      }
+      if(typeof d.medianValue==="number"&&refs.medianValue){
+        $("mvTransfer").textContent=fmtNum(d.medianValue*0.004);
+        $("mvSale").textContent=fmtNum(d.medianValue/1000);
+        $("mvSaleGeo").textContent=d.town?String(d.town).replace(/ (town|city)$/i,""):(c.school||"local");
+        setSrc("msrcTransfer",refs.medianValue); flashEl("mrowTransfer"); done.push("the transfer tax");
+      }
+      if(done.length){
+        show("Now showing figures for <b>"+dn+"</b>. Calculated for your district: "+done.join(" and ")+". The remaining lines are RVC-typical until we source them for your district.");
+      } else {
+        show("We have "+dn+" on file but no verified figures yet. The figures below are RVC-typical.");
+      }
+    });
+  }
 
   function render(c){
     var L=letters($("kitName").value.trim(),c.matched,c.school);
@@ -369,23 +448,31 @@
     err.style.display="none";
     btn.textContent="Looking up…";
     geocode(addr).then(function(data){
-      btn.textContent="Build my letters";
+      btn.textContent=BTN;
       var match=data&&data.result&&data.result.addressMatches&&data.result.addressMatches[0];
       if(!match){err.textContent="No match for that address. Include street number, village, and NY.";err.style.display="block";$("kitCards").style.display="none";$("kitFootnote").style.display="none";return;}
       var g=match.geographies||{};
       function pick(frag){var k=Object.keys(g).find(function(k){return k.toLowerCase().indexOf(frag)>=0;});return (k&&g[k]&&g[k][0])?g[k][0]:null;}
       var cdRaw=pick("congressional"),sldu=pick("upper"),sldl=pick("lower"),usd=pick("unified school");
+      var county=pick("counties"),subdiv=pick("county subdiv"),place=pick("incorporated");
       var c={
         cd:cdRaw?String(parseInt(cdRaw.CD119||cdRaw.CD||cdRaw.BASENAME,10)):null,
         sd:sldu?String(parseInt(sldu.SLDU||sldu.BASENAME,10)):null,
         ad:sldl?String(parseInt(sldl.SLDL||sldl.BASENAME,10)):null,
         school:usd?(usd.NAME||usd.BASENAME):null,
+        schoolGeoid:usd?(usd.GEOID||null):null,
+        countyName:county?(county.NAME||county.BASENAME):null,
+        countyGeoid:county?(county.GEOID||null):null,
+        isNassau:county?(county.GEOID==="36059"||String(county.NAME||"").toLowerCase().indexOf("nassau")>=0):null,
+        town:subdiv?(subdiv.NAME||subdiv.BASENAME):null,
+        place:place?(place.NAME||place.BASENAME):null,
+        inVillage:!!(place&&/village|city/i.test(place.NAME||place.BASENAME||"")),
         matched:match.matchedAddress||addr
       };
-      if(fromUser) signup(c.matched);
+      if(fromUser){ signup(c.matched); refreshMoney(c); }
       render(c);
     }).catch(function(){
-      btn.textContent="Build my letters";
+      btn.textContent=BTN;
       err.textContent="Lookup failed (the Census geocoder may be busy). Try again in a minute.";
       err.style.display="block";
     });

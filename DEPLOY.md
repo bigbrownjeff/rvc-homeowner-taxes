@@ -16,8 +16,8 @@ If wrangler.toml is ever absent, the explicit form is `npx wrangler pages deploy
 - Pages project `rvc-taxes` created; custom domain `rvc-taxes.jeffpinto.com` attached 2026-07-20 (same-account zone: proxied CNAME auto-created).
 - KV namespace `SIGNUPS` (`55371b2ca075430faeeae249f9b036cc`) created 2026-07-20 for the action-kit mailing list. Read signups with:
   ```bash
-  npx wrangler kv key list --namespace-id 55371b2ca075430faeeae249f9b036cc
-  npx wrangler kv key get "signup:<email>" --namespace-id 55371b2ca075430faeeae249f9b036cc
+  npx wrangler kv key list --namespace-id 55371b2ca075430faeeae249f9b036cc --remote
+  npx wrangler kv key get "signup:<email>" --namespace-id 55371b2ca075430faeeae249f9b036cc --remote
   ```
 
 ## What's served (July 2026 redesign — "Modernist" system, RVC green/gold, Archivo)

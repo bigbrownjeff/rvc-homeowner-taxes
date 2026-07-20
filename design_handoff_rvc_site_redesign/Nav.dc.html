@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<div style="border-bottom:2px solid rgba(32,30,29,.4);background:#f3f2f2;font-family:'Archivo',system-ui,sans-serif">
+  <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 24px;gap:12px">
+    <a href="RVC Brief.dc.html" style="font-weight:800;font-size:15px;color:#201e1d;text-decoration:none;letter-spacing:-.01em">RVC Housing &times; Schools</a>
+    <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+      <button onClick="{{ onToggle }}" aria-label="Menu" style="font-family:'Archivo',sans-serif;cursor:pointer;background:transparent;border:1px solid #201e1d;color:#201e1d;font-weight:800;font-size:13px;padding:8px 14px">{{ menuLabel }}</button>
+    </sc-if>
+    <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+      <div style="display:flex;gap:22px;font-size:13px;font-weight:600;align-items:center">
+        <sc-for list="{{ links }}" as="lnk" hint-placeholder-count="5">
+          <a href="{{ lnk.href }}" style="{{ lnk.style }}">{{ lnk.label }}</a>
+        </sc-for>
+        <a href="RVC Brief.dc.html#asks" style="background:#1e6b3d;color:#f3f2f2;font-weight:800;font-size:13px;padding:9px 26px 9px 12px;text-decoration:none">Act now</a>
+      </div>
+    </sc-if>
+  </div>
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="display:flex;flex-direction:column;border-top:1px solid rgba(32,30,29,.25);padding:6px 24px 14px">
+      <sc-for list="{{ links }}" as="lnk" hint-placeholder-count="5">
+        <a href="{{ lnk.href }}" style="{{ lnk.mobileStyle }}">{{ lnk.label }}</a>
+      </sc-for>
+      <a href="RVC Brief.dc.html#asks" style="display:inline-flex;align-self:flex-start;background:#1e6b3d;color:#f3f2f2;font-weight:800;font-size:14px;padding:11px 36px 11px 14px;text-decoration:none;margin-top:10px">Act now</a>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:&quot;120px&quot;},&quot;current&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;brief&quot;,&quot;options&quot;:[&quot;brief&quot;,&quot;mechanics&quot;,&quot;factcheck&quot;,&quot;voices&quot;,&quot;calculator&quot;],&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = { open: false, mobile: typeof window !== "undefined" && window.innerWidth < 760 };
+  componentDidMount() {
+    this._onResize = () => this.setState({ mobile: window.innerWidth < 760 });
+    window.addEventListener("resize", this._onResize);
+  }
+  componentWillUnmount() { window.removeEventListener("resize", this._onResize); }
+  renderVals() {
+    const current = this.props.current ?? "";
+    const items = [
+      { id: "brief", label: "The brief", href: "RVC Brief.dc.html" },
+      { id: "mechanics", label: "Mechanics", href: "Mechanics.dc.html" },
+      { id: "factcheck", label: "Fact check", href: "Fact Check.dc.html" },
+      { id: "voices", label: "Voices", href: "Voices.dc.html" },
+      { id: "calculator", label: "Calculator", href: "Calculator.dc.html" }
+    ];
+    const links = items.map(it => {
+      const active = it.id === current;
+      return {
+        label: it.label, href: it.href,
+        style: "text-decoration:" + (active ? "underline" : "none") + ";text-underline-offset:4px;text-decoration-color:#1e6b3d;color:" + (active ? "#1e6b3d" : "#201e1d") + ";font-weight:" + (active ? "800" : "600"),
+        mobileStyle: "padding:11px 0;border-bottom:1px solid rgba(32,30,29,.15);font-size:15px;text-decoration:none;color:" + (active ? "#1e6b3d" : "#201e1d") + ";font-weight:" + (active ? "800" : "600")
+      };
+    });
+    return {
+      links,
+      isMobile: this.state.mobile,
+      isDesktop: !this.state.mobile,
+      menuOpen: this.state.mobile && this.state.open,
+      menuLabel: this.state.open ? "Close" : "Menu",
+      onToggle: () => this.setState(s => ({ open: !s.open }))
+    };
+  }
+}
+</script>
+</body>
+</html>

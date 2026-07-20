@@ -1,6 +1,6 @@
 # Deploying rvc-taxes.jeffpinto.com
 
-Everything in `site/` is static — no build step. Hosting: Cloudflare Pages; DNS stays at Hover.
+Everything in `site/` is static — no build step. Hosting: Cloudflare Pages; DNS in the Cloudflare jeffpinto.com zone (moved from Hover 2026-07).
 
 ## One-time setup
 
@@ -16,15 +16,8 @@ Everything in `site/` is static — no build step. Hosting: Cloudflare Pages; DN
    ```
    First deploy gives you `https://rvc-taxes.pages.dev`. Verify it renders before touching DNS.
 
-3. **Custom domain (Cloudflare side):**
-   Cloudflare dashboard → Workers & Pages → `rvc-taxes` → Custom domains → Add `rvc-taxes.jeffpinto.com`. Because jeffpinto.com's DNS is *not* on Cloudflare, it will ask you to validate via CNAME.
-
-4. **DNS (Hover side):**
-   Hover → jeffpinto.com → DNS → Add record:
-   ```
-   Type: CNAME   Hostname: rvc-taxes   Target: rvc-taxes.pages.dev   TTL: default
-   ```
-   Subdomain CNAME to Pages works with third-party DNS; only apex domains require moving nameservers to Cloudflare. TLS cert is issued automatically once the CNAME resolves (usually < 15 min, up to a few hours).
+3. **Custom domain** (done 2026-07-20):
+   Cloudflare dashboard → Workers & Pages → `rvc-taxes` → Custom domains → Add `rvc-taxes.jeffpinto.com`. The jeffpinto.com zone lives in the same Cloudflare account, so the proxied CNAME is created automatically — no manual DNS record, no registrar step. TLS is issued on activation (usually < 1 min).
 
 ## Redeploys
 

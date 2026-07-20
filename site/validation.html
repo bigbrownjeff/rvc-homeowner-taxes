@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Fact check &amp; sources · RVC Housing &times; Schools</title>
-<meta name="description" content="The fact check and ledger for the RVC taxes project: every claim validated against primary sources, every figure's value, source, verification date, and the pages that use it.">
+<title>Facts &amp; sources · RVC Housing &times; Schools</title>
+<meta name="description" content="The facts ledger for the RVC taxes project: every figure the campaign cites, with its value, its primary public source, the date it was verified, and the pages that use it.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/site.css">
@@ -15,7 +15,6 @@ th{text-align:left;font-size:10.5px;font-weight:800;letter-spacing:.08em;text-tr
 td{font-size:13.5px;padding:10px 14px 10px 0;border-bottom:1px solid rgba(32,30,29,.2);vertical-align:top;line-height:1.5}
 td.f{font-weight:600;width:36%}
 td.u{width:17%;font-size:12px;font-weight:600}
-.strike{color:#8a2f1d;text-decoration:line-through}
 .hero{padding:56px 48px 36px;max-width:1100px}
 .hero h1{margin:0 0 20px;font-weight:800;font-size:54px;line-height:1.02;letter-spacing:-.025em;max-width:900px}
 .hero .lede{margin:0;font-size:19px;line-height:1.5;max-width:760px}
@@ -27,17 +26,9 @@ td.u{width:17%;font-size:12px;font-weight:600}
 .statgrid .c{font-size:11.5px;margin-top:8px;color:rgba(32,30,29,.75)}
 .sec{margin:0 48px;border-top:2px solid rgba(32,30,29,.4);padding:34px 0}
 .eyebrow{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#1e6b3d;margin-bottom:6px}
-.eyebrow.gap{margin-bottom:20px}
 .secintro{margin:0 0 18px;font-size:16px;max-width:740px}
 .twrap{max-width:1100px}
 .tnote{margin:16px 0 0;font-size:13px;color:rgba(32,30,29,.7)}
-.big4{display:grid;grid-template-columns:1fr 1fr;gap:0 56px;max-width:1100px}
-.big4 .item{padding:0 0 22px;border-bottom:1px solid rgba(32,30,29,.25)}
-.big4 .item.lower{padding:22px 0 0;border-bottom:none}
-.big4 .h{font-weight:800;font-size:18px;line-height:1.25;margin-bottom:8px}
-.big4 p{margin:0;font-size:14px}
-.survives{display:grid;grid-template-columns:220px 1fr;gap:32px;max-width:1100px}
-.survives .body{max-width:740px;font-size:16.5px}
 .rulebox{border-left:3px solid #1e6b3d;padding:2px 0 2px 16px;margin:18px 0;font-size:14px;max-width:740px}
 .toc{margin:18px 0 0;font-size:12px;font-weight:600;letter-spacing:.03em;text-transform:uppercase;line-height:2}
 .watch{max-width:820px}
@@ -60,11 +51,6 @@ code{font-family:'Archivo',system-ui,sans-serif;font-weight:600;font-size:.95em}
   .statgrid .cell{padding:14px 12px}
   .statgrid .cell:nth-child(2){border-right:none;padding-right:0}
   .statgrid .cell:nth-child(3){padding-left:0}
-  .big4{grid-template-columns:1fr}
-  .big4 .item{padding:18px 0;border-bottom:1px solid rgba(32,30,29,.25)}
-  .big4 .item:first-child{padding-top:0}
-  .big4 .item.lower:last-child{border-bottom:none;padding-bottom:0}
-  .survives{grid-template-columns:1fr;gap:16px}
   .twrap{overflow-x:auto}
   .twrap table{min-width:640px}
 }
@@ -74,101 +60,33 @@ code{font-family:'Archivo',system-ui,sans-serif;font-weight:600;font-size:.95em}
 <div id="site-nav" data-current="factcheck"></div>
 
 <div class="hero">
-  <div class="eyebrow" style="margin-bottom:16px">Fact check &amp; corrections &middot; ~120 claims &middot; six research passes &middot; June 9, 2026</div>
-  <h1>We fact-checked ourselves first.</h1>
-  <p class="lede">Every factual claim in this project, validated against primary public sources: statutes, agency tables, NYSED, Census, IRS data, and named articles. Including the errors we found in our own earlier drafts. Claims that could not be traced are labeled, not repeated.</p>
+  <div class="eyebrow" style="margin-bottom:16px">The facts ledger &middot; every figure sourced &middot; updated July 20, 2026</div>
+  <h1>Every number on this site, traced to its source.</h1>
+  <p class="lede">This is the source of record for the campaign. Every figure it cites lives here in one row: the value, the primary public source, the date it was verified, and the pages that use it. The sources are statutes, agency tables, NYSED, Census, and IRS data. If a claim cannot be traced to a source, it is labeled, not repeated. Check any of it.</p>
   <div class="statgrid">
-    <div class="cell"><div class="n">&asymp;&frac12;</div><div class="c">of claims confirmed</div></div>
-    <div class="cell"><div class="n">&asymp;&frac14;</div><div class="c">outdated or imprecise</div></div>
-    <div class="cell"><div class="n">&asymp;&frac14;</div><div class="c">wrong, and corrected</div></div>
-    <div class="cell"><div class="n" style="color:#8a2f1d">4</div><div class="c">would-be-fatal errors fixed</div></div>
+    <a class="cell" href="#f-senior-share" style="text-decoration:none;color:inherit"><div class="n">2,076</div><div class="c">senior-owned homes (27.9%)</div></a>
+    <a class="cell" href="#f-home-value" style="text-decoration:none;color:inherit"><div class="n">$820K</div><div class="c">median home value</div></a>
+    <a class="cell" href="#f-enrollment" style="text-decoration:none;color:inherit"><div class="n">&minus;257</div><div class="c">K-12 students since 2015-16</div></a>
+    <a class="cell" href="#f-dividend" style="text-decoration:none;color:inherit"><div class="n">$2,058</div><div class="c">state STAR savings per move</div></a>
   </div>
+  <p class="tnote" style="max-width:860px;margin-top:16px">Four of the numbers the campaign rests on. Each links to its row below, with the source and the date it was verified. So does every other figure on the site.</p>
 </div>
 
 <div class="sec">
-  <div class="eyebrow gap">01 &middot; The big four: errors that would have been fatal in Albany</div>
-  <div class="big4">
-    <div class="item">
-      <div class="h">1 &middot; "Exemptions cost the schools $6.9M a year": wrong kind of money</div>
-      <p>NY districts levy a fixed dollar amount. Exemptions shift the levy onto non-exempt neighbors; they do not reduce district revenue. And STAR, the largest piece of the claimed gap, is reimbursed by the State (RPTL &sect;1306-a). The "recaptured school revenue" scenarios mislabeled taxpayer relief and state savings as district revenue. The brief rebuilds this math correctly, and the correct version is still persuasive.</p>
-    </div>
-    <div class="item">
-      <div class="h">2 &middot; The &sect;467 table was shifted $8,400, and outdated</div>
-      <p>The project claimed 50% off for incomes up to $58,399. Per Nassau's official brochure, 50% requires income &le;$50,000; $58,399 is the ceiling of the minimum 5% tier. Since Dec 2025 (Ch. 581) the scale runs 5-65%, and the statutory income cap rises to $75,000 on July 1, 2027. Implication: RVC's median senior homeowner (~$80K income) does not qualify for &sect;467 at all, which broke the old "1,404 parcels &times; $4,900" arithmetic.</p>
-    </div>
-    <div class="item lower">
-      <div class="h">3 &middot; "Prop 19-style portability for NY": solving a California problem New York does not have</div>
-      <p>California needs portability because Prop 13 taxes acquisition value. New York taxes current assessed value (RPTL &sect;305): there is no basis to port, Nassau sales do not trigger reassessment, and a downsizing senior's taxes already fall with the cheaper home. The state centerpiece was rebuilt on NY-native vehicles: S3309/A5288, a deferral enabling act, and S3574.</p>
-    </div>
-    <div class="item lower">
-      <div class="h">4 &middot; The story was stale: the deficit was already closed, by cutting classrooms</div>
-      <p>Early documents treated the $3.78M deficit as looming. It ended: the board adopted a $141.32M budget (+1.03%) on April 16, 2026, eliminating about 22 teaching positions and 40 teaching assistants, and voters passed it 1,915-1,195 on May 19. This is better ammunition than a projection: the cuts are what "do nothing about housing turnover" looks like.</p>
-    </div>
-  </div>
-</div>
-
-<div class="sec">
-  <div class="eyebrow">02 &middot; Framing fixes</div>
-  <p class="secintro">Concepts, not just digits. What the project now says instead of what it used to say.</p>
-  <div class="twrap" style="max-width:1000px">
-    <table>
-      <thead><tr><th style="width:38%">Replace</th><th>With</th></tr></thead>
-      <tbody>
-        <tr><td class="strike">"Recaptured school tax revenue"; "deficit coverage"</td><td><b>Burden-shift relief</b> to other taxpayers plus <b>state savings</b>. The only channels that add district revenue from turnover: the tax-base growth factor, enrollment-linked aid, and budget-vote sustainability.</td></tr>
-        <tr><td class="strike">Enhanced STAR counted in district losses</td><td>STAR is a state charge. A senior-to-family transition saves <b>NY State about $2,058/yr</b> (Enhanced $3,147 to Basic $1,089): the downsizing dividend that can fund the incentives.</td></tr>
-        <tr><td class="strike">"Seniors lose &sect;467/STAR benefits if they move"</td><td>Mostly myth: Enhanced STAR follows an eligible owner to any NY primary residence; &sect;467 applies wherever adopted; Nassau waives its 12-month wait for prior holders. The real frictions: move-year timing (S3309 fixes it), capital gains, inventory.</td></tr>
-        <tr><td class="strike">"1,404 exempt senior parcels (18% of owner homes)"</td><td><b>2,076 senior-owned homes (27.9%, ACS B25007)</b>, of which the &sect;467-eligible subset is unknown until the county publishes parcel data. Never multiply every senior home by a full benefit stack.</td></tr>
-        <tr><td class="strike">"288 seats of spare capacity"</td><td>A ~260-290 student enrollment decline (NYSED: 3,533 to 3,276). No public capacity study exists; say "empty seats" only in that bounded sense.</td></tr>
-        <tr><td class="strike">Marginal cost of a new student = $0</td><td>One labeled assumption: low marginal cost while spare seats last, rising as they fill.</td></tr>
-      </tbody>
-    </table>
-  </div>
-</div>
-
-<div class="sec">
-  <div class="eyebrow">03 &middot; Number-by-number highlights</div>
-  <p class="secintro">The full tables cover RVC's budget, demographics, politics, coalition districts, and the calculator's macro layer. Highlights of what changed:</p>
-  <div class="twrap" style="max-width:1000px">
-    <table>
-      <thead><tr><th style="width:26%">Item</th><th style="width:30%">Project said</th><th>Verified value and source</th></tr></thead>
-      <tbody>
-        <tr><td>Senior-owned share of owner homes</td><td class="strike">18% (~1,404 parcels)</td><td><b>27.9%: 2,076 of 7,453</b> (ACS B25007). The affected base was undercounted by ~48%.</td></tr>
-        <tr><td>Median home value</td><td class="strike">$735,000 "(ACS)"</td><td><b>$818,700</b> (ACS 2020-24); Zillow June 2026 ~$807-819K.</td></tr>
-        <tr><td>STAR savings (RVC, Class 1)</td><td class="strike">Basic $1,220 / Enhanced $2,680</td><td><b>Credit $1,089 / $3,147.01</b> (DTF 2025 final).</td></tr>
-        <tr><td>Average tax bill</td><td class="strike">$15,230 "total bill"</td><td>$15,230 is a real school + library bill (verified in-village parcel); a typical in-village <b>total is ~$21.1K</b> including the village line. Bill split: school ~70 / village ~21 / county ~6.</td></tr>
-        <tr><td>Per-pupil spending</td><td class="strike">$42,050</td><td><b>$37,973</b> NYSED official (2023-24).</td></tr>
-        <tr><td>RVC's state senator</td><td class="strike">Todd Kaminsky (SD-9)</td><td>Corrected June 2026 to Canzoneri-Fitzpatrick; <b>current lines put RVC in SD-6 (Siela Bynoe)</b>, verified July 2026 against the Census geocoder and her district page.</td></tr>
-        <tr><td>Levittown closures</td><td class="strike">presented as current evidence</td><td>Pintail Lane and Cherrywood closed in <b>1976</b>: historical precedent only. Six elementaries operate today.</td></tr>
-        <tr><td>Long Beach East Elementary</td><td class="strike">implied closed</td><td><b>Stayed open</b> (Jan 2025) after a 4,000-signature parent campaign. The fight, not the outcome, is the data point.</td></tr>
-        <tr><td>Itemization rates</td><td class="strike">RVC 68% / US 13%</td><td><b>25.7% / 9.6%</b> (IRS SOI TY2022): the claimed figures were pre-TCJA magnitudes.</td></tr>
-        <tr><td>Boomer large-home stat</td><td class="strike">"Minneapolis Fed: 28% vs 14%"</td><td>It is <b>Redfin's</b> (Jan 2024: 28.2% vs 14.2%; 2026 refresh 28/16). The Minneapolis Fed piece is the separate property-tax lock-in article.</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <p class="tnote">Complete tables with every verdict: <a href="#ledger">the full ledger below</a> &middot; per-claim receipts in the repo's findings files &middot; July 2026 math audit: <a href="reconcile.html">reconcile</a></p>
-</div>
-
-<div class="sec">
-  <div class="survives">
-    <div class="eyebrow">04 &middot; What survives</div>
-    <div class="body">
-      <p style="margin:0 0 14px"><b>The hypothesis holds; it just needed correct plumbing.</b> The squeeze is real and now has a body count: 62 classroom positions cut to balance 2026-27, with revenue growing ~1% against +$2M in health insurance alone, and 61% of Nassau's 56 districts declining. The homes exist: 2,076 senior-owned, more than the project first assumed. The lock-in is real and fixable: &sect;121 unindexed since 1997 with ~1.9M senior homes above the caps, benefit-timing traps that S3309 fixes, and missing downsize inventory.</p>
-      <p style="margin:0">And the corrected fiscal upside is attractive: each transition saves the State ~$2,058/yr in STAR, pays ~$3,300 in one-time transfer tax, relieves the &sect;467 burden shift on neighbors, grows the levy cap through renovations, and refills empty seats. Every ask has a live vehicle and a named, current officeholder.</p>
-    </div>
+  <div class="eyebrow">On this page</div>
+  <div class="toc">
+    <a href="#ledger">How to read this ledger</a> &middot; <a href="#demo">Demographics &amp; housing</a> &middot; <a href="#schools">Rockville Centre schools</a> &middot; <a href="#star">STAR</a> &middot; <a href="#s467">&sect;467 senior exemption</a> &middot; <a href="#village">Village of Rockville Centre</a> &middot; <a href="#assess">Nassau assessment</a> &middot; <a href="#leg">Legislation &amp; officeholders</a> &middot; <a href="#derived">Derived figures</a> &middot; <a href="#memos">Standalone memos</a> &middot; <a href="#watch">Vintage watch</a> &middot; <a href="#unknown">Known unknowns</a>
   </div>
 </div>
 
 <div class="sec" id="ledger">
-  <div class="eyebrow">05 &middot; The full ledger</div>
+  <div class="eyebrow">01 &middot; How to read this ledger</div>
   <p class="secintro">Every figure cited anywhere on this site lives in one row of this ledger: the value, the primary source, how and when it was verified, and which pages use it. If a number on any page isn't traceable to a row here (or to the inline citations of the standalone memos indexed <a href="#memos">below</a>), it doesn't belong on the site.</p>
   <div class="rulebox"><strong>Maintenance rule.</strong> Numbers change here first. To update a figure: fix its row (value, source, verified date), then propagate to every page in its <em>used on</em> column. A figure with no live row gets removed from the site, not defended.</div>
-  <div class="toc">
-    <a href="#demo">Demographics</a> &middot; <a href="#schools">RVC schools</a> &middot; <a href="#star">STAR</a> &middot; <a href="#s467">&sect;467 exemption</a> &middot; <a href="#village">Village</a> &middot; <a href="#assess">Assessment</a> &middot; <a href="#leg">Legislation</a> &middot; <a href="#derived">Derived</a> &middot; <a href="#memos">Memo pages</a> &middot; <a href="#watch">Vintage watch</a> &middot; <a href="#unknown">Known unknowns</a>
-  </div>
 </div>
 
 <div class="sec" id="demo">
-  <div class="eyebrow">06 &middot; Demographics &amp; housing</div>
+  <div class="eyebrow">02 &middot; Demographics &amp; housing</div>
   <p class="ledgernote">Geography: Rockville Centre village = place FIPS 3663264. "2019-23" and "2020-24" are ACS 5-year vintages; 2020-24 (released Dec 2025) is the latest published. Full working notes: <a href="findings/demographics.md">findings/demographics.md</a>.</p>
   <div class="twrap">
   <table>
@@ -187,7 +105,7 @@ code{font-family:'Archivo',system-ui,sans-serif;font-weight:600;font-size:.95em}
 </div>
 
 <div class="sec" id="schools">
-  <div class="eyebrow">07 &middot; Rockville Centre UFSD</div>
+  <div class="eyebrow">03 &middot; Rockville Centre UFSD</div>
   <div class="twrap">
   <table>
   <tr><th>Fact</th><th>Source &middot; verification</th><th>Used on</th></tr>
@@ -204,7 +122,7 @@ code{font-family:'Archivo',system-ui,sans-serif;font-weight:600;font-size:.95em}
 </div>
 
 <div class="sec" id="star">
-  <div class="eyebrow">08 &middot; STAR</div>
+  <div class="eyebrow">04 &middot; STAR</div>
   <div class="twrap">
   <table>
   <tr><th>Fact</th><th>Source &middot; verification</th><th>Used on</th></tr>
@@ -218,7 +136,7 @@ code{font-family:'Archivo',system-ui,sans-serif;font-weight:600;font-size:.95em}
 </div>
 
 <div class="sec" id="s467">
-  <div class="eyebrow">09 &middot; &sect;467 senior exemption</div>
+  <div class="eyebrow">05 &middot; &sect;467 senior exemption</div>
   <div class="twrap">
   <table>
   <tr><th>Fact</th><th>Source &middot; verification</th><th>Used on</th></tr>
@@ -231,7 +149,7 @@ code{font-family:'Archivo',system-ui,sans-serif;font-weight:600;font-size:.95em}
 </div>
 
 <div class="sec" id="village">
-  <div class="eyebrow">10 &middot; Village of Rockville Centre</div>
+  <div class="eyebrow">06 &middot; Village of Rockville Centre</div>
   <div class="twrap">
   <table>
   <tr><th>Fact</th><th>Source &middot; verification</th><th>Used on</th></tr>
@@ -242,7 +160,7 @@ code{font-family:'Archivo',system-ui,sans-serif;font-weight:600;font-size:.95em}
 </div>
 
 <div class="sec" id="assess">
-  <div class="eyebrow">11 &middot; Nassau assessment mechanics</div>
+  <div class="eyebrow">07 &middot; Nassau assessment mechanics</div>
   <div class="twrap">
   <table>
   <tr><th>Fact</th><th>Source &middot; verification</th><th>Used on</th></tr>
@@ -252,7 +170,7 @@ code{font-family:'Archivo',system-ui,sans-serif;font-weight:600;font-size:.95em}
 </div>
 
 <div class="sec" id="leg">
-  <div class="eyebrow">12 &middot; Legislation &amp; officeholders</div>
+  <div class="eyebrow">08 &middot; Legislation &amp; officeholders</div>
   <div class="twrap">
   <table>
   <tr><th>Fact</th><th>Source &middot; verification</th><th>Used on</th></tr>
@@ -265,7 +183,7 @@ code{font-family:'Archivo',system-ui,sans-serif;font-weight:600;font-size:.95em}
 </div>
 
 <div class="sec" id="derived">
-  <div class="eyebrow">13 &middot; Derived figures</div>
+  <div class="eyebrow">09 &middot; Derived figures</div>
   <p class="ledgernote">Arithmetic on ledger rows: no independent source; update automatically when a parent row changes.</p>
   <div class="twrap">
   <table>
@@ -279,7 +197,7 @@ code{font-family:'Archivo',system-ui,sans-serif;font-weight:600;font-size:.95em}
 </div>
 
 <div class="sec" id="memos">
-  <div class="eyebrow">14 &middot; The standalone memos: facts cited inline</div>
+  <div class="eyebrow">10 &middot; The standalone memos: facts cited inline</div>
   <p class="ledgernote">Four pages are self-contained studies whose facts appear once, on that page, each claim cited inline where it's made (with [VERIFIED]/[REPORTED]/[ESTIMATE] labels where used). This ledger indexes them rather than duplicating their citation lists.</p>
   <div class="twrap">
   <table>
@@ -294,7 +212,7 @@ code{font-family:'Archivo',system-ui,sans-serif;font-weight:600;font-size:.95em}
 </div>
 
 <div class="sec" id="watch">
-  <div class="eyebrow">15 &middot; Vintage watch: figures that will change</div>
+  <div class="eyebrow">11 &middot; Vintage watch: figures that will change</div>
   <div class="watch"><ul>
   <li><strong>2026 final STAR credit amounts</strong>: DTF had not published them as of July 20, 2026 (<a href="https://www.tax.ny.gov/pit/property/star/comparison/28-nassau.htm">page</a> still 2025-labeled). When they land: update <a href="#f-star-credit">the credit row</a> and re-derive the <a href="#f-dividend">downsizing dividend</a>.</li>
   <li><strong>H.R. 1340 cosponsor count / Gillen status</strong>: volatile; re-verify same-day before anything goes in front of a politician.</li>
@@ -305,7 +223,7 @@ code{font-family:'Archivo',system-ui,sans-serif;font-weight:600;font-size:.95em}
 </div>
 
 <div class="sec" id="unknown">
-  <div class="eyebrow">16 &middot; Known unknowns: figures this site refuses to print</div>
+  <div class="eyebrow">12 &middot; Known unknowns: figures this site refuses to print</div>
   <div class="watch"><ul>
   <li><strong>Parcel-level &sect;467 / Enhanced STAR counts by tier for RVC</strong>: FOIL to Nassau Assessment still open. Until it lands, no aggregate "exemption gap" dollar figure appears anywhere on this site; the &sect;467-eligible subset of the 2,076 senior-owned homes is unknown. (This gap is itself Ask #3 of the deck.)</li>
   <li><strong>RVC UFSD's own &sect;467 adoption posture</strong> (ceiling, 65%-tier stance): supported only by county-wide statements; confirm with the district clerk before attributing.</li>
@@ -321,7 +239,7 @@ code{font-family:'Archivo',system-ui,sans-serif;font-weight:600;font-size:.95em}
   </div>
 </div>
 
-<div class="site-foot"><span>Jeff Pinto &middot; Rockville Centre &middot; <a href="mailto:jeff@bluecamelconsulting.com?subject=%5Brvc-taxes%5D%20">Contact</a></span><span>Fact check completed June 9, 2026 &middot; math audit July 2026 &middot; ledger updated July 20, 2026</span></div>
+<div class="site-foot"><span>Jeff Pinto &middot; Rockville Centre &middot; <a href="mailto:jeff@bluecamelconsulting.com?subject=%5Brvc-taxes%5D%20">Contact</a></span><span>Figures verified against primary sources &middot; math audit July 2026 &middot; ledger updated July 20, 2026</span></div>
 <script src="assets/nav.js"></script>
 </body>
 </html>

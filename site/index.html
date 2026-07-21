@@ -462,7 +462,7 @@
     }
   }
 
-  function build(fromUser){
+  function build(fromUser,sample){
     var addr=$("kitAddr").value.trim();
     var err=$("kitError"),btn=$("kitBuild");
     if(!addr){err.textContent="Enter a street address first.";err.style.display="block";return;}
@@ -500,7 +500,8 @@
         inVillage:!!(place&&/village|city/i.test(place.NAME||place.BASENAME||"")),
         matched:match.matchedAddress||addr
       };
-      if(fromUser){ signup(c.matched); refreshMoney(c); pingCount("lookup"); }
+      if(fromUser){ signup(c.matched); pingCount("lookup"); }
+      if(fromUser||sample){ refreshMoney(c); }
       render(c);
     }).catch(function(){
       btn.textContent=BTN;
@@ -513,7 +514,8 @@
     document.querySelectorAll("details.m-collapse[open]").forEach(function(d){d.removeAttribute("open");});
   }
   $("kitBuild").addEventListener("click",function(){build(true);});
-  build(false);
+  var qAddr=new URLSearchParams(location.search).get("addr");
+  if(qAddr){ $("kitAddr").value=qAddr; build(false,true); } else { build(false); }
 })();
 </script>
 </body>

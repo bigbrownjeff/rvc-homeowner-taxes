@@ -22,6 +22,13 @@
 .geo-flash{animation:geoflash 1.1s ease-out}
 @keyframes geoflash{0%{background:#c5a44e}100%{background:transparent}}
 @media(prefers-reduced-motion:reduce){.geo-flash{animation:none}}
+.m-collapse>summary{list-style:none}
+.m-collapse>summary::-webkit-details-marker{display:none}
+.m-collapse>summary .m-toggle{float:right;font-weight:800;color:#1e6b3d;font-size:17px;line-height:1}
+.m-collapse>summary .m-toggle::before{content:"+"}
+.m-collapse[open]>summary .m-toggle::before{content:"\2212"}
+@media(min-width:761px){.m-collapse>summary{display:none}}
+@media(max-width:760px){.m-collapse>summary{cursor:pointer;padding:13px 0;border-bottom:1px solid rgba(32,30,29,.25);font-weight:800;font-size:14px}}
 @media(max-width:760px){
   .px{margin:0 24px}
   .hero-pad{padding:44px 24px 36px}
@@ -210,6 +217,8 @@
     <div style="font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#1e6b3d">05 · Do seniors<br>really want<br>to move?</div>
     <div style="max-width:760px">
       <p style="margin:0 0 16px;font-size:17px">The strongest claim on this page is that many seniors want to downsize and cannot. It does not rest on anecdotes.</p>
+      <details class="m-collapse" open>
+      <summary>Five sources, Freddie Mac to the Governor <span class="m-toggle"></span></summary>
       <div style="border-top:1px solid rgba(32,30,29,.25)">
         <div style="padding:13px 0;border-bottom:1px solid rgba(32,30,29,.25)">
           <div style="font-size:14px"><b>Freddie Mac, December 2024.</b> The "Silver Tsunami" survey found two thirds of boomer homeowners who plan to move say the move will be a downsize. <a href="https://freddiemac.gcs-web.com/news-releases/news-release-details/silver-tsunami-likely-bring-wave-wealth-children-baby-boomer" style="font-size:12.5px;font-weight:600">Freddie Mac research</a></div>
@@ -227,6 +236,7 @@
           <div style="font-size:14px"><b>Gov. Hochul, April 2025.</b> "We are committed to creating more opportunities for older New Yorkers to downsize into smaller homes in communities they love." The state's own housing agenda already names this goal. <a href="https://hcr.ny.gov/news/affordable-housing-long-island-governor-hochul-announces-construction-has-begun-66-unit-senior" style="font-size:12.5px;font-weight:600">NYS HCR</a></div>
         </div>
       </div>
+      </details>
       <p style="margin:14px 0 0;font-size:13px;color:rgba(32,30,29,.7)">Local, named voices from Nassau superintendents and residents: <a href="voices.html" style="font-weight:600">voices</a></p>
     </div>
   </div>
@@ -415,9 +425,12 @@
     var wrap=$("kitCards");
     wrap.innerHTML="";
     cards.forEach(function(card){
-      var div=document.createElement("div");
+      var div=document.createElement("details");
+      div.className="m-collapse";
+      if(!window.matchMedia("(max-width:760px)").matches)div.setAttribute("open","");
       div.style.cssText="padding:20px 0 22px;border-bottom:1px solid rgba(32,30,29,.25)";
       div.innerHTML=
+        '<summary><span style="display:block;font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:rgba(32,30,29,.6)">'+esc(card.level)+'</span>'+esc(card.name)+' <span class="m-toggle"></span></summary>'+
         '<div style="font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:rgba(32,30,29,.6);margin-bottom:6px">'+esc(card.level)+'</div>'+
         '<a href="'+card.nameHref+'" target="_blank" rel="noopener" style="font-weight:800;font-size:17px;line-height:1.2;color:#201e1d;text-decoration:underline;text-decoration-color:#1e6b3d;text-underline-offset:3px">'+esc(card.name)+'</a>'+
         '<div style="font-size:12.5px;color:rgba(32,30,29,.7);margin:4px 0 8px">'+esc(card.district)+'</div>'+
@@ -496,6 +509,9 @@
     });
   }
 
+  if(window.matchMedia("(max-width:760px)").matches){
+    document.querySelectorAll("details.m-collapse[open]").forEach(function(d){d.removeAttribute("open");});
+  }
   $("kitBuild").addEventListener("click",function(){build(true);});
   build(false);
 })();

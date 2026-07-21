@@ -58,9 +58,9 @@
 
 <!-- hero -->
 <div class="hero-pad" style="max-width:1100px">
-  <div style="font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#1e6b3d;margin-bottom:18px">Briefing · August 2026 · Rockville Centre, NY</div>
-  <h1 style="margin:0 0 22px;font-weight:800;font-size:62px;line-height:1.02;letter-spacing:-.025em;max-width:940px">Our schools cut 62 positions this spring. A quarter of our homes hold the fix.</h1>
-  <p style="margin:0;font-size:19px;line-height:1.5;max-width:760px">Rockville Centre balanced its 2026-27 school budget by cutting 22 teaching positions and 40 teaching assistants. This happened in a village where the median household earns $151,938. The problem is not wealth. The homes stopped changing hands: 27.9% of RVC's owner households (2,076 of 7,453) are headed by someone 65 or older.</p>
+  <div style="font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#1e6b3d;margin-bottom:18px">Briefing · August 2026 · <span id="heroPlace">Rockville Centre, NY</span></div>
+  <h1 id="heroH1" style="margin:0 0 22px;font-weight:800;font-size:62px;line-height:1.02;letter-spacing:-.025em;max-width:940px">Our schools cut 62 positions this spring. A quarter of our homes hold the fix.</h1>
+  <p id="heroLede" style="margin:0;font-size:19px;line-height:1.5;max-width:760px">Rockville Centre balanced its 2026-27 school budget by cutting 22 teaching positions and 40 teaching assistants. This happened in a village where the median household earns $151,938. The problem is not wealth. The homes stopped changing hands: 27.9% of RVC's owner households (2,076 of 7,453) are headed by someone 65 or older.</p>
   <div style="display:flex;gap:12px;margin-top:30px;flex-wrap:wrap">
     <a href="#gist" style="display:inline-flex;background:#1e6b3d;color:#f3f2f2;font-weight:800;font-size:14px;padding:13px 44px 13px 18px;text-decoration:none">Read the 60-second version</a>
     <a href="#asks" style="display:inline-flex;border:1px solid #201e1d;color:#201e1d;font-weight:800;font-size:14px;padding:13px 44px 13px 18px;text-decoration:none">Contact your representatives →</a>
@@ -71,7 +71,7 @@
 <div id="gist" class="px" style="border-top:2px solid rgba(32,30,29,.4);padding:30px 0">
   <div class="grid-label" style="max-width:1000px">
     <div style="font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#1e6b3d">The gist<br><span style="color:rgba(32,30,29,.55);font-weight:600;letter-spacing:.06em">60 seconds</span></div>
-    <div style="font-size:17px;line-height:1.55;max-width:720px">
+    <div id="gistBody" style="font-size:17px;line-height:1.55;max-width:720px">
       <p style="margin:0 0 10px">RVC has 257 fewer students than in 2015. Seniors head 27.9% of the village's owner households, and many of them <b>want</b> to downsize (<a href="#evidence" style="font-weight:600">the evidence</a>). Federal capital gains rules, benefit timing traps, and a shortage of smaller homes keep the door locked.</p>
       <p style="margin:0">Every fix on this page removes a penalty on moving. <b>No senior loses a benefit.</b> Most fixes make money for New York State. 4 asks, each to our officials, a live bill number, and a link to contact them if you agree and want to support this. And this reaches past RVC: most of Nassau's school districts are shrinking the same way.</p>
     </div>
@@ -80,7 +80,7 @@
 
 <!-- five numbers -->
 <div class="px" style="border-top:2px solid rgba(32,30,29,.4)">
-  <div class="stats5">
+  <div class="stats5" id="stats5">
     <div style="padding:22px 16px 22px 0;border-right:1px solid rgba(32,30,29,.25)">
       <div style="font-weight:800;font-size:40px;letter-spacing:-.02em;line-height:1">−257</div>
       <div style="font-size:11.5px;margin-top:10px;line-height:1.45;color:rgba(32,30,29,.75)">K-12 students since 2015-16 · <a href="https://data.nysed.gov/enrollment.php?year=2025&instid=800000049383" style="font-weight:600">NYSED</a></div>
@@ -375,11 +375,67 @@
     if($("msrcStar")&&_moneyBase.srcStar)$("msrcStar").href=_moneyBase.srcStar;
     if($("msrcTransfer")&&_moneyBase.srcTransfer)$("msrcTransfer").href=_moneyBase.srcTransfer;
   }
+  var HERO_BASE=null;
+  function captureHeroBase(){
+    if(HERO_BASE) return;
+    HERO_BASE={place:$("heroPlace").textContent,h1:$("heroH1").textContent,
+      lede:$("heroLede").innerHTML,gist:$("gistBody").innerHTML,stats:$("stats5").innerHTML};
+  }
+  function restoreHeroBase(){
+    if(!HERO_BASE) return;
+    $("heroPlace").textContent=HERO_BASE.place;$("heroH1").textContent=HERO_BASE.h1;
+    $("heroLede").innerHTML=HERO_BASE.lede;$("gistBody").innerHTML=HERO_BASE.gist;
+    $("stats5").innerHTML=HERO_BASE.stats;
+  }
+  function heroTile(big,label,srcUrl,srcName,last){
+    return '<div style="padding:22px 16px'+(last?' 22px 16px':'')+';'+(last?'':'border-right:1px solid rgba(32,30,29,.25);')+'">'+
+      '<div style="font-weight:800;font-size:40px;letter-spacing:-.02em;line-height:1">'+big+'</div>'+
+      '<div style="font-size:11.5px;margin-top:10px;line-height:1.45;color:rgba(32,30,29,.75)">'+label+
+      (srcUrl?' &middot; <a href="'+srcUrl+'" style="font-weight:600">'+srcName+'</a>':'')+'</div></div>';
+  }
+  function refreshHero(c,d){
+    captureHeroBase();
+    var isRvc=(c.school||"").toLowerCase().indexOf("rockville centre")>=0;
+    if(!d||isRvc||c.isNassau===false){ restoreHeroBase(); return; }
+    var refs=d.source_refs||{};
+    var name=d.dtfName||c.school;
+    var full=c.school||name;
+    var em=d.enrollment,ok_e=em&&typeof em.cur==="number"&&typeof em.base==="number"&&refUrl(refs.enrollment);
+    if(!ok_e){ restoreHeroBase(); return; }
+    var delta=em.cur-em.base;
+    $("heroPlace").textContent=name+" \u00b7 Nassau County";
+    var h1;
+    if(delta<=-10) h1=name+" has "+fmtNum(-delta)+" fewer students than in 2015-16. Its larger homes hold the fix.";
+    else if(delta>=10) h1=name+" grew by "+fmtNum(delta)+" students since 2015-16. Most of Nassau went the other way.";
+    else h1=name+" enrollment is roughly flat since 2015-16. Most of Nassau is shrinking.";
+    $("heroH1").textContent=h1;
+    var bits=[full+" enrolled "+fmtNum(em.cur)+" K-12 students in the latest reported year, against "+fmtNum(em.base)+" in 2015-16."];
+    if(typeof d.levy==="number"&&refUrl(refs.levy)) bits.push("Its school levy is $"+(d.levy/1e6).toFixed(1)+" million.");
+    if(typeof d.medianValue==="number"&&refUrl(refs.medianValue)) bits.push("The median owner-occupied home runs about $"+Math.round(d.medianValue/1000)+"K.");
+    bits.push("The pattern this page documents is county wide: when older owners who want to downsize cannot move without a tax penalty, larger homes stop reaching younger families. Every figure for this district is verified in the <a href=\"validation.html\" style=\"font-weight:600\">facts ledger</a> and mapped on the <a href=\"coverage.html\" style=\"font-weight:600\">coverage page</a>.");
+    $("heroLede").innerHTML=bits.join(" ");
+    var gp=[];
+    var g1=[name+": "+fmtNum(em.cur)+" students now, "+fmtNum(em.base)+" in 2015-16."];
+    if(typeof d.enhStarExemptParcels==="number"&&refUrl(refs.enhStarExemptParcels)) g1.push(fmtNum(d.enhStarExemptParcels)+" parcels here still hold the legacy Enhanced STAR exemption, a marker of long-tenured senior owners.");
+    g1.push("Many senior owners want to downsize (<a href=\"#evidence\" style=\"font-weight:600\">the evidence</a>) and the tax code penalizes the move.");
+    gp.push('<p style="margin:0 0 10px">'+g1.join(" ")+'</p>');
+    gp.push('<p style="margin:0">Every fix on this page removes a penalty on moving. <b>No senior loses a benefit.</b> Most fixes make money for New York State. The four asks below already match your address: your officials, live bill numbers, one click each.</p>');
+    $("gistBody").innerHTML=gp.join("");
+    var tiles=[];
+    tiles.push(heroTile((delta>0?"+":"\u2212")+fmtNum(Math.abs(delta)),"K-12 students since 2015-16",refUrl(refs.enrollment),"NYSED"));
+    if(typeof d.levy==="number"&&refUrl(refs.levy)) tiles.push(heroTile("$"+(d.levy/1e6).toFixed(1)+"M","School levy, latest reported",refUrl(refs.levy),"OSC"));
+    tiles.push(heroTile("2%","School levy cap, 5th straight year","https://www.osc.ny.gov/press/releases/2026/01/dinapoli-school-district-tax-cap-levy-remains-at-2-percent","OSC"));
+    if(typeof d.medianValue==="number"&&refUrl(refs.medianValue)) tiles.push(heroTile("$"+Math.round(d.medianValue/1000)+"K","Median owner-occupied home",refUrl(refs.medianValue),"ACS"));
+    if(typeof d.enhStarExemptParcels==="number"&&refUrl(refs.enhStarExemptParcels)) tiles.push(heroTile(fmtNum(d.enhStarExemptParcels),"Parcels with the legacy Enhanced STAR exemption",refUrl(refs.enhStarExemptParcels),"NYS DTF",true));
+    $("stats5").innerHTML=tiles.join("");
+    ["heroH1","heroLede","gistBody","stats5"].forEach(function(id){flashEl(id);});
+  }
   function refreshMoney(c){
     var banner=$("moneyGeo"); if(!banner) return;
     captureMoneyBase();
     function show(html){ banner.innerHTML=html; banner.style.display="block"; }
     if(c.isNassau===false){
+      refreshHero(c,null);
       restoreMoneyBase();
       show("This address is outside Nassau. The figures below are RVC-typical, not specific to your area.");
       return;
@@ -388,6 +444,7 @@
     loadDistricts().then(function(data){
       restoreMoneyBase();
       var d=lookupDistrict(data,c);
+      refreshHero(c,d);
       if(!d){
         show("We do not yet have verified figures for "+dn+". The figures below are RVC-typical. See <a href=\"validation.html\" style=\"font-weight:600\">the facts ledger</a> for coverage.");
         return;

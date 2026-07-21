@@ -12,3 +12,4 @@
 - [Org-backing outreach](org-backing-outreach.md) — 7 org drafts (w1-org-*) + verified contacts (AARP NY, N-SSBA, LIHP, Vision LI, LIBOR, LWV, RVC Chamber); LIBI risk-flagged; showcase-strip consent rule; S3309 sponsor=Palumbo not Canzoneri flag
 - [Fan-out checkout discipline](fanout-checkout-discipline.md) — parallel agents left primary checkout on feature branches; verify HEAD after each completes; batch PRs need own-files-only diff check vs fresh main
 - [Districts integration](districts-integration.md) — PR #20: districts.json now full 55-row table; enhStarExemptParcels (exemption-program count) MUST stay distinct from north-star enhStarParcels; column empty by design; 2 documented scope-gap rows (Amityville/Glen Cove)
+- [Headless mobile render gotchas](headless-mobile-render-gotchas.md) — headless clamps width ~500 (test mobile CSS at 760); dark bands false-positive edge scans; iOS zooms sub-16px inputs

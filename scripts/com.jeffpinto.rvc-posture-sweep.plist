@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0"><dict>
+  <key>Label</key><string>com.jeffpinto.rvc-posture-sweep</string>
+  <key>ProgramArguments</key><array>
+    <string>/Users/jeffpinto/.claude/bin/runlog</string>
+    <string>--tag</string><string>rvc-posture</string>
+    <string>/bin/zsh</string>
+    <string>/Users/jeffpinto/Projects/rvc-homeowner-taxes/scripts/daily_posture_sweep.sh</string>
+  </array>
+  <key>StartCalendarInterval</key><dict><key>Hour</key><integer>7</integer><key>Minute</key><integer>0</integer></dict>
+  <key>EnvironmentVariables</key><dict>
+    <key>PATH</key><string>/Users/jeffpinto/.local/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin</string>
+  </dict>
+  <key>StandardOutPath</key><string>/Users/jeffpinto/Library/Logs/rvc-posture-sweep.log</string>
+  <key>StandardErrorPath</key><string>/Users/jeffpinto/Library/Logs/rvc-posture-sweep.log</string>
+</dict></plist>

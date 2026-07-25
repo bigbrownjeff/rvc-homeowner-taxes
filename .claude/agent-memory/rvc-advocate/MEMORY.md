@@ -13,3 +13,8 @@
 - [Fan-out checkout discipline](fanout-checkout-discipline.md) — parallel agents left primary checkout on feature branches; verify HEAD after each completes; batch PRs need own-files-only diff check vs fresh main
 - [Districts integration](districts-integration.md) — PR #20: districts.json now full 55-row table; enhStarExemptParcels (exemption-program count) MUST stay distinct from north-star enhStarParcels; column empty by design; 2 documented scope-gap rows (Amityville/Glen Cove)
 - [Headless mobile render gotchas](headless-mobile-render-gotchas.md) — headless clamps width ~500 (test mobile CSS at 760); dark bands false-positive edge scans; iOS zooms sub-16px inputs
+- [Cosponsor counts: sponsors vs cosponsors](feedback_cosponsor_count_definition.md) — a tracker's "Sponsors (N)" is one HIGHER than the cosponsor count; caused 2 days of false drift (relocated from lantern, 2026-07-24 memory hygiene sweep)
+- [Drift baselines pin to primary sources](feedback_drift_baseline_primary_source.md) — never baseline a monitor on a third-party tracker (relocated from lantern, 2026-07-24)
+- [Agent scratch stays local](feedback_scratch_stays_local.md) — global gitignore policy; don't force-add .claude/scratch/ (relocated from lantern, 2026-07-24)
+- [Politician-facing copy lives outside site/ too](project_outreach_copy_surface.md) — the outreach drafts carry figures and are public; sweep them on every figure change (relocated from lantern, 2026-07-24)
+- [Congress.gov is unreachable; use the GPO feed](reference_congress_primary_source.md) — the citable primary for federal bill facts, with the counter script path (relocated from lantern, 2026-07-24)

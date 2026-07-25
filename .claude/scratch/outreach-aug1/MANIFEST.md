@@ -1,7 +1,9 @@
 # Outreach manifest — RVC Housing x Schools public launch (Aug 1, 2026)
 
 Drafted 2026-07-20 by rvc-advocate. Civic advocacy from Jeff Pinto personally. Not a consulting pitch.
-All figures match the facts ledger (site/validation.html) as of 2026-07-20.
+All figures match the facts ledger (site/validation.html). Ledger baseline as of 2026-07-20,
+except the H.R. 1340 cosponsor count, re-grounded to the GPO BILLSTATUS primary feed on
+2026-07-24 (146 -> 147); the drafts below carry the corrected 147.
 
 ## How the subjects are labeled
 Each draft carries a `SUBJECT_GMAIL` (prefixed `[WAVE-1/2/3]` so Jeff can find/sort the drafts) and a
@@ -14,8 +16,13 @@ Each draft carries a `SUBJECT_GMAIL` (prefixed `[WAVE-1/2/3]` so Jeff can find/s
 
 ## BEFORE SENDING — required
 1. Fill the `[street address]` placeholder in every Wave-1 email (the constituency line needs it).
-2. Same-day re-verify H.R. 1340 cosponsor count (146 as of 7/20, still 146 on BillTrack50) and Gillen's
-   non-cosponsor status before Wave 1 goes out. This figure is volatile (ledger vintage watch).
+2. Same-day re-verify the H.R. 1340 cosponsor count and Gillen's non-cosponsor status before Wave 1
+   goes out. This figure is volatile (ledger vintage watch). Do NOT trust the number written here or
+   in a tracker: read it off the ledger row `site/validation.html#f-hr1340`, and re-count from the
+   primary feed the way `scripts/daily_posture_sweep.sh` CHECK 1 does
+   (GPO BILLSTATUS XML, https://www.govinfo.gov/bulkdata/BILLSTATUS/119/hr/BILLSTATUS-119hr1340.xml).
+   Trackers report a sponsors-inclusive total exactly one HIGHER than the cosponsor count, because
+   they count the lead sponsor. Cite the cosponsor count.
 3. Wave-2 trustees Messier / Joyce / Dorrego and the Wave-1 Board note ALL route to the same shared inbox
    boe@rvcschools.org. Consider sending one combined note to the Board, or space these out, rather than four
    emails landing in one inbox the same day.
@@ -83,7 +90,7 @@ Gmail drafts.
 ## Figure-verification notes (all trace to site/validation.html)
 - 2,076 senior-owned homes / 27.9% -> f-senior-share. Enrollment 3,533->3,276, -257, projects 3,260 -> f-enrollment/f-257.
 - RVC 2026-27 budget $141,323,369 (+1.03%), 22.2 teaching + 40 TA cut, passed 1,915-1,195 May 19 -> f-budget27.
-- H.R. 1340: 146 cosponsors incl. Suozzi + Malliotakis, Gillen not one -> f-hr1340 (re-verified 7/20 via BillTrack50).
+- H.R. 1340: 147 cosponsors incl. Suozzi + Malliotakis, Gillen not one -> f-hr1340 (re-grounded 7/24 from the GPO BILLSTATUS primary feed).
 - S3309 cleared Aging 7-0 Apr 21, died in Finance; A5288 stuck in Real Property Taxation -> f-s3309.
 - §467 income limit rises to $75,000 on July 1, 2027 -> f-467-75k (stated as statute effect; NO chapter named, per locked rule).
 - Village FY27: levy +6.6% to $44,488,056, rate $74.91 (+7.2%), adopted Apr 30 -> f-fy27.

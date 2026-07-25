@@ -54,3 +54,11 @@ STAR max exemption savings for RVC Class 1 are unchanged for 2026-27 ($1,068/$2,
 - `docs/VALIDATION_REPORT.md` — dated clarifying note at §1.2.
 - Legacy root artifacts (`RVC_Tax_Calculator.html`, `.docx`, `.xlsx`) remain superseded by
   `site/` per the June corrections; not re-touched.
+
+## Superseded since this refresh
+
+- **2026-07-24 — H.R. 1340 cosponsors: 146 -> 147.** The "July 18 state" column above is left
+  as-written on purpose: it records what was verified that day, and rewriting it would destroy
+  the delta this document exists to show. For the current figure and its receipt see the ledger
+  row `site/validation.html#f-hr1340` and `docs/_SOURCES.md`. The count is now baselined on the
+  GPO BILLSTATUS primary feed (`scripts/count_hr1340_cosponsors.py`), not on third-party trackers.

@@ -38,7 +38,7 @@ campaign-instruments band, and a count-only engagement endpoint. Shipped as PR #
   on resolve + on letter copy. On a plain http.server the POST 501s / GET 404s and the
   band shows "—" gracefully — expected in static preview.
 - **instruments-manual.json** (`site/assets/`): hand-maintained pillar-(b) counters Jeff
-  edits (hr1340 cosponsors 146, committee posture, office_replies/walkthroughs at 0).
+  edits (hr1340 cosponsors 147 as of 2026-07-24, committee posture, office_replies/walkthroughs at 0).
 - Worker unit-tested with a mock KV Map via `node /tmp/worker_test.mjs` (import the
   `export default`, fake `env.SIGNUPS.get/put`). Good pattern for testing the worker
   without wrangler dev.

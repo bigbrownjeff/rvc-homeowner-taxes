@@ -77,13 +77,37 @@ Repo copies of record to read for the deploy-drift comparison:
   site/index.html
 
 CHECK 1 - H.R. 1340 (federal Section 121 fix).
-  Expected: 146 cosponsors; Rep. Laura Gillen still holds NY-4 and is NOT a cosponsor.
-  congress.gov bot-blocks automated fetches, so cross-check at least two of:
-  BillTrack50 https://www.billtrack50.com/billdetail/1833162 , GovInfo
-  https://www.govinfo.gov/app/details/BILLS-119hr1340ih , GovTrack, or a sponsor
-  release. Report the observed cosponsor count and Gillen's district + cosponsor
-  status. DISCREPANCY if the count moved off 146, if Gillen no longer holds NY-4,
-  or if she has become a cosponsor.
+  Expected: 147 cosponsors; Rep. Laura Gillen still holds NY-4 and is NOT a cosponsor.
+
+  THE BASELINE IS THE PRIMARY SOURCE, NOT A TRACKER. Third-party trackers lag the
+  official feed and label their totals inconsistently, so a tracker mismatch alone
+  is NOT a discrepancy. Do not eyeball a tracker; count the primary feed by running
+  the repo's counter, which reads the GPO BILLSTATUS bulk feed (the same Legislative
+  Branch source data Congress.gov presents):
+
+    python3 scripts/count_hr1340_cosponsors.py
+
+  Report its 'cosponsors (live)' number, its withdrawn count, its NY-4 line, and
+  its feed vintage. Exit code 2 means the feed could not be reached or parsed:
+  that IS a discrepancy (a sweep that cannot verify is not green).
+
+  DEFINITIONAL TRAP (this produced two days of false drift, 2026-07-23 and 07-24):
+  "cosponsors" EXCLUDES the lead sponsor (Panetta, CA-19); "sponsors" INCLUDES him,
+  so a tracker's "Sponsors (N)" total runs exactly ONE HIGHER than the cosponsor
+  count this site cites. The rule is relational, never a hard-coded number:
+  tracker total == the script's 'sponsors-inclusive' value is AGREEMENT; only some
+  other relationship is drift. Do not read the expected count off a tracker, and do
+  not treat a tracker that is one higher as movement.
+
+  VINTAGE IS NOT DRIFT. GPO republishes within about a day of a new cosponsorship,
+  so a feed published before today is normal. A feed older than the ledger's
+  verified date is NOT a discrepancy by itself - report the dates and say so plainly.
+
+  DISCREPANCY only if: the counter yields a live cosponsor count other than 147, or
+  its withdrawn count is not 0, or a NY-4 cosponsor appears (Rep. Gillen is the
+  federal ask's target and must stay off the bill), or she no longer holds NY-4
+  (verify on her own House member page, https://gillen.house.gov/ , not news), or
+  the counter exits non-zero.
 
 CHECK 2 - NY S3309 and A5288 (exemption continuity in a move year).
   Expected posture (nysenate.gov / nyassembly.gov): S3309 cleared Senate Aging 7-0
@@ -98,8 +122,8 @@ CHECK 3 - Officeholders each still hold the stated seat (verify on the chamber's
   Legislator Scott Davis (LD-1). DISCREPANCY if any seat has changed hands.
 
 CHECK 4 - Deploy drift. WebFetch https://rvc-taxes.jeffpinto.com/validation and
-  https://rvc-taxes.jeffpinto.com/deck and confirm the deployed figures (the 146
-  count, the officials roster, the S3309/A5288 posture) match the repo copies you
+  https://rvc-taxes.jeffpinto.com/deck and confirm the deployed figures (the
+  cosponsor count, the officials roster, the S3309/A5288 posture) match the repo copies you
   read above. DISCREPANCY if the live site shows a figure the repo does not, or
   vice versa. (Prose/markdown formatting differences are fine; compare the numbers
   and names, not the exact HTML.)

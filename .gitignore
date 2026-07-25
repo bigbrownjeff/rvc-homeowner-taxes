@@ -3,3 +3,4 @@
 reports/shots/
 reports/posture-sweep-*.md
 .wrangler/
+__pycache__/

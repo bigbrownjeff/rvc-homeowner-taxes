@@ -8,7 +8,7 @@ Here is the problem it looks at. This spring, Rockville Centre's school district
 
 Those two facts are connected. When an older homeowner who wants to downsize can move without a tax penalty, a larger home opens up for a younger family. That steadies enrollment and spreads the levy across more households. The fix is not to push anyone out. A senior who wants to stay put should be left exactly as they are today. The goal is to clear the friction for the ones who do want to move.
 
-The site walks through a few low-cost changes at the federal, state, and county level, including one federal bill with 146 bipartisan cosponsors, and a state bill that would let a senior keep a property tax exemption in the year they move. Every number on the site links to its primary public source, so you can check all of it.
+The site walks through a few low-cost changes at the federal, state, and county level, including one federal bill with 147 bipartisan cosponsors, and a state bill that would let a senior keep a property tax exemption in the year they move. Every number on the site links to its primary public source, so you can check all of it.
 
 If you live in or near Rockville Centre: type your address on the site and it will show you your actual representatives and hand you a ready-to-send letter for each one. It takes about two minutes.
 

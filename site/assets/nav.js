@@ -3,6 +3,41 @@
 (function(){
   var mount=document.getElementById('site-nav'); if(!mount) return;
   var current=mount.getAttribute('data-current')||'';
+
+  /* Top signup CTA: prominent on every page, above the nav. Posts to the
+     existing /api/signup Pages Function (email -> KV SIGNUPS; Jeff reads the
+     list with wrangler). Email is >=16px to avoid iOS focus-zoom. */
+  var cta=document.createElement('div');
+  cta.className='cta-strip'; cta.id='signup';
+  cta.innerHTML=
+    '<form class="cta-inner" novalidate>'+
+      '<div class="cta-copy">'+
+        '<span class="cta-h">Sign up for updates or to support this effort.</span>'+
+        '<span class="cta-sub">One email when there is a real development on the RVC housing and schools squeeze. No spam, unsubscribe anytime.</span>'+
+      '</div>'+
+      '<div class="cta-form">'+
+        '<input type="email" name="email" class="cta-email" placeholder="you@email.com" aria-label="Your email address" autocomplete="email" required>'+
+        '<button type="submit" class="cta-btn">Sign up</button>'+
+      '</div>'+
+      '<div class="cta-msg" role="status" aria-live="polite"></div>'+
+    '</form>';
+  mount.parentNode.insertBefore(cta,mount);
+  (function(){
+    var form=cta.querySelector('form'),msg=cta.querySelector('.cta-msg'),
+        btn=cta.querySelector('.cta-btn'),email=cta.querySelector('.cta-email');
+    function setMsg(t,cls){msg.textContent=t;msg.className='cta-msg show '+cls;}
+    form.addEventListener('submit',function(e){
+      e.preventDefault();
+      var v=email.value.trim();
+      if(!v||v.indexOf('@')<1||v.indexOf('.')<0){setMsg('Enter a valid email address.','err');email.focus();return;}
+      btn.disabled=true;var orig=btn.textContent;btn.textContent='Sending...';
+      fetch('/api/signup',{method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({email:v,source:'cta:'+location.pathname})})
+        .then(function(r){return r.ok?r.json():Promise.reject(r);})
+        .then(function(){setMsg('You are on the list. Thank you.','ok');btn.textContent='Signed up';email.value='';email.disabled=true;})
+        .catch(function(){btn.disabled=false;btn.textContent=orig;setMsg('Something went wrong. Email jeff@bluecamelconsulting.com and I will add you.','err');});
+    });
+  })();
   var items=[
     {id:'brief',label:'The brief',href:'index.html'},
     {id:'mechanics',label:'Mechanics',href:'fiscal-math.html'},

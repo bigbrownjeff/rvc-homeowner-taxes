@@ -32,13 +32,17 @@ TODAY_NUM="$(date +%Y%m%d)"
 REPORT="reports/posture-sweep-${TODAY}.md"
 LOG="/Users/jeffpinto/Library/Logs/rvc-posture-sweep.log"
 
-# --- Auto-retire: the site goes public Aug 1, 2026; this sweep matters daily until
-# then. After 2026-08-02 (last run day) the job stops and asks to be retired. -------
-if [[ "$TODAY_NUM" -gt 20260802 ]]; then
-  "$FAILTASK" rvc-taxes "Retire the RVC posture sweep (past 2026-08-02 sunset)" \
+# --- Auto-retire: the site goes public Aug 1, 2026; the campaign value of this sweep
+# ends then. Sunset EXTENDED from 2026-08-02 to 2026-08-10 (Jeff, 2026-07-30) so the
+# job lives long enough to be the Phase-1 shadow pilot for the persona-graph/LangGraph
+# migration (~/Projects/personas/docs/langgraph-migration-plan-2026-07-29.md): it needs
+# 7 green shadow days before cutover, which 08-02 could not span. Retire after 08-10
+# unless the migration extends it again. --------------------------------------------
+if [[ "$TODAY_NUM" -gt 20260810 ]]; then
+  "$FAILTASK" rvc-taxes "Retire the RVC posture sweep (past 2026-08-10 sunset)" \
     --dedupe-key rvc-posture-retire --severity warn \
-    --detail "The daily posture sweep passed its 2026-08-02 sunset (site went public Aug 1). Unload + remove: launchctl bootout gui/\$UID/com.jeffpinto.rvc-posture-sweep; rm ~/Library/LaunchAgents/com.jeffpinto.rvc-posture-sweep.plist; delete scripts/daily_posture_sweep.sh. See $LOG"
-  echo "retired: past 2026-08-02 sunset ($TODAY)"
+    --detail "The daily posture sweep passed its 2026-08-10 sunset (campaign value ended Aug 1; kept alive as the persona-graph Phase-1 shadow pilot). If the LangGraph cutover is done, delete this bash job; if not, decide keep-or-kill. Unload + remove: launchctl bootout gui/\$UID/com.jeffpinto.rvc-posture-sweep; rm ~/Library/LaunchAgents/com.jeffpinto.rvc-posture-sweep.plist; delete scripts/daily_posture_sweep.sh. See $LOG"
+  echo "retired: past 2026-08-10 sunset ($TODAY)"
   exit 0
 fi
 

@@ -15,12 +15,14 @@ export default {
       const email = (body.email || "").trim().slice(0, 200);
       const name = (body.name || "").trim().slice(0, 200);
       const address = (body.address || "").trim().slice(0, 300);
+      const source = (body.source || "").trim().slice(0, 120); // which surface: "cta:/..." vs action kit
       if (!email || !email.includes("@")) return new Response("email required", { status: 400 });
       if (!env.SIGNUPS) return new Response("list unavailable", { status: 503 });
       const key = "signup:" + email.toLowerCase();
       const existing = await env.SIGNUPS.get(key, "json");
       await env.SIGNUPS.put(key, JSON.stringify({
         email, name, address,
+        source: source || (existing && existing.source) || "",
         first: existing ? existing.first : new Date().toISOString(),
         last: new Date().toISOString(),
       }));

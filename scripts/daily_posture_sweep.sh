@@ -66,7 +66,9 @@ git pull --ff-only 2>/dev/null || {
 # file board cards; it detects and reports only.
 # ---------------------------------------------------------------------------------
 read -r -d '' PROMPT <<PROMPT_EOF
-You are the daily accuracy sweep for the RVC Housing x Schools campaign
+Adopt the rvc-advocate persona (installed at ~/.claude/agents/rvc-advocate.md; read
+and become it before anything else). Within it, you are the daily accuracy sweep
+for the RVC Housing x Schools campaign
 (rvc-taxes.jeffpinto.com). Today is ${TODAY}. Verify four things against LIVE
 primary sources, then write ONE report file. You DETECT and REPORT only. You must
 NOT edit any site file or any figure; validation.html is the facts ledger.

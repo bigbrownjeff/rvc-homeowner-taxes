@@ -15,7 +15,10 @@
 #   scripts/check_pdf_drift.sh          check only; exit 0 clean, 1 drift, 2 cannot check
 #   scripts/check_pdf_drift.sh --fix    re-render the committed PDF in place
 #
-# Run before every deploy (see DEPLOY.md) and daily from daily_posture_sweep.sh.
+# Run before every deploy (see DEPLOY.md). daily_posture_sweep.sh also calls this,
+# but that sweep self-retires after 2026-08-02, so from 2026-08-03 the manual
+# pre-deploy run is the only thing standing between a deck edit and a stale handout.
+# This script stands alone by design: it depends on nothing in the sweep.
 # zsh-safe: null-glob (N) on any glob; no use of the reserved $status.
 set -o pipefail
 

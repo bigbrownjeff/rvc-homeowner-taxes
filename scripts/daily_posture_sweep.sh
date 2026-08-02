@@ -42,7 +42,7 @@ LOG="/Users/jeffpinto/Library/Logs/rvc-posture-sweep.log"
 if [[ "$TODAY_NUM" -gt 20260802 ]]; then
   "$FAILTASK" rvc-taxes "Retire the RVC posture sweep (past 2026-08-02 sunset)" \
     --dedupe-key rvc-posture-retire --severity warn \
-    --detail "The daily posture sweep passed its 2026-08-02 sunset (site went public Aug 1). Unload + remove: launchctl bootout gui/\$UID/com.jeffpinto.rvc-posture-sweep; rm ~/Library/LaunchAgents/com.jeffpinto.rvc-posture-sweep.plist; delete scripts/daily_posture_sweep.sh. See $LOG"
+    --detail "The daily posture sweep passed its 2026-08-02 sunset (site went public Aug 1). Unload + remove: launchctl bootout gui/\$UID/com.jeffpinto.rvc-posture-sweep; rm ~/Library/LaunchAgents/com.jeffpinto.rvc-posture-sweep.plist; delete scripts/daily_posture_sweep.sh. KEEP scripts/check_pdf_drift.sh: it is the pre-deploy PDF gate documented in DEPLOY.md and does not depend on this sweep. See $LOG"
   echo "retired: past 2026-08-02 sunset ($TODAY)"
   exit 0
 fi

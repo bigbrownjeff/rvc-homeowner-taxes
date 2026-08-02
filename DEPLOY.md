@@ -5,9 +5,12 @@ Everything in `site/` is static (no build step) plus one advanced-mode worker (`
 ## Deploy
 
 ```bash
+scripts/check_pdf_drift.sh       # gate: is the downloadable PDF still current?
 npx wrangler pages deploy        # reads wrangler.toml: project rvc-taxes, output site/
 ```
-Pages invalidates its own cache on deploy. Hard-refresh to bypass browser cache.
+Run the gate first. `/RVC_Briefing_8pager.pdf` is a rendered snapshot of `/deck.html`, so a deck edit that skips the re-render ships a handout whose figures the live page has already corrected. Exit 0 clean, 1 drift, 2 could not check. On drift: `scripts/check_pdf_drift.sh --fix`, then commit the PDF. The daily posture sweep runs the same check and files a board card.
+
+Pages invalidates its own cache on deploy. Hard-refresh to bypass browser cache. Cloudflare's edge caches a miss too: a path requested before the file existed can keep serving the 404 body for up to 4 hours (`max-age=14400`), so verify new assets with a cache-busting query (`?cb=1`) before concluding a deploy failed.
 
 If wrangler.toml is ever absent, the explicit form is `npx wrangler pages deploy site --project-name rvc-taxes` — but that skips the KV binding; `/api/signup` will 503 until the binding is attached (dashboard → rvc-taxes → Settings → Bindings, KV `SIGNUPS` → namespace id `55371b2ca075430faeeae249f9b036cc`).
 
@@ -32,9 +35,9 @@ If wrangler.toml is ever absent, the explicit form is `npx wrangler pages deploy
 | `/reconcile.html` | Bill reconciler — real county/village roll mechanics (math untouched by redesign) |
 | `/breakeven.html` | Break-even instrument (math untouched by redesign) |
 | `/deck.html` | The 8-page print briefing (old landing; print-first layout kept; ⌘P → PDF handout). Pages are white so it prints clean. |
-| `/RVC_Briefing_8pager.pdf` | Rendered PDF of `/deck.html`, linked as "Downloadable copy" from `/` and the deck banner. Re-render after any deck edit: `~/.claude/bin/html2pdf site/deck.html site/RVC_Briefing_8pager.pdf` |
+| `/RVC_Briefing_8pager.pdf` | Rendered PDF of `/deck.html`, linked as "Downloadable copy" from `/` and the deck banner. Re-render after any deck edit: `scripts/check_pdf_drift.sh --fix` |
 | `/governance.html`, `/governance-options.html`, `/redraw-evidence.html` | Governance memos (re-skinned) |
-| `/RVC_Legislator_Deck.pptx` | 26-slide deck; regenerate with `tools/build_deck_pptx.py` |
+| ~~`/RVC_Legislator_Deck.pptx`~~ | **Not served.** Neither `site/RVC_Legislator_Deck.pptx` nor `tools/build_deck_pptx.py` is in the repo (verified 2026-08-02); this row documented a file that never shipped. The PDF above is the handout. |
 | `/api/signup` | POST {name,email,address} → KV `SIGNUPS` (email required) |
 | `/brief-2026-08(.html)` | 301 → `/` (both `_redirects` and `_worker.js` handle it) |
 

@@ -10,7 +10,7 @@
 <style>
 /* RVC "Modernist" print deck. Tokens mirror site/assets/site.css exactly. */
 :root{
-  --bg:#f3f2f2; --ink:#201e1d; --green:#1e6b3d; --green-hover:#14522c; --gold:#c5a44e; --error:#8a2f1d;
+  --bg:#f3f2f2; --paper:#fff; --ink:#201e1d; --green:#1e6b3d; --green-hover:#14522c; --gold:#c5a44e; --error:#8a2f1d;
   --muted:rgba(32,30,29,.65); --muted-70:rgba(32,30,29,.7);
   --rule-strong:rgba(32,30,29,.4); --rule-hair:rgba(32,30,29,.25); --rule-row:rgba(32,30,29,.2);
   --sans:'Archivo',system-ui,-apple-system,'Segoe UI',sans-serif;
@@ -18,7 +18,7 @@
 *{margin:0;padding:0;box-sizing:border-box}
 html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
 body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.5}
-.page{width:8.5in;min-height:11in;margin:26px auto;background:var(--bg);border:1px solid var(--rule-hair);padding:.6in .68in .5in;position:relative;display:flex;flex-direction:column}
+.page{width:8.5in;min-height:11in;margin:26px auto;background:var(--paper);border:1px solid var(--rule-hair);padding:.6in .68in .5in;position:relative;display:flex;flex-direction:column}
 .masthead{display:flex;justify-content:space-between;align-items:baseline;border-bottom:2px solid var(--rule-strong);padding-bottom:8px;margin-bottom:18px}
 .masthead .t{font-weight:800;font-size:15px;color:var(--ink);letter-spacing:-.01em}
 .masthead .m{font-size:9.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
@@ -116,7 +116,7 @@ li{font-size:11.8px;margin:.25rem 0}
 .cols2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
 @page{size:letter;margin:0}
 @media print{
-  body{background:var(--bg)}
+  body{background:var(--paper)}
   .page{margin:0;border:none;page-break-after:always;width:8.5in;height:11in;min-height:0;overflow:hidden;padding:.52in .65in .4in}
   .page:last-child{page-break-after:auto}
   #live-banner{display:none !important}
@@ -132,6 +132,7 @@ li{font-size:11.8px;margin:.25rem 0}
   <a href="fiscal-math.html" style="color:#f3f2f2;font-weight:600">Mechanics</a>
   <a href="validation.html" style="color:#f3f2f2;font-weight:600">Facts &amp; sources</a>
   <a href="calculator.html" style="color:#f3f2f2;font-weight:600">Calculator</a>
+  <a href="RVC_Briefing_8pager.pdf" download style="color:#c5a44e;font-weight:800;text-decoration:none">Download PDF &darr;</a>
   <a href="index.html#signup" style="color:#c5a44e;font-weight:800;text-decoration:none">Sign up for updates &rarr;</a>
 </div>
 

@@ -31,7 +31,8 @@ If wrangler.toml is ever absent, the explicit form is `npx wrangler pages deploy
 | `/calculator.html` | Tax & outcomes calculator (July 2026 audited constants; no chart libs) |
 | `/reconcile.html` | Bill reconciler — real county/village roll mechanics (math untouched by redesign) |
 | `/breakeven.html` | Break-even instrument (math untouched by redesign) |
-| `/deck.html` | The 8-page print briefing (old landing; print-first layout kept; ⌘P → PDF handout) |
+| `/deck.html` | The 8-page print briefing (old landing; print-first layout kept; ⌘P → PDF handout). Pages are white so it prints clean. |
+| `/RVC_Briefing_8pager.pdf` | Rendered PDF of `/deck.html`, linked as "Downloadable copy" from `/` and the deck banner. Re-render after any deck edit: `~/.claude/bin/html2pdf site/deck.html site/RVC_Briefing_8pager.pdf` |
 | `/governance.html`, `/governance-options.html`, `/redraw-evidence.html` | Governance memos (re-skinned) |
 | `/RVC_Legislator_Deck.pptx` | 26-slide deck; regenerate with `tools/build_deck_pptx.py` |
 | `/api/signup` | POST {name,email,address} → KV `SIGNUPS` (email required) |

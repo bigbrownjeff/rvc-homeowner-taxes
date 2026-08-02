@@ -11,6 +11,8 @@
 #   3. Officeholders still hold their seats (Bynoe SD-6, Canzoneri-Fitzpatrick SD-9,
 #      Palumbo SD-1, Griffin AD-21, Davis LD-1).
 #   4. Deploy drift: LIVE /validation + /deck figures match the repo copies.
+#   5. PDF drift (shell, pre-deploy gate): the downloadable handout still renders
+#      from the current deck. See scripts/check_pdf_drift.sh.
 # It DETECTS and REPORTS only. It NEVER edits site figures; validation.html is the
 # facts ledger and the single source of truth.
 #
@@ -22,7 +24,7 @@
 # zsh-safe: null-glob (N) on any glob; no use of the reserved $status.
 set -o pipefail
 
-REPO="/Users/jeffpinto/Projects/rvc-homeowner-taxes"
+REPO="${RVC_REPO:-/Users/jeffpinto/Projects/rvc-homeowner-taxes}"   # overridable so a worktree can test the gates
 CLAUDE_BIN="/Users/jeffpinto/.local/bin/claude"      # absolute: launchd PATH lacks it (lantern PR #19)
 FAILTASK="$(command -v failtask || echo "$HOME/.claude/bin/failtask")"
 export PATH="/Users/jeffpinto/.local/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin"
@@ -55,6 +57,26 @@ git pull --ff-only 2>/dev/null || {
     --dedupe-key rvc-posture-git-pull --severity warn \
     --detail "git pull --ff-only failed in daily_posture_sweep.sh; deploy-drift compared live vs a possibly-stale repo copy. See $LOG"
 }
+
+# --- PDF drift, pure shell, no tokens. The downloadable handout linked from / and
+# /deck is a rendered snapshot of deck.html; edit the deck without re-rendering and
+# legislators download corrected-on-the-page figures that are stale in the PDF.
+# Exit 1 = drift, exit 2 = the check could not run (both file a card; a check that
+# cannot verify is not green, same rule as the legislative checks below). Never
+# aborts the sweep: the accuracy checks matter more than the artifact. ------------
+"$REPO/scripts/check_pdf_drift.sh"
+PDF_RC=$?
+if [[ "${SWEEP_DRY:-0}" = "1" ]]; then
+  echo "DRY: PDF drift check exited $PDF_RC; no card filed"
+elif [[ $PDF_RC -eq 1 ]]; then
+  "$FAILTASK" rvc-taxes "RVC: downloadable PDF is stale vs deck.html" \
+    --dedupe-key rvc-pdf-drift --severity warn \
+    --detail "site/deck.html changed without re-rendering site/RVC_Briefing_8pager.pdf, so /RVC_Briefing_8pager.pdf serves figures the live deck no longer shows. Fix: scripts/check_pdf_drift.sh --fix, then commit and deploy. See $LOG"
+elif [[ $PDF_RC -ne 0 ]]; then
+  "$FAILTASK" rvc-taxes "RVC: PDF drift check could not run" \
+    --dedupe-key rvc-pdf-drift-broken --severity warn \
+    --detail "scripts/check_pdf_drift.sh exited $PDF_RC (missing html2pdf, missing pdftotext, or a failed render), so PDF staleness went unverified for ${TODAY}. See $LOG"
+fi
 
 # ---------------------------------------------------------------------------------
 # The headless prompt. Judgment-heavy legislative checks against LIVE primary sources.

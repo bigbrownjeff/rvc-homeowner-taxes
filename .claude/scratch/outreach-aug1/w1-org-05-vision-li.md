@@ -1,6 +1,9 @@
 WAVE: 1 (organizations, advance notice ~Jul 29)
 RECIPIENT: Vision Long Island (Director Eric Alexander)
-TO: outreach@visionli.org (VERIFIED — general inbox; source visionli.org/contact, fetched 2026-07-20)
+TO: ea@visionli.org (their published outreach@visionli.org BOUNCED 2026-08-12, 550 5.1.1 address
+not found, even though their own contact page still lists it. ea@ is on the same domain, whose Google
+MX is live, so only that mailbox is gone. Fallback: outreach@visionlongisland.org, which also appears
+in their page source on a different mail host. Phone (631) 261-0242.)
 NOTE: Org candidate. Smart-growth nonprofit; on record on aging-in-place and downsizing into walkable downtowns. Well-aligned with the turnover-plus-choice framing.
 SUBJECT_GMAIL: [WAVE-1] A housing-turnover-and-schools site for Long Island
 SUBJECT_SEND: A housing-turnover-and-schools site for Long Island

@@ -56,12 +56,25 @@ replies, and files one `failtask` card per genuinely new message (deduped by Gma
 in `.claude/scratch/outreach-aug1/.reply-watcher-seen.json`, gitignored). Detect and report
 only: it never replies, labels, or sends.
 
-**It is not armed until Gmail credentials exist.** One-time: run the outbound repo's
-`scripts/gmail_auth_setup.py` signed in as jeff@jeffpinto.com, then put the three values in
-`scripts/.env` (gitignored) as `GMAIL_JP_CLIENT_ID`, `GMAIL_JP_CLIENT_SECRET`,
-`GMAIL_JP_REFRESH_TOKEN`. Until then each run files exactly one deduped
-`rvc-reply-watcher-unarmed` card and exits 0, so an unarmed watcher announces itself once
-instead of erroring daily or pretending to work.
+**It is not armed until Gmail credentials exist.** One-time, and it must run in a REAL
+TERMINAL (the prompts need a TTY; Claude Code's `!` prefix gives EOFError and would put the
+client secret in a transcript):
+
+```bash
+cd ~/Projects/rvc-homeowner-taxes && python3 scripts/gmail_auth_setup.py
+```
+
+That is this repo's own auth helper, not the outbound repo's. Three deliberate differences:
+**read-only scope** (`gmail.readonly`, so a watcher that cannot send cannot mis-send),
+**login_hint jeff@jeffpinto.com** plus a post-consent profile read that ABORTS if a different
+mailbox granted it (Google's chooser defaults to whoever is signed in; that default connected
+the wrong mailbox twice on 2026-08-11), and it writes `GMAIL_JP_*` into this repo's gitignored
+`scripts/.env` at chmod 600. Prereqs are a Gmail-API-enabled GCP project and a Desktop-app
+OAuth client on jeff@jeffpinto.com; the script's docstring hotlinks each console page.
+
+Until the credentials exist, each run files exactly one deduped `rvc-reply-watcher-unarmed`
+card and exits 0, so an unarmed watcher announces itself once instead of erroring every two
+hours or pretending to work.
 
 ```bash
 python3 scripts/reply_watcher.py --dry-run     # findings only, no cards, no ledger write

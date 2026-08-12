@@ -5,3 +5,7 @@ reports/posture-sweep-*.md
 .wrangler/
 __pycache__/
 .worktrees/
+
+# Gmail reply-watcher credentials (gitignored)
+scripts/.env
+.claude/scratch/outreach-aug1/.reply-watcher-seen.json

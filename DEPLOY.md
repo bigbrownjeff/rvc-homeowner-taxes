@@ -47,3 +47,29 @@ If wrangler.toml is ever absent, the explicit form is `npx wrangler pages deploy
 - Contact routing: every contact link is `mailto:jeff@bluecamelconsulting.com?subject=[rvc-taxes] …` — never any other email.
 - Officials table in `/` (action kit): fetch-verified 2026-07-20 — Gillen CD-4, Suozzi CD-3, Bynoe SD-6 (RVC's senator under current lines), Canzoneri-Fitzpatrick SD-9 (S3309 sponsor), Griffin AD-21 (direct email griffinj@nyassembly.gov), Davis LD-1 (SDavis@nassaucountyny.gov). Re-verify before each politician-facing push.
 - A real-browser pass is part of done — `curl` is not sufficient. After deploy: check the custom domain, run the action kit with a real address, and click one Copy letter + one mailto.
+
+## Reply watcher (`com.jeffpinto.rvc-reply-watcher`)
+
+`scripts/reply_watcher.py`, every two hours via launchd, no sunset. Lists inbox threads from
+any campaign recipient, drops our own messages, flags auto-responders separately from human
+replies, and files one `failtask` card per genuinely new message (deduped by Gmail message id
+in `.claude/scratch/outreach-aug1/.reply-watcher-seen.json`, gitignored). Detect and report
+only: it never replies, labels, or sends.
+
+**It is not armed until Gmail credentials exist.** One-time: run the outbound repo's
+`scripts/gmail_auth_setup.py` signed in as jeff@jeffpinto.com, then put the three values in
+`scripts/.env` (gitignored) as `GMAIL_JP_CLIENT_ID`, `GMAIL_JP_CLIENT_SECRET`,
+`GMAIL_JP_REFRESH_TOKEN`. Until then each run files exactly one deduped
+`rvc-reply-watcher-unarmed` card and exits 0, so an unarmed watcher announces itself once
+instead of erroring daily or pretending to work.
+
+```bash
+python3 scripts/reply_watcher.py --dry-run     # findings only, no cards, no ledger write
+cp scripts/com.jeffpinto.rvc-reply-watcher.plist ~/Library/LaunchAgents/
+launchctl bootstrap gui/$UID ~/Library/LaunchAgents/com.jeffpinto.rvc-reply-watcher.plist
+tail -f ~/Library/Logs/rvc-reply-watcher.log
+```
+
+Why it exists: on 2026-08-12 the campaign's first two substantive replies sat unnoticed
+because every check that day searched the SENT box. Delivery and response are different
+questions, and only the first one had anything watching it.

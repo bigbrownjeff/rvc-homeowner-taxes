@@ -17,12 +17,19 @@ RUN THIS IN A REAL TERMINAL, not through Claude Code's `!` prefix: the prompts n
 and the client secret should not land in a transcript. `!` gives you EOFError on the first
 prompt.
 
-One-time prerequisites, in a GCP project tied to jeff@jeffpinto.com:
+One-time prerequisites. Use the existing `jeffpinto-site` GCP project: it already runs the
+site's contact form through the Gmail API, so the API is enabled and a Desktop OAuth client
+may already exist to reuse.
   1. Enable the Gmail API:  https://console.cloud.google.com/apis/library/gmail.googleapis.com
-  2. Configure the OAuth consent screen as External, and add jeff@jeffpinto.com as a test
-     user:                  https://console.cloud.google.com/apis/credentials/consent
-  3. Create an OAuth client ID of type "Desktop app":
+  2. OAuth consent screen:  https://console.cloud.google.com/apis/credentials/consent
+     Set user type to **Internal**, which is available because jeffpinto.com is a Workspace
+     org. NOT External. An External app left in "Testing" issues refresh tokens that EXPIRE
+     AFTER 7 DAYS, so a long-lived watcher built on one dies silently every week and the
+     failure looks like "no replies" rather than like a broken credential. Internal refresh
+     tokens do not expire.
+  3. Create an OAuth client ID of type "Desktop app" (or reuse an existing Desktop client):
                             https://console.cloud.google.com/apis/credentials
+     Desktop clients accept any loopback port, so localhost:8913 needs no redirect-URI setup.
      Copy its client id and client secret; that is what this script asks for.
 
 Then:

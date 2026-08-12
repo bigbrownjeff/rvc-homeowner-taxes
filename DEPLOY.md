@@ -69,8 +69,14 @@ That is this repo's own auth helper, not the outbound repo's. Three deliberate d
 **login_hint jeff@jeffpinto.com** plus a post-consent profile read that ABORTS if a different
 mailbox granted it (Google's chooser defaults to whoever is signed in; that default connected
 the wrong mailbox twice on 2026-08-11), and it writes `GMAIL_JP_*` into this repo's gitignored
-`scripts/.env` at chmod 600. Prereqs are a Gmail-API-enabled GCP project and a Desktop-app
-OAuth client on jeff@jeffpinto.com; the script's docstring hotlinks each console page.
+`scripts/.env` at chmod 600. Prereqs: use the existing `jeffpinto-site` GCP project (it already runs the site's contact
+form through the Gmail API), set the [OAuth consent
+screen](https://console.cloud.google.com/apis/credentials/consent) to **Internal** (available
+because jeffpinto.com is a Workspace org), and create or reuse a **Desktop app** [OAuth
+client](https://console.cloud.google.com/apis/credentials). **Internal, not External:** an
+External app left in "Testing" issues refresh tokens that expire after 7 days, so the watcher
+would die silently every week and the failure would look like "no replies" rather than like a
+broken credential.
 
 Until the credentials exist, each run files exactly one deduped `rvc-reply-watcher-unarmed`
 card and exits 0, so an unarmed watcher announces itself once instead of erroring every two

@@ -51,9 +51,24 @@ export default {
       return new Response("method not allowed", { status: 405 });
     }
 
-    return env.ASSETS.fetch(request);
+    return injectBeacon(await env.ASSETS.fetch(request));
   },
 };
+
+// Single insertion point for the Cloudflare Web Analytics beacon: every static
+// asset flows through the ASSETS.fetch fallback above, so rewriting the head
+// here covers every page without touching each site/*.html file individually.
+const BEACON = '<!-- Cloudflare Web Analytics -->' +
+  '<script type=\'module\' src=\'https://static.cloudflareinsights.com/beacon.min.js\' ' +
+  'data-cf-beacon=\'{"token": "21d68181640646a5882a541e90f8be0f"}\'></script>' +
+  '<!-- End Cloudflare Web Analytics -->';
+function injectBeacon(response) {
+  const contentType = response.headers.get("content-type") || "";
+  if (!contentType.includes("text/html")) return response;
+  return new HTMLRewriter()
+    .on("head", { element(el) { el.append(BEACON, { html: true }); } })
+    .transform(response);
+}
 
 // KV has no atomic increment; read-modify-write is fine for a non-critical,
 // count-only tally (a lost race under-counts by one, never leaks anything).

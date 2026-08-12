@@ -1,6 +1,6 @@
 {
   "_comment": "Hand-maintained campaign-instrument counters read by coverage.html (pillar b, Legislation). Ledger discipline applies: every number here is either sourced (name the source in its _note) or a manual tally Jeff keeps by hand. The daily officials/bill sweep updates the cosponsor count and committee posture; office replies and walkthroughs are entered by hand as they happen. Re-verify H.R. 1340 cosponsors same-day before anything politician-facing goes out.",
-  "updated": "2026-07-24",
+  "updated": "2026-08-12",
   "legislation": {
     "hr1340_cosponsors": 150,
     "hr1340_source": "https://www.govinfo.gov/bulkdata/BILLSTATUS/119/hr/BILLSTATUS-119hr1340.xml",

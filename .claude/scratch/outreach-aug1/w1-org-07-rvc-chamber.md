@@ -2,12 +2,12 @@ WAVE: 1 (organizations, advance notice ~Jul 29)
 RECIPIENT: Rockville Centre Chamber of Commerce
 TO: ChamberRVC@gmail.com (from rockvillecentrechamberofcommerce.com/contact via search 2026-07-20 — confirm before sending)
 NOTE: Org candidate, local. A vibrant village with families moving in is a direct business interest. Hyperlocal credibility more than policy weight. Keep it neighborly.
-SUBJECT_GMAIL: [WAVE-1] A resident's Rockville Centre schools-and-housing site launches Aug 1
-SUBJECT_SEND: A resident's Rockville Centre schools-and-housing site launches Aug 1
+SUBJECT_GMAIL: [WAVE-1] A resident's Rockville Centre schools-and-housing site
+SUBJECT_SEND: A resident's Rockville Centre schools-and-housing site
 ---
 Dear Rockville Centre Chamber of Commerce,
 
-I am a homeowner here in the village. This is a courtesy note before a nonpartisan site I built goes public on August 1: rvc-taxes.jeffpinto.com. I wanted the Chamber to see it first, because a village that keeps welcoming young families is good for every business on the avenue.
+I am a homeowner here in the village. A nonpartisan site I built went public on August 1: rvc-taxes.jeffpinto.com. I am writing the Chamber because a village that keeps welcoming young families is good for every business on the avenue.
 
 The site connects two facts about Rockville Centre. Our schools passed a $141,323,369 budget on May 19 and cut 22.2 teaching positions to stay under the tax cap, while enrollment has fallen from 3,533 students in 2015-16 to 3,276. At the same time, 2,076 of our owner-occupied homes, about 27.9 percent, are held by an owner aged 65 or older. The argument is that voluntary senior-to-family housing turnover is the least painful way to steady both the schools and the tax levy, since a larger home that opens up tends to bring school-age children back. A strong school district and a steady levy are also what keep storefronts full and homes in demand. Every figure links to its primary public source.
 

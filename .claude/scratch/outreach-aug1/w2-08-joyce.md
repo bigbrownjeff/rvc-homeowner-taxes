@@ -1,3 +1,5 @@
+DO NOT SEND (decided 2026-08-12): this routes to the shared boe@rvcschools.org inbox, which already
+received the Wave-1 Board note on 2026-08-12. Kept as a record of what was drafted, not as a queue.
 WAVE: 2 (quoted on the site, heads-up ~Jul 31)
 RECIPIENT: Mary Beth Joyce — Board of Education Trustee (elected May 19, 2026), Rockville Centre UFSD
 TO: boe@rvcschools.org (VERIFIED shared Board inbox. NOTE: same inbox as w1-06, w2-06, w2-09 — see manifest.)

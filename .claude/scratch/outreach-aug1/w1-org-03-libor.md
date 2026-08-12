@@ -2,12 +2,12 @@ WAVE: 1 (organizations, advance notice ~Jul 29)
 RECIPIENT: Long Island Board of REALTORS (LIBOR) — Public Policy & Government Affairs
 TO: pr@lirealtor.com (VERIFIED — Sr. Communications Manager Christina DeFalco-Romano; source lirealtor.com press release, fetched 2026-07-20)
 NOTE: Org candidate. UNVERIFIED alternate route: MPaventi@LIRealtor.com (Marlo Paventi, Sr. Director Public Policy & Gov Affairs) appeared in a realtorparty.realtor success story but was NOT confirmed on LIBOR's own site — confirm before using. OPTICS FLAG for Jeff: a realtor board benefits from more transactions, so its backing could read as self-interested. Judgment call whether to list it publicly or just brief them. Low NIMBY risk (they are not a developer lobby).
-SUBJECT_GMAIL: [WAVE-1] A Long Island housing-turnover site launches Aug 1, for your Gov Affairs team
-SUBJECT_SEND: A Long Island housing-turnover site launches Aug 1, for your Gov Affairs team
+SUBJECT_GMAIL: [WAVE-1] A Long Island housing-turnover site, for your Gov Affairs team
+SUBJECT_SEND: A Long Island housing-turnover site, for your Gov Affairs team
 ---
 Dear Long Island Board of REALTORS,
 
-I am a homeowner in Rockville Centre. This is a courtesy note before a nonpartisan site I built goes public on August 1: rvc-taxes.jeffpinto.com. Please route it to your Public Policy and Government Affairs team, since it sits on a housing-inventory problem your association has been vocal about.
+I am a homeowner in Rockville Centre. A nonpartisan site I built went public on August 1: rvc-taxes.jeffpinto.com. Please route it to your Public Policy and Government Affairs team, since it sits on a housing-inventory problem your association has been vocal about.
 
 Long Island has record-low inventory, and one reason is that older owners who might downsize face a penalty for doing so. The site documents this in one district. Rockville Centre has 2,076 owner-occupied homes, about 27.9 percent, with a homeowner aged 65 or older, while its schools cut 22.2 teaching positions this year and enrollment has fallen from 3,533 students to 3,276 since 2015-16. The argument is that when an older owner who wants to move can do so without a tax penalty, a larger home opens for a younger family. That is inventory freed at the exact point in the market where it is scarcest. Every figure links to its primary public source.
 

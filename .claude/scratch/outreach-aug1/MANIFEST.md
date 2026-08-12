@@ -37,9 +37,11 @@ Each draft carries a `SUBJECT_GMAIL` (prefixed `[WAVE-1/2/3]` so Jeff can find/s
    (GPO BILLSTATUS XML, https://www.govinfo.gov/bulkdata/BILLSTATUS/119/hr/BILLSTATUS-119hr1340.xml).
    Trackers report a sponsors-inclusive total exactly one HIGHER than the cosponsor count, because
    they count the lead sponsor. Cite the cosponsor count.
-3. Wave-2 trustees Messier / Joyce / Dorrego and the Wave-1 Board note ALL route to the same shared inbox
-   boe@rvcschools.org. Consider sending one combined note to the Board, or space these out, rather than four
-   emails landing in one inbox the same day.
+3. **DECIDED 2026-08-12: the boe@rvcschools.org duplicates are dropped.** The Wave-1 Board note
+   landed there on 08-12, and Wave-2 trustees Messier / Joyce / Dorrego share that same inbox, so
+   their three notes would have been messages two through four into one mailbox. Jeff's call: do not
+   send them. Their drafts stay in this directory as a record of what was written, not as a queue.
+   If a trustee ever needs a direct note, it needs a direct address first.
 
 ---
 

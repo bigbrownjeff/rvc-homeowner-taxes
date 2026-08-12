@@ -1,12 +1,12 @@
 WAVE: 1 (legislators / boards, advance notice ~Jul 29)
 RECIPIENT: Village of Rockville Centre, Mayor and Board of Trustees (via Village Clerk)
 TO: WEBFORM ONLY — https://www.rvcny.gov/home/webforms/contact-us-resident-feedback (Village publishes phones + a webform, no public email; Board line 516-678-9246). Mayor: Francis X. Murray.
-SUBJECT_GMAIL: [WAVE-1] A resident's note before a Rockville Centre housing site launches Aug 1
-SUBJECT_SEND: A resident's note before a Rockville Centre housing site launches Aug 1
+SUBJECT_GMAIL: [WAVE-1] A resident's note on the Rockville Centre housing site I built
+SUBJECT_SEND: A resident's note on the Rockville Centre housing site I built
 ---
 Dear Mayor Murray and Members of the Board of Trustees,
 
-I am a homeowner in the Village of Rockville Centre. This is a courtesy note before a nonpartisan site I built goes public on August 1: rvc-taxes.jeffpinto.com. I wanted the Board to see it first.
+I am a homeowner in the Village of Rockville Centre. A nonpartisan site I built went public on August 1: rvc-taxes.jeffpinto.com. I am writing the Board because it argues about village housing and I would rather you hear it from me directly than come across it.
 
 The site is about how our schools and our housing move together. The school district cut 22.2 teaching positions and 40 teaching-assistant positions this year to stay under the tax cap, while 2,076 of our owner-occupied homes, about 27.9 percent, have a homeowner aged 65 or older. The village side matters too: the FY2026-27 budget the Board adopted on April 30 raised the levy 6.6 percent to $44,488,056 and the tax rate 7.2 percent to $74.91 per $100 of village assessed value. Every figure links to its primary public source on a facts page.
 

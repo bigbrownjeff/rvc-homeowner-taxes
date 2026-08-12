@@ -1,3 +1,5 @@
+DO NOT SEND (decided 2026-08-12): this routes to the shared boe@rvcschools.org inbox, which already
+received the Wave-1 Board note on 2026-08-12. Kept as a record of what was drafted, not as a queue.
 WAVE: 2 (quoted on the site, heads-up ~Jul 31)
 RECIPIENT: Erica Messier — Board of Education Trustee, Rockville Centre UFSD
 TO: boe@rvcschools.org (VERIFIED shared Board inbox; Messier is Board Secretary. NOTE: same inbox as w1-06, w2-08, w2-09 — see manifest, consider spacing these or combining.)

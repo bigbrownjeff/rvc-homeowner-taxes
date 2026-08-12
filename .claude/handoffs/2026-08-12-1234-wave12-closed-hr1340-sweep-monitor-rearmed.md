@@ -128,7 +128,27 @@ Deploy verification is always cache-busted: `curl -s "<url>?cb=$RANDOM"`.
 1. **Wave 3, the public lane, is the only thing left.** `w3-01-community-email` has no
    recipients prefilled; `w3-02-linkedin` is re-grounded to 150; **`w3-03-bluesky` is untouched
    and still carries pre-launch framing** (295 chars, re-tense before posting).
-2. **Zero replies so far**, across sixteen sends. The first one is the real test.
+2. **Two substantive replies landed within 35 minutes of the first batch**, plus three
+   auto-replies. Both need answers, and one is a scheduling thread:
+   - **Asm. Judy Griffin (AD-21), 11:30 EDT.** Called the site "informative and
+     action-oriented." Asked why A5288 has sat since 2019 and put her Legislative Director
+     ("JT") on finding out. **Offered to meet; Chief of Staff Andrea Wilkins is to reach out
+     to schedule.** Also volunteered that she passed a STAR bill this year that helps
+     seniors and offered to send the details. Chase that bill: it is a live 2026 STAR change
+     from RVC's own Assembly member and the ledger's vintage watch already tracks STAR.
+   - **Bob Vecchio, Executive Director, N-SSBA, 11:23 EDT.** Will review in depth and take it
+     to his **Executive Committee** to decide the Association's next steps. That is the org
+     endorsement path opening on its own.
+   - Auto-replies: Bynoe's office and RVC BOE (routine acknowledgements), and
+     **Zublionis, whose mailbox is unmonitored**: "All inquiries should be directed to the
+     North Shore Schools Central Office at 277-7801." His quote-courtesy note therefore
+     delivered but did not reach him. He is quoted on `/voices` and still effectively
+     un-notified. Call (516) 277-7801 or find another route.
+
+   **I reported "zero replies" in the first version of this handoff. That was wrong**, and
+   wrong in an avoidable way: every check this session searched `in:sent` and I never once
+   searched the inbox, then stated a negative I had not tested. Jeff caught it from his phone.
+   Check `in:inbox` before making any claim about replies.
 3. **Watch for late bounces**, especially the four org addresses verified 07-20 and not
    re-fetched (`nyaarp@aarp.org`, `pr@lirealtor.com`, `info@lihp.org`) plus
    `info@lwvofnassaucounty.org`, which is corroborated rather than primary-verified.

@@ -42,32 +42,49 @@ FAILTASK = os.path.expanduser("~/.claude/bin/failtask")
 TOKEN_URL = "https://oauth2.googleapis.com/token"
 API = "https://gmail.googleapis.com/gmail/v1/users/me"
 
-# Everyone the campaign wrote to. A reply from any of them is what we are watching for.
-# Keep in sync with .claude/scratch/outreach-aug1/SENDLOG.md.
-RECIPIENTS = [
+# Everyone the campaign wrote to. Keep in sync with
+# .claude/scratch/outreach-aug1/SENDLOG.md.
+#
+# ADDRESSES are exact. DOMAINS are deliberately broader, because the reply we most want may
+# come from a colleague rather than the person written to: Griffin's Chief of Staff Andrea
+# Wilkins is supposed to reach out about scheduling, and she will not be writing from
+# griffinj@. The cost of that breadth is newsletters. A run on 2026-08-12 surfaced a
+# legislator's constituent mailing and a political blast alongside the real replies, so
+# domain hits are scoped: a message counts as a REPLY only if it lands in a thread we
+# started, bulk mail is dropped outright, and anything else from a campaign domain is
+# reported at lower severity rather than either trusted or silently discarded.
+ADDRESSES = [
     "palumbo@nysenate.gov",
     "info@nssba.org",
-    "nssba.org",
     "SDavis@nassaucountyny.gov",
     "griffinj@nyassembly.gov",
-    "nyassembly.gov",
     "canzoneri@nysenate.gov",
     "Bynoe@nysenate.gov",
     "boe@rvcschools.org",
     "replauragillen@mail.house.gov",
-    "mail.house.gov",
     "onicks@nassaucountyny.gov",
     "nyaarp@aarp.org",
     "pr@lirealtor.com",
     "info@lihp.org",
     "ea@visionli.org",
-    "visionli.org",
     "info@lwvofnassaucounty.org",
     "ChamberRVC@gmail.com",
     "zublionisc@northshoreschools.org",
-    "northshoreschools.org",
     "mgaven@rvcschools.org",
 ]
+
+DOMAINS = [
+    "nssba.org",
+    "nyassembly.gov",
+    "nysenate.gov",
+    "mail.house.gov",
+    "nassaucountyny.gov",
+    "visionli.org",
+    "northshoreschools.org",
+    "rvcschools.org",
+]
+
+RECIPIENTS = ADDRESSES + DOMAINS
 
 # Substrings that mark a message as machine-generated. Auto-replies are still worth seeing
 # once (Zublionis's revealed an unmonitored mailbox), so they are reported at warn severity
@@ -84,6 +101,10 @@ AUTO_MARKERS = (
 )
 
 OURS = ("jeff@jeffpinto.com", "bigbrownjeff@gmail.com", "jeff@bluecamelconsulting.com")
+
+# Headers that mark mass mail. A constituent newsletter from an office we wrote to is not a
+# reply, and two of them showed up in the first live run.
+BULK_HEADERS = ("list-unsubscribe", "list-id", "precedence")
 
 
 def load_env() -> dict:
@@ -129,7 +150,12 @@ def access_token(cid: str, secret: str, refresh: str) -> str:
 def api_get(path: str, token: str, **params) -> dict:
     url = f"{API}/{path}"
     if params:
-        url += "?" + urllib.parse.urlencode(params)
+        # doseq=True is load-bearing: metadataHeaders is a repeated query param, and without
+        # it urlencode serializes the LIST ITSELF ("metadataHeaders=['From', 'Subject']"), so
+        # Gmail returns a message with no headers at all. Every From and Subject came back
+        # empty on 2026-08-12, which also silently broke the auto-responder classifier and the
+        # is-it-from-us check, because both test strings that were always "".
+        url += "?" + urllib.parse.urlencode(params, doseq=True)
     req = urllib.request.Request(url, headers={"Authorization": f"Bearer {token}"})
     with urllib.request.urlopen(req, timeout=30) as r:
         return json.load(r)
@@ -161,6 +187,13 @@ def main() -> int:
         return 0
 
     token = access_token(*c)
+
+    # Threads we started. A message landing in one of these IS a reply, by definition, and
+    # that is the only claim this watcher gets to make with confidence.
+    sent_q = "in:sent newer_than:60d {" + " ".join(f"to:{a}" for a in ADDRESSES) + "}"
+    our_threads = {m["threadId"] for m in api_get("messages", token, q=sent_q,
+                                                  maxResults=100).get("messages", []) or []}
+
     query = "in:inbox newer_than:30d {" + " ".join(f"from:{r}" for r in RECIPIENTS) + "}"
     listing = api_get("messages", token, q=query, maxResults=50)
 
@@ -174,15 +207,34 @@ def main() -> int:
         if mid in seen:
             continue
         msg = api_get(f"messages/{mid}", token, format="metadata",
-                      metadataHeaders=["From", "Subject", "Date"])
+                      metadataHeaders=["From", "Subject", "Date", "List-Unsubscribe",
+                                       "List-Id", "Precedence"])
         sender = header(msg, "From")
+        if not sender:
+            # Never classify on empty headers again: that is how the 08-12 run reported five
+            # senderless "REPLY from :" lines and misfiled two auto-responders as human.
+            print(f"    WARN: message {mid} returned no From header; skipping", file=sys.stderr)
+            continue
         if any(o.lower() in sender.lower() for o in OURS):
             continue  # our own message in the thread
+
+        if any(header(msg, h) for h in BULK_HEADERS):
+            print(f"    bulk mail, skipped: {sender}")
+            continue
+
         subject = header(msg, "Subject")
         blob = f"{subject} {msg.get('snippet','')}".lower()
-        auto = any(m in blob for m in AUTO_MARKERS)
+        in_thread = msg.get("threadId") in our_threads
+        if any(m in blob for m in AUTO_MARKERS):
+            kind = "auto-reply"
+        elif in_thread:
+            kind = "REPLY"
+        else:
+            # Right domain, but not in a thread we started and not obviously bulk. Could be
+            # Griffin's Chief of Staff opening a fresh scheduling thread; could be noise.
+            kind = "unsolicited"
         fresh.append({"id": mid, "from": sender, "subject": subject,
-                      "date": header(msg, "Date"), "auto": auto,
+                      "date": header(msg, "Date"), "kind": kind,
                       "snippet": msg.get("snippet", "")[:300]})
 
     if not fresh:
@@ -190,7 +242,7 @@ def main() -> int:
         return 0
 
     for r in fresh:
-        kind = "auto-reply" if r["auto"] else "REPLY"
+        kind = r["kind"]
         line = f"{kind} from {r['from']}: {r['subject']}"
         print(line)
         print(f"    {r['snippet']}")
@@ -202,7 +254,7 @@ def main() -> int:
             f"Open at https://mail.google.com/mail/u/3/#inbox/{r['id']} . "
             "A human reply from a legislative office is perishable; an offer to schedule goes cold.",
             f"rvc-reply-{r['id']}",
-            "warn" if r["auto"] else "error",
+            "error" if kind == "REPLY" else "warn",
         )
 
     if not dry:

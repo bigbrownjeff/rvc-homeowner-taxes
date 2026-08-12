@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0"><dict>
+  <key>Label</key><string>com.jeffpinto.rvc-reply-watcher</string>
+  <key>ProgramArguments</key><array>
+    <string>/Users/jeffpinto/.claude/bin/runlog</string>
+    <string>--tag</string><string>rvc-reply-watcher</string>
+    <string>/usr/bin/python3</string>
+    <string>/Users/jeffpinto/Projects/rvc-homeowner-taxes/scripts/reply_watcher.py</string>
+  </array>
+  <!-- Every two hours. Replies from legislative offices are perishable (an offer to
+       schedule goes cold), but they are not minute-critical, and the ledger makes
+       repeat runs free. No sunset, deliberately: see daily_posture_sweep.sh. -->
+  <key>StartInterval</key><integer>7200</integer>
+  <key>RunAtLoad</key><true/>
+  <key>EnvironmentVariables</key><dict>
+    <key>PATH</key><string>/Users/jeffpinto/.local/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin</string>
+  </dict>
+  <key>StandardOutPath</key><string>/Users/jeffpinto/Library/Logs/rvc-reply-watcher.log</string>
+  <key>StandardErrorPath</key><string>/Users/jeffpinto/Library/Logs/rvc-reply-watcher.log</string>
+</dict></plist>

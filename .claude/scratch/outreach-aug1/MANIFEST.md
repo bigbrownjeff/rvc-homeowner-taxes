@@ -6,9 +6,12 @@
 > or reusing a draft: the drafts below are written for a pre-launch send that has passed.
 
 Drafted 2026-07-20 by rvc-advocate. Civic advocacy from Jeff Pinto personally. Not a consulting pitch.
-All figures match the facts ledger (site/validation.html). Ledger baseline as of 2026-07-20,
-except the H.R. 1340 cosponsor count, re-grounded to the GPO BILLSTATUS primary feed on
-2026-07-24 (146 -> 147); the drafts below carry the corrected 147.
+All figures match the facts ledger (site/validation.html). Ledger baseline as of 2026-07-20.
+The H.R. 1340 cosponsor count is volatile and is NOT restated here: read it off ledger row
+`site/validation.html#f-hr1340` and re-count with `python3 scripts/count_hr1340_cosponsors.py`
+before any send. (This line used to say "the drafts below carry the corrected 147." It went
+stale on 2026-08-03 when the count reached 150, which is exactly why a checklist points at a
+figure instead of quoting one.)
 
 ## How the subjects are labeled
 Each draft carries a `SUBJECT_GMAIL` (prefixed `[WAVE-1/2/3]` so Jeff can find/sort the drafts) and a

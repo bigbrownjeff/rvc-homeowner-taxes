@@ -17,5 +17,5 @@ One thing I would ask now: if it would help, I would welcome 15 minutes to walk 
 Thank you for your time.
 
 Jeff Pinto
-[street address], Rockville Centre, NY 11570
+Rockville Centre, NY 11570
 rvc-taxes.jeffpinto.com

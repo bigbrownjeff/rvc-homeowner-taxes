@@ -2,6 +2,9 @@
 
 > **This file stages drafts. It does not record sends.** What actually went out, to whom,
 > when, and what was still open is in `SENDLOG.md` beside this file. Wave 1 sent 2026-08-12.
+> `SENDLOG.md` is **machine-local and not in git** (global ignore on `**/.claude/scratch/`;
+> the files here are tracked only because they were force-added before that policy). On a
+> fresh clone it will be absent: ask Jeff, do not assume nothing has been sent.
 > Read the send log before assuming any recipient here is untouched, and before re-tensing
 > or reusing a draft: the drafts below are written for a pre-launch send that has passed.
 
@@ -23,7 +26,10 @@ Each draft carries a `SUBJECT_GMAIL` (prefixed `[WAVE-1/2/3]` so Jeff can find/s
 - Wave 3 (public): Aug 1 launch day.
 
 ## BEFORE SENDING — required
-1. Fill the `[street address]` placeholder in every Wave-1 email (the constituency line needs it).
+1. **Do not add a street address, and do not reintroduce a placeholder for one.** Signatures end
+   at `Rockville Centre, NY 11570`. Village plus ZIP carries the constituency claim; the street
+   line is Jeff's personal information and he decides per-send whether any letter gets one.
+   Never write his street address into this repo (it is public) or into any draft file.
 2. Same-day re-verify the H.R. 1340 cosponsor count and Gillen's non-cosponsor status before Wave 1
    goes out. This figure is volatile (ledger vintage watch). Do NOT trust the number written here or
    in a tracker: read it off the ledger row `site/validation.html#f-hr1340`, and re-count from the

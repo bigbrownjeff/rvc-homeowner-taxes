@@ -19,14 +19,22 @@ export default {
       if (!email || !email.includes("@")) return new Response("email required", { status: 400 });
       if (!env.SIGNUPS) return new Response("list unavailable", { status: 503 });
       const key = "signup:" + email.toLowerCase();
-      const existing = await env.SIGNUPS.get(key, "json");
-      await env.SIGNUPS.put(key, JSON.stringify({
-        email, name, address,
-        source: source || (existing && existing.source) || "",
-        first: existing ? existing.first : new Date().toISOString(),
-        last: new Date().toISOString(),
-      }));
-      if (!existing) await bumpCount(env, "signup"); // count distinct signups, no PII
+      // Loud errors: a KV failure here must not look like a successful signup to
+      // the caller. A silent 200 on a write that never landed is how "the counter
+      // never increments" reports happen while the roster is actually empty.
+      try {
+        const existing = await env.SIGNUPS.get(key, "json");
+        await env.SIGNUPS.put(key, JSON.stringify({
+          email, name, address,
+          source: source || (existing && existing.source) || "",
+          first: existing ? existing.first : new Date().toISOString(),
+          last: new Date().toISOString(),
+        }));
+        if (!existing) await bumpCount(env, "signup"); // count distinct signups, no PII
+      } catch (err) {
+        console.error("signup KV write failed", err);
+        return new Response("signup storage error, try again", { status: 500 });
+      }
       return new Response(JSON.stringify({ ok: true }), { headers: { "Content-Type": "application/json" } });
     }
 
@@ -35,18 +43,28 @@ export default {
     if (url.pathname === "/api/count") {
       if (!env.SIGNUPS) return json({ lookup: 0, letter: 0, signup: 0 });
       if (request.method === "GET") {
-        const [lookup, letter, signup] = await Promise.all([
-          readCount(env, "lookup"), readCount(env, "letter"), readCount(env, "signup"),
-        ]);
-        return json({ lookup, letter, signup });
+        try {
+          const [lookup, letter, signup] = await Promise.all([
+            readCount(env, "lookup"), readCount(env, "letter"), readCount(env, "signup"),
+          ]);
+          return json({ lookup, letter, signup });
+        } catch (err) {
+          console.error("count KV read failed", err);
+          return new Response("count storage error", { status: 500 });
+        }
       }
       if (request.method === "POST") {
         let body;
         try { body = await request.json(); } catch { return new Response("bad json", { status: 400 }); }
         const event = (body && body.event || "").trim();
         if (event !== "lookup" && event !== "letter") return new Response("bad event", { status: 400 });
-        const n = await bumpCount(env, event);
-        return json({ ok: true, event, count: n });
+        try {
+          const n = await bumpCount(env, event);
+          return json({ ok: true, event, count: n });
+        } catch (err) {
+          console.error("count KV write failed", err);
+          return new Response("count storage error", { status: 500 });
+        }
       }
       return new Response("method not allowed", { status: 405 });
     }

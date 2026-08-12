@@ -12,6 +12,14 @@ Run the gate first. `/RVC_Briefing_8pager.pdf` is a rendered snapshot of `/deck.
 
 Pages invalidates its own cache on deploy. Hard-refresh to bypass browser cache. Cloudflare's edge caches a miss too: a path requested before the file existed can keep serving the 404 body for up to 4 hours (`max-age=14400`), so verify new assets with a cache-busting query (`?cb=1`) before concluding a deploy failed.
 
+**After any deploy touching `site/_worker.js`'s signup/count logic, run the live smoke test:**
+
+```bash
+scripts/smoke-signup.sh
+```
+
+Posts a real `smoke+<timestamp>@example.com` signup to the deployed site, asserts the KV roster row was written, asserts `count:signup` incremented by exactly 1, asserts a repeat post of the same address does NOT double-count, then deletes the test key and restores the counter to its pre-test value. Self-cleaning: it never leaves the real signup numbers polluted. Exit 0 pass, 1 fail (and it still restores state on failure via a trap).
+
 If wrangler.toml is ever absent, the explicit form is `npx wrangler pages deploy site --project-name rvc-taxes` — but that skips the KV binding; `/api/signup` will 503 until the binding is attached (dashboard → rvc-taxes → Settings → Bindings, KV `SIGNUPS` → namespace id `55371b2ca075430faeeae249f9b036cc`).
 
 ## One-time setup (done)

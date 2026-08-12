@@ -1,5 +1,10 @@
 # Outreach manifest — RVC Housing x Schools public launch (Aug 1, 2026)
 
+> **This file stages drafts. It does not record sends.** What actually went out, to whom,
+> when, and what was still open is in `SENDLOG.md` beside this file. Wave 1 sent 2026-08-12.
+> Read the send log before assuming any recipient here is untouched, and before re-tensing
+> or reusing a draft: the drafts below are written for a pre-launch send that has passed.
+
 Drafted 2026-07-20 by rvc-advocate. Civic advocacy from Jeff Pinto personally. Not a consulting pitch.
 All figures match the facts ledger (site/validation.html). Ledger baseline as of 2026-07-20,
 except the H.R. 1340 cosponsor count, re-grounded to the GPO BILLSTATUS primary feed on

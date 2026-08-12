@@ -30,24 +30,40 @@ FAILTASK="$(command -v failtask || echo "$HOME/.claude/bin/failtask")"
 export PATH="/Users/jeffpinto/.local/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin"
 
 TODAY="$(date +%Y-%m-%d)"
-TODAY_NUM="$(date +%Y%m%d)"
 REPORT="reports/posture-sweep-${TODAY}.md"
 LOG="/Users/jeffpinto/Library/Logs/rvc-posture-sweep.log"
 
-# --- Auto-retire: the site goes public Aug 1, 2026; the campaign value of this
-# sweep ends then, so it retires 2026-08-02. (It was briefly extended to 08-10 as a
-# persona-graph shadow-cutover pilot; that migration is NOT being pursued -- the
-# rvc sweep needs browser-grade fetch for nysenate.gov, which persona-graph's
-# no-evasion design can't provide -- so the campaign-driven date is restored.) ----
-if [[ "$TODAY_NUM" -gt 20260802 ]]; then
-  "$FAILTASK" rvc-taxes "Retire the RVC posture sweep (past 2026-08-02 sunset)" \
-    --dedupe-key rvc-posture-retire --severity warn \
-    --detail "The daily posture sweep passed its 2026-08-02 sunset (site went public Aug 1). Unload + remove: launchctl bootout gui/\$UID/com.jeffpinto.rvc-posture-sweep; rm ~/Library/LaunchAgents/com.jeffpinto.rvc-posture-sweep.plist; delete scripts/daily_posture_sweep.sh. KEEP scripts/check_pdf_drift.sh: it is the pre-deploy PDF gate documented in DEPLOY.md and does not depend on this sweep. See $LOG"
-  echo "retired: past 2026-08-02 sunset ($TODAY)"
-  exit 0
-fi
+# --- NO SUNSET. This sweep used to auto-retire on 2026-08-02, on the theory that its
+# campaign value ended when the site went public Aug 1. That was backwards: the day the
+# site went public is the day a stale figure started being read by legislative staff.
+# The plist was retired 2026-08-09 and by 2026-08-12 the H.R. 1340 cosponsor count on
+# the live site was three low (147 vs 150), with nothing watching. Re-armed 2026-08-12
+# with no end date; the site is live indefinitely, so the monitor is too. If it ever
+# does need retiring, that is a deliberate decision, not a date the script makes for
+# someone. (Jeff, 2026-08-12: "rearm the daily monitor to keep both fresh going forward.")
 
 cd "$REPO" || { "$FAILTASK" rvc-taxes "RVC posture sweep: repo cd failed" --dedupe-key rvc-posture-run-failed --severity error --detail "Could not cd to $REPO. See $LOG"; exit 1; }
+
+# --- The CHECK 1 baseline is READ FROM THE LEDGER, never hard-coded here. A monitor that
+# restates a volatile figure rots into misinformation the moment the figure moves, and then
+# reports drift against its own stale copy. validation.html row #f-hr1340 is the source of
+# truth; this sweep asks "does the live world still match the ledger", so the ledger has to
+# be the input. (Why: this script shipped with "Expected: 147 cosponsors" baked into the
+# prompt. Same failure class as MANIFEST.md encoding "146, still 146" in its own
+# re-verify step, 2026-07-24.)
+LEDGER_HR1340="$(grep -oE '<strong>[0-9]+ cosponsors</strong>' site/validation.html | head -1 | grep -oE '[0-9]+')"
+if [[ -z "$LEDGER_HR1340" ]]; then
+  # SWEEP_DRY must stay side-effect-free: filing a real board card from a dry run is the
+  # exact bug the PDF gate shipped with on 2026-08-02.
+  if [[ "${SWEEP_DRY:-0}" = "1" ]]; then
+    echo "DRY: could not read the H.R. 1340 count from site/validation.html; no card filed" >&2
+  else
+    "$FAILTASK" rvc-taxes "RVC posture sweep: could not read the H.R. 1340 count from the ledger" \
+      --dedupe-key rvc-posture-ledger-parse --severity error \
+      --detail "grep for '<strong>N cosponsors</strong>' in site/validation.html (row #f-hr1340) found nothing, so CHECK 1 has no baseline. Either the row was reworded or the ledger moved. See $LOG"
+  fi
+  exit 1
+fi
 
 # git pull is best-effort: a stale checkout still sweeps live sources, but a persistent
 # pull failure means the deploy-drift baseline is stale, so warn-file it.
@@ -104,7 +120,9 @@ Repo copies of record to read for the deploy-drift comparison:
   site/index.html
 
 CHECK 1 - H.R. 1340 (federal Section 121 fix).
-  Expected: 147 cosponsors; Rep. Laura Gillen still holds NY-4 and is NOT a cosponsor.
+  Expected: ${LEDGER_HR1340} cosponsors (read out of ledger row #f-hr1340 in
+  site/validation.html at run time, NOT a number written into this prompt); Rep. Laura
+  Gillen still holds NY-4 and is NOT a cosponsor.
 
   THE BASELINE IS THE PRIMARY SOURCE, NOT A TRACKER. Third-party trackers lag the
   official feed and label their totals inconsistently, so a tracker mismatch alone
@@ -130,7 +148,8 @@ CHECK 1 - H.R. 1340 (federal Section 121 fix).
   so a feed published before today is normal. A feed older than the ledger's
   verified date is NOT a discrepancy by itself - report the dates and say so plainly.
 
-  DISCREPANCY only if: the counter yields a live cosponsor count other than 147, or
+  DISCREPANCY only if: the counter yields a live cosponsor count other than
+  ${LEDGER_HR1340}, or
   its withdrawn count is not 0, or a NY-4 cosponsor appears (Rep. Gillen is the
   federal ask's target and must stay off the bill), or she no longer holds NY-4
   (verify on her own House member page, https://gillen.house.gov/ , not news), or

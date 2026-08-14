@@ -5,6 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Coverage by district &middot; RVC Housing &times; Schools</title>
 <meta name="description" content="Which Nassau school districts the campaign can serve with accurate, ledger-sourced figures today. A live completeness matrix derived from the per-district source table, plus the campaign instruments that track progress.">
+<link rel="canonical" href="https://rvc-taxes.jeffpinto.com/coverage">
+<meta property="og:type" content="website"><meta property="og:site_name" content="RVC Housing &amp; Schools">
+<meta property="og:title" content="Coverage by district"><meta property="og:description" content="See which Nassau school districts have complete, source-backed campaign figures today.">
+<meta property="og:url" content="https://rvc-taxes.jeffpinto.com/coverage"><meta property="og:image" content="https://rvc-taxes.jeffpinto.com/assets/rvc-housing-schools-social-1200x630.png">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Coverage by district"><meta name="twitter:description" content="See which Nassau school districts have complete, source-backed campaign figures today."><meta name="twitter:image" content="https://rvc-taxes.jeffpinto.com/assets/rvc-housing-schools-social-1200x630.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/site.css">
@@ -124,7 +129,7 @@ thead th.ns{border-bottom-color:#c5a44e}
 <div class="hero">
   <div class="eyebrow">Coverage by district &middot; derived live from the source table</div>
   <h1>Which districts we can serve, and what to source next.</h1>
-  <p class="lede">One grid. Every Nassau school district down the side, every data dimension across the top. A filled dot means the figure is complete and traced to a primary source. A half dot means it is partly sourced. An empty ring means it is not sourced yet. Nothing here is typed by hand. It is computed every time this page loads from <a href="assets/districts.json">the per-district source table</a>, so a cell can only show complete when its source link resolves. Provenance is documented in the <a href="validation.html#districts">facts ledger</a>.</p>
+  <p class="lede">One grid. Every Nassau school district down the side, every data dimension across the top. A filled dot means the figure is complete and traced to a primary source. A half dot means it is partly sourced. An empty ring means it is not sourced yet. Nothing here is typed by hand. It is computed every time this page loads from <a href="assets/districts.json">the per-district source table</a>, so a cell can only show complete when its source link resolves. Provenance is documented in the <a href="/validation#districts">facts ledger</a>.</p>
 </div>
 
 <div class="sec" id="how">
@@ -170,7 +175,7 @@ thead th.ns{border-bottom-color:#c5a44e}
         <div class="m-big" id="ns-count">0 / 55</div>
         <div class="m-cap">districts with a sourced Enhanced-STAR parcel count in the source table.</div>
       </div>
-      <p class="pnote">Each parcel that comes off Enhanced STAR year over year is roughly one senior move: one family home freed, plus the state's <a href="validation.html#f-dividend">downsizing dividend</a>. The clean per-district number is not published yet. New York publishes Enhanced-STAR <em>exemption-program</em> recipient counts by district (<a href="https://data.ny.gov/resource/aa3i-eamx.json">data.ny.gov, aa3i-eamx</a>: Rockville Centre 395 for the 2025 levy year, down from 428 in 2023). That is a shrinking legacy subset only. It excludes the post-2016 credit-check recipients and is not the &sect;467 count <a href="validation.html#unknown">Ask #3</a> seeks. A true parcel count needs the credit recipients added, a derivation or FOIL still pending. This column stays empty until that lands.</p>
+      <p class="pnote">Each parcel that comes off Enhanced STAR year over year is roughly one senior move: one family home freed, plus the state's <a href="/validation#f-dividend">downsizing dividend</a>. The clean per-district number is not published yet. New York publishes Enhanced-STAR <em>exemption-program</em> recipient counts by district (<a href="https://data.ny.gov/resource/aa3i-eamx.json">data.ny.gov, aa3i-eamx</a>: Rockville Centre 395 for the 2025 levy year, down from 428 in 2023). That is a shrinking legacy subset only. It excludes the post-2016 credit-check recipients and is not the &sect;467 count <a href="/validation#unknown">Ask #3</a> seeks. A true parcel count needs the credit recipients added, a derivation or FOIL still pending. This column stays empty until that lands.</p>
     </div>
     <div class="pillar">
       <div class="plabel">b &middot; Legislation</div>
@@ -179,7 +184,7 @@ thead th.ns{border-bottom-color:#c5a44e}
         <div class="m-cap">H.R. 1340 cosponsors. <span id="leg-gillen"></span></div>
       </div>
       <p class="pnote" id="leg-posture"></p>
-      <p class="pnote"><span id="leg-replies">0</span> office replies &middot; <span id="leg-walk">0</span> walkthroughs booked (manual tally). Cosponsor counts and committee posture drift; <a href="validation.html#f-hr1340">re-verify same-day</a> before anything politician-facing goes out.</p>
+      <p class="pnote"><span id="leg-replies">0</span> office replies &middot; <span id="leg-walk">0</span> walkthroughs booked (manual tally). Cosponsor counts and committee posture drift; <a href="/validation#f-hr1340">re-verify same-day</a> before anything politician-facing goes out.</p>
     </div>
     <div class="pillar">
       <div class="plabel">c &middot; Residents acting</div>
@@ -187,24 +192,24 @@ thead th.ns{border-bottom-color:#c5a44e}
         <div class="m-big" id="eng-lookups">&mdash;</div>
         <div class="m-cap">address lookups run in the action kit.</div>
       </div>
-      <p class="pnote"><span id="eng-letters">&mdash;</span> letters copied &middot; <span id="eng-signups">&mdash;</span> update-list signups. Counts only: no addresses, no personal data, aggregate integers. Reads live from the site's count endpoint; shows a dash where the endpoint is unreachable (for example, opening this file without the site running).</p>
+      <p class="pnote"><span id="eng-lookups">&mdash;</span> completed address lookups &middot; <span id="eng-letters">&mdash;</span> letters copied &middot; <span id="eng-contact">&mdash;</span> contact routes opened &middot; <span id="eng-sent">&mdash;</span> self-confirmed sends &middot; <span id="eng-signups">&mdash;</span> confirmed update-list signups. Counts only: no addresses, no personal data, aggregate integers. A copied letter is not called a sent letter. Reads live from the site's count endpoint; shows a dash where the endpoint is unreachable (for example, opening this file without the site running).</p>
     </div>
   </div>
 
   <div class="expect" id="expect">
     <h3>What to realistically expect</h3>
-    <p>The honest target is <b>stabilization, not restoration</b>. Enrollment fell from <a href="validation.html#f-enrollment">3,533 in 2015-16 to 3,276 in 2024-25</a>, down 257. Each senior-to-family turnover adds about 1.4 students (the turnover model in <a href="index.html#money">Follow one home sale</a>). Refilling all 257 seats would take roughly 184 extra turnovers (257 divided by 1.4) on top of the natural rate. The realistic aim is to slow the slide and protect programs, not to win every seat back.</p>
-    <p><b>The direct dollars to a homeowner who stays are small.</b> When one &sect;467-exempt home turns over it stops shifting roughly $7,300 a year of school tax onto its neighbors (the neighbor-relief figure in Follow one home sale, order-of-magnitude). Spread across the district's roughly 7,400 owner-occupied parcels (<a href="validation.html#f-senior-share">ACS: 7,453 owner households</a>), that is about $1 per parcel per year per turnover. The case is cumulative and about stopping the shift, not a rebate anyone receives.</p>
-    <p><b>The $2,058 downsizing dividend is the state's saving, not the homeowner's.</b> It is the difference between the Enhanced and Basic STAR credit (<a href="validation.html#f-dividend">ledger</a>) that Albany keeps when a senior downsizes. It funds the incentives on the brief. It is not cash back to any resident.</p>
-    <p><b>Where real individual dollars live: the personal levers.</b> A grievance to challenge an over-assessment, registering for the STAR credit, checking <a href="validation.html#s467">&sect;467</a> eligibility, and, for a senior who is actually downsizing, <a href="validation.html#f-s3309">S3309</a> keeping the exemption in the move year. Those move real money for an individual household. The campaign's targets are stabilization, burden-shift relief, and program protection. It never promises cash back.</p>
+    <p>The honest target is <b>stabilization, not restoration</b>. Enrollment fell from <a href="/validation#f-enrollment">3,533 in 2015-16 to 3,276 in 2024-25</a>, down 257. Each senior-to-family turnover adds about 1.4 students (the turnover model in <a href="/#money">Follow one home sale</a>). Refilling all 257 seats would take roughly 184 extra turnovers (257 divided by 1.4) on top of the natural rate. The realistic aim is to slow the slide and protect programs, not to win every seat back.</p>
+    <p><b>The direct dollars to a homeowner who stays are small.</b> When one &sect;467-exempt home turns over it stops shifting roughly $7,300 a year of school tax onto its neighbors (the neighbor-relief figure in Follow one home sale, order-of-magnitude). Spread across the district's roughly 7,400 owner-occupied parcels (<a href="/validation#f-senior-share">ACS: 7,453 owner households</a>), that is about $1 per parcel per year per turnover. The case is cumulative and about stopping the shift, not a rebate anyone receives.</p>
+    <p><b>The $2,058 downsizing dividend is the state's saving, not the homeowner's.</b> It is the difference between the Enhanced and Basic STAR credit (<a href="/validation#f-dividend">ledger</a>) that Albany keeps when a senior downsizes. It funds the incentives on the brief. It is not cash back to any resident.</p>
+    <p><b>Where real individual dollars live: the personal levers.</b> A grievance to challenge an over-assessment, registering for the STAR credit, checking <a href="/validation#s467">&sect;467</a> eligibility, and, for a senior who is actually downsizing, <a href="/validation#f-s3309">S3309</a> keeping the exemption in the move year. Those move real money for an individual household. The campaign's targets are stabilization, burden-shift relief, and program protection. It never promises cash back.</p>
   </div>
 </div>
 
 <div class="band">
   <div class="headline">A cell shows complete only when its source link resolves. That is the same rule the whole site runs on.</div>
   <div class="btns">
-    <a class="primary" href="validation.html#districts">See the per-district provenance</a>
-    <a class="secondary" href="index.html#asks">Look up your address</a>
+    <a class="primary" href="/validation#districts">See the per-district provenance</a>
+    <a class="secondary" href="/#asks">Look up your address</a>
   </div>
 </div>
 
@@ -268,7 +273,7 @@ var DIMS = [
       // aa3i-eamx), but that legacy subset is NOT the true §467 parcel count Ask #3
       // seeks, so it must not light this north-star column. Do not repoint this scorer
       // at enhStarExemptParcels; this column stays empty until the credit-recipient
-      // count lands (see the panel copy and validation.html#unknown).
+      // count lands (see the panel copy and /validation#unknown).
       return (numOk(r.enhStarParcels)&&hasRef(r,"enhStarParcels"))?1:0;
   }},
   { id:"levy", label:"School levy", score:function(r){ return (numOk(r.levy)&&hasRef(r,"levy"))?1:0; } },
@@ -473,7 +478,9 @@ function paintInstruments(nsComplete,total){
   fetch("/api/count",{cache:"no-store"}).then(function(r){return r.ok?r.json():null;}).then(function(c){
     if(!c) return;
     var lk=document.getElementById("eng-lookups"); if(lk) lk.textContent=fmtCount(c.lookup);
-    var lt=document.getElementById("eng-letters"); if(lt) lt.textContent=fmtCount(c.letter);
+    var lt=document.getElementById("eng-letters"); if(lt) lt.textContent=fmtCount(c.letter_copied);
+    var co=document.getElementById("eng-contact"); if(co) co.textContent=fmtCount(c.contact_opened);
+    var se=document.getElementById("eng-sent"); if(se) se.textContent=fmtCount(c.sent_confirmed);
     var sg=document.getElementById("eng-signups"); if(sg) sg.textContent=fmtCount(c.signup);
   }).catch(function(){});
 }

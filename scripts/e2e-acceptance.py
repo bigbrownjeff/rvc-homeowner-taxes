@@ -1,12 +1,28 @@
-import sys, time, subprocess, http.server, socketserver, threading, os
+import http.server
+import os
+from pathlib import Path
+import socketserver
+import threading
+import time
+
 from playwright.sync_api import sync_playwright
 
-ROOT = "/private/tmp/rvc-nassau-address/site"
-PORT = 8791
+REPO_ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(os.environ.get("RVC_SITE_ROOT", REPO_ROOT / "site")).resolve()
+PORT = int(os.environ.get("RVC_E2E_PORT", "8791"))
+
+if not (ROOT / "index.html").is_file():
+    raise SystemExit(f"site root does not contain index.html: {ROOT}")
 
 os.chdir(ROOT)
 Handler = http.server.SimpleHTTPRequestHandler
-httpd = socketserver.TCPServer(("127.0.0.1", PORT), Handler)
+
+
+class ReusableTCPServer(socketserver.TCPServer):
+    allow_reuse_address = True
+
+
+httpd = ReusableTCPServer(("127.0.0.1", PORT), Handler)
 threading.Thread(target=httpd.serve_forever, daemon=True).start()
 base = f"http://127.0.0.1:{PORT}/index.html"
 
@@ -38,10 +54,14 @@ def read_state(page):
 
 with sync_playwright() as p:
     b = p.chromium.launch()
-    pg = b.new_page()
+    pg = b.new_page(viewport={"width": 1280, "height": 900})
 
     # default page (no interaction)
     pg.goto(base, wait_until="load")
+    assert pg.locator("#kitForm").count() == 1, "action kit must be a semantic form"
+    assert pg.locator("#kitBuild").get_attribute("type") == "submit", "action kit must submit by keyboard"
+    assert pg.locator(".cta-consent input[required]").count() == 1, "email signup must require explicit consent"
+    assert pg.locator("#kitEmail").count() == 0, "email signup must stay separate from address lookup"
     time.sleep(1.0)
     dflt = read_state(pg)
     print("DEFAULT (no user interaction):")
@@ -53,7 +73,7 @@ with sync_playwright() as p:
         pg.goto(base, wait_until="load")
         pg.wait_for_selector("#kitBuild")
         pg.fill("#kitAddr", addr)
-        pg.click("#kitBuild")
+        pg.press("#kitAddr", "Enter")
         # wait for banner to appear (money refresh) up to 15s
         try:
             pg.wait_for_function("() => { const g=document.getElementById('moneyGeo'); return g && g.style.display!=='none'; }", timeout=15000)

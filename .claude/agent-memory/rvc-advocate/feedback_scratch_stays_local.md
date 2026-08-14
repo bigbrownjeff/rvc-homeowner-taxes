@@ -20,10 +20,11 @@ hour.
 session may have changed policy underneath you. Report what the dirty changes actually were
 before committing or discarding either way.
 
-Note the asymmetry in rvc-homeowner-taxes: 38 files under `.claude/scratch/` (the outreach
-drafts, fanout provenance, districts provenance) **are** tracked because they were force-added
-before the policy existed, and they are load-bearing — see [[outreach-copy-surface]]. Leave
-them tracked; don't churn them, and don't treat their existence as license to add more.
+Note the historical asymmetry in rvc-homeowner-taxes: some `.claude/scratch/` material was
+force-added before the policy existed. Recipient-specific outreach content has since been
+removed from the current head. Only public-safe templates may remain tracked; never restore or
+add recipient drafts, contact details, routing, mailbox state, send logs, or private-resident
+material.
 
 Because `~/.gitignore_global` is machine-local and does not travel with a repo, genuinely
 repo-wide patterns (`.worktrees/`, `__pycache__/`) still belong in the repo's own `.gitignore`.

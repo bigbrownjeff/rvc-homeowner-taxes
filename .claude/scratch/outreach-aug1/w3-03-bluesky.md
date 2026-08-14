@@ -1,7 +1,10 @@
-WAVE: 3 (public lane; re-tensed 2026-08-12, the site has been live since Aug 1) — Bluesky post (Jeff's civic voice)
-PLATFORM: Bluesky (300-grapheme limit; link counts toward it)
-POST-AS: Jeff Pinto, personal civic post
----
-A nonpartisan site about my town: rvc-taxes.jeffpinto.com
+# Public microblogging channel
 
-RVC schools cut 22+ teaching jobs this year; enrollment is down 257 since 2015. Meanwhile 2,076 homes here have an owner 65+. Help seniors who want to downsize move, so larger homes open for younger families. Write your reps in 2 min.
+No send-ready post or campaign-operational detail is stored here. Use the
+current approved outreach one-pager and verify the live public route before
+publication:
+
+https://rvc-taxes.jeffpinto.com/go/bsky
+
+Keep the message voluntary, fact-based, and independent. Recheck every factual
+claim and link on the day of use.

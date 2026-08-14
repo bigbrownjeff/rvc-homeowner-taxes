@@ -1,171 +1,63 @@
-# Handoff — Waves 1 and 2 closed, H.R. 1340 147 to 150, daily monitor re-armed
-**Date:** 2026-08-12 · **Project:** rvc-homeowner-taxes (session started from `~`; a small
-jeffpinto-site change rode along at the top, see the last section)
+# Handoff — outreach closure and source-monitor maintenance (privacy-redacted)
+
+**Date:** 2026-08-12 · **Project:** rvc-homeowner-taxes
 
 ## Goal
-Jeff had sent Wave-1 emails that morning and asked for three things: log the work, draft a
-Gmail note to Rep. Laura Gillen, and draft one to a Nassau legislator he knows personally.
-Mid-session he added: fix the ledger and the site, and re-arm the daily monitor. It ended
-with Waves 1 and 2 fully closed.
 
-## What got done
+Close a historical outreach phase while keeping the public facts ledger and
+accuracy monitoring current.
 
-**Sixteen sends across four batches, all confirmed off the Gmail sent box.**
-- 14:53-15:03 UTC (Jeff, before the session): Palumbo SD-1, NSSBA, Davis LD-1, Griffin AD-21,
-  Canzoneri-Fitzpatrick SD-9, Bynoe SD-6, RVC BOE.
-- 15:29-15:32: Gillen NY-4 (`replauragillen@mail.house.gov`, address Jeff supplied) and Nassau
-  Leg. **Olena Nicks** LD-5 (`onicks@nassaucountyny.gov`).
-- 16:17-16:19: AARP NY, LIBOR, LIHP, Vision LI, LWV Nassau, RVC Chamber, plus the Village of
-  RVC via its resident-feedback webform.
-- 16:23 and 16:32: the Vision LI resend after a bounce, then Zublionis and Gaven.
+## Retained outcomes
 
-**The send log now exists** at `.claude/scratch/outreach-aug1/SENDLOG.md`. It is
-**machine-local and NOT in git** (see dead ends). MANIFEST.md now states that up front so a
-fresh clone does not read its absence as "nothing sent."
+- A prior outreach phase was completed. Recipient identities, contact routes,
+  message copy, timestamps, mailbox state, and reply details are intentionally
+  absent from source control.
+- A historical legislative-count correction was made using the primary-source
+  workflow. Do not reuse a count from this handoff; the current
+  [facts and sources page](https://rvc-taxes.jeffpinto.com/validation) is the
+  public source of truth.
+- The daily source monitor reads its expected value from the facts ledger rather
+  than embedding a stale number. It must continue after a public launch and
+  fail loudly when the ledger cannot be read.
+- Public-facing artifacts were checked for ledger drift before release. The
+  current release process remains the authoritative procedure.
 
-**H.R. 1340 corrected 147 to 150 (PR #41, #42), ledger first.** The repo's own
-`scripts/count_hr1340_cosponsors.py` read 150 records, 150 unique bioguide IDs, 0 withdrawn,
-no NY-4 cosponsor; GPO feed published 2026-08-04, latest cosponsorship 2026-08-03; GovTrack
-corroborated 150. Row `f-hr1340` changed first, then every page in its used-on column: brief
-fact strip, the prewritten federal letter in the action kit, deck body + roster + endnote 11,
-`assets/instruments-manual.json` (how coverage.html gets the number), and the two outreach
-drafts carrying it. Tracker note moved 148 to 151. PDF re-rendered, drift gate passed,
-deployed, verified cache-busted on `/validation`, `/`, `/deck`, the JSON and the PDF
-(byte-identical to the repo copy). #42 caught the vintage labels still saying July 24.
+## Durable working method
 
-**The daily monitor is re-armed (PR #41)** and proven with a real `launchctl kickstart` run
-that returned `OVERALL: GREEN` on all four checks
-(`reports/posture-sweep-2026-08-12.md`). Two fixes:
-1. The 2026-08-02 auto-retire is **gone**. It killed the sweep on 08-09 and the count drifted
-   unwatched.
-2. CHECK 1 no longer hard-codes the expected count. It reads `LEDGER_HR1340` out of
-   `site/validation.html` row `f-hr1340` at run time and fails loudly (SWEEP_DRY-guarded) if
-   the row cannot be parsed. Negative-tested by rewording the row.
+1. Verify the live, primary source before making a factual assertion.
+2. Treat time-sensitive facts and public routes as day-of-use checks.
+3. Keep public copy voluntary, nonpartisan, and independent; never imply
+   support or consent.
+4. Use an owner-authorized operational system for direct outreach and check it
+   before acting. Do not recreate recipient data or campaign status from git.
+5. Preserve monitoring and release checks after launch; a public site requires
+   ongoing accuracy review.
 
-**Street address removed from the system (PR #43).** All eight Wave-1 signatures end at
-`Rockville Centre, NY 11570`; MANIFEST pre-send step 1 now forbids a placeholder instead of
-demanding one. Global memory `no-street-address-in-drafts`.
+## Current references
 
-**Seven unsent Wave-1 drafts and two Wave-2 drafts re-tensed (PR #44, #47)** before being
-staged as Gmail drafts. BOE duplicates (Messier, Joyce, Dorrego) dropped by Jeff's call and
-tagged DO NOT SEND.
+- Public evidence: [RVC facts and sources](https://rvc-taxes.jeffpinto.com/validation)
+- Primary-source count workflow: `scripts/count_hr1340_cosponsors.py`
+- Side-effect-free monitor rehearsal: `SWEEP_DRY=1 scripts/daily_posture_sweep.sh`
+- Artifact drift check: `scripts/check_pdf_drift.sh`
 
-## What worked (and why)
+## Open work
 
-**Asking three decision-shaped questions before doing anything.** CRM target, Gillen routing,
-Olena's identity. All three had answers only Jeff had, and guessing any of them would have
-wasted the whole session's output.
+Any new public communication must use approved current copy and verified links.
+Any direct contact requires owner approval and an authorized operational record;
+no recipient-specific material belongs in this repository.
 
-**Reading the sent box instead of trusting the drafts.** It surfaced that Jeff rewrites
-subjects and openers by hand at send time, that the Davis note got personalized, and that
-`[street address]` had shipped unfilled. None of that is knowable from the draft files.
+## Historical engineering notes retained
 
-**Running the repo's own counter rather than eyeballing a tracker.** The definitional trap
-(cosponsors excludes the lead sponsor) is already encoded in the script and the ledger row.
-
-**Verifying before asserting, twice, both times with a payoff.** Confirming both quotes were
-actually live on `/voices` before telling two superintendents they were quoted in full; and
-re-fetching both district addresses the same day.
-
-## What didn't / dead ends
-
-**`git add -A` silently dropped SENDLOG.md.** `~/.gitignore_global` excludes
-`**/.claude/scratch/`, so PR #40 merged carrying only the MANIFEST edits while the file it was
-named for was never committed. The 38 files already in that directory are tracked only because
-they were force-added before the policy. **Do not `git add -f` past it** (memory
-`scratch-stays-local`); machine-local is right anyway, since this repo is public and the log
-carries candid operating detail. The file was rescued out of the worktree before removal.
-
-**A "VERIFIED" address stamp is only as good as its date.** `outreach@visionli.org` was
-verified 07-20 off Vision Long Island's own contact page, which still lists it. It bounced
-`550 5.1.1` fourteen seconds after send. The two addresses re-checked that morning both
-delivered. Rerouted to `ea@visionli.org` (same domain, live Google MX, so the mailbox died not
-the domain), which delivered. PR #46 records the bounce, fallback
-`outreach@visionlongisland.org`, and the phone.
-
-**Gmail-API drafts lag the iOS Mail drafts list by minutes.** Cost a round trip when Jeff
-screenshotted an empty-looking Drafts folder three minutes after creation. They exist
-server-side immediately; check Gmail on the web.
-
-**`gh pr merge --squash --delete-branch` fails from a worktree** with "'main' is already used
-by worktree". The merge itself succeeds; only the local branch-delete step dies. Verify with
-`gh pr view N --json state` before re-running anything.
-
-**Fresh PRs report `mergeable: UNKNOWN`** for a few seconds. Poll before merging.
-
-## Key decisions
-
-- **Send log in the repo, not the business CRM** (Jeff). `outbound_with_jeff_and_marv/crm.db`
-  has zero RVC rows and its account/tier/wave machinery is built for consulting sales;
-  officeholders in it would pollute the Scenario B metrics.
-- **BOE duplicates dropped, not deferred** (Jeff). Three trustees share `boe@rvcschools.org`,
-  which got the Wave-1 Board note the same morning.
-- **No sunset on the monitor.** Retiring it when the site went public was backwards: Aug 1 is
-  when legislative staff started reading the figures.
-- **Cited 150 in the Gillen letter while the site still said 147**, then swept the site the
-  same hour. The ledger states its own verified date, so the gap was self-explaining, but the
-  sweep closed it before anything else went out.
-- **Nicks accepted on Jeff's say-so.** No public record of an "Olena Douglass" exists;
-  `onicks@nassaucountyny.gov` is secondary-sourced. Her letter states outright that Jeff is
-  not her constituent (LD-5 is Uniondale/Westbury) and hooks the ask to her Finance and
-  Veteran & Senior Affairs seats.
-
-## How to reproduce / pick up
-
-```bash
-cd ~/Projects/rvc-homeowner-taxes
-cat .claude/scratch/outreach-aug1/SENDLOG.md        # source of record, local only
-python3 scripts/count_hr1340_cosponsors.py          # the primary-source counter
-SWEEP_DRY=1 scripts/daily_posture_sweep.sh          # side-effect-free rehearsal
-launchctl print gui/$UID/com.jeffpinto.rvc-posture-sweep
-scripts/check_pdf_drift.sh                          # pre-deploy gate; --fix to re-render
-npx wrangler pages deploy --project-name rvc-taxes  # direct-upload: merge is NOT deploy
-```
-Deploy verification is always cache-busted: `curl -s "<url>?cb=$RANDOM"`.
-
-## Open threads / next steps
-
-1. **Wave 3, the public lane, is the only thing left.** `w3-01-community-email` has no
-   recipients prefilled; `w3-02-linkedin` is re-grounded to 150; **`w3-03-bluesky` is untouched
-   and still carries pre-launch framing** (295 chars, re-tense before posting).
-2. **Two substantive replies landed within 35 minutes of the first batch**, plus three
-   auto-replies. Both need answers, and one is a scheduling thread:
-   - **Asm. Judy Griffin (AD-21), 11:30 EDT.** Called the site "informative and
-     action-oriented." Asked why A5288 has sat since 2019 and put her Legislative Director
-     ("JT") on finding out. **Offered to meet; Chief of Staff Andrea Wilkins is to reach out
-     to schedule.** Also volunteered that she passed a STAR bill this year that helps
-     seniors and offered to send the details. Chase that bill: it is a live 2026 STAR change
-     from RVC's own Assembly member and the ledger's vintage watch already tracks STAR.
-   - **Bob Vecchio, Executive Director, N-SSBA, 11:23 EDT.** Will review in depth and take it
-     to his **Executive Committee** to decide the Association's next steps. That is the org
-     endorsement path opening on its own.
-   - Auto-replies: Bynoe's office and RVC BOE (routine acknowledgements), and
-     **Zublionis, whose mailbox is unmonitored**: "All inquiries should be directed to the
-     North Shore Schools Central Office at 277-7801." His quote-courtesy note therefore
-     delivered but did not reach him. He is quoted on `/voices` and still effectively
-     un-notified. Call (516) 277-7801 or find another route.
-
-   **I reported "zero replies" in the first version of this handoff. That was wrong**, and
-   wrong in an avoidable way: every check this session searched `in:sent` and I never once
-   searched the inbox, then stated a negative I had not tested. Jeff caught it from his phone.
-   Check `in:inbox` before making any claim about replies.
-3. **Watch for late bounces**, especially the four org addresses verified 07-20 and not
-   re-fetched (`nyaarp@aarp.org`, `pr@lirealtor.com`, `info@lihp.org`) plus
-   `info@lwvofnassaucounty.org`, which is corroborated rather than primary-verified.
-4. **The monitor fires 07:00 daily.** First unattended run is 2026-08-13. If a card lands via
-   `failtask`, the report is in `reports/posture-sweep-YYYY-MM-DD.md`.
-5. **LIBOR optics** stay Jeff's call: a realtor board benefits from more transactions, so
-   listing them publicly as a backer could read as self-interested. Sending was harmless.
-6. **rvc-advocate persona not yet evolved.** This session's durable lessons live in
-   `.claude/agent-memory/rvc-advocate/wave1-sent-and-sendlog.md` and global memory
-   `no-street-address-in-drafts`. Promoting the VERIFIED-has-a-date rule and the
-   no-sunset-on-monitors rule into `persona.md` via `/persona-author` is the outstanding step.
-7. **Beacon retrofit** landed as PR #45 from a parallel lane (memory `beacon-from-day-one`);
-   not this session's work but it is in the same commit range.
-
-## Rode along: jeffpinto.com
-
-Before the RVC work, one unrelated change: `/notes/the-list/` retitled to "The List - aka an
-old school homage" with the dek opening "Welcome to my mailing list... in the style of Raymond
-Chandler:" after feedback that the noir voice read as opaque. jeffpinto-site PR #228, merged
-and live on both the note page and the notes wall. Body, dates and update stamps untouched.
+- The source monitor was changed to read its baseline from the ledger at run
+  time, with an explicit failure when that value cannot be parsed. This avoids
+  silently carrying a stale literal in automation.
+- Generated public artifacts must be re-rendered and checked whenever a
+  ledger-backed claim changes. Live verification needs cache-aware requests and
+  a real-browser pass.
+- A local worktree can make a merge command report a cleanup error after the
+  remote merge already succeeded. Verify the remote state before retrying a
+  publication action.
+- Fresh pull requests may briefly report an indeterminate mergeability state.
+  Poll the provider rather than treating the first result as final.
+- An unrelated content-only site update occurred in the same session. It did
+  not alter this project's public facts, release process, or outreach boundary.

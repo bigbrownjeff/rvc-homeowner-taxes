@@ -19,7 +19,9 @@ Pages invalidates its own cache on deploy. Hard-refresh to bypass browser cache.
 scripts/smoke-signup.sh
 ```
 
-Posts a real `smoke+<timestamp>@example.com` signup with explicit consent to the deployed site, asserts the KV row contains only email and consent metadata, asserts `count:signup` increments by exactly 1, then verifies the self-service deletion endpoint removes the row and restores the counter. It is self-cleaning and never leaves a real signup count polluted. Exit 0 pass, 1 fail, and it still restores state on failure via a trap.
+Posts a real `smoke+<timestamp>@example.com` signup with explicit consent to the deployed site, asserts the KV row contains only email and consent metadata, asserts `count:signup` increments by exactly 1, then verifies the self-service deletion endpoint removes the row and restores the counter. Cloudflare KV reads are eventually consistent, so the script polls remote key state and `/api/count` for up to 120 seconds at a 3-second cadence by default. It retries reads only, never either POST. Set `SMOKE_POLL_MAX_SECONDS`, `SMOKE_POLL_INTERVAL_SECONDS`, and the per-command `SMOKE_WRANGLER_MAX_TIME` to tune those bounds.
+
+The trap first uses the same single unsubscribe request if it has not yet been attempted. Its direct-KV emergency fallback removes only the uniquely named smoke row and never writes `count:signup`; a divergent or unreadable tally is reported for manual remediation rather than clobbered.
 
 ## Privacy-release cleanup
 

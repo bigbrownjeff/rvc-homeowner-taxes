@@ -8,4 +8,12 @@ __pycache__/
 
 # Gmail reply-watcher credentials (gitignored)
 scripts/.env
-.claude/scratch/outreach-aug1/.reply-watcher-seen.json
+scripts/reply_watcher.local.json
+
+# Keep outreach scratch private by default. Only these four public-safe
+# methodology/current-copy pointers may be tracked in this directory.
+.claude/scratch/outreach-aug1/*
+!.claude/scratch/outreach-aug1/MANIFEST.md
+!.claude/scratch/outreach-aug1/w3-01-community-email.md
+!.claude/scratch/outreach-aug1/w3-02-linkedin.md
+!.claude/scratch/outreach-aug1/w3-03-bluesky.md

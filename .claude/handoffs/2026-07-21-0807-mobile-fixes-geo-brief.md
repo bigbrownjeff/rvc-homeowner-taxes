@@ -74,10 +74,10 @@ gist / big numbers follow the resolved address, not just section 03).
   (poll, don't diagnose); missing assets 200 as index.html (SPA fallback).
 
 ## Open threads / next steps
-Unchanged from the previous handoff (Wave-1 send prep Jul 29, LIBOR call, LWV/Chamber routes,
-`[street address]` placeholders, trash stale canzoneri Gmail draft, L5 calculator flow-back,
-playwright install for the e2e gate, Glen Cove/Long Beach city-roll rates, officials lane,
-disable daily sweep after Aug 1). New this session:
+Unchanged technical work from the previous handoff includes calculator flow-back, the e2e gate,
+coverage-rate research, the officials lane, and ongoing accuracy monitoring. Historical
+recipient-specific outreach preparation has been privacy-redacted; future direct contact must
+use an owner-authorized operational record. New this session:
 - Consider adding the East Meadow (growth) case to the §7 regression list — it exercises the
   direction-aware headline branch.
 - Jeff should sanity-check the collapse + voices pages and a quick-link flow on his actual phone

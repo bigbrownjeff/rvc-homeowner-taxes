@@ -1,11 +1,11 @@
 {
   "_comment": "Hand-maintained campaign-instrument counters read by coverage.html (pillar b, Legislation). Ledger discipline applies: every number here is either sourced (name the source in its _note) or a manual tally Jeff keeps by hand. The daily officials/bill sweep updates the cosponsor count and committee posture; office replies and walkthroughs are entered by hand as they happen. Re-verify H.R. 1340 cosponsors same-day before anything politician-facing goes out.",
-  "updated": "2026-08-12",
+  "updated": "2026-08-14",
   "legislation": {
-    "hr1340_cosponsors": 150,
+    "hr1340_cosponsors": 153,
     "hr1340_source": "https://www.govinfo.gov/bulkdata/BILLSTATUS/119/hr/BILLSTATUS-119hr1340.xml",
-    "hr1340_note": "150 cosponsors counted from the GPO BILLSTATUS XML primary feed (published 2026-08-04; latest cosponsorship 2026-08-03), 0 withdrawn. Rep. Gillen (NY-4) is not yet a cosponsor. Trackers that show 151 are counting sponsors-inclusive (150 cosponsors + lead sponsor Panetta); cite 150.",
-    "committee_posture": "H.R. 1340 sits in House Ways & Means; the Senate companion S.3332 is in Senate Finance. In Albany, S3309 cleared Senate Aging 7-0 and was held in Finance; A5288 sits in Assembly Real Property Taxation.",
+    "hr1340_note": "153 cosponsors counted from the GPO BILLSTATUS XML primary feed (published 2026-08-14; latest cosponsorship 2026-08-13), 0 withdrawn. Rep. Gillen (NY-4) is not yet a cosponsor. Trackers that show 154 are counting sponsors-inclusive (153 cosponsors + lead sponsor Panetta); cite 153.",
+    "committee_posture": "H.R. 1340 sits in House Ways & Means; the Senate companion S.3332 is in Senate Finance. In Albany, S3309 cleared Senate Aging 7-0 but did not pass the 2026 session; A5288 remained in Assembly Real Property Taxation. The 2027 ask is reintroduction and advancement, a staff briefing, and a fiscal note.",
     "office_replies": 0,
     "walkthroughs_booked": 0
   }

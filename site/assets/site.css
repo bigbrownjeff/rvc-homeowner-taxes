@@ -29,6 +29,7 @@ a:hover{color:var(--green-hover)}
 }
 /* Shared footer */
 .site-foot{display:flex;justify-content:space-between;padding:16px 48px;font-size:12px;font-weight:600;color:var(--muted-60);flex-wrap:wrap;gap:8px}
+.site-foot .independence-note{flex-basis:100%;font-weight:400}
 @media(max-width:760px){.site-foot{padding:16px 24px}}
 
 /* Shared top signup CTA (injected by assets/nav.js, above the nav on every page) */
@@ -37,19 +38,32 @@ a:hover{color:var(--green-hover)}
 .cta-strip .cta-copy{display:flex;flex-direction:column;gap:2px;flex:1 1 360px;min-width:240px}
 .cta-strip .cta-h{font-weight:800;font-size:14.5px;letter-spacing:-.01em}
 .cta-strip .cta-sub{font-size:12.5px;font-weight:600;color:rgba(243,242,242,.82)}
+.cta-strip .cta-sub a{color:var(--bg);text-underline-offset:3px}
 .cta-strip .cta-form{display:flex;gap:8px;flex:0 0 auto}
 .cta-strip .cta-email{font-family:inherit;font-size:16px;font-weight:600;color:var(--ink);background:#f3f2f2;border:none;padding:10px 12px;width:220px;max-width:52vw}
 .cta-strip .cta-email::placeholder{color:rgba(32,30,29,.5)}
 .cta-strip .cta-btn{font-family:inherit;font-weight:800;font-size:14px;color:var(--ink);background:var(--gold);border:none;padding:10px 22px;cursor:pointer;white-space:nowrap}
 .cta-strip .cta-btn:disabled{opacity:.7;cursor:default}
+.cta-strip .cta-consent{display:flex;align-items:flex-start;gap:8px;flex:1 1 100%;font-size:12px;font-weight:600;line-height:1.35;color:rgba(243,242,242,.9)}
+.cta-strip .cta-consent input{margin:3px 0 0;accent-color:var(--gold)}
+.cta-strip .cta-honeypot{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
 .cta-strip .cta-msg{flex:1 1 100%;font-size:12.5px;font-weight:700;height:0;overflow:hidden}
 .cta-strip .cta-msg.show{height:auto;margin-top:2px}
 .cta-strip .cta-msg.ok{color:#eaf3ea}
 .cta-strip .cta-msg.err{color:#ffd9d0}
+.share-routes{border-top:2px solid var(--rule-strong);padding-top:34px;padding-bottom:34px}
+.share-route-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;max-width:760px}
+.share-route{display:flex;align-items:center;justify-content:space-between;gap:8px;border:1px solid var(--rule-hair);padding:9px 10px;background:rgba(255,255,255,.25)}
+.share-route code{font:600 11px/1.3 ui-monospace,SFMono-Regular,Menlo,monospace;overflow-wrap:anywhere}
+.share-copy{flex:0 0 auto;font-family:inherit;font-size:12px;font-weight:800;background:transparent;border:1px solid var(--ink);color:var(--ink);padding:6px 8px;cursor:pointer;text-align:left}
+.share-copy:hover{background:var(--ink);color:var(--bg)}
+.share-status{min-height:1.5em;margin:10px 0 0;font-size:12.5px;font-weight:600;color:var(--muted-70)}
 @media(max-width:760px){
   .cta-strip .cta-inner{padding:12px 16px;gap:10px}
   .cta-strip .cta-copy{flex-basis:100%}
   .cta-strip .cta-form{flex:1 1 100%}
   .cta-strip .cta-email{flex:1 1 auto;width:auto;max-width:none}
+  .share-route-list{grid-template-columns:1fr}
+  .share-route{align-items:flex-start;flex-direction:column}
 }
 @media print{.cta-strip{display:none !important}}

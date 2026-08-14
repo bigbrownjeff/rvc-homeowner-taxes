@@ -148,7 +148,38 @@ Then submit https://rvc-taxes.jeffpinto.com/sitemap.xml through verified Google
 Search Console and Bing Webmaster Tools. Keep confirmation receipts with the
 release notes.
 
-## Reply watcher (com.jeffpinto.rvc-reply-watcher)
+### One-off IndexNow notification
+
+IndexNow supplements, rather than replaces, the sitemap submissions above. Its 64-hex
+verification key is intentionally public: the root `site/<key>.txt` file is the
+[ownership proof the protocol requires](https://www.indexnow.org/documentation). It is not an API secret, does not identify a
+visitor, and must stay in version control so the deployed file and release script
+remain reviewable together.
+
+After the Pages deploy and the crawl checks above are clean, run the script once from
+the exact release checkout:
+
+```bash
+python3 scripts/submit_indexnow.py
+python3 scripts/submit_indexnow.py --submit
+```
+
+The first command is a no-network dry run. The second accepts only the exact ordered
+14-route canonical allowlist from the local sitemap, verifies production serves that
+same sitemap and the exact root key file without a redirect, then makes one JSON POST
+to `api.indexnow.org`.
+It has no scheduling, retry loop, caller-supplied URLs, analytics, or user data. A
+`200` means accepted; `202` means received while key validation is pending. Any other
+result is a stop-and-investigate signal, not a cue to retry blindly. Record the
+command output in the release notes.
+
+The Pages worker needs no special IndexNow route: a `/<64-hex>.txt` request is a
+static asset path (it has a file extension and is not an `.html` route), so it falls
+through to `env.ASSETS.fetch`. Do not add it to the worker's clean-page map or API
+surface. If the key is ever rotated, replace the root file with one new 64-hex file;
+both the integrity gate and the submitter deliberately refuse zero or multiple keys.
+
+## Reply watcher (`com.jeffpinto.rvc-reply-watcher`)
 
 scripts/reply_watcher.py runs every two hours via launchd and has no sunset. It
 detects configured reply candidates and files one deduplicated alert per new

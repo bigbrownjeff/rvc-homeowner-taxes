@@ -14,29 +14,15 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 from urllib.parse import urlparse
 
+from site_routes import CANONICAL_ORIGIN, CANONICAL_URLS, PAGE_ROUTES
+
 
 ROOT = Path(__file__).resolve().parents[1]
 SITE = ROOT / "site"
-CANONICAL_ORIGIN = "https://rvc-taxes.jeffpinto.com"
-PAGE_ROUTES = {
-    "/": "index.html",
-    "/breakeven": "breakeven.html",
-    "/calculator": "calculator.html",
-    "/coverage": "coverage.html",
-    "/deck": "deck.html",
-    "/fiscal-math": "fiscal-math.html",
-    "/governance": "governance.html",
-    "/governance-options": "governance-options.html",
-    "/privacy": "privacy.html",
-    "/reconcile": "reconcile.html",
-    "/redraw-evidence": "redraw-evidence.html",
-    "/validation": "validation.html",
-    "/voices": "voices.html",
-    "/voices-library": "voices-library.html",
-}
 HTML_FILES = sorted(SITE.glob("*.html"))
 MAILTO_PREFIX = "mailto:jeff@bluecamelconsulting.com?subject=%5Brvc-taxes%5D%20"
 OG_IMAGE = "/assets/rvc-housing-schools-social-1200x630.png"
+INDEXNOW_KEY_PATTERN = re.compile(r"^[a-f0-9]{64}$")
 TRACKED_ROUTES = {
     "/go/email": ("email", "email"),
     "/go/linkedin": ("linkedin", "social"),
@@ -53,16 +39,26 @@ def attrs(html: str, attr: str) -> list[str]:
 
 def main() -> int:
     failures: list[str] = []
+    sitemap_list: list[str] = []
     sitemap_locs: set[str] = set()
     try:
         root = ET.parse(SITE / "sitemap.xml").getroot()
-        sitemap_locs = {node.text or "" for node in root.findall("{*}url/{*}loc")}
+        sitemap_list = [node.text or "" for node in root.findall("{*}url/{*}loc")]
+        sitemap_locs = set(sitemap_list)
     except Exception as exc:  # noqa: BLE001
         failures.append(f"sitemap.xml is not valid XML: {exc}")
 
     robots = (SITE / "robots.txt").read_text(encoding="utf-8")
     if f"Sitemap: {CANONICAL_ORIGIN}/sitemap.xml" not in robots:
         failures.append("robots.txt does not name the canonical sitemap")
+
+    indexnow_files = [path for path in SITE.glob("*.txt") if INDEXNOW_KEY_PATTERN.fullmatch(path.stem)]
+    if len(indexnow_files) != 1:
+        failures.append(f"expected exactly one public IndexNow key file, found {len(indexnow_files)}")
+    elif indexnow_files[0].read_text(encoding="utf-8") != f"{indexnow_files[0].stem}\n":
+        failures.append("public IndexNow key file must contain only its filename key plus a newline")
+    if tuple(sitemap_list) != CANONICAL_URLS:
+        failures.append("sitemap must match the ordered canonical route allowlist")
 
     for route, filename in PAGE_ROUTES.items():
         canonical = f"{CANONICAL_ORIGIN}{route}"

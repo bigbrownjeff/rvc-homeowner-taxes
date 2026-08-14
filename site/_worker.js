@@ -179,8 +179,13 @@ async function handleUnsubscribe(request, env, url) {
       env.SIGNUPS.get(key),
       env.SIGNUPS.get(legacyKey),
     ]);
-    if (modern !== null || legacy !== null) {
-      await Promise.all([env.SIGNUPS.delete(key), env.SIGNUPS.delete(legacyKey)]);
+    const hadSignup = modern !== null || legacy !== null;
+    // KV reads can be stale across locations. Always issue both deletes so a
+    // stale pre-read cannot leave a modern or legacy record behind. The count
+    // still changes only when this request observed a record, avoiding an
+    // unsubscribe request becoming an address-enumeration or count oracle.
+    await Promise.all([env.SIGNUPS.delete(key), env.SIGNUPS.delete(legacyKey)]);
+    if (hadSignup) {
       await changeCount(env, "signup", -1);
     }
   } catch (err) {

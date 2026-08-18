@@ -83,7 +83,7 @@
 <div class="hero-pad" style="max-width:1100px">
   <div style="font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#1e6b3d;margin-bottom:18px">Briefing · August 2026 · <span id="heroPlace">Rockville Centre, NY</span></div>
   <h1 id="heroH1" style="margin:0 0 22px;font-weight:800;font-size:62px;line-height:1.02;letter-spacing:-.025em;max-width:940px">Make it easier for longtime homeowners to move by choice, and keep Nassau schools strong.</h1>
-  <p id="heroLede" style="margin:0;font-size:19px;line-height:1.5;max-width:760px">Rockville Centre balanced its 2026-27 school budget by cutting 22 teaching positions and 40 teaching assistants. This happened in a village where the median household earns $151,938. The problem is not wealth. The homes stopped changing hands: 27.9% of RVC's owner households (2,076 of 7,453) are headed by someone 65 or older.</p>
+  <p id="heroLede" style="margin:0;font-size:19px;line-height:1.5;max-width:760px">Rockville Centre balanced its 2026-27 school budget by cutting 22 teaching positions and 40 teaching assistants. This happened in a village where the median household earns $151,938. The problem is not wealth. The homes stopped changing hands: 28% of RVC's owner households (2,076 of 7,453) are headed by someone 65 or older.</p>
   <div style="display:flex;gap:12px;margin-top:30px;flex-wrap:wrap">
     <a href="#gist" style="display:inline-flex;background:#1e6b3d;color:#f3f2f2;font-weight:800;font-size:14px;padding:13px 44px 13px 18px;text-decoration:none">Read the 60-second version</a>
     <a href="#asks" style="display:inline-flex;border:1px solid #201e1d;color:#201e1d;font-weight:800;font-size:14px;padding:13px 44px 13px 18px;text-decoration:none">Contact your representatives</a>
@@ -95,7 +95,7 @@
   <div class="grid-label" style="max-width:1000px">
     <div style="font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#1e6b3d">The gist<br><span style="color:rgba(32,30,29,.55);font-weight:600;letter-spacing:.06em">60 seconds</span></div>
     <div id="gistBody" style="font-size:17px;line-height:1.55;max-width:720px">
-      <p style="margin:0 0 10px">RVC has 257 fewer students than in 2015. Seniors head 27.9% of the village's owner households, and many of them <b>want</b> to downsize (<a href="#evidence" style="font-weight:600">the evidence</a>). Federal capital gains rules, benefit timing traps, and a shortage of smaller homes keep the door locked.</p>
+      <p style="margin:0 0 10px">RVC has 257 fewer students than in 2015. Seniors head 28% of the village's owner households, and many of them <b>want</b> to downsize (<a href="#evidence" style="font-weight:600">the evidence</a>). Federal capital gains rules, benefit timing traps, and a shortage of smaller homes keep the door locked.</p>
       <p style="margin:0">Every fix on this page removes a penalty on moving. <b>No senior loses a benefit.</b> Most fixes make money for New York State. Five tailored actions connect you with the right officials, a live bill number, and a clear request. And this reaches past RVC: most of Nassau's school districts are shrinking the same way.</p>
     </div>
   </div>
@@ -113,15 +113,15 @@
       <div style="font-size:11.5px;margin-top:10px;line-height:1.45;color:rgba(32,30,29,.75)">Positions cut to balance 2026-27 · <a href="https://www.liherald.com/rockvillecentre/stories/rockville-centre-school-board-adopts-1413m-budget-preserves-tax-cap,221736" style="font-weight:600">LI Herald</a></div>
     </div>
     <div style="padding:22px 16px;border-right:1px solid rgba(32,30,29,.25)">
-      <div style="font-weight:800;font-size:40px;letter-spacing:-.02em;line-height:1">2%</div>
+      <div style="font-weight:800;font-size:40px;letter-spacing:-.02em;line-height:1">2.00%</div>
       <div style="font-size:11.5px;margin-top:10px;line-height:1.45;color:rgba(32,30,29,.75)">School levy cap, 5th straight year · <a href="https://www.osc.ny.gov/press/releases/2026/01/dinapoli-school-district-tax-cap-levy-remains-at-2-percent" style="font-weight:600">OSC</a></div>
     </div>
     <div style="padding:22px 16px;border-right:1px solid rgba(32,30,29,.25)">
-      <div style="font-weight:800;font-size:40px;letter-spacing:-.02em;line-height:1">+7.2%</div>
+      <div style="font-weight:800;font-size:40px;letter-spacing:-.02em;line-height:1">+7.18%</div>
       <div style="font-size:11.5px;margin-top:10px;line-height:1.45;color:rgba(32,30,29,.75)">Village tax rate increase, FY27 · <a href="https://www.rvcny.gov/sites/g/files/vyhlif4946/f/uploads/village_of_rockville_centre_fy27_adopted_budget.pdf" style="font-weight:600">Adopted budget</a></div>
     </div>
     <div style="padding:22px 0 22px 16px">
-      <div style="font-weight:800;font-size:40px;letter-spacing:-.02em;line-height:1">27.9%</div>
+      <div style="font-weight:800;font-size:40px;letter-spacing:-.02em;line-height:1">28%</div>
       <div style="font-size:11.5px;margin-top:10px;line-height:1.45;color:rgba(32,30,29,.75)">Owner homes headed by someone 65 or older · <a href="https://data.census.gov/table/ACSDT5Y2023.B25007?g=1600000US3663264" style="font-weight:600">ACS B25007</a></div>
     </div>
   </div>
@@ -488,7 +488,7 @@
     var tiles=[];
     tiles.push(heroTile((delta>0?"+":"\u2212")+fmtNum(Math.abs(delta)),"K-12 students since 2015-16",refUrl(refs.enrollment),"NYSED"));
     if(typeof d.levy==="number"&&refUrl(refs.levy)) tiles.push(heroTile("$"+(d.levy/1e6).toFixed(1)+"M","School levy, latest reported",refUrl(refs.levy),"OSC"));
-    tiles.push(heroTile("2%","School levy cap, 5th straight year","https://www.osc.ny.gov/press/releases/2026/01/dinapoli-school-district-tax-cap-levy-remains-at-2-percent","OSC"));
+    tiles.push(heroTile("2.00%","School levy cap, 5th straight year","https://www.osc.ny.gov/press/releases/2026/01/dinapoli-school-district-tax-cap-levy-remains-at-2-percent","OSC"));
     if(typeof d.medianValue==="number"&&refUrl(refs.medianValue)) tiles.push(heroTile("$"+Math.round(d.medianValue/1000)+"K","Median owner-occupied home",refUrl(refs.medianValue),"ACS"));
     if(typeof d.enhStarExemptParcels==="number"&&refUrl(refs.enhStarExemptParcels)) tiles.push(heroTile(fmtNum(d.enhStarExemptParcels),"Parcels with the legacy Enhanced STAR exemption",refUrl(refs.enhStarExemptParcels),"NYS DTF",true));
     $("stats5").innerHTML=tiles.join("");

@@ -57,7 +57,13 @@ cd "$REPO" || { "$FAILTASK" rvc-taxes "RVC posture sweep: repo cd failed" --dedu
 # never makes a working install worse.
 ENV_FILE="$REPO/scripts/.env"
 if [[ -r "$ENV_FILE" ]]; then
-  while IFS= read -r envline; do
+  # The `|| [[ -n "$envline" ]]` is load-bearing: `read` returns non-zero on a final line
+  # with no trailing newline, so a plain `while read` loop silently SKIPS that line. GUI
+  # editors routinely save without a trailing newline, and the token is appended last, so
+  # without this the token is the one value that never gets read. Caught 2026-08-21, when
+  # the freshly saved token parsed as empty and the sweep would have quietly kept falling
+  # back to the session auth this block exists to replace.
+  while IFS= read -r envline || [[ -n "$envline" ]]; do
     [[ -z "$envline" || "$envline" == \#* || "$envline" != *=* ]] && continue
     envkey="${envline%%=*}"
     [[ "${envkey// /}" != "CLAUDE_CODE_OAUTH_TOKEN" ]] && continue

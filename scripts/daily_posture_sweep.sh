@@ -25,7 +25,7 @@
 set -o pipefail
 
 REPO="${RVC_REPO:-/Users/jeffpinto/Projects/rvc-homeowner-taxes}"   # overridable so a worktree can test the gates
-CLAUDE_BIN="/Users/jeffpinto/.local/bin/claude"      # absolute: launchd PATH lacks it (lantern PR #19)
+CLAUDE_BIN="${RVC_CLAUDE_BIN:-/Users/jeffpinto/.local/bin/claude}"   # absolute: launchd PATH lacks it (lantern PR #19); overridable so the auth preflight is testable
 FAILTASK="$(command -v failtask || echo "$HOME/.claude/bin/failtask")"
 export PATH="/Users/jeffpinto/.local/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin"
 
@@ -43,6 +43,44 @@ LOG="/Users/jeffpinto/Library/Logs/rvc-posture-sweep.log"
 # someone. (Jeff, 2026-08-12: "rearm the daily monitor to keep both fresh going forward.")
 
 cd "$REPO" || { "$FAILTASK" rvc-taxes "RVC posture sweep: repo cd failed" --dedupe-key rvc-posture-run-failed --severity error --detail "Could not cd to $REPO. See $LOG"; exit 1; }
+
+# --- HEADLESS AUTH. This job is non-interactive, and the first run after a Claude Code
+# self-update has now failed twice with "Not logged in - Please run /login" while an
+# interactive `claude auth status` still reported a live claude.ai session: 2026-08-17
+# and 2026-08-21 (the binary was re-linked to 2.1.238 at 16:52 the evening before the
+# second one). No reboot was involved either time, so this is not a locked keychain;
+# the interactive OAuth session simply is not reliably readable from a launchd context
+# across an update. A long-lived token from `claude setup-token` does not depend on it.
+# Put it in scripts/.env, which is gitignored and already holds the reply watcher's
+# credentials, as:  CLAUDE_CODE_OAUTH_TOKEN=...
+# The token is optional: if it is absent the run still tries the normal session, so this
+# never makes a working install worse.
+ENV_FILE="$REPO/scripts/.env"
+if [[ -r "$ENV_FILE" ]]; then
+  while IFS= read -r envline; do
+    [[ -z "$envline" || "$envline" == \#* || "$envline" != *=* ]] && continue
+    envkey="${envline%%=*}"
+    [[ "${envkey// /}" != "CLAUDE_CODE_OAUTH_TOKEN" ]] && continue
+    envval="${envline#*=}"
+    envval="${envval%\"}"; envval="${envval#\"}"; envval="${envval%\'}"; envval="${envval#\'}"
+    export CLAUDE_CODE_OAUTH_TOKEN="$envval"
+  done < "$ENV_FILE"
+fi
+
+# --- PREFLIGHT. A dead credential used to surface only as a generic exit 1 buried in the
+# log, and on 2026-08-17 the failure card never reached the board because the gh token was
+# missing the read:project scope. Two silent misses followed. Check auth explicitly and
+# fail with the actual remedy in the card text, so the next person does not re-diagnose it.
+if ! "$CLAUDE_BIN" auth status >/dev/null 2>&1; then
+  AUTH_DETAIL="The headless sweep cannot authenticate. Fix: run 'claude setup-token' interactively, then append CLAUDE_CODE_OAUTH_TOKEN=<token> to $ENV_FILE. If the board card itself is missing, also run 'gh auth refresh -s read:project'. See $LOG"
+  if [[ "${SWEEP_DRY:-0}" = "1" ]]; then
+    echo "DRY: claude auth status failed; would have filed a card. $AUTH_DETAIL" >&2
+  else
+    "$FAILTASK" rvc-taxes "RVC posture sweep: claude auth is dead" --dedupe-key rvc-posture-auth-dead --severity error --detail "$AUTH_DETAIL"
+  fi
+  echo "rvc-posture: claude auth status failed, aborting before the run" >&2
+  exit 1
+fi
 
 # --- The CHECK 1 baseline is READ FROM THE LEDGER, never hard-coded here. A monitor that
 # restates a volatile figure rots into misinformation the moment the figure moves, and then

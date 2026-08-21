@@ -123,6 +123,26 @@ def main() -> int:
             failures.append(f"worker missing required privacy or SEO behavior: {required}")
     if 'CAMPAIGN_NAME = "wave-3-2026"' not in worker:
         failures.append("worker missing the Wave 3 campaign name")
+
+    # An action-kit card whose key is not in the worker allowlist gets a 400 that
+    # the client's ping swallows, so the card goes uncounted in silence. That has
+    # happened twice. Make the two lists prove they agree.
+    card_keys = set(re.findall(r'\{key:"([A-Za-z0-9_]+)"', index))
+    allow_match = re.search(r"const ACTION_KEYS = new Set\(\[(.*?)\]\)", worker, re.S)
+    if not card_keys:
+        failures.append("index.html exposes no action-kit card keys to check")
+    elif not allow_match:
+        failures.append("worker ACTION_KEYS allowlist not found")
+    else:
+        allowed = set(re.findall(r'"([A-Za-z0-9_]*)"', allow_match.group(1)))
+        expected = card_keys | {""}
+        if allowed != expected:
+            missing = sorted(expected - allowed)
+            extra = sorted(allowed - expected)
+            failures.append(
+                "worker ACTION_KEYS is out of sync with the index.html cards array: "
+                f"missing {missing or 'none'}, unused {extra or 'none'}"
+            )
     for route, (source, medium) in TRACKED_ROUTES.items():
         if f'"{route}": {{ source: "{source}", medium: "{medium}" }}' not in worker:
             failures.append(f"worker missing campaign redirect mapping for {route}")

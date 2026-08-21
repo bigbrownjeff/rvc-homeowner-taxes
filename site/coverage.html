@@ -485,9 +485,15 @@ function paintInstruments(nsComplete,total){
     // a sentence for an opponent, not a metric for the campaign. The note below
     // it says plainly that the figures are withheld, so nothing here implies
     // volume that does not exist.
+    // Every figure in the strip must be real before any of it publishes. An
+    // "any one is non-zero" rule looked equivalent and was not: letter_copied
+    // is 1 from the legacy pre-rename count:letter key, so it fired on day one
+    // and printed "0 contact routes opened, 0 self-confirmed sends" — the exact
+    // sentence the suppression exists to prevent. A published zero is the harm,
+    // so the gate is every figure, not any figure.
     var press=document.getElementById("eng-press");
-    var any=(c.letter_copied>0)||(c.contact_opened>0)||(c.sent_confirmed>0);
-    if(press&&any){
+    var all=(c.letter_copied>0)&&(c.contact_opened>0)&&(c.sent_confirmed>0);
+    if(press&&all){
       press.hidden=false;
       var wh=document.getElementById("eng-withheld"); if(wh) wh.hidden=true;
       var lt=document.getElementById("eng-letters"); if(lt) lt.textContent=fmtCount(c.letter_copied);

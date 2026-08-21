@@ -71,8 +71,17 @@ fi
 # log, and on 2026-08-17 the failure card never reached the board because the gh token was
 # missing the read:project scope. Two silent misses followed. Check auth explicitly and
 # fail with the actual remedy in the card text, so the next person does not re-diagnose it.
+#
+# On the gh side, do NOT reflexively run 'gh auth refresh -s read:project'. Checked
+# 2026-08-21: the live token already carried the 'project' scope and 'gh project list'
+# succeeded, so that scope was NOT the standing problem and the refresh is a dead end.
+# Whatever broke gh inside the 08-17 launchd run was not reproducible afterwards. Three
+# other tempting explanations were tested and refuted the same day: no reboot near either
+# failure (uptime 25 days), the login keychain is set to no-timeout so it never auto-locks,
+# and no GH_TOKEN/GITHUB_TOKEN override exists. Re-diagnose from evidence; do not inherit
+# these guesses.
 if ! "$CLAUDE_BIN" auth status >/dev/null 2>&1; then
-  AUTH_DETAIL="The headless sweep cannot authenticate. Fix: run 'claude setup-token' interactively, then append CLAUDE_CODE_OAUTH_TOKEN=<token> to $ENV_FILE. If the board card itself is missing, also run 'gh auth refresh -s read:project'. See $LOG"
+  AUTH_DETAIL="The headless sweep cannot authenticate. Fix: run 'claude setup-token' interactively, then append CLAUDE_CODE_OAUTH_TOKEN=<token> to $ENV_FILE. Do NOT start with 'claude /login': /login is an in-session slash command, not a CLI subcommand. Check state first with 'claude auth status'. See $LOG"
   if [[ "${SWEEP_DRY:-0}" = "1" ]]; then
     echo "DRY: claude auth status failed; would have filed a card. $AUTH_DETAIL" >&2
   else

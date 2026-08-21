@@ -59,7 +59,23 @@ const SIGNUP_SOURCES = new Set([
 ]);
 
 const COUNT_EVENTS = new Set(["lookup", "letter_copied", "contact_opened", "sent_confirmed"]);
-const ACTION_KEYS = new Set(["", "fed", "sen", "asm", "cty", "vil"]);
+// ACTION_KEYS must stay in sync with the `key` values in the cards array in
+// site/index.html, plus "" for the lookup event. A card whose key is missing here
+// gets a 400 that the client's ping swallows, so the card goes uncounted in
+// silence. That has now happened twice: "gov" shipped in the cards array before
+// it was allowed here. Add the key in both places in the same change.
+const ACTION_KEYS = new Set(["", "fed", "sen", "asm", "gov", "cty", "vil"]);
+// The lookup event sends action "". Store it under a named bucket so the
+// per-official JSON never carries an empty-string key. "site" is therefore
+// reserved: never give a card that key.
+const SITE_BUCKET = "site";
+// Lifetime and per-day per-official grids. One JSON blob each, not a key per
+// cell: the nightly reader shells out to a separate wrangler process for every
+// key it reads, so a key-per-cell scheme would cost thousands of subprocesses.
+const GRID_KEY = "count:grid";
+const DAY_KEY_PREFIX = "count:day:";
+// ~25 hours: one Eastern local day plus slack across the DST boundary.
+const COUNT_DEDUPE_TTL_SECONDS = 90000;
 const MAX_JSON_BYTES = 2048;
 const textEncoder = new TextEncoder();
 
@@ -201,6 +217,12 @@ async function handleCount(request, env, url) {
   if (!env.SIGNUPS) return json(emptyCounts());
   if (request.method === "GET") {
     try {
+      // The per-official grid is deliberately NOT served here. It is written to
+      // KV and read privately from there by the gated insights page, which uses
+      // wrangler against the namespace rather than this endpoint. Until the
+      // press-through numbers mean something, publishing the breakdown to any
+      // anonymous caller hands an opponent a sentence rather than the campaign a
+      // metric. Keep the response shape to the fields coverage.html reads.
       const [lookup, legacyLetter, letterCopied, contactOpened, sentConfirmed, signup] = await Promise.all([
         readCount(env, "lookup"),
         readCount(env, "letter"),
@@ -230,12 +252,22 @@ async function handleCount(request, env, url) {
   const event = cleanString(body.event, 40);
   const action = cleanString(body.action, 12);
   if (!COUNT_EVENTS.has(event) || !ACTION_KEYS.has(action)) return plain("bad event", 400);
-  if (await rateLimited(env, request, "event:" + event + ":" + action, 600)) {
+
+  const day = easternDay(new Date());
+  // What one counted unit means: one unique network-identifier hash, per
+  // official, per event, per Eastern local day. It is a floor, not a census.
+  // Two known weaknesses: a shared NAT collapses a whole household or building
+  // into one count, and the dedupe rests entirely on CF-Connecting-IP. A caller
+  // that is not behind Cloudflare sends no such header and rateLimited() then
+  // throttles nothing, so a direct unit-test fetch counts every ping. Under
+  // wrangler dev the header is present but is 127.0.0.1 for everyone, which
+  // collapses the other way. Neither shape occurs in production.
+  if (await rateLimited(env, request, "event:" + event + ":" + action + ":" + day, COUNT_DEDUPE_TTL_SECONDS)) {
     return json({ ok: true, rateLimited: true });
   }
 
   try {
-    const count = await changeCount(env, event, 1);
+    const count = await recordAction(env, event, action, day);
     return json({ ok: true, event, count });
   } catch (err) {
     console.error("count KV write failed", err);
@@ -391,4 +423,79 @@ async function changeCount(env, event, delta) {
   const next = Math.max(0, (await readCount(env, event)) + delta);
   await env.SIGNUPS.put("count:" + event, String(next));
   return next;
+}
+
+// One action ping writes three places: the long-standing scalar total, the
+// lifetime per-official grid, and the per-official grid for the Eastern local
+// day. The same read-then-write race described in changeCount applies to each
+// of the three, and the grids carry it twice over because concurrent pings for
+// different officials share one blob. All three can undercount; none of them
+// can hold personal data or turn a copy into a send.
+async function recordAction(env, event, action, day) {
+  const bucket = action || SITE_BUCKET;
+  const [count] = await Promise.all([
+    changeCount(env, event, 1),
+    bumpGrid(env, GRID_KEY, event, bucket),
+    bumpGrid(env, DAY_KEY_PREFIX + day, event, bucket),
+  ]);
+  return count;
+}
+
+async function bumpGrid(env, key, event, bucket) {
+  const grid = await readGrid(env, key);
+  const row = grid[event] && typeof grid[event] === "object" && !Array.isArray(grid[event]) ? grid[event] : {};
+  const current = typeof row[bucket] === "number" && Number.isFinite(row[bucket]) ? row[bucket] : 0;
+  row[bucket] = current + 1;
+  grid[event] = row;
+  await env.SIGNUPS.put(key, JSON.stringify(grid));
+}
+
+// Shape: {"<event>": {"<official>": n}}. Both dimensions are validated
+// allowlists, so a blob holds at most COUNT_EVENTS x ACTION_KEYS cells and
+// cannot grow with traffic. A KV read failure is deliberately
+// allowed to throw so the caller aborts instead of overwriting an existing blob
+// with a fresh one. Only an unparseable blob starts over, and it was already lost.
+async function readGrid(env, key) {
+  const raw = await env.SIGNUPS.get(key);
+  if (!raw) return {};
+  try {
+    const value = JSON.parse(raw);
+    return value && typeof value === "object" && !Array.isArray(value) ? value : {};
+  } catch (err) {
+    console.error("count grid blob unparseable, starting a new one", key, err);
+    return {};
+  }
+}
+
+// This is a Rockville Centre campaign, so "who acted today" means the local day,
+// not the UTC day. Intl carries the timezone database in the Workers runtime;
+// the fixed-offset path below is a guard, not the expected route.
+function easternDay(now) {
+  try {
+    const day = new Intl.DateTimeFormat("en-CA", {
+      timeZone: "America/New_York",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    }).format(now);
+    if (/^\d{4}-\d{2}-\d{2}$/.test(day)) return day;
+    console.error("eastern day format returned an unexpected shape", day);
+  } catch (err) {
+    console.error("eastern day timezone lookup failed", err);
+  }
+  return new Date(now.getTime() + easternOffsetHours(now) * 3600000).toISOString().slice(0, 10);
+}
+
+// US Eastern is UTC-4 from 07:00 UTC on the second Sunday in March to 06:00 UTC
+// on the first Sunday in November, and UTC-5 otherwise.
+function easternOffsetHours(now) {
+  const year = now.getUTCFullYear();
+  const start = Date.UTC(year, 2, firstSundayDate(year, 2) + 7, 7);
+  const end = Date.UTC(year, 10, firstSundayDate(year, 10), 6);
+  const t = now.getTime();
+  return t >= start && t < end ? -4 : -5;
+}
+
+function firstSundayDate(year, monthIndex) {
+  return 1 + ((7 - new Date(Date.UTC(year, monthIndex, 1)).getUTCDay()) % 7);
 }

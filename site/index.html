@@ -319,8 +319,11 @@
   var copied={};
   var BTN="See my details";
 
-  // Count-only engagement pings. They record only the named action, never the
-  // letter, address, name, or email. A failed ping is ignored.
+  // Count-only engagement pings. They record the named event and which card it
+  // came from, never the letter, address, name, or email. The server counts one
+  // unit per network-identifier hash, per card, per event, per Eastern local day.
+  // A failed ping is ignored. Card keys must also be listed in ACTION_KEYS in
+  // site/_worker.js or the ping is rejected and the card goes uncounted.
   function pingCount(event,action){
     try{ fetch("/api/count",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({event:event,action:action||""}),keepalive:true}).catch(function(){}); }catch(e){}
   }

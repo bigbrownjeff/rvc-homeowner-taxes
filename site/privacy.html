@@ -69,6 +69,8 @@ ul{padding-left:20px;margin:12px 0}
       <li>This site does not save your address or name to the update list.</li>
       <li>Your address and name are included in an office form or email only if you choose to open that action and submit it.</li>
     </ul>
+    <p>The site does count how the action tool is used, so the project can report how many residents reach an office. A count records the step (a district lookup, a letter copied, a contact form or email opened, a self-reported send) and which official card it came from. It does not record your address, your name, the letter, or anything else you type. Most of these totals are not published. The <a href="/coverage">coverage page</a> shows the number of address lookups; the rest are held back until the action kit has produced enough for a figure to mean anything, and they are read privately in the meantime.</p>
+    <p>So that one person clicking twice does not read as two people, the counting endpoint temporarily keeps a one-way hash of a network identifier for about 25 hours. One count means one network identifier, one official, one step, one local day. That makes the numbers a floor rather than a headcount, because a household or building sharing a network connection is counted once. The hash is not linked to an email address, is not used for outreach, and expires on its own.</p>
   </section>
 
   <section class="section">

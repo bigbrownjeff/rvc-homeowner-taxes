@@ -192,7 +192,8 @@ thead th.ns{border-bottom-color:#c5a44e}
         <div class="m-big" id="eng-lookups">&mdash;</div>
         <div class="m-cap">address lookups run in the action kit.</div>
       </div>
-      <p class="pnote"><span id="eng-lookups">&mdash;</span> completed address lookups &middot; <span id="eng-letters">&mdash;</span> letters copied &middot; <span id="eng-contact">&mdash;</span> contact routes opened &middot; <span id="eng-sent">&mdash;</span> self-confirmed sends &middot; <span id="eng-signups">&mdash;</span> confirmed update-list signups. Counts only: no addresses, no personal data, aggregate integers. A copied letter is not called a sent letter. Reads live from the site's count endpoint; shows a dash where the endpoint is unreachable (for example, opening this file without the site running).</p>
+      <p class="pnote" id="eng-press" hidden><span id="eng-letters">&mdash;</span> letters copied &middot; <span id="eng-contact">&mdash;</span> contact routes opened &middot; <span id="eng-sent">&mdash;</span> self-confirmed sends. A copied letter is not called a sent letter.</p>
+      <p class="pnote"><span id="eng-signups">&mdash;</span> confirmed update-list signups. Counts only: no addresses, no personal data, aggregate integers. Reads live from the site's count endpoint; shows a dash where the endpoint is unreachable (for example, opening this file without the site running). <span id="eng-withheld">Letters copied, contact routes opened, and self-confirmed sends are not published here yet. They appear once the action kit has produced enough for a figure to mean anything.</span></p>
     </div>
   </div>
 
@@ -478,10 +479,21 @@ function paintInstruments(nsComplete,total){
   fetch("/api/count",{cache:"no-store"}).then(function(r){return r.ok?r.json():null;}).then(function(c){
     if(!c) return;
     var lk=document.getElementById("eng-lookups"); if(lk) lk.textContent=fmtCount(c.lookup);
-    var lt=document.getElementById("eng-letters"); if(lt) lt.textContent=fmtCount(c.letter_copied);
-    var co=document.getElementById("eng-contact"); if(co) co.textContent=fmtCount(c.contact_opened);
-    var se=document.getElementById("eng-sent"); if(se) se.textContent=fmtCount(c.sent_confirmed);
     var sg=document.getElementById("eng-signups"); if(sg) sg.textContent=fmtCount(c.signup);
+    // The press-through strip stays hidden until at least one of the three is
+    // real. A row of zeros published three weeks before the politician push is
+    // a sentence for an opponent, not a metric for the campaign. The note below
+    // it says plainly that the figures are withheld, so nothing here implies
+    // volume that does not exist.
+    var press=document.getElementById("eng-press");
+    var any=(c.letter_copied>0)||(c.contact_opened>0)||(c.sent_confirmed>0);
+    if(press&&any){
+      press.hidden=false;
+      var wh=document.getElementById("eng-withheld"); if(wh) wh.hidden=true;
+      var lt=document.getElementById("eng-letters"); if(lt) lt.textContent=fmtCount(c.letter_copied);
+      var co=document.getElementById("eng-contact"); if(co) co.textContent=fmtCount(c.contact_opened);
+      var se=document.getElementById("eng-sent"); if(se) se.textContent=fmtCount(c.sent_confirmed);
+    }
   }).catch(function(){});
 }
 function fmtCount(n){ return (typeof n==="number"&&isFinite(n))?n.toLocaleString("en-US"):"—"; }

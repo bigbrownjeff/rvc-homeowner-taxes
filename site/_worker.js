@@ -217,16 +217,19 @@ async function handleCount(request, env, url) {
   if (!env.SIGNUPS) return json(emptyCounts());
   if (request.method === "GET") {
     try {
-      const [lookup, legacyLetter, letterCopied, contactOpened, sentConfirmed, signup, grid] = await Promise.all([
+      // The per-official grid is deliberately NOT served here. It is written to
+      // KV and read privately from there by the gated insights page, which uses
+      // wrangler against the namespace rather than this endpoint. Until the
+      // press-through numbers mean something, publishing the breakdown to any
+      // anonymous caller hands an opponent a sentence rather than the campaign a
+      // metric. Keep the response shape to the fields coverage.html reads.
+      const [lookup, legacyLetter, letterCopied, contactOpened, sentConfirmed, signup] = await Promise.all([
         readCount(env, "lookup"),
         readCount(env, "letter"),
         readCount(env, "letter_copied"),
         readCount(env, "contact_opened"),
         readCount(env, "sent_confirmed"),
         readCount(env, "signup"),
-        // The grid is additive. A failure to read it must not blank the scalar
-        // totals that coverage.html has always shown.
-        readGrid(env, GRID_KEY).catch(function () { return {}; }),
       ]);
       return json({
         lookup,
@@ -234,7 +237,6 @@ async function handleCount(request, env, url) {
         contact_opened: contactOpened,
         sent_confirmed: sentConfirmed,
         signup,
-        grid,
       });
     } catch (err) {
       console.error("count KV read failed", err);
@@ -374,7 +376,7 @@ async function sha256(value) {
 }
 
 function emptyCounts() {
-  return { lookup: 0, letter_copied: 0, contact_opened: 0, sent_confirmed: 0, signup: 0, grid: {} };
+  return { lookup: 0, letter_copied: 0, contact_opened: 0, sent_confirmed: 0, signup: 0 };
 }
 
 function json(obj, init = {}) {
